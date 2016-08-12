@@ -48,6 +48,7 @@ public class NovaSenha extends javax.swing.JFrame {
         txtConfirmacaoSenha = new javax.swing.JPasswordField();
         btnExibirSenhaConfirmacao = new javax.swing.JButton();
         txtCPF = new javax.swing.JFormattedTextField();
+        txtDataNascimento = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Nova senha"); // NOI18N
@@ -211,7 +212,8 @@ public class NovaSenha extends javax.swing.JFrame {
                                         .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(lblDataNascimento)
-                                        .addGap(160, 160, 160))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(lblLogin)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -249,7 +251,9 @@ public class NovaSenha extends javax.swing.JFrame {
                     .addComponent(lblCPF)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lblDataNascimento)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDataNascimento)
+                    .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmail)
@@ -394,6 +398,7 @@ public class NovaSenha extends javax.swing.JFrame {
     private javax.swing.JLabel lblSenha;
     private javax.swing.JFormattedTextField txtCPF;
     private javax.swing.JPasswordField txtConfirmacaoSenha;
+    private com.toedter.calendar.JDateChooser txtDataNascimento;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
