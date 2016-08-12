@@ -1459,7 +1459,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair1ActionPerformed
-      //  this.setExtendedState(Menu.ICONIFIED);
+       // this.setExtendedState(Menu.ICONIFIED);
     }//GEN-LAST:event_btnSair1ActionPerformed
 
     private void btnRecolhe1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecolhe1ActionPerformed
