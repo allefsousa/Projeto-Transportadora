@@ -5,7 +5,14 @@
  */
 package View;
 
+import Dao.ConnBanco;
+import Dao.DaoLogin;
+import Model.Usuario;
 import static java.awt.SystemColor.menu;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,9 +20,8 @@ import static java.awt.SystemColor.menu;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    ConnBanco conecta = new ConnBanco();
+
     public Login() {
         initComponents();
         txtSenha.setEchoChar('\u25cf');
@@ -268,8 +274,19 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSair1ActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        this.dispose();
-        new Menu().setVisible(true);
+
+        if (txtLogin.getText().isEmpty() || txtSenha.getPassword().toString().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Usuario e senha Invalidos !! ");
+        } else {
+            Dao.DaoLogin daologin = new DaoLogin();
+            String usuario = txtLogin.getText();
+            String senha = txtSenha.getText();
+            boolean resposta = daologin.verificaLogin(usuario, senha);
+            if (resposta == true) {
+                this.dispose();
+                new Menu().setVisible(true);
+            }
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExibirSenhaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExibirSenhaMousePressed
@@ -281,7 +298,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExibirSenhaMouseExited
 
     private void btnExibirSenhaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExibirSenhaMouseReleased
-       txtSenha.setEchoChar('\u25cf');
+        txtSenha.setEchoChar('\u25cf');
     }//GEN-LAST:event_btnExibirSenhaMouseReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
