@@ -274,7 +274,9 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSair1ActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-
+/**
+ * COMENTADO SO PARA TESTE DE OUTRAS CLASSES 
+ 
         if (txtLogin.getText().isEmpty() || txtSenha.getPassword().toString().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Usuario e senha Invalidos !! ");
         } else {
@@ -287,6 +289,9 @@ public class Login extends javax.swing.JFrame {
                 new Menu().setVisible(true);
             }
         }
+         */
+                this.dispose();
+                new Menu().setVisible(true);
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExibirSenhaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExibirSenhaMousePressed
