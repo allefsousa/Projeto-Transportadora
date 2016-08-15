@@ -7,6 +7,8 @@ package View;
 
 import Dao.ConnBanco;
 import Dao.DaoFuncionario;
+import Funcionalidades.AbrirNavegador;
+import Funcionalidades.Atualizahora;
 import Model.Funcionario;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -20,7 +22,40 @@ import javax.swing.JOptionPane;
  * @author Felipe
  */
 public class CadastrarFuncionario extends javax.swing.JFrame {
-
+    /**
+     *Metodo responsavel por receber os dados da tela de pesquisa
+     * os valores foram passados por um objeto do tipo funcionario 
+     * @author Allef 
+     * @param b 
+     * @data 14/08/2016
+     * @param funcionario
+     */
+    public void recebendo1(String b[]){
+        cbxcidade.addItem(b);
+    }
+    public void recebendo(Funcionario funcionario) {
+        
+        txtCodigo.setText(String.valueOf(funcionario.getNumMatricula()));
+        txtNomeCompleto.setText(funcionario.getNome());
+        txtCPF.setText(funcionario.getCpf());
+        txtRG.setText(funcionario.getRg());
+        txtNascimento.setDate(funcionario.getDataNasc());
+        txtSalario.setText(String.valueOf(funcionario.getSalario()));
+        txtUsuario.setText(funcionario.getNomeUsuario());
+        txtSenha.setText(funcionario.getSenha());
+        cbxCargo.setSelectedItem(funcionario.getFuncao());
+        txtcep.setText(String.valueOf(funcionario.getCep()));
+        txtEndereco.setText(funcionario.getEndereco());
+        txtNumero.setText(String.valueOf(funcionario.getNumero()));
+        txtBairro.setText(funcionario.getBairro());
+        txtComplemento.setText(funcionario.getComplemento());
+        
+        cbxcidade.setSelectedItem(funcionario.getCidade());
+        
+        cbxEstado.setSelectedItem(funcionario.getEstado());
+        dataAdmisao.setDate(funcionario.getDataRegistro());
+    }
+    
     /**
      * Creates new form CadastrarFuncionario
      */
@@ -34,29 +69,38 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     public CadastrarFuncionario() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
-
+      
         /**
          * @Author Allef preenche os combos de cidade e estado quando a tela é
          * iniciada
          */
-        String sql1 = ("use transportadora;");
-        String sql = ("select nome from estado;");
+        String sql1 = ("select nome from transportadora.cidade;");
+        String sql = ("select nome from transportadora.estado;");
 
         try {
 
             banco.conn = banco.getConection();
             banco.pstm = banco.conn.prepareStatement(sql);
-            banco.executaSQL(sql1);
-            ResultSet rslocal = banco.executaSQLRetorno(sql);
-            while (rslocal.next()) {
-                String a = rslocal.getString(1);
-                cbxEstado.addItem(rslocal.getString(1));
+            ResultSet rscidade = banco.executaSQLRetorno(sql1);
+            ResultSet rsestado = banco.executaSQLRetorno(sql);
+            while (rsestado.next()) {
+                String a = rsestado.getString(1);
+                cbxEstado.addItem(rsestado.getString(1));
+            }
+            while(rscidade.next()){
+                cbxcidade.addItem(rscidade.getString(1));
             }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "" + ex);
         }
     }
+    /**
+     * metodo que vai receber os dados do outro jFrame 
+     * no caso os dados que forem clicados na tabela de pesquisa
+     * @param funcionario 
+     */
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,10 +172,10 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         txtComplemento = new javax.swing.JTextField();
         lblNascimento1 = new javax.swing.JLabel();
         dataAdmisao = new com.toedter.calendar.JDateChooser();
-        cbxOutro = new javax.swing.JComboBox();
         txtcep = new javax.swing.JTextField();
         txtRG = new javax.swing.JTextField();
         txtCPF = new javax.swing.JTextField();
+        cbxcidade = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -435,6 +479,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 btnExcluirMouseExited(evt);
             }
         });
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnExcluir);
         jToolBar1.add(jSeparator8);
 
@@ -457,6 +506,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnPesquisarMouseExited(evt);
+            }
+        });
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
             }
         });
         jToolBar1.add(btnPesquisar);
@@ -596,19 +650,19 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         dataAdmisao.setPreferredSize(new java.awt.Dimension(110, 20));
 
-        cbxOutro.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        cbxOutro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione Uma Cidade .." }));
-        cbxOutro.setBorder(null);
-        cbxOutro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cbxOutro.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                cbxOutroFocusLost(evt);
-            }
-        });
-
         txtRG.setPreferredSize(new java.awt.Dimension(60, 20));
 
         txtCPF.setPreferredSize(new java.awt.Dimension(60, 20));
+
+        cbxcidade.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        cbxcidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione Uma Cidade ...." }));
+        cbxcidade.setBorder(null);
+        cbxcidade.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cbxcidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbxcidadeFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -675,14 +729,14 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbxOutro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(54, 54, 54)
+                                .addComponent(txtcep, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbxcidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(73, 73, 73)
                                 .addComponent(lblEstado)
                                 .addGap(18, 18, 18)
-                                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtcep, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -708,7 +762,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                                     .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 153, Short.MAX_VALUE))
+                .addGap(0, 144, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -741,13 +795,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(lblEndereco))
                             .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
-                                .addComponent(lblNumero))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEndereco)
+                                    .addComponent(lblNumero)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -763,18 +816,18 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblCidade)
-                                .addComponent(cbxOutro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbxcidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addComponent(lblEstado))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCEP)
-                            .addComponent(txtcep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtcep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -860,14 +913,26 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoMouseExited
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        txtNomeCompleto.setEditable(true);
-        txtEndereco.setEditable(true);
-        txtBairro.setEditable(true);
-        txtcep.setEditable(true);
-        txtNumero.setEditable(true);
-        txtCPF.setEditable(true);
-        txtRG.setEditable(true);
-        cbxEstado.setEnabled(true);
+       /**
+        * @autor Allef 
+        * data 14/08/2016
+        */
+        
+        txtNascimento.setDate(null);
+       dataAdmisao.setDate(null);
+       txtSalario.setText("");
+       txtComplemento.setText("");
+       txtCodigo.setText("");
+        txtNomeCompleto.setText("");
+        txtEndereco.setText("");
+        txtBairro.setText("");
+        txtcep.setText("");
+        txtNumero.setText("");
+        txtCPF.setText("");
+        txtRG.setText("");
+        cbxEstado.setSelectedIndex(0);
+        cbxCargo.setSelectedIndex(0);
+        cbxcidade.setSelectedIndex(0);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnGravarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGravarMouseEntered
@@ -1001,7 +1066,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 func.setNumero(Integer.parseInt(txtNumero.getText()));
                 func.setBairro(txtBairro.getText());
                 func.setComplemento(txtComplemento.getText());
-                func.setCidade((String) cbxOutro.getSelectedItem());
+                func.setCidade((String) cbxcidade.getSelectedItem());
                 func.setEstado((String) cbxEstado.getSelectedItem());
                 DateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
                 func.setDataRegistro((dataAdmisao.getDate()));
@@ -1024,8 +1089,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private void cbxEstadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxEstadoFocusLost
         // removendo todos os itens do combobox de cidades logo 
         // apos o estado ser selecionado.
-        cbxOutro.removeAllItems();
-        cbxOutro.addItem("Selecione Uma Cidade ..");
+        cbxcidade.removeAllItems();
         String a = "";
 
         int estado = cbxEstado.getSelectedIndex();
@@ -1042,7 +1106,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                     ResultSet rslocal = banco.executaSQLRetorno(sql);
                     while (rslocal.next()) {
                         a = rslocal.getString(1);
-                        cbxOutro.addItem(rslocal.getString(2));
+                        cbxcidade.addItem(rslocal.getString(2));
                     }
                   
                 } catch (SQLException ex) {
@@ -1053,9 +1117,19 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cbxEstadoFocusLost
 
-    private void cbxOutroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxOutroFocusLost
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+       
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        this.dispose();
+        new PesquisaFuncionario().setVisible(true);
+      
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void cbxcidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxcidadeFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxOutroFocusLost
+    }//GEN-LAST:event_cbxcidadeFocusLost
 
     /**
      * @param args the command line arguments
@@ -1111,7 +1185,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton btnUltimo;
     private javax.swing.JComboBox cbxCargo;
     private javax.swing.JComboBox cbxEstado;
-    private javax.swing.JComboBox cbxOutro;
+    private javax.swing.JComboBox cbxcidade;
     private com.toedter.calendar.JDateChooser dataAdmisao;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
@@ -1159,4 +1233,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtcep;
     // End of variables declaration//GEN-END:variables
+
+    
+
+   
 }

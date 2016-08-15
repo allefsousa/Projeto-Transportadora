@@ -5,15 +5,21 @@
  */
 package Funcionalidades;
 
+import Dao.ConnBanco;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Allef
  */
 public class Atualizahora {
+    ConnBanco banco = new ConnBanco();
 
     public void StartData(final JLabel jdata) {
         Thread atualizaData = new Thread(new Runnable() {
@@ -56,4 +62,5 @@ public class Atualizahora {
         });
         atualizaHora.start();
     }
+   
 }

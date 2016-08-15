@@ -5,9 +5,11 @@
  */
 package Dao;
 
+
 import Model.Funcionario;
 import static java.lang.System.console;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
@@ -106,9 +108,9 @@ public class DaoFuncionario {
     public boolean deletarFunc(Funcionario funcionario) {
         try {
             ConnFunc.conn = ConnFunc.getConection();
-            String sql = "DELETE FROM funcionario WHERE cpf = ?";
+            String sql = "DELETE FROM funcionario WHERE id = ?";
             ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
-            ConnFunc.pstm.setString(1, funcionario.getCpf());
+            ConnFunc.pstm.setString(1, (String.valueOf(funcionario.getNumMatricula())));
             ConnFunc.pstm.execute();
             JOptionPane.showMessageDialog(null, "Funcionario Removido Com Sucesso");
             return true;
@@ -119,7 +121,7 @@ public class DaoFuncionario {
         return false;
     }
     
-    public Funcionario getFuncionario(int cpf){
+  /*  public Funcionario getFuncionario(int cpf){
         try {
             ConnFunc.conn = ConnFunc.getConection();
             
@@ -158,6 +160,54 @@ public class DaoFuncionario {
             JOptionPane.showMessageDialog
                     (null,"Erro ao recuperar Funcionario!" + e.getMessage());
             e.printStackTrace();
+        }
+        return null;
+    }*/
+     public Funcionario getFuncionario(int codigo){
+        try {
+            
+           ConnFunc.conn = ConnFunc.getConection();
+          //  JOptionPane.showMessageDialog(null, ""+ codigo);
+            DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
+           String sql = ( "SELECT id,cpf, nome, rg, dataNAsc, salario, nomeUsuario, senha, cargo, cep, rua, numero, bairro, complemento, cidade, estado, dataRegistro FROM transportadora.funcionario WHERE id= ?;");
+            ConnFunc.pstm=ConnFunc.conn.prepareStatement(sql);
+            ConnFunc.pstm.setInt(1, codigo);
+            // recebendo os resultados do select  e executando a tarefa 
+            ResultSet rs = ConnFunc.pstm.executeQuery();
+            Model.Funcionario f= new Funcionario();
+            if (rs.next()) {
+                
+               
+                f.setNumMatricula((rs.getInt(1)));
+                f.setCpf(rs.getString(2));
+                f.setNome(rs.getString(3));
+                f.setRg(String.valueOf(rs.getInt(4)));
+                f.setDataNasc((rs.getDate(5)));
+                f.setSalario(Double.valueOf(rs.getString(6)));
+                f.setNomeUsuario(rs.getString(7));
+                f.setSenha(rs.getString(8));
+                f.setFuncao(rs.getString(9));
+                f.setCep(rs.getInt(10));
+                f.setEndereco(rs.getString(11));
+                f.setNumero(rs.getInt(12));
+                f.setBairro(rs.getString(13));
+                f.setComplemento(rs.getString(14));
+                f.setCidade(rs.getString(15));
+                f.setEstado(rs.getString(16));
+                f.setDataRegistro(rs.getDate(17));
+               // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
+               //com essa mensagem nao 
+               JOptionPane.showMessageDialog(null, "");
+             
+                
+               
+                
+                 
+            }
+            return f;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog
+                    (null,"Erro ao recuperar funcionario!" + e.getMessage());
         }
         return null;
     }

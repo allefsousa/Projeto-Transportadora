@@ -34,6 +34,9 @@ public class Menu extends javax.swing.JFrame {
          * Instanciando a classe atualiza hora
          */
         Atualizahora HoraData = new Atualizahora();
+        
+        
+        
         /**
          * chamando o metodo para atualizar hora
          * @param Jdata

@@ -53,7 +53,7 @@ public class ConnBanco {
 
     public void executaSQL(String sql) {
         try {
-            stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
             rs = stm.executeQuery(sql);
 
         } catch (SQLException ex) {
