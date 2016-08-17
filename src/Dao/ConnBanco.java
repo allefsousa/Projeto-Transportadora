@@ -30,7 +30,7 @@ public class ConnBanco {
     public Connection getConection() {
         try {
             conn = DriverManager.getConnection(url, usuario, senha);//Realiza a conexão com o banco
-            //  JOptionPane.showMessageDialog(null, "Conexão com o banco realizada com sucesso !");//Exibe caixa de mensagem
+            //JOptionPane.showMessageDialog(null, "Conexão com o banco realizada com sucesso !");//Exibe caixa de mensagem
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na conexão...");//Exibe caixa de mensagem
             e.printStackTrace();
