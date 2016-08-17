@@ -5,7 +5,6 @@
  */
 package Dao;
 
-
 import Model.Funcionario;
 import static java.lang.System.console;
 import java.sql.PreparedStatement;
@@ -39,7 +38,7 @@ public class DaoFuncionario {
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             //Inserindo o valor formatado no banco
             comando.setString(4, formatter.format(funcionario.getDataNasc()));
-           comando.setString(5,String.valueOf(( funcionario.getSalario())));
+            comando.setString(5, String.valueOf((funcionario.getSalario())));
             comando.setString(6, funcionario.getNomeUsuario());
             comando.setString(7, funcionario.getSenha());
             comando.setString(8, funcionario.getFuncao());
@@ -57,9 +56,9 @@ public class DaoFuncionario {
             comando.execute();
             //Fecha a conexao com o BD
             ConnFunc.conn.close();
-            JOptionPane.showMessageDialog(null,"Funcionario Inserido Com Sucesso !! ");
+            JOptionPane.showMessageDialog(null, "Funcionario Inserido Com Sucesso !! ");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Impossivel Persistir"+ e);
+            JOptionPane.showMessageDialog(null, "Impossivel Persistir" + e);
             e.printStackTrace();
         }
 
@@ -108,76 +107,85 @@ public class DaoFuncionario {
     public boolean deletarFunc(Funcionario funcionario) {
         try {
             ConnFunc.conn = ConnFunc.getConection();
-            String sql = "DELETE FROM funcionario WHERE id = ?";
+            String sql = "SELECT cpf FROM funcionario WHERE cpf = ?";
             ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
-            ConnFunc.pstm.setString(1, (String.valueOf(funcionario.getNumMatricula())));
-            ConnFunc.pstm.execute();
-            JOptionPane.showMessageDialog(null, "Funcionario Removido Com Sucesso");
-            return true;
+            ConnFunc.pstm.setString(1, funcionario.getCpf());
+            ResultSet rs = ConnFunc.pstm.executeQuery();
+
+            if (rs.next()) {
+                sql = "DELETE FROM funcionario WHERE cpf = ?";
+                ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
+                //ConnFunc.pstm.setString(1, (String.valueOf(funcionario.getNumMatricula())));
+                ConnFunc.pstm.setString(1, funcionario.getCpf());
+                ConnFunc.pstm.execute();
+                JOptionPane.showMessageDialog(null, "Funcionario Removido Com Sucesso");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Funcionario não existe !");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Impossivel Remover Funcionario");
             e.printStackTrace();
         }
         return false;
     }
-    
-  /*  public Funcionario getFuncionario(int cpf){
+
+    /*  public Funcionario getFuncionario(int cpf){
+     try {
+     ConnFunc.conn = ConnFunc.getConection();
+            
+     //DateFormat format = new SimpleDateFormat("ddmmyyyy");
+     String sql = "SELECT * FROM funcionario where cpf = ?";
+     ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
+     ConnFunc.pstm.setInt(1, cpf);
+     ConnFunc.rs = ConnFunc.pstm.executeQuery();
+     if(ConnFunc.rs.next()){
+     Funcionario f = new Funcionario();
+                
+     f.setCpf(ConnFunc.rs.getString(1));
+     f.setNome(ConnFunc.rs.getString(2));
+     f.setRg((ConnFunc.rs.getString(3)));
+     f.setDataNasc(ConnFunc.rs.getDate(4));
+     f.setNomeUsuario(ConnFunc.rs.getString(5));
+     f.setSenha(ConnFunc.rs.getString(6));
+     f.setFuncao(ConnFunc.rs.getString(7));
+     f.setCep(Integer.parseInt(ConnFunc.rs.getString(8)));
+     f.setRua(ConnFunc.rs.getString(9));
+     f.setNumero(Integer.parseInt(ConnFunc.rs.getString(10)));
+     f.setBairro(ConnFunc.rs.getString(11));
+     f.setComplemento(ConnFunc.rs.getString(12));
+     f.setCidade(ConnFunc.rs.getString(13));
+     f.setEstado(ConnFunc.rs.getString(14));
+     f.setDataRegistro(ConnFunc.rs.getDate(15));
+     f.setCnpjTransp(Integer.parseInt(ConnFunc.rs.getString(16)));
+                
+     ConnFunc.conn.close();
+                
+     return f;
+                
+     }
+            
+     } catch (Exception e) {
+     JOptionPane.showMessageDialog
+     (null,"Erro ao recuperar Funcionario!" + e.getMessage());
+     e.printStackTrace();
+     }
+     return null;
+     }*/
+    public Funcionario getFuncionario(int codigo) {
         try {
+
             ConnFunc.conn = ConnFunc.getConection();
-            
-            //DateFormat format = new SimpleDateFormat("ddmmyyyy");
-            String sql = "SELECT * FROM funcionario where cpf = ?";
-            ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
-            ConnFunc.pstm.setInt(1, cpf);
-            ConnFunc.rs = ConnFunc.pstm.executeQuery();
-            if(ConnFunc.rs.next()){
-                Funcionario f = new Funcionario();
-                
-                f.setCpf(ConnFunc.rs.getString(1));
-                f.setNome(ConnFunc.rs.getString(2));
-                f.setRg((ConnFunc.rs.getString(3)));
-                f.setDataNasc(ConnFunc.rs.getDate(4));
-                f.setNomeUsuario(ConnFunc.rs.getString(5));
-                f.setSenha(ConnFunc.rs.getString(6));
-                f.setFuncao(ConnFunc.rs.getString(7));
-                f.setCep(Integer.parseInt(ConnFunc.rs.getString(8)));
-                f.setRua(ConnFunc.rs.getString(9));
-                f.setNumero(Integer.parseInt(ConnFunc.rs.getString(10)));
-                f.setBairro(ConnFunc.rs.getString(11));
-                f.setComplemento(ConnFunc.rs.getString(12));
-                f.setCidade(ConnFunc.rs.getString(13));
-                f.setEstado(ConnFunc.rs.getString(14));
-                f.setDataRegistro(ConnFunc.rs.getDate(15));
-                f.setCnpjTransp(Integer.parseInt(ConnFunc.rs.getString(16)));
-                
-                ConnFunc.conn.close();
-                
-                return f;
-                
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog
-                    (null,"Erro ao recuperar Funcionario!" + e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
-    }*/
-     public Funcionario getFuncionario(int codigo){
-        try {
-            
-           ConnFunc.conn = ConnFunc.getConection();
-          //  JOptionPane.showMessageDialog(null, ""+ codigo);
+            //  JOptionPane.showMessageDialog(null, ""+ codigo);
             DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
-           String sql = ( "SELECT id,cpf, nome, rg, dataNAsc, salario, nomeUsuario, senha, cargo, cep, rua, numero, bairro, complemento, cidade, estado, dataRegistro FROM transportadora.funcionario WHERE id= ?;");
-            ConnFunc.pstm=ConnFunc.conn.prepareStatement(sql);
+            String sql = ("SELECT id,cpf, nome, rg, dataNAsc, salario, nomeUsuario, senha, cargo, cep, rua, numero, bairro, complemento, cidade, estado, dataRegistro FROM transportadora.funcionario WHERE id= ?;");
+            ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
             ConnFunc.pstm.setInt(1, codigo);
             // recebendo os resultados do select  e executando a tarefa 
             ResultSet rs = ConnFunc.pstm.executeQuery();
-            Model.Funcionario f= new Funcionario();
+            Model.Funcionario f = new Funcionario();
             if (rs.next()) {
-                
-               
+
                 f.setNumMatricula((rs.getInt(1)));
                 f.setCpf(rs.getString(2));
                 f.setNome(rs.getString(3));
@@ -195,19 +203,14 @@ public class DaoFuncionario {
                 f.setCidade(rs.getString(15));
                 f.setEstado(rs.getString(16));
                 f.setDataRegistro(rs.getDate(17));
-               // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
-               //com essa mensagem nao 
-               JOptionPane.showMessageDialog(null, "");
-             
-                
-               
-                
-                 
+                // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
+                //com essa mensagem nao 
+                JOptionPane.showMessageDialog(null, "");
+
             }
             return f;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog
-                    (null,"Erro ao recuperar funcionario!" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao recuperar funcionario!" + e.getMessage());
         }
         return null;
     }
