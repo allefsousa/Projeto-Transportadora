@@ -22,19 +22,22 @@ import javax.swing.JOptionPane;
  * @author Felipe
  */
 public class CadastrarFuncionario extends javax.swing.JFrame {
+
     /**
-     *Metodo responsavel por receber os dados da tela de pesquisa
-     * os valores foram passados por um objeto do tipo funcionario 
-     * @author Allef 
-     * @param b 
+     * Metodo responsavel por receber os dados da tela de pesquisa os valores
+     * foram passados por um objeto do tipo funcionario
+     *
+     * @author Allef
+     * @param b
      * @data 14/08/2016
      * @param funcionario
      */
-    public void recebendo1(String b[]){
+    public void recebendo1(String b[]) {
         cbxcidade.addItem(b);
     }
+
     public void recebendo(Funcionario funcionario) {
-        
+
         txtCodigo.setText(String.valueOf(funcionario.getNumMatricula()));
         txtNomeCompleto.setText(funcionario.getNome());
         txtCPF.setText(funcionario.getCpf());
@@ -49,27 +52,27 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         txtNumero.setText(String.valueOf(funcionario.getNumero()));
         txtBairro.setText(funcionario.getBairro());
         txtComplemento.setText(funcionario.getComplemento());
-        
+
         cbxcidade.setSelectedItem(funcionario.getCidade());
-        
+
         cbxEstado.setSelectedItem(funcionario.getEstado());
         dataAdmisao.setDate(funcionario.getDataRegistro());
     }
-    
+
     /**
      * Creates new form CadastrarFuncionario
      */
     ConnBanco banco = new ConnBanco();
     // Instanciando Objeto do tipo da tela para Persistir os dados.
     Dao.DaoFuncionario DaoFunc = new DaoFuncionario();
+    Dao.ConnBanco conn = new ConnBanco();
 
     Funcionario func = new Funcionario();
-  
 
     public CadastrarFuncionario() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
-      
+
         /**
          * @Author Allef preenche os combos de cidade e estado quando a tela é
          * iniciada
@@ -87,7 +90,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 String a = rsestado.getString(1);
                 cbxEstado.addItem(rsestado.getString(1));
             }
-            while(rscidade.next()){
+            while (rscidade.next()) {
                 cbxcidade.addItem(rscidade.getString(1));
             }
 
@@ -95,13 +98,13 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "" + ex);
         }
     }
-    /**
-     * metodo que vai receber os dados do outro jFrame 
-     * no caso os dados que forem clicados na tabela de pesquisa
-     * @param funcionario 
-     */
-   
 
+    /**
+     * metodo que vai receber os dados do outro jFrame no caso os dados que
+     * forem clicados na tabela de pesquisa
+     *
+     * @param funcionario
+     */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -913,16 +916,15 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoMouseExited
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-       /**
-        * @autor Allef 
-        * data 14/08/2016
-        */
-        
+        /**
+         * @autor Allef data 14/08/2016
+         */
+
         txtNascimento.setDate(null);
-       dataAdmisao.setDate(null);
-       txtSalario.setText("");
-       txtComplemento.setText("");
-       txtCodigo.setText("");
+        dataAdmisao.setDate(null);
+        txtSalario.setText("");
+        txtComplemento.setText("");
+        txtCodigo.setText("");
         txtNomeCompleto.setText("");
         txtEndereco.setText("");
         txtBairro.setText("");
@@ -1024,8 +1026,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         }
 
-        
-
     }
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
 
@@ -1108,7 +1108,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                         a = rslocal.getString(1);
                         cbxcidade.addItem(rslocal.getString(2));
                     }
-                  
+
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(rootPane, "Erro ao Preecher combo Cidade" + ex);
                 }
@@ -1118,13 +1118,24 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxEstadoFocusLost
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-       
+        try {
+            if (txtCPF.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Nada para remover !");
+            } else {
+                func.setCpf(txtCPF.getText());
+                DaoFunc.deletarFunc(func);
+                //JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso !");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Impossivel Alterar !! ");
+        }
+    
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         this.dispose();
         new PesquisaFuncionario().setVisible(true);
-      
+
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void cbxcidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxcidadeFocusLost
@@ -1145,16 +1156,32 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastrarFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastrarFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastrarFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastrarFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarFuncionario.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CadastrarFuncionario.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CadastrarFuncionario.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CadastrarFuncionario.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1234,7 +1261,4 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField txtcep;
     // End of variables declaration//GEN-END:variables
 
-    
-
-   
 }
