@@ -107,22 +107,22 @@ public class DaoFuncionario {
     public boolean deletarFunc(Funcionario funcionario) {
         try {
             ConnFunc.conn = ConnFunc.getConection();
-            String sql = "SELECT cpf FROM funcionario WHERE cpf = ?";
+            String sql = "SELECT id FROM funcionario WHERE id = ?";
             ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
-            ConnFunc.pstm.setString(1, funcionario.getCpf());
+            ConnFunc.pstm.setInt(1, funcionario.getNumMatricula());
             ResultSet rs = ConnFunc.pstm.executeQuery();
 
             if (rs.next()) {
-                sql = "DELETE FROM funcionario WHERE cpf = ?";
+                sql = "DELETE FROM funcionario WHERE id = ?";
                 ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
                 //ConnFunc.pstm.setString(1, (String.valueOf(funcionario.getNumMatricula())));
-                ConnFunc.pstm.setString(1, funcionario.getCpf());
+                ConnFunc.pstm.setInt(1, funcionario.getNumMatricula());
                 ConnFunc.pstm.execute();
                 JOptionPane.showMessageDialog(null, "Funcionario Removido Com Sucesso");
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Funcionario não existe !");
-            }
+            } 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Impossivel Remover Funcionario");
             e.printStackTrace();
