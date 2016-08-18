@@ -160,7 +160,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         lblCidade = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         cbxEstado = new javax.swing.JComboBox();
-        txtCodigo = new javax.swing.JTextField();
         lblCodigo = new javax.swing.JLabel();
         txtNascimento = new com.toedter.calendar.JDateChooser();
         lblSalario = new javax.swing.JLabel();
@@ -179,6 +178,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         txtRG = new javax.swing.JTextField();
         txtCPF = new javax.swing.JTextField();
         cbxcidade = new javax.swing.JComboBox();
+        txtCodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -599,10 +599,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             }
         });
 
-        txtCodigo.setEditable(false);
-        txtCodigo.setFocusable(false);
-        txtCodigo.setPreferredSize(new java.awt.Dimension(250, 20));
-
         lblCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblCodigo.setText("NumMatricula:");
 
@@ -667,6 +663,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             }
         });
 
+        txtCodigo.setPreferredSize(new java.awt.Dimension(60, 20));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -680,9 +678,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblCodigo)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(134, 134, 134)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
                         .addComponent(lblBairro1)
                         .addGap(10, 10, 10)
                         .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -773,14 +771,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(BarraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(lblCodigo))
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -788,7 +778,13 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                                 .addGap(1, 1, 1)
                                 .addComponent(lblBairro1))
                             .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCodigo))
+                        .addGap(34, 34, 34)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -877,7 +873,10 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -1118,11 +1117,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxEstadoFocusLost
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        
         try {
-            if (txtCPF.getText().isEmpty()) {
+            if (txtCodigo.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Nada para remover !");
             } else {
-                func.setCpf(txtCPF.getText());
+                func.setNumMatricula(Integer.parseInt(txtCodigo.getText()));
                 DaoFunc.deletarFunc(func);
                 //JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso !");
             }
