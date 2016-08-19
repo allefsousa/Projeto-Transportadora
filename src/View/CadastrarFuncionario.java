@@ -72,6 +72,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     public CadastrarFuncionario() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        btnAnterior.setEnabled(false);
+        btnProximo.setEnabled(false);
 
         /**
          * @Author Allef preenche os combos de cidade e estado quando a tela é
@@ -302,6 +304,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 btnPrimeiroMouseExited(evt);
             }
         });
+        btnPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrimeiroActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnPrimeiro);
         jToolBar1.add(jSeparator2);
 
@@ -324,6 +331,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnAnteriorMouseExited(evt);
+            }
+        });
+        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnteriorActionPerformed(evt);
             }
         });
         jToolBar1.add(btnAnterior);
@@ -540,6 +552,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 btnProximoMouseExited(evt);
             }
         });
+        btnProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProximoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnProximo);
         jToolBar1.add(jSeparator15);
 
@@ -562,6 +579,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnUltimoMouseExited(evt);
+            }
+        });
+        btnUltimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUltimoActionPerformed(evt);
             }
         });
         jToolBar1.add(btnUltimo);
@@ -1084,10 +1106,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnGravarActionPerformed
-
+/**
+ * Removendo todos os itens do combobox de cidades logo,apos o estado ser selecionado.
+ * @param evt 
+ */
     private void cbxEstadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxEstadoFocusLost
-        // removendo todos os itens do combobox de cidades logo 
-        // apos o estado ser selecionado.
         cbxcidade.removeAllItems();
         String a = "";
 
@@ -1096,9 +1119,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             if (estado == i) {
                 String sql1 = ("use transportadora;");
                 String sql = ("select * from cidade where estado =" + estado + ";");
-
                 try {
-
                     banco.conn = banco.getConection();
                     banco.pstm = banco.conn.prepareStatement(sql);
                     banco.executaSQL(sql1);
@@ -1107,7 +1128,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                         a = rslocal.getString(1);
                         cbxcidade.addItem(rslocal.getString(2));
                     }
-
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(rootPane, "Erro ao Preecher combo Cidade" + ex);
                 }
@@ -1115,9 +1135,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_cbxEstadoFocusLost
-
+/**
+ * Método exclui o funcionario da base de dados referenciando - se pelo Código do mesmo.
+ * @param evt 
+ */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        
         try {
             if (txtCodigo.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Nada para remover !");
@@ -1129,7 +1151,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Impossivel Alterar !! ");
         }
-    
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -1141,6 +1162,154 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private void cbxcidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxcidadeFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxcidadeFocusLost
+ /**
+  * Método recupera os dados  de cadastro de funcionarios do primeiro registro 
+  * da base de dados.
+  * @param evt 
+  */
+    private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
+        btnProximo.setEnabled(true);
+        btnAnterior.setEnabled(false);
+        cbxcidade.removeAllItems();
+        cbxEstado.removeAllItems();
+        cbxCargo.removeAllItems();
+        try {
+            String sql = "SELECT * FROM funcionario";
+            banco.executaSQL(sql);
+            banco.rs.first();
+            txtCodigo.setText(banco.rs.getString("id"));
+            txtNomeCompleto.setText(banco.rs.getString("nome"));
+            txtEndereco.setText(banco.rs.getString("rua"));
+            txtBairro.setText(banco.rs.getString("bairro"));
+            txtNumero.setText(String.valueOf(banco.rs.getString("numero")));
+            txtcep.setText(banco.rs.getString("cep"));
+            cbxEstado.addItem(banco.rs.getString("estado"));
+            cbxcidade.addItem(banco.rs.getString("cidade"));
+            cbxCargo.addItem(banco.rs.getString("cargo"));
+            txtCPF.setText(banco.rs.getString("cpf"));
+            txtRG.setText(banco.rs.getString("rg"));
+            txtNascimento.setDate(banco.rs.getDate("DataNAsc"));
+            txtSalario.setText(banco.rs.getString("salario"));
+            dataAdmisao.setDate(banco.rs.getDate("dataRegistro"));
+            txtComplemento.setText(banco.rs.getString("complemento"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnPrimeiroActionPerformed
+
+    /**
+     * Método recupera os dados de cadastro de funcionário presente no último registro
+     * da base de dados.
+     * @param evt 
+     */
+    private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
+        btnProximo.setEnabled(false);
+        btnAnterior.setEnabled(true);
+        cbxcidade.removeAllItems();
+        cbxEstado.removeAllItems();
+        cbxCargo.removeAllItems();
+        
+        try {
+            String sql = "SELECT * FROM funcionario";
+            banco.executaSQL(sql);
+            banco.rs.last();
+            txtCodigo.setText(banco.rs.getString("id"));
+            txtNomeCompleto.setText(banco.rs.getString("nome"));
+            txtEndereco.setText(banco.rs.getString("rua"));
+            txtBairro.setText(banco.rs.getString("bairro"));
+            txtNumero.setText(String.valueOf(banco.rs.getString("numero")));
+            txtcep.setText(banco.rs.getString("cep"));
+            cbxEstado.addItem(banco.rs.getString("estado"));
+            cbxcidade.addItem(banco.rs.getString("cidade"));
+            cbxCargo.addItem(banco.rs.getString("cargo"));
+            txtCPF.setText(banco.rs.getString("cpf"));
+            txtRG.setText(banco.rs.getString("rg"));
+            txtNascimento.setDate(banco.rs.getDate("DataNAsc"));
+            txtSalario.setText(banco.rs.getString("salario"));
+            dataAdmisao.setDate(banco.rs.getDate("dataRegistro"));
+            txtComplemento.setText(banco.rs.getString("complemento"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnUltimoActionPerformed
+    
+    /**
+    * Método recupera os dados de um registro anterior em relação a posição atual,
+    * exceto se o mesmo estiver na primeira posição.
+    * @param evt 
+    */
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+        btnProximo.setEnabled(true);
+        cbxcidade.removeAllItems();
+        cbxEstado.removeAllItems();
+        cbxCargo.removeAllItems();
+        
+        try {
+            if (banco.rs.isFirst()) {
+                btnAnterior.setEnabled(false);
+            } else {
+                banco.rs.previous();
+                txtCodigo.setText(banco.rs.getString("id"));
+                txtNomeCompleto.setText(banco.rs.getString("nome"));
+                txtEndereco.setText(banco.rs.getString("rua"));
+                txtBairro.setText(banco.rs.getString("bairro"));
+                txtNumero.setText(String.valueOf(banco.rs.getString("numero")));
+                txtcep.setText(banco.rs.getString("cep"));
+                cbxEstado.addItem(banco.rs.getString("estado"));
+                cbxcidade.addItem(banco.rs.getString("cidade"));
+                cbxCargo.addItem(banco.rs.getString("cargo"));
+                txtCPF.setText(banco.rs.getString("cpf"));
+                txtRG.setText(banco.rs.getString("rg"));
+                txtNascimento.setDate(banco.rs.getDate("DataNAsc"));
+                txtSalario.setText(banco.rs.getString("salario"));
+                dataAdmisao.setDate(banco.rs.getDate("dataRegistro"));
+                txtComplemento.setText(banco.rs.getString("complemento"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnAnteriorActionPerformed
+
+    /**
+     * Método recupera os dados de um registro posterior em relação a posição atual,
+     * exceto se o mesmo estiver na última posição.
+     * @param evt 
+     */
+    private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
+        btnAnterior.setEnabled(true);
+        cbxcidade.removeAllItems();
+        cbxEstado.removeAllItems();
+        cbxCargo.removeAllItems();
+        
+        try {
+            if (banco.rs.isLast()) {
+                btnProximo.setEnabled(false);
+            } else {
+                banco.rs.next();
+                txtCodigo.setText(banco.rs.getString("id"));
+                txtNomeCompleto.setText(banco.rs.getString("nome"));
+                txtEndereco.setText(banco.rs.getString("rua"));
+                txtBairro.setText(banco.rs.getString("bairro"));
+                txtNumero.setText(String.valueOf(banco.rs.getString("numero")));
+                txtcep.setText(banco.rs.getString("cep"));
+                cbxEstado.addItem(banco.rs.getString("estado"));
+                cbxcidade.addItem(banco.rs.getString("cidade"));
+                cbxCargo.addItem(banco.rs.getString("cargo"));
+                txtCPF.setText(banco.rs.getString("cpf"));
+                txtRG.setText(banco.rs.getString("rg"));
+                txtNascimento.setDate(banco.rs.getDate("DataNAsc"));
+                txtSalario.setText(banco.rs.getString("salario"));
+                dataAdmisao.setDate(banco.rs.getDate("dataRegistro"));
+                txtComplemento.setText(banco.rs.getString("complemento"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnProximoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1156,32 +1325,21 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastrarFuncionario.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastrarFuncionario.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastrarFuncionario.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastrarFuncionario.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarFuncionario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CadastrarFuncionario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CadastrarFuncionario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CadastrarFuncionario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
