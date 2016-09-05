@@ -29,8 +29,7 @@ public class DaoVeiculo {
     public boolean insereVeiculo(Veiculo veiculo) {
         ConnVeic.conn = ConnVeic.getConection();
         
-        String InsereVeiculo = " INSERT INTO veiculo(placa, num_chassi, capacidade,  "
-                + "modelo,fk_Id_Centro_Dist, fk_Id_Func, fk_Id_Cidade)"
+        String InsereVeiculo = " INSERT INTO veiculo( placa, num_chassi, capacidade, modelo, fk_Id_Centro_Dist, fk_Id_Func, fk_Id_Cidade)"
                 + "VALUES(?,?,?,?,?,?,?)";
         try {
             PreparedStatement comando = ConnVeic.conn.prepareStatement(InsereVeiculo);
@@ -39,9 +38,9 @@ public class DaoVeiculo {
             comando.setString(2, veiculo.getNumChassi());
             comando.setInt(3, veiculo.getCapacidade());
             comando.setString(4, veiculo.getModelo());
-            comando.setString(5, veiculo.getIdCentroDist());
-            comando.setString(6, veiculo.getIdFunc());
-            comando.setString(7, veiculo.getCidade());
+            comando.setInt(5, veiculo.getIdCentroDist());
+            comando.setInt(6, veiculo.getIdFunc());
+            comando.setInt(7, veiculo.getCidade());
 
             //executa a query
             comando.execute();
