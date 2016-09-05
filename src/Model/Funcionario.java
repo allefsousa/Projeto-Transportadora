@@ -6,76 +6,78 @@ import java.util.Date;
  *
  * @author Allef
  */
-public class Funcionario extends Pessoa {
+public class Funcionario {
 
     private int NumMatricula;
+    private String Nome;
+    private String Rg;
+    private String Cpf;
     //Campo De Data
     private Date DataNasc;
-    // Campo Para adicionar mascara
-    private int TelFixo;
-    // Campo Para adicionar mascara
-    private int TelCelular;    
-    private String Funcao;     
-    private int Cep;   
-   
+    private String nomeUsuario;
+    private String senha;
+
+    private int TelCelular;
+    private String Funcao;
+    private int Cep;
+
     private String Endereco;
-    private String Cidade; 
+    private String Cidade;
     private String Estado;
-    private String rua;
     private String Bairro;
     // campo para data 
     private Date DataRegistro;
     //SubClasse
-    private Double Salario;
     private int numero;
     private String complemento;
-    private String nomeUsuario;
-    private String senha;
+
     private int cnpjTransp;
+    private int cidadeFunciCentro;
 
     public Funcionario() {
     }
 
-    public Funcionario(int NumMatricula, Date DataNasc, int TelFixo, int TelCelular,
-            String Funcao, int Cep, String Cidade, String Estado, String rua, String Bairro,
-            Date DataRegistro, Double Salario, int numero, String complemento,
-            String Nome, String Cpf, String rg, String nomeUsuario, String senha,
-            int cnpjTransp) {
-        super(Nome, Cpf, rg);
-        this.NumMatricula = NumMatricula;
-        this.DataNasc = DataNasc;
-        this.TelFixo = TelFixo;
-        this.TelCelular = TelCelular;
-        this.Funcao = Funcao;
-        this.Cep = Cep;
-        this.Cidade = Cidade;
-        this.Estado = Estado;
-        this.rua = rua;
-        this.Bairro = Bairro;
-        this.DataRegistro = DataRegistro;
-        this.Salario = Salario;
-        this.numero = numero;
-        this.complemento = complemento;
-        this.nomeUsuario = nomeUsuario;
-        this.senha = senha;
-        this.cnpjTransp = cnpjTransp;
-    }
-
     public Funcionario(int NumMatricula) {
         this.NumMatricula = NumMatricula;
-    }    
+    }
+
+    public String getNome() {
+        return Nome;
+    }
+
+    public void setNome(String Nome) {
+        this.Nome = Nome;
+    }
+
+    public String getRg() {
+        return Rg;
+    }
+
+    public void setRg(String Rg) {
+        this.Rg = Rg;
+    }
+
+    public String getCpf() {
+        return Cpf;
+    }
+
+    public void setCpf(String Cpf) {
+        this.Cpf = Cpf;
+    }
+
+    public int getCidadeFunciCentro() {
+        return cidadeFunciCentro;
+    }
+
+    public void setCidadeFunciCentro(int cidadeFunciCentro) {
+        this.cidadeFunciCentro = cidadeFunciCentro;
+    }
 
     @Override
     public String toString() {
-        return "Funcionario{" + "NumMatricula=" + NumMatricula + ", DataNasc=" 
-                + DataNasc + ", TelFixo=" + TelFixo + ", TelCelular=" + TelCelular 
-                + ", Funcao=" + Funcao + ", Cep=" + Cep + ", Cidade=" + Cidade 
-                + ", Estado=" + Estado + ", rua=" + rua + ", Bairro=" + Bairro 
-                + ", DataRegistro=" + DataRegistro + ", Salario=" + Salario 
-                + ", numero=" + numero + ", complemento=" + complemento 
-                + ", nomeUsuario=" + nomeUsuario + ", senha=" + senha +", cnpjTransp=" + cnpjTransp + '}';
+        return "Funcionario{" + "NumMatricula=" + NumMatricula + ", DataNasc=" + DataNasc + ", TelCelular=" + TelCelular + ", Funcao=" + Funcao + ", Cep=" + Cep + ", Endereco=" + Endereco + ", Cidade=" + Cidade + ", Estado=" + Estado + ", Bairro=" + Bairro + ", DataRegistro=" + DataRegistro + ", numero=" + numero + ", complemento=" + complemento + ", nomeUsuario=" + nomeUsuario + ", senha=" + senha + ", cnpjTransp=" + cnpjTransp + ", cidadeFunciCentro=" + cidadeFunciCentro + '}';
     }
-    
+
     public int getNumMatricula() {
         return NumMatricula;
     }
@@ -87,7 +89,6 @@ public class Funcionario extends Pessoa {
     public void setEndereco(String Endereco) {
         this.Endereco = Endereco;
     }
-    
 
     public void setNumMatricula(int NumMatricula) {
         this.NumMatricula = NumMatricula;
@@ -99,14 +100,6 @@ public class Funcionario extends Pessoa {
 
     public void setDataNasc(Date DataNasc) {
         this.DataNasc = DataNasc;
-    }
-
-    public int getTelFixo() {
-        return TelFixo;
-    }
-
-    public void setTelFixo(int TelFixo) {
-        this.TelFixo = TelFixo;
     }
 
     public int getTelCelular() {
@@ -149,14 +142,6 @@ public class Funcionario extends Pessoa {
         this.Estado = Estado;
     }
 
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
     public String getBairro() {
         return Bairro;
     }
@@ -171,14 +156,6 @@ public class Funcionario extends Pessoa {
 
     public void setDataRegistro(Date DataRegistro) {
         this.DataRegistro = DataRegistro;
-    }
-
-    public Double getSalario() {
-        return Salario;
-    }
-
-    public void setSalario(Double Salario) {
-        this.Salario = Salario;
     }
 
     public int getNumero() {
@@ -220,7 +197,5 @@ public class Funcionario extends Pessoa {
     public void setCnpjTransp(int cnpjTransp) {
         this.cnpjTransp = cnpjTransp;
     }
-
-    
 
 }

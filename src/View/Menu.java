@@ -9,6 +9,7 @@ package View;
 
 import Funcionalidades.AbrirNavegador;
 import Funcionalidades.Atualizahora;
+import Model.ModeloLogin;
 import View.Login;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,13 +24,13 @@ public class Menu extends javax.swing.JFrame {
     int aux=0;
     // Objeto para Abrir Navegador 
     AbrirNavegador abrirPagina = new AbrirNavegador();
-    
+  
     
     public Menu() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         Menu.setVisible(false);
-        
+       // lblUnidade.setText(modellogin.getCentroOn().toString());
         /**
          * Instanciando a classe atualiza hora
          */
@@ -185,6 +186,8 @@ public class Menu extends javax.swing.JFrame {
         btnCalculadora2 = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JToolBar.Separator();
         jButton1 = new javax.swing.JButton();
+        lblUnidade = new javax.swing.JLabel();
+        jSeparator10 = new javax.swing.JToolBar.Separator();
         Jdata = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         Jhora = new javax.swing.JLabel();
@@ -1200,6 +1203,12 @@ public class Menu extends javax.swing.JFrame {
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton1);
 
+        lblUnidade.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUnidade.setForeground(new java.awt.Color(255, 255, 255));
+        lblUnidade.setText("Unidade");
+        jToolBar1.add(lblUnidade);
+        jToolBar1.add(jSeparator10);
+
         Jdata.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         Jdata.setForeground(new java.awt.Color(255, 255, 255));
         Jdata.setText("dd/mm/aaaa");
@@ -1804,6 +1813,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JToolBar.Separator jSeparador4;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JToolBar.Separator jSeparator11;
     private javax.swing.JToolBar.Separator jSeparator12;
     private javax.swing.JToolBar.Separator jSeparator13;
@@ -1818,5 +1828,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JLabel lblUnidade;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,10 +23,10 @@ public class DaoFuncionario {
 
     public boolean insereFuncionario(Funcionario funcionario) {
         ConnFunc.conn = ConnFunc.getConection();
-        String InsereFucionario = " INSERT INTO funcionario(cpf, nome, rg, dataNAsc,salario,"
+        String InsereFucionario = " INSERT INTO funcionario(cpf, nome, rg, dataNAsc,"
                 + "nomeUsuario, senha, cargo, cep, rua, "
-                + "numero, bairro, complemento, cidade, estado, dataRegistro)"
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "numero, bairro, complemento, cidade, estado, dataRegistro, fone, fk_Cnpj_Centro_Dist, fk_Cidade_Func)"
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement comando = ConnFunc.conn.prepareStatement(InsereFucionario);
@@ -38,7 +38,6 @@ public class DaoFuncionario {
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             //Inserindo o valor formatado no banco
             comando.setString(4, formatter.format(funcionario.getDataNasc()));
-            comando.setString(5, String.valueOf((funcionario.getSalario())));
             comando.setString(6, funcionario.getNomeUsuario());
             comando.setString(7, funcionario.getSenha());
             comando.setString(8, funcionario.getFuncao());
@@ -84,7 +83,7 @@ public class DaoFuncionario {
             ConnFunc.pstm.setString(6, funcionario.getSenha());
             ConnFunc.pstm.setString(7, funcionario.getFuncao());
             ConnFunc.pstm.setInt(8, funcionario.getCep());
-            ConnFunc.pstm.setString(9, funcionario.getRua());
+            ConnFunc.pstm.setString(9, funcionario.getEndereco());
             ConnFunc.pstm.setInt(10, funcionario.getNumero());
             ConnFunc.pstm.setString(11, funcionario.getBairro());
             ConnFunc.pstm.setString(12, funcionario.getComplemento());
@@ -130,48 +129,6 @@ public class DaoFuncionario {
         return false;
     }
 
-    /*  public Funcionario getFuncionario(int cpf){
-     try {
-     ConnFunc.conn = ConnFunc.getConection();
-            
-     //DateFormat format = new SimpleDateFormat("ddmmyyyy");
-     String sql = "SELECT * FROM funcionario where cpf = ?";
-     ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
-     ConnFunc.pstm.setInt(1, cpf);
-     ConnFunc.rs = ConnFunc.pstm.executeQuery();
-     if(ConnFunc.rs.next()){
-     Funcionario f = new Funcionario();
-                
-     f.setCpf(ConnFunc.rs.getString(1));
-     f.setNome(ConnFunc.rs.getString(2));
-     f.setRg((ConnFunc.rs.getString(3)));
-     f.setDataNasc(ConnFunc.rs.getDate(4));
-     f.setNomeUsuario(ConnFunc.rs.getString(5));
-     f.setSenha(ConnFunc.rs.getString(6));
-     f.setFuncao(ConnFunc.rs.getString(7));
-     f.setCep(Integer.parseInt(ConnFunc.rs.getString(8)));
-     f.setRua(ConnFunc.rs.getString(9));
-     f.setNumero(Integer.parseInt(ConnFunc.rs.getString(10)));
-     f.setBairro(ConnFunc.rs.getString(11));
-     f.setComplemento(ConnFunc.rs.getString(12));
-     f.setCidade(ConnFunc.rs.getString(13));
-     f.setEstado(ConnFunc.rs.getString(14));
-     f.setDataRegistro(ConnFunc.rs.getDate(15));
-     f.setCnpjTransp(Integer.parseInt(ConnFunc.rs.getString(16)));
-                
-     ConnFunc.conn.close();
-                
-     return f;
-                
-     }
-            
-     } catch (Exception e) {
-     JOptionPane.showMessageDialog
-     (null,"Erro ao recuperar Funcionario!" + e.getMessage());
-     e.printStackTrace();
-     }
-     return null;
-     }*/
     public Funcionario getFuncionario(int codigo) {
         try {
 
@@ -191,7 +148,6 @@ public class DaoFuncionario {
                 f.setNome(rs.getString(3));
                 f.setRg(String.valueOf(rs.getInt(4)));
                 f.setDataNasc((rs.getDate(5)));
-                f.setSalario(Double.valueOf(rs.getString(6)));
                 f.setNomeUsuario(rs.getString(7));
                 f.setSenha(rs.getString(8));
                 f.setFuncao(rs.getString(9));
