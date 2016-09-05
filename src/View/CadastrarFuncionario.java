@@ -1106,10 +1106,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnGravarActionPerformed
-/**
- * Removendo todos os itens do combobox de cidades logo,apos o estado ser selecionado.
- * @param evt 
- */
+    /**
+     * Removendo todos os itens do combobox de cidades logo,apos o estado ser
+     * selecionado.
+     *
+     * @param evt
+     */
     private void cbxEstadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxEstadoFocusLost
         cbxcidade.removeAllItems();
         String a = "";
@@ -1135,10 +1137,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_cbxEstadoFocusLost
-/**
- * Método exclui o funcionario da base de dados referenciando - se pelo Código do mesmo.
- * @param evt 
- */
+    /**
+     * Método exclui o funcionario da base de dados referenciando - se pelo
+     * Código do mesmo.
+     *
+     * @param evt
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         try {
             if (txtCodigo.getText().isEmpty()) {
@@ -1162,11 +1166,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private void cbxcidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxcidadeFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxcidadeFocusLost
- /**
-  * Método recupera os dados  de cadastro de funcionarios do primeiro registro 
-  * da base de dados.
-  * @param evt 
-  */
+    /**
+     * Método recupera os dados de cadastro de funcionarios do primeiro registro
+     * da base de dados.
+     *
+     * @param evt
+     */
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
         btnProximo.setEnabled(true);
         btnAnterior.setEnabled(false);
@@ -1199,9 +1204,10 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     /**
-     * Método recupera os dados de cadastro de funcionário presente no último registro
-     * da base de dados.
-     * @param evt 
+     * Método recupera os dados de cadastro de funcionário presente no último
+     * registro da base de dados.
+     *
+     * @param evt
      */
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
         btnProximo.setEnabled(false);
@@ -1209,7 +1215,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         cbxcidade.removeAllItems();
         cbxEstado.removeAllItems();
         cbxCargo.removeAllItems();
-        
+
         try {
             String sql = "SELECT * FROM funcionario";
             banco.executaSQL(sql);
@@ -1234,18 +1240,19 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnUltimoActionPerformed
-    
+
     /**
-    * Método recupera os dados de um registro anterior em relação a posição atual,
-    * exceto se o mesmo estiver na primeira posição.
-    * @param evt 
-    */
+     * Método recupera os dados de um registro anterior em relação a posição
+     * atual, exceto se o mesmo estiver na primeira posição.
+     *
+     * @param evt
+     */
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         btnProximo.setEnabled(true);
         cbxcidade.removeAllItems();
         cbxEstado.removeAllItems();
         cbxCargo.removeAllItems();
-        
+
         try {
             if (banco.rs.isFirst()) {
                 btnAnterior.setEnabled(false);
@@ -1274,16 +1281,16 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     /**
-     * Método recupera os dados de um registro posterior em relação a posição atual,
-     * exceto se o mesmo estiver na última posição.
-     * @param evt 
+     * Método recupera os dados de um registro posterior em relação a posição
+     * atual, exceto se o mesmo estiver na última posição.
+     * @param evt
      */
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
         btnAnterior.setEnabled(true);
         cbxcidade.removeAllItems();
         cbxEstado.removeAllItems();
         cbxCargo.removeAllItems();
-        
+
         try {
             if (banco.rs.isLast()) {
                 btnProximo.setEnabled(false);
