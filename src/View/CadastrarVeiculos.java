@@ -89,8 +89,6 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         txtPesoTotal = new javax.swing.JFormattedTextField();
         txtPlaca = new javax.swing.JFormattedTextField();
         txtCodigo = new javax.swing.JTextField();
-        VeiculoAtivo = new javax.swing.JRadioButton();
-        VeiculoDesativado = new javax.swing.JRadioButton();
         cbxCidade = new javax.swing.JComboBox();
         cbxEstado = new javax.swing.JComboBox();
         cbxCentroDist = new javax.swing.JComboBox();
@@ -191,6 +189,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 btnPrimeiroMouseExited(evt);
             }
         });
+        btnPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrimeiroActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnPrimeiro);
         jToolBar1.add(jSeparator2);
 
@@ -213,6 +216,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnAnteriorMouseExited(evt);
+            }
+        });
+        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnteriorActionPerformed(evt);
             }
         });
         jToolBar1.add(btnAnterior);
@@ -370,6 +378,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 btnExcluirMouseExited(evt);
             }
         });
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnExcluir);
         jToolBar1.add(jSeparator8);
 
@@ -418,6 +431,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 btnProximoMouseExited(evt);
             }
         });
+        btnProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProximoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnProximo);
         jToolBar1.add(jSeparator15);
 
@@ -440,6 +458,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnUltimoMouseExited(evt);
+            }
+        });
+        btnUltimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUltimoActionPerformed(evt);
             }
         });
         jToolBar1.add(btnUltimo);
@@ -485,18 +508,17 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         lblRevisao.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblRevisao.setText("Centro de Distribuição:");
 
-        VeiculoAtivo.setBackground(new java.awt.Color(255, 255, 255));
-        Estado.add(VeiculoAtivo);
-        VeiculoAtivo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        VeiculoAtivo.setSelected(true);
-        VeiculoAtivo.setText("Ativo");
-
-        VeiculoDesativado.setBackground(new java.awt.Color(255, 255, 255));
-        Estado.add(VeiculoDesativado);
-        VeiculoDesativado.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        VeiculoDesativado.setText("Desativado");
-
         cbxCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione uma Cidade" }));
+        cbxCidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbxCidadeFocusLost(evt);
+            }
+        });
+        cbxCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCidadeActionPerformed(evt);
+            }
+        });
 
         cbxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Estado" }));
         cbxEstado.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -540,10 +562,6 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                     .addComponent(lblRENVAN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(VeiculoAtivo)
-                        .addGap(18, 18, 18)
-                        .addComponent(VeiculoDesativado))
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxCentroDist, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtPesoTotal)
@@ -596,11 +614,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRevisao)
                     .addComponent(cbxCentroDist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(VeiculoAtivo)
-                    .addComponent(VeiculoDesativado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(barraNavegacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -738,8 +752,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         try {
             
             veic.setPlaca(txtPlaca.getText());
-            veic.setNumChassi(txtNumChassi.getText());
-            //veic.setEstado((String) cbxEstado.getSelectedItem());           
+            veic.setNumChassi(txtNumChassi.getText());           
             veic.setModelo(txtModelo.getText());
             veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
             
@@ -757,6 +770,132 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao Inserir Funcionario " + e.getMessage() + veic.toString());
         }
     }//GEN-LAST:event_btnGravarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        try {
+            if (txtCodigo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Nada para remover !");
+            } else {
+                veic.setId(Integer.parseInt(txtCodigo.getText()));
+                DaoVeic.deletarVeiculo(veic);
+                //JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso !");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Impossivel Alterar !! ");
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
+        btnProximo.setEnabled(true);
+        btnAnterior.setEnabled(false);
+        cbxCidade.removeAllItems();
+        cbxCentroDist.removeAllItems();
+        cbxFunc.removeAllItems();
+        
+        try {
+            String sql = "SELECT * FROM veiculo";
+            banco.executaSQL(sql);
+            banco.rs.first();
+            txtCodigo.setText(banco.rs.getString("Id_Veiculo"));
+            txtPlaca.setText(banco.rs.getString("placa"));
+            txtNumChassi.setText(banco.rs.getString("num_Chassi"));
+            txtPesoTotal.setText(banco.rs.getString("capacidade"));
+            txtModelo.setText(banco.rs.getString("modelo"));
+            cbxCentroDist.addItem(banco.rs.getString("fk_Id_Centro_Dist"));
+            cbxFunc.addItem(banco.rs.getString("fk_Id_func"));
+            cbxCidade.addItem(banco.rs.getString("fk_Id_Cidade"));
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnPrimeiroActionPerformed
+
+    private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
+        btnProximo.setEnabled(false);
+        btnAnterior.setEnabled(true);
+        cbxCidade.removeAllItems();
+        cbxCentroDist.removeAllItems();
+        cbxFunc.removeAllItems();
+
+        try {
+            String sql = "SELECT * FROM veiculo";
+            banco.executaSQL(sql);
+            banco.rs.last();
+            txtCodigo.setText(banco.rs.getString("Id_Veiculo"));
+            txtPlaca.setText(banco.rs.getString("placa"));
+            txtNumChassi.setText(banco.rs.getString("num_Chassi"));
+            txtPesoTotal.setText(banco.rs.getString("capacidade"));
+            txtModelo.setText(banco.rs.getString("modelo"));
+            cbxCentroDist.addItem(banco.rs.getString("fk_Id_Centro_Dist"));
+            cbxFunc.addItem(banco.rs.getString("fk_Id_func"));
+            cbxCidade.addItem(banco.rs.getString("fk_Id_Cidade"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnUltimoActionPerformed
+
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+ 
+        try {
+            if (banco.rs.isFirst()) {
+                btnAnterior.setEnabled(false);
+            } else {
+                btnProximo.setEnabled(true);
+                cbxCidade.removeAllItems();
+                cbxCentroDist.removeAllItems();
+                cbxFunc.removeAllItems();
+                banco.rs.previous();
+                txtCodigo.setText(banco.rs.getString("Id_Veiculo"));
+                txtPlaca.setText(banco.rs.getString("placa"));
+                txtNumChassi.setText(banco.rs.getString("num_Chassi"));
+                txtPesoTotal.setText(banco.rs.getString("capacidade"));
+                txtModelo.setText(banco.rs.getString("modelo"));
+                cbxCentroDist.addItem(banco.rs.getString("fk_Id_Centro_Dist"));
+                cbxFunc.addItem(banco.rs.getString("fk_Id_func"));
+                cbxCidade.addItem(banco.rs.getString("fk_Id_Cidade"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnAnteriorActionPerformed
+
+    private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
+
+        try {
+            if (banco.rs.isLast()) {
+                btnProximo.setEnabled(false);
+            } else {
+                btnAnterior.setEnabled(true);
+                cbxCidade.removeAllItems();
+                cbxCentroDist.removeAllItems();
+                cbxFunc.removeAllItems();
+                banco.rs.next();
+                txtCodigo.setText(banco.rs.getString("Id_Veiculo"));
+                txtPlaca.setText(banco.rs.getString("placa"));
+                txtNumChassi.setText(banco.rs.getString("num_Chassi"));
+                txtPesoTotal.setText(banco.rs.getString("capacidade"));
+                txtModelo.setText(banco.rs.getString("modelo"));
+                cbxCentroDist.addItem(banco.rs.getString("fk_Id_Centro_Dist"));
+                cbxFunc.addItem(banco.rs.getString("fk_Id_func"));
+                cbxCidade.addItem(banco.rs.getString("fk_Id_Cidade"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnProximoActionPerformed
+
+    private void cbxCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCidadeActionPerformed
+        
+    }//GEN-LAST:event_cbxCidadeActionPerformed
+
+    private void cbxCidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCidadeFocusLost
+
+    }//GEN-LAST:event_cbxCidadeFocusLost
 
     /**
      * @param args the command line arguments
@@ -796,8 +935,6 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BarraMenu;
     private javax.swing.ButtonGroup Estado;
-    private javax.swing.JRadioButton VeiculoAtivo;
-    private javax.swing.JRadioButton VeiculoDesativado;
     private javax.swing.JPanel barraNavegacao;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnEditar;
