@@ -739,13 +739,17 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             
             veic.setPlaca(txtPlaca.getText());
             veic.setNumChassi(txtNumChassi.getText());
-            //veic.setEstado((String) cbxEstado.getSelectedItem());
-            veic.setCidade((String) cbxCidade.getSelectedItem());
+            //veic.setEstado((String) cbxEstado.getSelectedItem());           
             veic.setModelo(txtModelo.getText());
             veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
-            veic.setIdFunc((String)cbxFunc.getSelectedItem());
-            veic.setIdCentroDist((String)cbxCentroDist.getSelectedItem());
             
+            String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
+            veic.setIdFunc(Integer.parseInt(dados[0]));
+            
+            String dados2[] = String.valueOf(cbxCentroDist.getSelectedItem()).split(" - ");
+            veic.setIdCentroDist(Integer.parseInt(dados2[0]));
+            String dados3[] = String.valueOf(cbxCidade.getSelectedItem()).split(" - ");
+            veic.setCidade(Integer.parseInt(dados3[0]));
             DaoVeic.insereVeiculo(veic);
             
         } catch (Exception e) {
@@ -847,8 +851,8 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
      * Método lista cidades e estado no comboBox
      */
     public void listarCidEst() {
-        String sql1 = ("select nome from transportadora.cidade;");
-        String sql = ("select nome from transportadora.estado;");
+        String sql1 = ("select * from transportadora.cidade;");
+        String sql = ("select * from transportadora.estado;");
         
         try {
             banco.conn = banco.getConection();
@@ -858,12 +862,12 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             while (rsestado.next()) {
                 String a = rsestado.getString(1);
                 cbxEstado.removeAllItems();
-                cbxEstado.addItem(rsestado.getString(1));
-                //cbxEstado.addItem(String.valueOf(rsestado.getInt("id")) + " - " + rsestado.getString("nome"));
+                //cbxEstado.addItem(rsestado.getString(1));
+                cbxEstado.addItem(String.valueOf(rsestado.getInt("id")) + " - " + rsestado.getString("nome"));
             }
             while (rscidade.next()) {
-                cbxCidade.addItem(rscidade.getString(1));
-                //cbxCidade.addItem(String.valueOf(rscidade.getInt("id")) + " - " + rscidade.getString("nome"));
+                //cbxCidade.addItem(rscidade.getString(1));
+                cbxCidade.addItem(String.valueOf(rscidade.getInt("id")) + " - " + rscidade.getString("nome"));
             }
             
         } catch (SQLException ex) {
