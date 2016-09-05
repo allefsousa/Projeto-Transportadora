@@ -12,18 +12,18 @@ package Model;
 public class Veiculo {
     private int id;
     private String placa;
-    private String cidade;
+    private int cidade;
     private String estado;
     private String modelo;
     private String numChassi;
     private int capacidade;
-    private String idCentroDist;
-    private String idFunc;
+    private int idCentroDist;
+    private int idFunc;
 
     public Veiculo() {
     }
 
-    public Veiculo(int id, String placa, String cidade, String estado, String modelo, String numChassi, int capacidade) {
+    public Veiculo(int id, String placa, int cidade, String estado, String modelo, String numChassi, int capacidade) {
         this.id = id;
         this.placa = placa;
         this.cidade = cidade;
@@ -49,11 +49,11 @@ public class Veiculo {
         this.placa = placa;
     }
 
-    public String getCidade() {
+    public int getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(int cidade) {
         this.cidade = cidade;
     }
 
@@ -89,19 +89,19 @@ public class Veiculo {
         this.capacidade = capacidade;
     }
 
-    public String getIdCentroDist() {
+    public int getIdCentroDist() {
         return idCentroDist;
     }
 
-    public void setIdCentroDist(String idCentroDist) {
+    public void setIdCentroDist(int idCentroDist) {
         this.idCentroDist = idCentroDist;
     }
 
-    public String getIdFunc() {
+    public int getIdFunc() {
         return idFunc;
     }
 
-    public void setIdFunc(String idFunc) {
+    public void setIdFunc(int idFunc) {
         this.idFunc = idFunc;
     }
 
@@ -109,7 +109,8 @@ public class Veiculo {
     
     @Override
     public String toString() {
-        return "Veiculo{" + "id=" + id + ", placa=" + placa + ", cidade=" + cidade + 
-                "estado= "+ estado + "modelo=" + modelo + ", numChassi=" + numChassi + ", capacidade=" + capacidade + '}';
+        return "Veiculo{" + "id =" + id + ", placa =" + placa + ", cidade =" + cidade + 
+                 "modelo =" + modelo + ", numChassi =" + numChassi + ", "
+                + "capacidade =" + capacidade + ", id = " + idFunc + ", CentroDist = " + idCentroDist +'}';
     } 
 }
