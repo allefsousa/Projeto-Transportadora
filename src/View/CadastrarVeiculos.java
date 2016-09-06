@@ -330,6 +330,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 btnEditarMouseExited(evt);
             }
         });
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnEditar);
         jToolBar1.add(jSeparator6);
 
@@ -352,6 +357,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnLimparMouseExited(evt);
+            }
+        });
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
             }
         });
         jToolBar1.add(btnLimpar);
@@ -896,6 +906,14 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     private void cbxCidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCidadeFocusLost
 
     }//GEN-LAST:event_cbxCidadeFocusLost
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     /**
      * @param args the command line arguments

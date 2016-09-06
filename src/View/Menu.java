@@ -20,11 +20,15 @@ import java.util.GregorianCalendar;
  * @author Felipe
  */
 public class Menu extends javax.swing.JFrame {
-
+    String rec = "Allef sousa";
     int aux=0;
     // Objeto para Abrir Navegador 
     AbrirNavegador abrirPagina = new AbrirNavegador();
-  
+    // Metodo que recebe Filial Passada pela tela de LOGIN 
+   public void Recebendoctd(String a){
+      // Adicionando o valor recebido a tela 
+       lblUnidade.setText(a);
+   }
     
     public Menu() {
         initComponents();
@@ -34,8 +38,9 @@ public class Menu extends javax.swing.JFrame {
         /**
          * Instanciando a classe atualiza hora
          */
+        lblUnidade.setText(rec);
         Atualizahora HoraData = new Atualizahora();
-        
+      
         
         
         /**
@@ -48,6 +53,7 @@ public class Menu extends javax.swing.JFrame {
          * @param Jhora
          */
         HoraData.StartHora(Jhora);
+       
     }
     
         public void cor(){
@@ -60,7 +66,7 @@ public class Menu extends javax.swing.JFrame {
                 
             
         }
-          
+         
         public void ocultarBotoes(){
             //Primeira Parte
             btnMenu1.setVisible(false);
@@ -186,6 +192,7 @@ public class Menu extends javax.swing.JFrame {
         btnCalculadora2 = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JToolBar.Separator();
         jButton1 = new javax.swing.JButton();
+        lblUnidade1 = new javax.swing.JLabel();
         lblUnidade = new javax.swing.JLabel();
         jSeparator10 = new javax.swing.JToolBar.Separator();
         Jdata = new javax.swing.JLabel();
@@ -1203,9 +1210,14 @@ public class Menu extends javax.swing.JFrame {
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton1);
 
+        lblUnidade1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUnidade1.setForeground(new java.awt.Color(255, 255, 255));
+        lblUnidade1.setText("Filial:  ");
+        jToolBar1.add(lblUnidade1);
+
         lblUnidade.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblUnidade.setForeground(new java.awt.Color(255, 255, 255));
-        lblUnidade.setText("Unidade");
+        lblUnidade.setText(" Unidade");
         jToolBar1.add(lblUnidade);
         jToolBar1.add(jSeparator10);
 
@@ -1829,5 +1841,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblUnidade;
+    private javax.swing.JLabel lblUnidade1;
     // End of variables declaration//GEN-END:variables
 }

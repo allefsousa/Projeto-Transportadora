@@ -7,6 +7,7 @@ package Model;
 
 
 import java.util.Date;
+import javax.swing.JLabel;
 
 /**
  *

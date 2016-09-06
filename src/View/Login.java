@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
+    Menu menu = new Menu();
     ConnBanco banco = new ConnBanco();
 
     public Login() {
@@ -33,7 +35,7 @@ public class Login extends javax.swing.JFrame {
             banco.conn = banco.getConection();
             banco.pstm = banco.conn.prepareStatement(sql);
             banco.executaSQL(sql);
-            while(banco.rs.next()){
+            while (banco.rs.next()) {
                 cmbCentro.addItem(banco.rs.getString(1));
             }
         } catch (SQLException ex) {
@@ -297,6 +299,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair1ActionPerformed
@@ -304,26 +307,52 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSair1ActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-Model.ModeloLogin modellogin = new ModeloLogin();
-        /**
- * COMENTADO SO PARA TESTE DE OUTRAS CLASSES 
- 
+
         if (txtLogin.getText().isEmpty() || txtSenha.getPassword().toString().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Usuario e senha Invalidos !! ");
-        } else {
-            Dao.DaoLogin daologin = new DaoLogin();
-            String usuario = txtLogin.getText();
-            String senha = txtSenha.getText();
-            boolean resposta = daologin.verificaLogin(usuario, senha);
-            if (resposta == true) {
-                this.dispose();
-                new Menu().setVisible(true);
-            }
         }
-         */
-            modellogin.setCentroOn((String) cmbCentro.getSelectedItem());
-                this.dispose();
-                new Menu().setVisible(true);
+        if ( cmbCentro.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione O Centro de Distribuição. ");
+        } else {
+            try {
+                ModeloLogin Mlogin = new ModeloLogin();
+                Dao.DaoLogin daologin = new DaoLogin();
+                Mlogin.setUsuario(txtLogin.getText());
+                Mlogin.setSenha(txtSenha.getText());
+                String nomeFantasia = (String) cmbCentro.getSelectedItem();
+                /**
+                 * select utilizado para fazer a busca do cnpj com base no nome
+                 * fantasia escolhido da filial
+                 */
+                String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+                banco.conn = banco.getConection();
+                banco.pstm = banco.conn.prepareStatement(sql);
+                banco.pstm.setString(1, nomeFantasia);
+                ResultSet rs = banco.pstm.executeQuery();
+                if (rs.next()) {
+                    Mlogin.setCentroDis(rs.getString("cnpj"));
+                }
+                // metodo que verifica o login 
+                boolean resposta = daologin.verificaLogin(Mlogin);
+
+                // Chamando a tela passando o  valor para o metodo
+                // Verifica o estado da tela
+                if (menu == null) {
+                    menu.setVisible(true);
+                    menu.Recebendoctd((String) cmbCentro.getSelectedItem());
+                    this.setVisible(false);
+                } else {
+                    menu.setVisible(true);
+                    menu.setState(Menu.NORMAL);
+                    menu.Recebendoctd((String) cmbCentro.getSelectedItem());
+                    this.setVisible(false);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExibirSenhaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExibirSenhaMousePressed
