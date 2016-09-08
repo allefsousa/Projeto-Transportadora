@@ -77,9 +77,9 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         jSeparator12 = new javax.swing.JToolBar.Separator();
         btnGravar = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
-        btnEditar = new javax.swing.JButton();
+        btnEditarr = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
-        btnLimpar = new javax.swing.JButton();
+        btnLimparr = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
         btnExcluir = new javax.swing.JButton();
         jSeparator8 = new javax.swing.JToolBar.Separator();
@@ -320,62 +320,62 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         jToolBar1.add(btnGravar);
         jToolBar1.add(jSeparator5);
 
-        btnEditar.setBackground(new java.awt.Color(0, 28, 119));
-        btnEditar.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Editar.png"))); // NOI18N
-        btnEditar.setText("EDITAR");
-        btnEditar.setBorder(null);
-        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditar.setFocusable(false);
-        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEditar.setMaximumSize(new java.awt.Dimension(70, 70));
-        btnEditar.setMinimumSize(new java.awt.Dimension(70, 70));
-        btnEditar.setPreferredSize(new java.awt.Dimension(70, 70));
-        btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditarMouseEntered(evt);
-            }
+        btnEditarr.setBackground(new java.awt.Color(0, 28, 119));
+        btnEditarr.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        btnEditarr.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditarr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Editar.png"))); // NOI18N
+        btnEditarr.setText("EDITAR");
+        btnEditarr.setBorder(null);
+        btnEditarr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarr.setFocusable(false);
+        btnEditarr.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEditarr.setMaximumSize(new java.awt.Dimension(70, 70));
+        btnEditarr.setMinimumSize(new java.awt.Dimension(70, 70));
+        btnEditarr.setPreferredSize(new java.awt.Dimension(70, 70));
+        btnEditarr.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditarr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditarMouseExited(evt);
+                btnEditarrMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditarrMouseEntered(evt);
             }
         });
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnEditarrActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnEditar);
+        jToolBar1.add(btnEditarr);
         jToolBar1.add(jSeparator6);
 
-        btnLimpar.setBackground(new java.awt.Color(0, 28, 119));
-        btnLimpar.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Limpar.png"))); // NOI18N
-        btnLimpar.setText("LIMPAR");
-        btnLimpar.setBorder(null);
-        btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLimpar.setFocusable(false);
-        btnLimpar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLimpar.setMaximumSize(new java.awt.Dimension(70, 70));
-        btnLimpar.setMinimumSize(new java.awt.Dimension(70, 70));
-        btnLimpar.setPreferredSize(new java.awt.Dimension(70, 70));
-        btnLimpar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLimparMouseEntered(evt);
-            }
+        btnLimparr.setBackground(new java.awt.Color(0, 28, 119));
+        btnLimparr.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        btnLimparr.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimparr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Limpar.png"))); // NOI18N
+        btnLimparr.setText("LIMPAR");
+        btnLimparr.setBorder(null);
+        btnLimparr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimparr.setFocusable(false);
+        btnLimparr.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLimparr.setMaximumSize(new java.awt.Dimension(70, 70));
+        btnLimparr.setMinimumSize(new java.awt.Dimension(70, 70));
+        btnLimparr.setPreferredSize(new java.awt.Dimension(70, 70));
+        btnLimparr.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLimparr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLimparMouseExited(evt);
+                btnLimparrMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLimparrMouseEntered(evt);
             }
         });
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+        btnLimparr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
+                btnLimparrActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnLimpar);
+        jToolBar1.add(btnLimparr);
         jToolBar1.add(jSeparator7);
 
         btnExcluir.setBackground(new java.awt.Color(0, 28, 119));
@@ -713,21 +713,21 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnGravar.setBorder(null);
     }//GEN-LAST:event_btnGravarMouseExited
 
-    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
-        btnEditar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    }//GEN-LAST:event_btnEditarMouseEntered
+    private void btnEditarrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarrMouseEntered
+        btnEditarr.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    }//GEN-LAST:event_btnEditarrMouseEntered
 
-    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
-        btnEditar.setBorder(null);
-    }//GEN-LAST:event_btnEditarMouseExited
+    private void btnEditarrMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarrMouseExited
+        btnEditarr.setBorder(null);
+    }//GEN-LAST:event_btnEditarrMouseExited
 
-    private void btnLimparMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparMouseEntered
-        btnLimpar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    }//GEN-LAST:event_btnLimparMouseEntered
+    private void btnLimparrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparrMouseEntered
+        btnLimparr.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    }//GEN-LAST:event_btnLimparrMouseEntered
 
-    private void btnLimparMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparMouseExited
-        btnLimpar.setBorder(null);
-    }//GEN-LAST:event_btnLimparMouseExited
+    private void btnLimparrMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparrMouseExited
+        btnLimparr.setBorder(null);
+    }//GEN-LAST:event_btnLimparrMouseExited
 
     private void btnExcluirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluirMouseEntered
         btnExcluir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -980,7 +980,15 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cbxCidadeFocusLost
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+    private void btnLimparrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparrActionPerformed
+
+    private void btnEditarrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarrActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         int x = JOptionPane.showConfirmDialog(this, "Deseja alterar o registro ?");
         switch (x) {
             case 0:
@@ -1018,9 +1026,9 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 break;
         }
 
-    }//GEN-LAST:event_btnEditarActionPerformed
+    }                                         
 
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {                                          
         txtCodigo.setText("");
         txtPlaca.setText("");
         txtNumChassi.setText("");
@@ -1030,15 +1038,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         cbxCidade.setSelectedIndex(0);
         cbxEstado.setSelectedIndex(0);
         cbxFunc.setSelectedIndex(0);
-    }//GEN-LAST:event_btnLimparActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimparActionPerformed
+    }                                         
 
     /**
      * @param args the command line arguments
@@ -1080,11 +1080,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     private javax.swing.ButtonGroup Estado;
     private javax.swing.JPanel barraNavegacao;
     private javax.swing.JButton btnAnterior;
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEditarr;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnImprimir;
-    private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnLimparr;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnPrimeiro;
