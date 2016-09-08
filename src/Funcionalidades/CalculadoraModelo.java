@@ -10,5 +10,16 @@ package Funcionalidades;
  * @author Allef
  */
 public class CalculadoraModelo {
-    
+    public void somar(double a, double b){
+        
+    }
+    public void Dividir(double a, double b){
+        
+    }
+    public void Multiplicar(double a, double b){
+        
+    }
+    public void Subtrair(double a, double b){
+        
+    }
 }
