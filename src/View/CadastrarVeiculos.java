@@ -77,7 +77,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         jSeparator12 = new javax.swing.JToolBar.Separator();
         btnGravar = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
-        btnEditarr = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         btnLimparr = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
@@ -320,33 +320,33 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         jToolBar1.add(btnGravar);
         jToolBar1.add(jSeparator5);
 
-        btnEditarr.setBackground(new java.awt.Color(0, 28, 119));
-        btnEditarr.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        btnEditarr.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditarr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Editar.png"))); // NOI18N
-        btnEditarr.setText("EDITAR");
-        btnEditarr.setBorder(null);
-        btnEditarr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditarr.setFocusable(false);
-        btnEditarr.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEditarr.setMaximumSize(new java.awt.Dimension(70, 70));
-        btnEditarr.setMinimumSize(new java.awt.Dimension(70, 70));
-        btnEditarr.setPreferredSize(new java.awt.Dimension(70, 70));
-        btnEditarr.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnEditarr.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditarrMouseExited(evt);
-            }
+        btnAtualizar.setBackground(new java.awt.Color(0, 28, 119));
+        btnAtualizar.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Editar.png"))); // NOI18N
+        btnAtualizar.setText("EDITAR");
+        btnAtualizar.setBorder(null);
+        btnAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtualizar.setFocusable(false);
+        btnAtualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAtualizar.setMaximumSize(new java.awt.Dimension(70, 70));
+        btnAtualizar.setMinimumSize(new java.awt.Dimension(70, 70));
+        btnAtualizar.setPreferredSize(new java.awt.Dimension(70, 70));
+        btnAtualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAtualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditarrMouseEntered(evt);
+                btnAtualizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAtualizarMouseExited(evt);
             }
         });
-        btnEditarr.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarrActionPerformed(evt);
+                btnAtualizarActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnEditarr);
+        jToolBar1.add(btnAtualizar);
         jToolBar1.add(jSeparator6);
 
         btnLimparr.setBackground(new java.awt.Color(0, 28, 119));
@@ -713,13 +713,13 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnGravar.setBorder(null);
     }//GEN-LAST:event_btnGravarMouseExited
 
-    private void btnEditarrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarrMouseEntered
-        btnEditarr.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    }//GEN-LAST:event_btnEditarrMouseEntered
+    private void btnAtualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtualizarMouseEntered
+        btnAtualizar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    }//GEN-LAST:event_btnAtualizarMouseEntered
 
-    private void btnEditarrMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarrMouseExited
-        btnEditarr.setBorder(null);
-    }//GEN-LAST:event_btnEditarrMouseExited
+    private void btnAtualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtualizarMouseExited
+        btnAtualizar.setBorder(null);
+    }//GEN-LAST:event_btnAtualizarMouseExited
 
     private void btnLimparrMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparrMouseEntered
         btnLimparr.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -984,36 +984,32 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimparrActionPerformed
 
-    private void btnEditarrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarrActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarrActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         int x = JOptionPane.showConfirmDialog(this, "Deseja alterar o registro ?");
-        switch (x) {
-            case 0:
-                try {
-                    veic.setId(Integer.parseInt(txtCodigo.getText()));
-                    veic.setPlaca(txtPlaca.getText());
-                    veic.setNumChassi(txtNumChassi.getText());
-                    veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
-                    veic.setModelo(txtModelo.getText());
+                switch (x) {
+                    case 0:
+                        try {
+                            veic.setId(Integer.parseInt(txtCodigo.getText()));
+                            veic.setPlaca(txtPlaca.getText());
+                            veic.setNumChassi(txtNumChassi.getText());
+                            veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
+                            veic.setModelo(txtModelo.getText());
 
-                    //Tratando caixa de combinação de Centro de distribuição
-                    String dados2[] = String.valueOf(cbxCentroDist.getSelectedItem()).split(" - ");
-                    veic.setIdCentroDist(Integer.parseInt(dados2[0]));
+                            //Tratando caixa de combinação de Centro de distribuição
+                            String dados2[] = String.valueOf(cbxCentroDist.getSelectedItem()).split(" - ");
+                            veic.setIdCentroDist(Integer.parseInt(dados2[0]));
 
-                    //Tratando caixa de combinação de funcionario
-                    String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
-                    veic.setIdFunc(Integer.parseInt(dados[0]));
+                            //Tratando caixa de combinação de funcionario
+                            String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
+                            veic.setIdFunc(Integer.parseInt(dados[0]));
 
-                    //Tratando a caixa de combinação de cidade.
-                    String dados3[] = String.valueOf(cbxCidade.getSelectedItem()).split(" - ");
-                    veic.setCidade(Integer.parseInt(dados3[0]));
+                            //Tratando a caixa de combinação de cidade.
+                            String dados3[] = String.valueOf(cbxCidade.getSelectedItem()).split(" - ");
+                            veic.setCidade(Integer.parseInt(dados3[0]));
 
-                    DaoVeic.atualizarFunc(veic);
+                            DaoVeic.atualizarFunc(veic);
 
-                    JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
+                            JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro ao alterar registro !!");
@@ -1025,7 +1021,10 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             case 2:
                 break;
         }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
+    private void btnEditarrActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    
     }                                         
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -1080,7 +1079,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     private javax.swing.ButtonGroup Estado;
     private javax.swing.JPanel barraNavegacao;
     private javax.swing.JButton btnAnterior;
-    private javax.swing.JButton btnEditarr;
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnImprimir;
