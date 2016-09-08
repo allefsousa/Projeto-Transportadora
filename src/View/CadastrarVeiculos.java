@@ -24,18 +24,29 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     /**
      * Creates new form CadastrarVeiculos
      */
+    //Conexões com o banco
     ConnBanco banco = new ConnBanco();
+    ConnBanco conCidade = new ConnBanco();
+    ConnBanco conFunc = new ConnBanco();
+    ConnBanco conCentro = new ConnBanco();
+
     DaoVeiculo DaoVeic = new DaoVeiculo();
     Veiculo veic = new Veiculo();
     Funcionario func = new Funcionario();
     CentroDistribuicao centroDist = new CentroDistribuicao();
-    
+
     public CadastrarVeiculos() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        banco.getConection();
+        conCidade.getConection();
+        conCentro.getConection();
+        conFunc.getConection();
         listarCidEst();
         listaFuncionario();
         listaCentroDist();
+        btnAnterior.setEnabled(false);
+        btnProximo.setEnabled(false);
     }
 
     /**
@@ -760,21 +771,21 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
         try {
-            
             veic.setPlaca(txtPlaca.getText());
-            veic.setNumChassi(txtNumChassi.getText());           
+            veic.setNumChassi(txtNumChassi.getText());
             veic.setModelo(txtModelo.getText());
             veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
-            
-            String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
-            veic.setIdFunc(Integer.parseInt(dados[0]));
-            
+
             String dados2[] = String.valueOf(cbxCentroDist.getSelectedItem()).split(" - ");
             veic.setIdCentroDist(Integer.parseInt(dados2[0]));
+
+            String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
+            veic.setIdFunc(Integer.parseInt(dados[0]));
+
             String dados3[] = String.valueOf(cbxCidade.getSelectedItem()).split(" - ");
             veic.setCidade(Integer.parseInt(dados3[0]));
             DaoVeic.insereVeiculo(veic);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao Inserir Funcionario " + e.getMessage() + veic.toString());
@@ -782,27 +793,35 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGravarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        try {
-            if (txtCodigo.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Nada para remover !");
-            } else {
-                veic.setId(Integer.parseInt(txtCodigo.getText()));
-                DaoVeic.deletarVeiculo(veic);
-                //JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso !");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Impossivel Alterar !! ");
+        int x = JOptionPane.showConfirmDialog(this, "Deseja excluir o registro ?");
+        switch (x) {
+            case 0:
+                try {
+                    if (txtCodigo.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Nada para remover !");
+                    } else {
+                        veic.setId(Integer.parseInt(txtCodigo.getText()));
+                        DaoVeic.deletarVeiculo(veic);
+                        //JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso !");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Impossivel Alterar !! ");
+                }
+                break;
+
+            case 1:
+                break;
+            case 2:
+                break;
         }
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
         btnProximo.setEnabled(true);
         btnAnterior.setEnabled(false);
-        cbxCidade.removeAllItems();
-        cbxCentroDist.removeAllItems();
-        cbxFunc.removeAllItems();
-        
+
         try {
             String sql = "SELECT * FROM veiculo";
             banco.executaSQL(sql);
@@ -812,12 +831,27 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             txtNumChassi.setText(banco.rs.getString("num_Chassi"));
             txtPesoTotal.setText(banco.rs.getString("capacidade"));
             txtModelo.setText(banco.rs.getString("modelo"));
-            cbxCentroDist.addItem(banco.rs.getString("fk_Id_Centro_Dist"));
-            cbxFunc.addItem(banco.rs.getString("fk_Id_func"));
-            cbxCidade.addItem(banco.rs.getString("fk_Id_Cidade"));
-            
+
+            //tratando a caixa de combinação de Centro de distribuição
+            String sql1 = "SELECT * FROM centro_Dist WHERE cnpj = " + banco.rs.getString("fk_Id_Centro_Dist");
+            conCentro.executaSQL(sql1);
+            conCentro.rs.first();
+            cbxCentroDist.setSelectedItem(conCentro.rs.getString("cnpj") + " - " + conCentro.rs.getString("nome_Fantasia"));
+
+            //tratando a caixa de combinação de Centro de funcionario
+            String sql2 = "SELECT * FROM funcionario WHERE id = " + banco.rs.getString("fk_Id_func");
+            conFunc.executaSQL(sql2);
+            conFunc.rs.first();
+            cbxFunc.setSelectedItem(conFunc.rs.getString("id") + " - " + conFunc.rs.getString("nome"));
+
+            //Tratando a caixa de combinação de cidade
+            String sql3 = "SELECT * FROM cidade WHERE id = " + banco.rs.getString("fk_Id_Cidade");
+            conCidade.executaSQL(sql3);
+            conCidade.rs.first();
+            cbxCidade.setSelectedItem(conCidade.rs.getString("id") + " - " + conCidade.rs.getString("nome"));
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar o primeiro registro !");
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnPrimeiroActionPerformed
@@ -825,9 +859,6 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
         btnProximo.setEnabled(false);
         btnAnterior.setEnabled(true);
-        cbxCidade.removeAllItems();
-        cbxCentroDist.removeAllItems();
-        cbxFunc.removeAllItems();
 
         try {
             String sql = "SELECT * FROM veiculo";
@@ -838,37 +869,66 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             txtNumChassi.setText(banco.rs.getString("num_Chassi"));
             txtPesoTotal.setText(banco.rs.getString("capacidade"));
             txtModelo.setText(banco.rs.getString("modelo"));
-            cbxCentroDist.addItem(banco.rs.getString("fk_Id_Centro_Dist"));
-            cbxFunc.addItem(banco.rs.getString("fk_Id_func"));
-            cbxCidade.addItem(banco.rs.getString("fk_Id_Cidade"));
+
+            //tratando a caixa de combinação de Centro de distribuição
+            String sql1 = "SELECT * FROM centro_Dist WHERE cnpj = " + banco.rs.getString("fk_Id_Centro_Dist");
+            conCentro.executaSQL(sql1);
+            conCentro.rs.first();
+            cbxCentroDist.setSelectedItem(conCentro.rs.getString("cnpj") + " - " + conCentro.rs.getString("nome_Fantasia"));
+
+            //tratando a caixa de combinação de Centro de funcionario
+            String sql2 = "SELECT * FROM funcionario WHERE id = " + banco.rs.getString("fk_Id_func");
+            conFunc.executaSQL(sql2);
+            conFunc.rs.first();
+            cbxFunc.setSelectedItem(conFunc.rs.getString("id") + " - " + conFunc.rs.getString("nome"));
+
+            //Tratando a caixa de combinação de cidade
+            String sql3 = "SELECT * FROM cidade WHERE id = " + banco.rs.getString("fk_Id_Cidade");
+            conCidade.executaSQL(sql3);
+            conCidade.rs.first();
+            cbxCidade.setSelectedItem(conCidade.rs.getString("id") + " - " + conCidade.rs.getString("nome"));
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar o ultimo registro !");
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnUltimoActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
- 
+
         try {
             if (banco.rs.isFirst()) {
                 btnAnterior.setEnabled(false);
             } else {
                 btnProximo.setEnabled(true);
-                cbxCidade.removeAllItems();
-                cbxCentroDist.removeAllItems();
-                cbxFunc.removeAllItems();
                 banco.rs.previous();
                 txtCodigo.setText(banco.rs.getString("Id_Veiculo"));
                 txtPlaca.setText(banco.rs.getString("placa"));
                 txtNumChassi.setText(banco.rs.getString("num_Chassi"));
                 txtPesoTotal.setText(banco.rs.getString("capacidade"));
                 txtModelo.setText(banco.rs.getString("modelo"));
-                cbxCentroDist.addItem(banco.rs.getString("fk_Id_Centro_Dist"));
-                cbxFunc.addItem(banco.rs.getString("fk_Id_func"));
-                cbxCidade.addItem(banco.rs.getString("fk_Id_Cidade"));
+
+                //tratando a caixa de combinação de Centro de distribuição
+                String sql1 = "SELECT * FROM centro_Dist WHERE cnpj = " + banco.rs.getString("fk_Id_Centro_Dist");
+                conCentro.executaSQL(sql1);
+                conCentro.rs.first();
+                cbxCentroDist.setSelectedItem(conCentro.rs.getString("cnpj") + " - " + conCentro.rs.getString("nome_Fantasia"));
+
+                //tratando a caixa de combinação de Centro de funcionario
+                String sql2 = "SELECT * FROM funcionario WHERE id = " + banco.rs.getString("fk_Id_func");
+                conFunc.executaSQL(sql2);
+                conFunc.rs.first();
+                cbxFunc.setSelectedItem(conFunc.rs.getString("id") + " - " + conFunc.rs.getString("nome"));
+
+                //Tratando a caixa de combinação de cidade
+                String sql3 = "SELECT * FROM cidade WHERE id = " + banco.rs.getString("fk_Id_Cidade");
+                conCidade.executaSQL(sql3);
+                conCidade.rs.first();
+                cbxCidade.setSelectedItem(conCidade.rs.getString("id") + " - " + conCidade.rs.getString("nome"));
+
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar o registro anterior !");
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnAnteriorActionPerformed
@@ -880,32 +940,97 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 btnProximo.setEnabled(false);
             } else {
                 btnAnterior.setEnabled(true);
-                cbxCidade.removeAllItems();
-                cbxCentroDist.removeAllItems();
-                cbxFunc.removeAllItems();
                 banco.rs.next();
                 txtCodigo.setText(banco.rs.getString("Id_Veiculo"));
                 txtPlaca.setText(banco.rs.getString("placa"));
                 txtNumChassi.setText(banco.rs.getString("num_Chassi"));
                 txtPesoTotal.setText(banco.rs.getString("capacidade"));
                 txtModelo.setText(banco.rs.getString("modelo"));
-                cbxCentroDist.addItem(banco.rs.getString("fk_Id_Centro_Dist"));
-                cbxFunc.addItem(banco.rs.getString("fk_Id_func"));
-                cbxCidade.addItem(banco.rs.getString("fk_Id_Cidade"));
+
+                //tratando a caixa de combinação de Centro de distribuição
+                String sql1 = "SELECT * FROM centro_Dist WHERE cnpj = " + banco.rs.getString("fk_Id_Centro_Dist");
+                conCentro.executaSQL(sql1);
+                conCentro.rs.first();
+                cbxCentroDist.setSelectedItem(conCentro.rs.getString("cnpj") + " - " + conCentro.rs.getString("nome_Fantasia"));
+
+                //tratando a caixa de combinação  de funcionario
+                String sql2 = "SELECT * FROM funcionario WHERE id = " + banco.rs.getString("fk_Id_func");
+                conFunc.executaSQL(sql2);
+                conFunc.rs.first();
+                cbxFunc.setSelectedItem(conFunc.rs.getString("id") + " - " + conFunc.rs.getString("nome"));
+
+                //Tratando a caixa de combinação de cidade
+                String sql3 = "SELECT * FROM cidade WHERE id = " + banco.rs.getString("fk_Id_Cidade");
+                conCidade.executaSQL(sql3);
+                conCidade.rs.first();
+                cbxCidade.setSelectedItem(conCidade.rs.getString("id") + " - " + conCidade.rs.getString("nome"));
+
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar o próximo registro !");
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void cbxCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCidadeActionPerformed
-        
+
     }//GEN-LAST:event_cbxCidadeActionPerformed
 
     private void cbxCidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCidadeFocusLost
 
     }//GEN-LAST:event_cbxCidadeFocusLost
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int x = JOptionPane.showConfirmDialog(this, "Deseja alterar o registro ?");
+        switch (x) {
+            case 0:
+                try {
+                    veic.setId(Integer.parseInt(txtCodigo.getText()));
+                    veic.setPlaca(txtPlaca.getText());
+                    veic.setNumChassi(txtNumChassi.getText());
+                    veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
+                    veic.setModelo(txtModelo.getText());
+
+                    //Tratando caixa de combinação de Centro de distribuição
+                    String dados2[] = String.valueOf(cbxCentroDist.getSelectedItem()).split(" - ");
+                    veic.setIdCentroDist(Integer.parseInt(dados2[0]));
+
+                    //Tratando caixa de combinação de funcionario
+                    String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
+                    veic.setIdFunc(Integer.parseInt(dados[0]));
+
+                    //Tratando a caixa de combinação de cidade.
+                    String dados3[] = String.valueOf(cbxCidade.getSelectedItem()).split(" - ");
+                    veic.setCidade(Integer.parseInt(dados3[0]));
+
+                    DaoVeic.atualizarFunc(veic);
+
+                    JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Erro ao alterar registro !!");
+                    e.printStackTrace();
+                }
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        txtCodigo.setText("");
+        txtPlaca.setText("");
+        txtNumChassi.setText("");
+        txtPesoTotal.setText("");
+        txtModelo.setText("");
+        cbxCentroDist.setSelectedIndex(0);
+        cbxCidade.setSelectedIndex(0);
+        cbxEstado.setSelectedIndex(0);
+        cbxFunc.setSelectedIndex(0);
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
@@ -1008,7 +1133,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     public void listarCidEst() {
         String sql1 = ("select * from transportadora.cidade;");
         String sql = ("select * from transportadora.estado;");
-        
+
         try {
             banco.conn = banco.getConection();
             banco.pstm = banco.conn.prepareStatement(sql);
@@ -1024,12 +1149,12 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 //cbxCidade.addItem(rscidade.getString(1));
                 cbxCidade.addItem(String.valueOf(rscidade.getInt("id")) + " - " + rscidade.getString("nome"));
             }
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    
+
     public void listaFuncionario() {
         String sql = "SELECT * FROM funcionario";
         try {
@@ -1044,7 +1169,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     public void listaCentroDist() {
         String sql = "SELECT * FROM centro_dist";
         try {
@@ -1059,5 +1184,5 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
 }
