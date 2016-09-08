@@ -82,7 +82,6 @@ public class DaoVeiculo {
             if (rs.next()) {
                 sql = "DELETE FROM veiculo WHERE id_Veiculo = ?";
                 ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);
-                //ConnFunc.pstm.setString(1, (String.valueOf(funcionario.getNumMatricula())));
                 ConnVeic.pstm.setInt(1, veiculo.getId());
                 ConnVeic.pstm.execute();
                 JOptionPane.showMessageDialog(null, "Funcionario Removido Com Sucesso");
@@ -101,24 +100,24 @@ public class DaoVeiculo {
 
         try {
             ConnVeic.conn = ConnVeic.getConection();
-            String sql = "UPDATE veiculo set Id_Veiculo = ?, placa = ?, num_Chassi = ?, capacidade = ?, "
-                    + "modelo = ?, fk_Id_Centro_Dist = ?, fk_Id_func = ?, fk_Id_Cidade = ?";
-            ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);
-            ConnVeic.pstm.setInt(1, veiculo.getId());
-            ConnVeic.pstm.setString(2, veiculo.getPlaca());
-            ConnVeic.pstm.setString(3, veiculo.getNumChassi());
-            ConnVeic.pstm.setInt(4, veiculo.getCapacidade());
-            ConnVeic.pstm.setString(5, veiculo.getModelo());
-            ConnVeic.pstm.setInt(6, veiculo.getIdCentroDist());
-            ConnVeic.pstm.setInt(7, veiculo.getIdFunc());
-            ConnVeic.pstm.setInt(8, veiculo.getCidade());
+            String sql = "UPDATE veiculo set placa = ?, num_Chassi = ?, capacidade = ?, "
+                    + "modelo = ?, fk_Id_Centro_Dist = ?, fk_Id_func = ?, fk_Id_Cidade = ? WHERE id_Veiculo = ?";
+            ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);        
+            ConnVeic.pstm.setString(1, veiculo.getPlaca());
+            ConnVeic.pstm.setString(2, veiculo.getNumChassi());
+            ConnVeic.pstm.setInt(3, veiculo.getCapacidade());
+            ConnVeic.pstm.setString(4, veiculo.getModelo());
+            ConnVeic.pstm.setInt(5, veiculo.getIdCentroDist());
+            ConnVeic.pstm.setInt(6, veiculo.getIdFunc());
+            ConnVeic.pstm.setInt(7, veiculo.getCidade());
+            ConnVeic.pstm.setInt(8, veiculo.getId());
 
             //executa a query
             ConnVeic.pstm.execute();
             ConnVeic.conn.close();
-            JOptionPane.showMessageDialog(null, "Veiculo atualizado com sucesso !");
+            //JOptionPane.showMessageDialog(null, "Registro alterado com sucesso !!");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar Veiculo!");
+            JOptionPane.showMessageDialog(null, " DAO Erro ao atualizar Veiculo!" + e);
             e.printStackTrace();
         }
         return false;
