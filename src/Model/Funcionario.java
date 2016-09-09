@@ -22,7 +22,7 @@ public class Funcionario {
     private int Cep;
 
     private String Endereco;
-    private String Cidade;
+  
     private String Estado;
     private String Bairro;
     // campo para data 
@@ -75,7 +75,7 @@ public class Funcionario {
 
     @Override
     public String toString() {
-        return "Funcionario{" + "NumMatricula=" + NumMatricula + ", DataNasc=" + DataNasc + ", TelCelular=" + TelCelular + ", Funcao=" + Funcao + ", Cep=" + Cep + ", Endereco=" + Endereco + ", Cidade=" + Cidade + ", Estado=" + Estado + ", Bairro=" + Bairro + ", DataRegistro=" + DataRegistro + ", numero=" + numero + ", complemento=" + complemento + ", nomeUsuario=" + nomeUsuario + ", senha=" + senha + ", cnpjTransp=" + cnpjTransp + ", cidadeFunciCentro=" + cidadeFunciCentro + '}';
+        return "Funcionario{" + "NumMatricula=" + NumMatricula + ", DataNasc=" + DataNasc + ", TelCelular=" + TelCelular + ", Funcao=" + Funcao + ", Cep=" + Cep + ", Endereco=" + Endereco + ", Estado=" + Estado + ", Bairro=" + Bairro + ", DataRegistro=" + DataRegistro + ", numero=" + numero + ", complemento=" + complemento + ", nomeUsuario=" + nomeUsuario + ", senha=" + senha + ", cnpjTransp=" + cnpjTransp + ", cidadeFunciCentro=" + cidadeFunciCentro + '}';
     }
 
     public int getNumMatricula() {
@@ -125,15 +125,7 @@ public class Funcionario {
     public void setCep(int Cep) {
         this.Cep = Cep;
     }
-
-    public String getCidade() {
-        return Cidade;
-    }
-
-    public void setCidade(String Cidade) {
-        this.Cidade = Cidade;
-    }
-
+  
     public String getEstado() {
         return Estado;
     }

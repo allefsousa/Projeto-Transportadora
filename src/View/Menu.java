@@ -20,7 +20,7 @@ import java.util.GregorianCalendar;
  * @author Felipe
  */
 public class Menu extends javax.swing.JFrame {
-    String rec = "Allef sousa";
+   CadastrarFuncionario ViewFuncionario = new CadastrarFuncionario();
     int aux=0;
     // Objeto para Abrir Navegador 
     AbrirNavegador abrirPagina = new AbrirNavegador();
@@ -38,7 +38,7 @@ public class Menu extends javax.swing.JFrame {
         /**
          * Instanciando a classe atualiza hora
          */
-        lblUnidade.setText(rec);
+        
         Atualizahora HoraData = new Atualizahora();
       
         
@@ -1527,7 +1527,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu3ActionPerformed
         if (aux==1)
-            new CadastrarFuncionario().setVisible(true);
+             ViewFuncionario.recebendoFilial(lblUnidade.getText());
+            ViewFuncionario.setVisible(true);
+            this.setVisible(false);
     }//GEN-LAST:event_btnMenu3ActionPerformed
 
     private void btnMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu4ActionPerformed

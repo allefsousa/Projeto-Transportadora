@@ -24,9 +24,9 @@ public class DaoFuncionario {
     public boolean insereFuncionario(Funcionario funcionario) {
         ConnFunc.conn = ConnFunc.getConection();
         String InsereFucionario = " INSERT INTO funcionario(cpf, nome, rg, dataNAsc,"
-                + "nomeUsuario, senha, cargo, cep, rua, "
-                + "numero, bairro, complemento, cidade, estado, dataRegistro, fone, fk_Cnpj_Centro_Dist, fk_Cidade_Func)"
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "cargo, cep, rua, "
+                + "numero, bairro, complemento, estado, dataRegistro, fone, fk_Cnpj_Centro_Dist, fk_Cidade_Func)"
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement comando = ConnFunc.conn.prepareStatement(InsereFucionario);
@@ -38,18 +38,18 @@ public class DaoFuncionario {
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             //Inserindo o valor formatado no banco
             comando.setString(4, formatter.format(funcionario.getDataNasc()));
-            comando.setString(6, funcionario.getNomeUsuario());
-            comando.setString(7, funcionario.getSenha());
-            comando.setString(8, funcionario.getFuncao());
-            comando.setInt(9, funcionario.getCep());
-            comando.setString(10, funcionario.getEndereco());
-            comando.setInt(11, funcionario.getNumero());
-            comando.setString(12, funcionario.getBairro());
-            comando.setString(13, funcionario.getComplemento());
-            comando.setString(14, funcionario.getCidade());
-            comando.setString(15, funcionario.getEstado());
-            comando.setString(16, formatter.format(funcionario.getDataRegistro()));
-          // Implememtar a classe empresa  comando.setInt(17, funcionario.getCnpjTransp());
+            comando.setString(5, funcionario.getFuncao());
+            comando.setInt(6, funcionario.getCep());
+            comando.setString(7, funcionario.getEndereco());
+            comando.setInt(8, funcionario.getNumero());
+            comando.setString(9, funcionario.getBairro());
+            comando.setString(10, funcionario.getComplemento());
+            comando.setString(11, funcionario.getEstado());
+            comando.setString(12, formatter.format(funcionario.getDataRegistro()));
+            comando.setInt(13, funcionario.getTelCelular());
+            comando.setInt(14, funcionario.getCnpjTransp());
+            comando.setInt(15, funcionario.getCidadeFunciCentro());
+            // Implememtar a classe empresa  comando.setInt(17, funcionario.getCnpjTransp());
 
             //executa a query
             comando.execute();
@@ -87,7 +87,7 @@ public class DaoFuncionario {
             ConnFunc.pstm.setInt(10, funcionario.getNumero());
             ConnFunc.pstm.setString(11, funcionario.getBairro());
             ConnFunc.pstm.setString(12, funcionario.getComplemento());
-            ConnFunc.pstm.setString(13, funcionario.getCidade());
+    
             ConnFunc.pstm.setString(14, funcionario.getEstado());
             ConnFunc.pstm.setString(15, formatter.format(funcionario.getDataRegistro()));
             ConnFunc.pstm.setInt(16, funcionario.getCnpjTransp());
@@ -121,7 +121,7 @@ public class DaoFuncionario {
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Funcionario não existe !");
-            } 
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Impossivel Remover Funcionario");
             e.printStackTrace();
@@ -156,7 +156,7 @@ public class DaoFuncionario {
                 f.setNumero(rs.getInt(12));
                 f.setBairro(rs.getString(13));
                 f.setComplemento(rs.getString(14));
-                f.setCidade(rs.getString(15));
+            
                 f.setEstado(rs.getString(16));
                 f.setDataRegistro(rs.getDate(17));
                 // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
