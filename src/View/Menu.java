@@ -1529,7 +1529,7 @@ public class Menu extends javax.swing.JFrame {
         if (aux==1)
              ViewFuncionario.recebendoFilial(lblUnidade.getText());
             ViewFuncionario.setVisible(true);
-            this.setVisible(false);
+           // this.setVisible(false);
     }//GEN-LAST:event_btnMenu3ActionPerformed
 
     private void btnMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu4ActionPerformed

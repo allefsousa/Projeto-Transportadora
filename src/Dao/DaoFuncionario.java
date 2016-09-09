@@ -9,8 +9,11 @@ import Model.Funcionario;
 import static java.lang.System.console;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +23,26 @@ import javax.swing.JOptionPane;
 public class DaoFuncionario {
 
     ConnBanco ConnFunc = new ConnBanco();
-
+    public String chaveEstrangeira(String sql,int idChave){
+        try {
+            String resultado = null;
+            
+           // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+            ConnFunc.conn = ConnFunc.getConection();
+            ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
+            ConnFunc.pstm.setInt(1, idChave);
+            ResultSet rs = ConnFunc.pstm.executeQuery();
+            if (rs.next()) {
+                resultado=(rs.getString(1));
+            }
+            
+            
+            return resultado;
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+        }
+        return null;
+    }
     public boolean insereFuncionario(Funcionario funcionario) {
         ConnFunc.conn = ConnFunc.getConection();
         String InsereFucionario = " INSERT INTO funcionario(cpf, nome, rg, dataNAsc,"
@@ -130,12 +152,14 @@ public class DaoFuncionario {
     }
 
     public Funcionario getFuncionario(int codigo) {
+        String SqlEstrageira,retorn;
+         int cidade, centrodis;
         try {
-
+           
             ConnFunc.conn = ConnFunc.getConection();
             //  JOptionPane.showMessageDialog(null, ""+ codigo);
             DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
-            String sql = ("SELECT id,cpf, nome, rg, dataNAsc, salario, nomeUsuario, senha, cargo, cep, rua, numero, bairro, complemento, cidade, estado, dataRegistro FROM transportadora.funcionario WHERE id= ?;");
+            String sql = ("SELECT id,cpf, nome, rg, dataNasc, cargo, cep, rua, numero, bairro, complemento, estado, dataRegistro, fone, fk_Cnpj_Centro_Dist, Fk_Cidade_Func FROM transportadora.funcionario WHERE id= ?;");
             ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
             ConnFunc.pstm.setInt(1, codigo);
             // recebendo os resultados do select  e executando a tarefa 
@@ -148,17 +172,24 @@ public class DaoFuncionario {
                 f.setNome(rs.getString(3));
                 f.setRg(String.valueOf(rs.getInt(4)));
                 f.setDataNasc((rs.getDate(5)));
-                f.setNomeUsuario(rs.getString(7));
-                f.setSenha(rs.getString(8));
-                f.setFuncao(rs.getString(9));
-                f.setCep(rs.getInt(10));
-                f.setEndereco(rs.getString(11));
-                f.setNumero(rs.getInt(12));
-                f.setBairro(rs.getString(13));
-                f.setComplemento(rs.getString(14));
+                f.setFuncao(rs.getString(6));
+                f.setCep(rs.getInt(7));
+                f.setEndereco(rs.getString(8));
+                f.setNumero(rs.getInt(9));
+                f.setBairro(rs.getString(10));
+                f.setComplemento(rs.getString(11));
             
-                f.setEstado(rs.getString(16));
-                f.setDataRegistro(rs.getDate(17));
+                f.setEstado(rs.getString(12));
+                f.setDataRegistro(rs.getDate(13));
+                f.setTelCelular(rs.getInt(14));
+               /* centrodis = rs.getInt(15);
+                SqlEstrageira = "SELECT nome_Fantasia FROM centro_dist WHERE cnpj=?";
+               retorn = chaveEstrangeira(SqlEstrageira, centrodis);
+               JOptionPane.showMessageDialog(null, retorn);
+               */
+                f.setCnpjTransp(rs.getInt(15));
+                
+                f.setCidadeFunciCentro(rs.getInt(16));
                 // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
                 //com essa mensagem nao 
                 JOptionPane.showMessageDialog(null, "");
