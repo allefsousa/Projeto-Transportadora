@@ -10,6 +10,7 @@ package Model;
  * @author Rafael
  */
 public class Veiculo {
+
     private int id;
     private String placa;
     private int cidade;
@@ -19,8 +20,60 @@ public class Veiculo {
     private int capacidade;
     private int idCentroDist;
     private int idFunc;
-
+private int i;
     public Veiculo() {
+    }
+
+    /**
+     * Construtor utilizado para testar os metodos da classe Inserir Veiculo
+     *
+     * @param placa
+     * @param numChassi
+     * @param capacidade
+     * @param modelo
+     * @param idCentroDist
+     * @param idFunc
+     * @param cidade
+     */
+    public Veiculo(String placa, String numChassi, int capacidade, String modelo, int idCentroDist, int idFunc, int cidade) {
+
+        this.placa = placa;
+        this.cidade = cidade;
+        this.idCentroDist = idCentroDist;
+        this.idFunc = idFunc;
+        this.modelo = modelo;
+        this.numChassi = numChassi;
+        this.capacidade = capacidade;
+    }
+    /**
+     * Construtor para Atualizar Veiculo
+     * @param placa
+     * @param numChassi
+     * @param capacidade
+     * @param modelo
+     * @param idCentroDist
+     * @param idFunc
+     * @param cidade
+     * @param id 
+     */
+ public Veiculo(String placa, String numChassi, int capacidade, String modelo, int idCentroDist, int idFunc, int cidade,int id) {
+
+        this.placa = placa;
+        this.cidade = cidade;
+        this.idCentroDist = idCentroDist;
+        this.idFunc = idFunc;
+        this.modelo = modelo;
+        this.numChassi = numChassi;
+        this.capacidade = capacidade;
+        this.id = id;
+    }
+    /**
+     * Construtor utilizado para testar os metodos da classe Deletar Veiculo
+     *
+     * @param id
+     */
+    public Veiculo(int id) {
+        this.id = id;
     }
 
     public Veiculo(int id, String placa, int cidade, String estado, String modelo, String numChassi, int capacidade) {
@@ -32,7 +85,26 @@ public class Veiculo {
         this.numChassi = numChassi;
         this.capacidade = capacidade;
     }
+     public Veiculo(int id,String placa, String numChassi, int capacidade, String modelo, int idCentroDist, int idFunc) {
+        this.id = id;
+        this.placa = placa;
+        this.idCentroDist = idCentroDist;
+        this.idFunc = idFunc;
+        this.modelo = modelo;
+        this.numChassi = numChassi;
+        this.capacidade = capacidade;
+    }
 
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+   
+
+   
     public int getId() {
         return id;
     }
@@ -57,14 +129,14 @@ public class Veiculo {
         this.cidade = cidade;
     }
 
-     public String getEstado() {
+    public String getEstado() {
         return estado;
     }
 
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
     public String getModelo() {
         return modelo;
     }
@@ -105,12 +177,10 @@ public class Veiculo {
         this.idFunc = idFunc;
     }
 
-    
-    
     @Override
     public String toString() {
-        return "Veiculo{" + "id =" + id + ", placa =" + placa + ", cidade =" + cidade + 
-                 "modelo =" + modelo + ", numChassi =" + numChassi + ", "
-                + "capacidade =" + capacidade + ", id = " + idFunc + ", CentroDist = " + idCentroDist +'}';
-    } 
+        return "Veiculo{" + "id =" + id + ", placa =" + placa + ", cidade =" + cidade
+                + "modelo =" + modelo + ", numChassi =" + numChassi + ", "
+                + "capacidade =" + capacidade + ", id = " + idFunc + ", CentroDist = " + idCentroDist + '}';
+    }
 }

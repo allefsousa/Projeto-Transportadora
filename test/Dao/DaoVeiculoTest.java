@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import sun.rmi.runtime.Log;
 
 /**
  *
@@ -38,64 +39,33 @@ public class DaoVeiculoTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of insereVeiculo method, of class DaoVeiculo.
-     */
+    
     @Test
     public void testInsereVeiculo() {
         System.out.println("insereVeiculo");
-        Veiculo veiculo = null;
+        Veiculo veiculo = new Veiculo("1245-asbd","2154655",3,"Volvo",12456554,1,1);
         DaoVeiculo instance = new DaoVeiculo();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.insereVeiculo(veiculo);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of deletarVeiculo method, of class DaoVeiculo.
-     */
     @Test
     public void testDeletarVeiculo() {
         System.out.println("deletarVeiculo");
-        Veiculo veiculo = null;
+        Veiculo veiculo = new Veiculo(13);
         DaoVeiculo instance = new DaoVeiculo();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.deletarVeiculo(veiculo);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of atualizarFunc method, of class DaoVeiculo.
-     */
     @Test
     public void testAtualizarFunc() {
         System.out.println("atualizarFunc");
-        Veiculo veiculo = null;
+        Veiculo veiculo = new Veiculo("6548-gsca","2154655",2,"Toyota",12456554,1,1,15);
         DaoVeiculo instance = new DaoVeiculo();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.atualizarFunc(veiculo);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getVeiculo method, of class DaoVeiculo.
-     */
-    @Test
-    public void testGetVeiculo() {
-        System.out.println("getVeiculo");
-        int codigo = 0;
-        DaoVeiculo instance = new DaoVeiculo();
-        Veiculo expResult = null;
-        Veiculo result = instance.getVeiculo(codigo);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

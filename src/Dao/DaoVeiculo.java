@@ -56,7 +56,7 @@ public class DaoVeiculo {
             ConnVeic.conn.close();
 
             JOptionPane.showMessageDialog(null, "Veiculo Inserido Com Sucesso !! ");
-
+            return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao Inserir Veiculo !!!" + e);
             e.printStackTrace();
@@ -84,13 +84,13 @@ public class DaoVeiculo {
                 ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);
                 ConnVeic.pstm.setInt(1, veiculo.getId());
                 ConnVeic.pstm.execute();
-                JOptionPane.showMessageDialog(null, "Funcionario Removido Com Sucesso");
+                JOptionPane.showMessageDialog(null, "Veiculo Removido Com Sucesso");
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "Funcionario não existe !");
+                JOptionPane.showMessageDialog(null, "Veiculo não existe !");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Impossivel Remover Funcionario");
+            JOptionPane.showMessageDialog(null, "Impossivel Remover Veiculo");
             e.printStackTrace();
         }
         return false;
@@ -115,7 +115,8 @@ public class DaoVeiculo {
             //executa a query
             ConnVeic.pstm.execute();
             ConnVeic.conn.close();
-            //JOptionPane.showMessageDialog(null, "Registro alterado com sucesso !!");
+            JOptionPane.showMessageDialog(null, "Registro alterado com sucesso !!");
+            return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, " DAO Erro ao atualizar Veiculo!" + e);
             e.printStackTrace();
@@ -136,7 +137,7 @@ public class DaoVeiculo {
             ConnVeic.conn = ConnVeic.getConection();
 
             String sql = ("SELECT id_Veiculo, placa, num_Chassi, capacidade, modelo,"
-                    + " fk_Id_Centro_Dist, fk_Id_func, fk_Id_Cidade WHERE id_Veiculo= ?;");
+                    + " fk_Id_Centro_Dist, fk_Id_func, fk_Id_Cidade FROM veiculo WHERE id_Veiculo= ?;");
             ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);
             ConnVeic.pstm.setInt(1, codigo);
             // recebendo os resultados do select  e executando a tarefa 
@@ -154,7 +155,7 @@ public class DaoVeiculo {
                 v.setCidade(rs.getInt(8));
                 // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
                 //com essa mensagem nao 
-                JOptionPane.showMessageDialog(null, "");
+                JOptionPane.showMessageDialog(null, "Objeto Retornado");
 
             }
             return v;
