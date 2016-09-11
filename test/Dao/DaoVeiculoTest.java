@@ -43,7 +43,7 @@ public class DaoVeiculoTest {
     @Test
     public void testInsereVeiculo() {
         System.out.println("insereVeiculo");
-        Veiculo veiculo = new Veiculo("1245-asbd","2154655",3,"Volvo",12456554,1,1);
+        Veiculo veiculo = new Veiculo("BBBB-1111 ","9876543",2,"Volvo",12456554,1,1);
         DaoVeiculo instance = new DaoVeiculo();
         boolean expResult = true;
         boolean result = instance.insereVeiculo(veiculo);
@@ -52,7 +52,7 @@ public class DaoVeiculoTest {
     @Test
     public void testDeletarVeiculo() {
         System.out.println("deletarVeiculo");
-        Veiculo veiculo = new Veiculo(13);
+        Veiculo veiculo = new Veiculo(19);
         DaoVeiculo instance = new DaoVeiculo();
         boolean expResult = true;
         boolean result = instance.deletarVeiculo(veiculo);
@@ -61,10 +61,10 @@ public class DaoVeiculoTest {
     @Test
     public void testAtualizarFunc() {
         System.out.println("atualizarFunc");
-        Veiculo veiculo = new Veiculo("6548-gsca","2154655",2,"Toyota",12456554,1,1,15);
+        Veiculo veiculo = new Veiculo("AAAA-8888","123456",8,"Toyota",12456554,1,1,11);
         DaoVeiculo instance = new DaoVeiculo();
         boolean expResult = true;
-        boolean result = instance.atualizarFunc(veiculo);
+        boolean result = instance.atualizarVeiculo(veiculo);
         assertEquals(expResult, result);
     }
 

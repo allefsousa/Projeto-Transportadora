@@ -1007,7 +1007,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                             String dados3[] = String.valueOf(cbxCidade.getSelectedItem()).split(" - ");
                             veic.setCidade(Integer.parseInt(dados3[0]));
 
-                            DaoVeic.atualizarFunc(veic);
+                            DaoVeic.atualizarVeiculo(veic);
 
                             JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
 

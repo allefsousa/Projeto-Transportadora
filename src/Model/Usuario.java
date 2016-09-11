@@ -35,12 +35,11 @@ public class Usuario extends Funcionario {
         this.Usuario = Usuario;
     }
 
-   @Override
+
     public String getSenha() {
         return Senha;
     }
 
-   @Override
     public void setSenha(String Senha) {
         this.Senha = Senha;
     }

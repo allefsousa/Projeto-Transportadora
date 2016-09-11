@@ -43,9 +43,29 @@ public class DaoFuncionario {
         }
         return null;
     }
+    public String chaveEstrangeiraLong(String sql,Long idChave){
+        try {
+            String resultado = null;
+            
+           // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+            ConnFunc.conn = ConnFunc.getConection();
+            ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
+            ConnFunc.pstm.setLong(1, idChave);
+            ResultSet rs = ConnFunc.pstm.executeQuery();
+            if (rs.next()) {
+                resultado=(rs.getString(1));
+            }
+            
+            
+            return resultado;
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+        }
+        return null;
+    }
     public boolean insereFuncionario(Funcionario funcionario) {
         ConnFunc.conn = ConnFunc.getConection();
-        String InsereFucionario = " INSERT INTO funcionario(cpf, nome, rg, dataNAsc,"
+        String InsereFucionario = " INSERT INTO funcionario(cpf, nome, rg, dataNasc,"
                 + "cargo, cep, rua, "
                 + "numero, bairro, complemento, estado, dataRegistro, fone, fk_Cnpj_Centro_Dist, fk_Cidade_Func)"
                 + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -68,8 +88,8 @@ public class DaoFuncionario {
             comando.setString(10, funcionario.getComplemento());
             comando.setString(11, funcionario.getEstado());
             comando.setString(12, formatter.format(funcionario.getDataRegistro()));
-            comando.setInt(13, funcionario.getTelCelular());
-            comando.setInt(14, funcionario.getCnpjTransp());
+            comando.setLong(13, funcionario.getTelCelular());
+            comando.setString(14, funcionario.getCnpjTransp());
             comando.setInt(15, funcionario.getCidadeFunciCentro());
             // Implememtar a classe empresa  comando.setInt(17, funcionario.getCnpjTransp());
 
@@ -78,6 +98,7 @@ public class DaoFuncionario {
             //Fecha a conexao com o BD
             ConnFunc.conn.close();
             JOptionPane.showMessageDialog(null, "Funcionario Inserido Com Sucesso !! ");
+            return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Impossivel Persistir" + e);
             e.printStackTrace();
@@ -101,8 +122,6 @@ public class DaoFuncionario {
             //Formatando a data para ano mes e dia 
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             ConnFunc.pstm.setString(4, formatter.format(funcionario.getDataNasc()));
-            ConnFunc.pstm.setString(5, funcionario.getNomeUsuario());
-            ConnFunc.pstm.setString(6, funcionario.getSenha());
             ConnFunc.pstm.setString(7, funcionario.getFuncao());
             ConnFunc.pstm.setInt(8, funcionario.getCep());
             ConnFunc.pstm.setString(9, funcionario.getEndereco());
@@ -112,7 +131,7 @@ public class DaoFuncionario {
     
             ConnFunc.pstm.setString(14, funcionario.getEstado());
             ConnFunc.pstm.setString(15, formatter.format(funcionario.getDataRegistro()));
-            ConnFunc.pstm.setInt(16, funcionario.getCnpjTransp());
+            ConnFunc.pstm.setString(16, funcionario.getCnpjTransp());
             //executa a query
             ConnFunc.pstm.execute();
             ConnFunc.conn.close();
@@ -152,14 +171,13 @@ public class DaoFuncionario {
     }
 
     public Funcionario getFuncionario(int codigo) {
-        String SqlEstrageira,retorn;
-         int cidade, centrodis;
+       
         try {
            
             ConnFunc.conn = ConnFunc.getConection();
             //  JOptionPane.showMessageDialog(null, ""+ codigo);
             DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
-            String sql = ("SELECT id,cpf, nome, rg, dataNasc, cargo, cep, rua, numero, bairro, complemento, estado, dataRegistro, fone, fk_Cnpj_Centro_Dist, Fk_Cidade_Func FROM transportadora.funcionario WHERE id= ?;");
+            String sql = ("SELECT id,cpf, nome, rg, dataNasc, cargo, cep, rua, numero, bairro, complemento, estado, dataRegistro, fone, fk_Cnpj_Centro_Dist, Fk_Cidade_Func FROM funcionario WHERE id= ?;");
             ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
             ConnFunc.pstm.setInt(1, codigo);
             // recebendo os resultados do select  e executando a tarefa 
@@ -181,14 +199,9 @@ public class DaoFuncionario {
             
                 f.setEstado(rs.getString(12));
                 f.setDataRegistro(rs.getDate(13));
-                f.setTelCelular(rs.getInt(14));
-               /* centrodis = rs.getInt(15);
-                SqlEstrageira = "SELECT nome_Fantasia FROM centro_dist WHERE cnpj=?";
-               retorn = chaveEstrangeira(SqlEstrageira, centrodis);
-               JOptionPane.showMessageDialog(null, retorn);
-               */
-                f.setCnpjTransp(rs.getInt(15));
-                
+                f.setTelCelular(rs.getLong(14));
+               
+                f.setCnpjTransp(rs.getString(15));
                 f.setCidadeFunciCentro(rs.getInt(16));
                 // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
                 //com essa mensagem nao 

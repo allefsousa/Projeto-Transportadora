@@ -96,7 +96,7 @@ public class DaoVeiculo {
         return false;
     }
 
-    public boolean atualizarFunc(Veiculo veiculo) {
+    public boolean atualizarVeiculo(Veiculo veiculo) {
 
         try {
             ConnVeic.conn = ConnVeic.getConection();
@@ -120,8 +120,9 @@ public class DaoVeiculo {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, " DAO Erro ao atualizar Veiculo!" + e);
             e.printStackTrace();
+            return false;
         }
-        return false;
+        
     }
 
     /**

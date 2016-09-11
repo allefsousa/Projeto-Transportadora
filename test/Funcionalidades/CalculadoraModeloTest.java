@@ -73,7 +73,7 @@ public class CalculadoraModeloTest {
         double a = 100.0;
         double b = 1.0;
         CalculadoraModelo instance = new CalculadoraModelo();
-        double expResult = 50.0;
+        double expResult = 100.0;
         double result = instance.Multiplicar(a, b);
         assertEquals(expResult, result, 0.0);
        
@@ -88,7 +88,7 @@ public class CalculadoraModeloTest {
         double a = 20.0;
         double b = 10.0;
         CalculadoraModelo instance = new CalculadoraModelo();
-        double expResult = 1.0;
+        double expResult = 10.0;
         double result = instance.Subtrair(a, b);
         assertEquals(expResult, result, 0.0);
        

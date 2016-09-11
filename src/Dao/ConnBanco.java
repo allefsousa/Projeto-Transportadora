@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class ConnBanco {
 
-    private String url = "jdbc:mysql://localhost:3306/transportadora";
+    private String url = "jdbc:mysql://localhost:3306/transportadoraf";
     private String usuario = "root";
     private String senha = "26011994";
     public ResultSet rs;//Armazena o resultado de uma pesquisa passada para o Statement

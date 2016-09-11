@@ -1527,7 +1527,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu3ActionPerformed
         if (aux==1)
-             ViewFuncionario.recebendoFilial(lblUnidade.getText());
+            // ViewFuncionario.recebendoFilial(lblUnidade.getText());
             ViewFuncionario.setVisible(true);
            // this.setVisible(false);
     }//GEN-LAST:event_btnMenu3ActionPerformed

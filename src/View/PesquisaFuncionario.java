@@ -33,6 +33,8 @@ public class PesquisaFuncionario extends javax.swing.JFrame {
      * Creates new form PesquisaFuncionario
      */
     Model.Funcionario func = new Funcionario();
+    DaoFuncionario daoFunc = new DaoFuncionario();
+    
 
     ConnBanco connBanco = new ConnBanco();
     Dao.DaoFuncionario daofunc = new DaoFuncionario();
@@ -40,11 +42,13 @@ public class PesquisaFuncionario extends javax.swing.JFrame {
     public PesquisaFuncionario() {
         initComponents();
         connBanco.getConection();
-        preencherTabela("SELECT * FROM transportadora.funcionario order by id;");
+        preencherTabela("SELECT * FROM transportadoraf.funcionario order by id;");
     }
 
     public void preencherTabela(String SQL) {
-
+        int cidade;
+                Long unidade;
+        String cid = null,uni,sql1,sql;
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"N° Regist", "Nome Completo", "Cpf", "Rg", "Data Nasc", "Cargo", "fone", "Cep", "Endereço", "Numero", "Bairro", "Complemento", "Cidade", "Estado", "Data Regist", "Unidade"};
         // formatando a data que sera mostrada na tabela 
@@ -56,12 +60,20 @@ public class PesquisaFuncionario extends javax.swing.JFrame {
 
             // pegando os valores e formatando para preecher a tabela  
             do {
+                 cidade = connBanco.rs.getInt("fk_Cidade_Func");
+                 sql = "SELECT nome FROM cidade where id = ?";
+                cid=daoFunc.chaveEstrangeira(sql, cidade);
+                unidade = connBanco.rs.getLong("fk_Cnpj_Centro_Dist");
+                sql1 = "SELECT nome_Fantasia from centro_dist where cnpj =?";
+                uni = daoFunc.chaveEstrangeiraLong(sql1, unidade);
+                
+                
                 dados.add(new Object[]{connBanco.rs.getInt("id"), connBanco.rs.getString("nome"), connBanco.rs.getString("cpf"), connBanco.rs.getInt("rg"),
                     formatter.format(connBanco.rs.getDate("dataNasc")), connBanco.rs.getString("cargo"), connBanco.rs.getString("fone"), connBanco.rs.getInt("cep"),
                     connBanco.rs.getString("rua"), connBanco.rs.getInt("numero"), connBanco.rs.getString("bairro"), connBanco.rs.getString("complemento"), 
-                    connBanco.rs.getInt("fk_Cidade_Func"), connBanco.rs.getString("estado"), formatter.format(connBanco.rs.getDate("dataRegistro")), connBanco.rs.getInt("fk_Cnpj_Centro_Dist")});
+                   cid, connBanco.rs.getString("estado"), formatter.format(connBanco.rs.getDate("dataRegistro")), uni});
             } while (connBanco.rs.next());
-
+           
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }

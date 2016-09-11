@@ -14,10 +14,9 @@ public class Funcionario {
     private String Cpf;
     //Campo De Data
     private Date DataNasc;
-    private String nomeUsuario;
-    private String senha;
+   
 
-    private int TelCelular;
+    private Long TelCelular;
     private String Funcao;
     private int Cep;
 
@@ -31,8 +30,28 @@ public class Funcionario {
     private int numero;
     private String complemento;
 
-    private int cnpjTransp;
+    private String cnpjTransp;
     private int cidadeFunciCentro;
+
+    public Funcionario(String Nome, String Rg, String Cpf, Date DataNasc, Long TelCelular, String Funcao, int Cep, String Endereco, String Estado, String Bairro, Date DataRegistro, int numero, String complemento, String cnpjTransp, int cidadeFunciCentro) {
+        this.Nome = Nome;
+        this.Rg = Rg;
+        this.Cpf = Cpf;
+        this.DataNasc = DataNasc;
+        this.TelCelular = TelCelular;
+        this.Funcao = Funcao;   
+        this.Cep = Cep;
+        this.Endereco = Endereco;
+        this.Estado = Estado;
+        this.Bairro = Bairro;
+        this.DataRegistro = DataRegistro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.cnpjTransp = cnpjTransp;
+        this.cidadeFunciCentro = cidadeFunciCentro;
+    }
+
+ 
 
     public Funcionario() {
     }
@@ -75,7 +94,7 @@ public class Funcionario {
 
     @Override
     public String toString() {
-        return "Funcionario{" + "NumMatricula=" + NumMatricula + ", DataNasc=" + DataNasc + ", TelCelular=" + TelCelular + ", Funcao=" + Funcao + ", Cep=" + Cep + ", Endereco=" + Endereco + ", Estado=" + Estado + ", Bairro=" + Bairro + ", DataRegistro=" + DataRegistro + ", numero=" + numero + ", complemento=" + complemento + ", nomeUsuario=" + nomeUsuario + ", senha=" + senha + ", cnpjTransp=" + cnpjTransp + ", cidadeFunciCentro=" + cidadeFunciCentro + '}';
+        return "Funcionario{" + "NumMatricula=" + NumMatricula + ", DataNasc=" + DataNasc + ", TelCelular=" + TelCelular + ", Funcao=" + Funcao + ", Cep=" + Cep + ", Endereco=" + Endereco + ", Estado=" + Estado + ", Bairro=" + Bairro + ", DataRegistro=" + DataRegistro + ", numero=" + numero + ", complemento=" + complemento + ", nomeUsuario=" +  ", cnpjTransp=" + cnpjTransp + ", cidadeFunciCentro=" + cidadeFunciCentro + '}';
     }
 
     public int getNumMatricula() {
@@ -102,11 +121,11 @@ public class Funcionario {
         this.DataNasc = DataNasc;
     }
 
-    public int getTelCelular() {
+    public Long getTelCelular() {
         return TelCelular;
     }
 
-    public void setTelCelular(int TelCelular) {
+    public void setTelCelular(Long TelCelular) {
         this.TelCelular = TelCelular;
     }
 
@@ -166,27 +185,13 @@ public class Funcionario {
         this.complemento = complemento;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
+    
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public int getCnpjTransp() {
+    public String getCnpjTransp() {
         return cnpjTransp;
     }
 
-    public void setCnpjTransp(int cnpjTransp) {
+    public void setCnpjTransp(String cnpjTransp) {
         this.cnpjTransp = cnpjTransp;
     }
 

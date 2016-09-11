@@ -22,7 +22,8 @@ import javax.swing.JOptionPane;
  * @author Felipe
  */
 public class CadastrarFuncionario extends javax.swing.JFrame {
-
+Dao.DaoFuncionario DaoFunc = new DaoFuncionario();
+ConnBanco viewFunc = new ConnBanco();
     /**
      * Metodo responsavel por receber os dados da tela de pesquisa os valores
      * foram passados por um objeto do tipo funcionario
@@ -32,11 +33,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
      * @data 14/08/2016
      * @param funcionario
      */
-    public void recebendoFilial(String a){
+    
+   /* public void recebendoFilial(String a){
         cbxCentrodis.addItem(a);
         cbxCentrodis.setSelectedIndex(1);
         cbxCentrodis.setEditable(false);
-    }
+    }*/
     public void recebendo1(String b[]) {
         cbxcidade.addItem(b);
     }
@@ -59,8 +61,30 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         cbxcidade.setSelectedIndex(funcionario.getCidadeFunciCentro());
         cbxEstado.setSelectedItem(funcionario.getEstado());
         dataAdmisao.setDate(funcionario.getDataRegistro());
-        cbxCentrodis.addItem(String.valueOf(funcionario.getCnpjTransp()));
-        cbxCentrodis.setSelectedIndex(1);
+        String unidade = funcionario.getCnpjTransp();
+       
+        try {
+             String sql;
+             String resultado = null;
+             sql = "select nome_Fantasia from centro_dist where cnpj =? ";
+            
+            
+           // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+            viewFunc.conn = viewFunc.getConection();
+            viewFunc.pstm = viewFunc.conn.prepareStatement(sql);
+            viewFunc.pstm.setString(1, unidade);
+            ResultSet rs = viewFunc.pstm.executeQuery();
+            if (rs.next()) {
+                resultado=(rs.getString(1));
+            }
+             cbxCentrodis.setSelectedItem(resultado);
+            
+            
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+        }
+        
+       
        // cbxCentrodis.setSelectedIndex(String.valueOf(funcionario.getCnpjTransp()));
     }
 
@@ -69,7 +93,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
      */
     ConnBanco banco = new ConnBanco();
     // Instanciando Objeto do tipo da tela para Persistir os dados.
-    Dao.DaoFuncionario DaoFunc = new DaoFuncionario();
+    
     Dao.ConnBanco conn = new ConnBanco();
 
     Funcionario func = new Funcionario();
@@ -84,8 +108,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
          * @Author Allef preenche os combos de cidade e estado quando a tela é
          * iniciada
          */
-        String sql1 = ("select nome from transportadora.cidade;");
-        String sql = ("select nome from transportadora.estado;");
+        String sql1 = ("select nome from transportadoraf.cidade;");
+        String sql = ("select nome from transportadoraf.estado;");
+        String sql3 =("select nome_Fantasia from centro_dist; ");
 
         try {
 
@@ -93,12 +118,16 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             banco.pstm = banco.conn.prepareStatement(sql);
             ResultSet rscidade = banco.executaSQLRetorno(sql1);
             ResultSet rsestado = banco.executaSQLRetorno(sql);
+            ResultSet rsfilial = banco.executaSQLRetorno(sql3);
             while (rsestado.next()) {
                 String a = rsestado.getString(1);
                 cbxEstado.addItem(rsestado.getString(1));
             }
             while (rscidade.next()) {
                 cbxcidade.addItem(rscidade.getString(1));
+            }
+            while(rsfilial.next()){
+                cbxCentrodis.addItem(rsfilial.getString(1));
             }
 
         } catch (SQLException ex) {
@@ -386,11 +415,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         btnGravar.setPreferredSize(new java.awt.Dimension(70, 70));
         btnGravar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnGravar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGravarMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGravarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGravarMouseExited(evt);
             }
         });
         btnGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -638,7 +667,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         lblCargo1.setText("Telefone:");
 
         cbxCentrodis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-        cbxCentrodis.setEnabled(false);
 
         lblSenha1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblSenha1.setText("Centro De Distribuição:");
@@ -662,47 +690,51 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(111, 111, 111)
-                                                .addComponent(lblCPF))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(111, 111, 111)
+                                                        .addComponent(lblCPF))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(118, 118, 118)
+                                                        .addComponent(lblRG))
+                                                    .addComponent(lblNascimento))
+                                                .addGap(10, 10, 10)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                                    .addComponent(txtRG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(118, 118, 118)
-                                                .addComponent(lblRG))
-                                            .addComponent(lblNascimento))
-                                        .addGap(10, 10, 10)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(11, 11, 11)
+                                                .addComponent(lblBairro)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(9, 9, 9)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(lblEstado)
+                                                    .addComponent(lblCEP))
+                                                .addGap(10, 10, 10)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtcep, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(401, 401, 401))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(lblBairro)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lblEstado)
-                                            .addComponent(lblCEP))
-                                        .addGap(10, 10, 10)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtcep, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(lblCargo1)
-                                                .addComponent(lblCargo))
-                                            .addGap(10, 10, 10)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(cbxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(26, 26, 26))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(14, 14, 14)
-                                            .addComponent(lblCidade)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(cbxcidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addGap(385, 385, 385))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(lblCargo1)
+                                                    .addComponent(lblCargo))
+                                                .addGap(10, 10, 10)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(cbxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(26, 26, 26))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(14, 14, 14)
+                                                .addComponent(lblCidade)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(cbxcidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGap(385, 385, 385))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(lblCodigo)
@@ -722,7 +754,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                                         .addGap(59, 59, 59)
                                         .addComponent(lblNascimento1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(dataAdmisao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(dataAdmisao, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(148, 148, 148)
@@ -995,7 +1027,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 }
               
                 func.setEstado((String) cbxEstado.getSelectedItem());
-                func.setTelCelular(Integer.parseInt(txtTelefone.getText()));
+                func.setTelCelular(Long.parseLong(txtTelefone.getText()));
                 String nomeFantasia = (String) cbxCentrodis.getSelectedItem();
                
                 /**
@@ -1008,7 +1040,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 banco.pstm.setString(1, nomeFantasia);
                 ResultSet rs1 = banco.pstm.executeQuery();
                 if (rs1.next()) {
-                    func.setCnpjTransp(rs1.getInt("cnpj"));
+                    func.setCnpjTransp(rs1.getString("cnpj"));
                 }
              
                 DateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
@@ -1035,28 +1067,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
      * @param evt
      */
     private void cbxEstadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxEstadoFocusLost
-        cbxcidade.removeAllItems();
-        String a = "";
-
-        int estado = cbxEstado.getSelectedIndex();
-        for (int i = 1; i <= 27; i++) {
-            if (estado == i) {
-                String sql1 = ("use transportadora;");
-                String sql = ("select * from cidade where estado =" + estado + ";");
-                try {
-                    banco.conn = banco.getConection();
-                    banco.pstm = banco.conn.prepareStatement(sql);
-                    banco.executaSQL(sql1);
-                    ResultSet rslocal = banco.executaSQLRetorno(sql);
-                    while (rslocal.next()) {
-                        a = rslocal.getString(1);
-                        cbxcidade.addItem(rslocal.getString(2));
-                    }
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(rootPane, "Erro ao Preecher combo Cidade" + ex);
-                }
-            }
-        }
+        
 
     }//GEN-LAST:event_cbxEstadoFocusLost
     /**
