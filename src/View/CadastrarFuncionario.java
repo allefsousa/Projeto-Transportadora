@@ -1273,7 +1273,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                         func.setCnpjTransp(cbxCentrodis.getToolTipText());
 
                         String cidade = (String) cbxcidade.getSelectedItem();
-                        String sql = "SELECT id FROM cidade WHERE nome = ?;";
+                        String sql = "SELECT id FROM cidade WHERE id = ?;";
                         banco.conn = banco.getConection();
                         banco.pstm = banco.conn.prepareStatement(sql);
                         banco.pstm.setString(1, cidade);
