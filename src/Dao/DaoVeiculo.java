@@ -10,8 +10,6 @@ import Model.Funcionario;
 import Model.Veiculo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,7 +43,7 @@ public class DaoVeiculo {
             comando.setString(2, veiculo.getNumChassi());
             comando.setInt(3, veiculo.getCapacidade());
             comando.setString(4, veiculo.getModelo());
-            comando.setInt(5, veiculo.getIdCentroDist());
+            comando.setString(5, veiculo.getIdCentroDist());
             comando.setInt(6, veiculo.getIdFunc());
             comando.setInt(7, veiculo.getCidade());
 
@@ -107,7 +105,7 @@ public class DaoVeiculo {
             ConnVeic.pstm.setString(2, veiculo.getNumChassi());
             ConnVeic.pstm.setInt(3, veiculo.getCapacidade());
             ConnVeic.pstm.setString(4, veiculo.getModelo());
-            ConnVeic.pstm.setInt(5, veiculo.getIdCentroDist());
+            ConnVeic.pstm.setString(5, veiculo.getIdCentroDist());
             ConnVeic.pstm.setInt(6, veiculo.getIdFunc());
             ConnVeic.pstm.setInt(7, veiculo.getCidade());
             ConnVeic.pstm.setInt(8, veiculo.getId());
@@ -151,7 +149,7 @@ public class DaoVeiculo {
                 v.setNumChassi(rs.getString(3));
                 v.setCapacidade(rs.getInt(4));
                 v.setModelo(rs.getString(5));
-                v.setIdCentroDist(rs.getInt(6));
+                v.setIdCentroDist(rs.getString(6));
                 v.setIdFunc(rs.getInt(7));
                 v.setCidade(rs.getInt(8));
                 // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
