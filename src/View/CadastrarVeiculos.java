@@ -48,10 +48,13 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         txtPesoTotal.setText(String.valueOf(veiculo.getCapacidade()));
         txtModelo.setText(veiculo.getModelo());
         //cbxCentroDist.setSelectedItem(veiculo.getIdCentroDist());
-        cbxFunc.setSelectedIndex(veiculo.getIdFunc());
-        cbxCidade.setSelectedIndex(veiculo.getCidade());
+        cbxFunc.setSelectedItem(veiculo.getIdFunc());
+        cbxCidade.setSelectedItem(veiculo.getCidade());
         String unidade = veiculo.getIdCentroDist();
+        String unidade1 = String.valueOf(veiculo.getCidade());
+        String unidade2 = String.valueOf(veiculo.getIdFunc());
        try {
+           //Tratando Centro de distribuição
             String sql;
             String resultado = null;
             sql = "select * from centro_dist where cnpj =? ";
@@ -65,6 +68,38 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 resultado = (rs.getString("cnpj") + " - " +rs.getString("nome_Fantasia"));
             }
             cbxCentroDist.setSelectedItem(resultado);
+            
+            //Tratando cidade
+            
+            String sql1;
+            String resultado1 = null;
+            sql1 = "select * from cidade where id =? ";
+
+            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+            conCidade.conn = conCidade.getConection();
+            conCidade.pstm = conCidade.conn.prepareStatement(sql1);
+            conCidade.pstm.setString(1, unidade1);
+            ResultSet rs1 = conCidade.pstm.executeQuery();
+            if (rs1.next()) {
+                resultado1 = (rs1.getString("id") + " - " +rs1.getString("nome"));
+            }
+            cbxCidade.setSelectedItem(resultado1);
+            
+            //Tratando funcionario
+            
+            String sql2;
+            String resultado2 = null;
+            sql2 = "select * from funcionario where id =? ";
+
+            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+            conFunc.conn = conFunc.getConection();
+            conFunc.pstm = conFunc.conn.prepareStatement(sql2);
+            conFunc.pstm.setString(1, unidade2);
+            ResultSet rs2 = conFunc.pstm.executeQuery();
+            if (rs2.next()) {
+                resultado2 = (rs2.getString("id") + " - " +rs2.getString("nome"));
+            }
+            cbxFunc.setSelectedItem(resultado2);
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
