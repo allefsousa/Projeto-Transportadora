@@ -26,43 +26,42 @@ public class DaoVeiculo {
     //Instanciando Centro de Distribuição
     CentroDistribuicao centroDist = new CentroDistribuicao();
 
-    public String chaveEstrangeira(String sql,int idChave){
+    public String chaveEstrangeira(String sql, int idChave) {
         try {
             String resultado = null;
-            
-           // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+
+            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
             ConnVeic.conn = ConnVeic.getConection();
             ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);
             ConnVeic.pstm.setInt(1, idChave);
             ResultSet rs = ConnVeic.pstm.executeQuery();
             if (rs.next()) {
-                resultado=(rs.getString(1));
+                resultado = (rs.getString(1));
             }
-            
-            
+
             return resultado;
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+            JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
         }
         return null;
     }
-    public String chaveEstrangeiraLong(String sql,Long idChave){
+
+    public String chaveEstrangeiraLong(String sql, Long idChave) {
         try {
             String resultado = null;
-            
-           // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+
+            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
             ConnVeic.conn = ConnVeic.getConection();
             ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);
             ConnVeic.pstm.setLong(1, idChave);
             ResultSet rs = ConnVeic.pstm.executeQuery();
             if (rs.next()) {
-                resultado=(rs.getString(1));
+                resultado = (rs.getString(1));
             }
-            
-            
+
             return resultado;
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+            JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
         }
         return null;
     }
@@ -137,7 +136,7 @@ public class DaoVeiculo {
     }
 
     public boolean atualizarVeiculo(Veiculo veiculo) {
-
+        ConnVeic.conn = ConnVeic.getConection();
         try {
             ConnVeic.conn = ConnVeic.getConection();
             String sql = "UPDATE veiculo set placa = ?, num_Chassi = ?, capacidade = ?, "
@@ -157,12 +156,12 @@ public class DaoVeiculo {
             ConnVeic.conn.close();
             JOptionPane.showMessageDialog(null, "Registro alterado com sucesso !!");
             return true;
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, " DAO Erro ao atualizar Veiculo!" + e);
             e.printStackTrace();
             return false;
         }
-
     }
 
     /**
