@@ -18,7 +18,7 @@ public class Veiculo {
     private String modelo;
     private String numChassi;
     private int capacidade;
-    private int idCentroDist;
+    private String idCentroDist;
     private int idFunc;
 private int i;
     public Veiculo() {
@@ -35,7 +35,7 @@ private int i;
      * @param idFunc
      * @param cidade
      */
-    public Veiculo(String placa, String numChassi, int capacidade, String modelo, int idCentroDist, int idFunc, int cidade) {
+    public Veiculo(String placa, String numChassi, int capacidade, String modelo, String idCentroDist, int idFunc, int cidade) {
 
         this.placa = placa;
         this.cidade = cidade;
@@ -56,7 +56,7 @@ private int i;
      * @param cidade
      * @param id 
      */
- public Veiculo(String placa, String numChassi, int capacidade, String modelo, int idCentroDist, int idFunc, int cidade,int id) {
+ public Veiculo(String placa, String numChassi, int capacidade, String modelo, String idCentroDist, int idFunc, int cidade,int id) {
 
         this.placa = placa;
         this.cidade = cidade;
@@ -85,7 +85,7 @@ private int i;
         this.numChassi = numChassi;
         this.capacidade = capacidade;
     }
-     public Veiculo(int id,String placa, String numChassi, int capacidade, String modelo, int idCentroDist, int idFunc) {
+     public Veiculo(int id,String placa, String numChassi, int capacidade, String modelo, String idCentroDist, int idFunc) {
         this.id = id;
         this.placa = placa;
         this.idCentroDist = idCentroDist;
@@ -161,11 +161,11 @@ private int i;
         this.capacidade = capacidade;
     }
 
-    public int getIdCentroDist() {
+    public String getIdCentroDist() {
         return idCentroDist;
     }
 
-    public void setIdCentroDist(int idCentroDist) {
+    public void setIdCentroDist(String idCentroDist) {
         this.idCentroDist = idCentroDist;
     }
 
