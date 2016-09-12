@@ -12,6 +12,8 @@ import Model.Funcionario;
 import Model.Veiculo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,60 +47,80 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         txtNumChassi.setText(veiculo.getNumChassi());
         txtPesoTotal.setText(String.valueOf(veiculo.getCapacidade()));
         txtModelo.setText(veiculo.getModelo());
-        cbxCentroDist.setSelectedItem(veiculo.getIdCentroDist());
+        //cbxCentroDist.setSelectedItem(veiculo.getIdCentroDist());
         cbxFunc.setSelectedIndex(veiculo.getIdFunc());
         cbxCidade.setSelectedIndex(veiculo.getCidade());
-        /*String unidade = veiculo.getIdCentroDist();
-        String unidade1 = String.valueOf(veiculo.getIdFunc());
-        String unidade2 = String.valueOf(veiculo.getCidade());
-        try {
-
-            //Tratando caixa combinada de Centro de Distribuição
+        String unidade = veiculo.getIdCentroDist();
+       try {
             String sql;
             String resultado = null;
             sql = "select * from centro_dist where cnpj =? ";
 
-            conVeic.conn = conVeic.getConection();
-            conVeic.pstm = conVeic.conn.prepareStatement(sql);
-            conVeic.pstm.setString(1, unidade);
-            ResultSet rs = conVeic.pstm.executeQuery();
+            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+            conCentro.conn = conCentro.getConection();
+            conCentro.pstm = conCentro.conn.prepareStatement(sql);
+            conCentro.pstm.setString(1, unidade);
+            ResultSet rs = conCentro.pstm.executeQuery();
             if (rs.next()) {
-                resultado = rs.getString("cnpj") + " - " + rs.getString("nome_Fantasia");
+                resultado = (rs.getString("cnpj") + " - " +rs.getString("nome_Fantasia"));
             }
-            cbxCentroDist.addItem(resultado);
-
-            //Tratando caixa combinada de Funcionario
-            String sql1;
-            String resultado1 = null;
-            sql = "select * from funcionario where id = ? ";
-
-            conFunc.conn = conFunc.getConection();
-            conFunc.pstm = conFunc.conn.prepareStatement(sql);
-            conFunc.pstm.setString(1, unidade1);
-            ResultSet rs1 = conFunc.pstm.executeQuery();
-            if (rs1.next()) {
-                resultado1 = rs1.getInt("id") + " - " + rs1.getString("nome");
-            }
-            cbxFunc.addItem(resultado1);
-
-            //Tratando caixa combinada de cidade
-            String sql2;
-            String resultado2 = null;
-            sql = "select * from cidade where id = ? ";
-
-            conCidade.conn = conCidade.getConection();
-            conCidade.pstm = conCidade.conn.prepareStatement(sql);
-            conCidade.pstm.setString(1, unidade2);
-            ResultSet rs2 = conCidade.pstm.executeQuery();
-            if (rs2.next()) {
-                resultado2 = rs2.getInt("id") + " - " + rs2.getString("nome");
-            }
-            cbxCidade.addItem(resultado2);
+            cbxCentroDist.setSelectedItem(resultado);
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Erro ao trazer chaves estrangeiras");
-        }*/
+            JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+        }
 
+
+        /*String unidade = veiculo.getIdCentroDist();
+         String unidade1 = String.valueOf(veiculo.getIdFunc());
+         String unidade2 = String.valueOf(veiculo.getCidade());
+         try {
+
+         //Tratando caixa combinada de Centro de Distribuição
+         String sql;
+         String resultado = null;
+         sql = "select * from centro_dist where cnpj =? ";
+
+         conVeic.conn = conVeic.getConection();
+         conVeic.pstm = conVeic.conn.prepareStatement(sql);
+         conVeic.pstm.setString(1, unidade);
+         ResultSet rs = conVeic.pstm.executeQuery();
+         if (rs.next()) {
+         resultado = rs.getString("cnpj") + " - " + rs.getString("nome_Fantasia");
+         }
+         cbxCentroDist.addItem(resultado);
+
+         //Tratando caixa combinada de Funcionario
+         String sql1;
+         String resultado1 = null;
+         sql = "select * from funcionario where id = ? ";
+
+         conFunc.conn = conFunc.getConection();
+         conFunc.pstm = conFunc.conn.prepareStatement(sql);
+         conFunc.pstm.setString(1, unidade1);
+         ResultSet rs1 = conFunc.pstm.executeQuery();
+         if (rs1.next()) {
+         resultado1 = rs1.getInt("id") + " - " + rs1.getString("nome");
+         }
+         cbxFunc.addItem(resultado1);
+
+         //Tratando caixa combinada de cidade
+         String sql2;
+         String resultado2 = null;
+         sql = "select * from cidade where id = ? ";
+
+         conCidade.conn = conCidade.getConection();
+         conCidade.pstm = conCidade.conn.prepareStatement(sql);
+         conCidade.pstm.setString(1, unidade2);
+         ResultSet rs2 = conCidade.pstm.executeQuery();
+         if (rs2.next()) {
+         resultado2 = rs2.getInt("id") + " - " + rs2.getString("nome");
+         }
+         cbxCidade.addItem(resultado2);
+
+         } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, " Erro ao trazer chaves estrangeiras");
+         }*/
         // cbxCentrodis.setSelectedIndex(String.valueOf(funcionario.getCnpjTransp()));
     }
 
@@ -1074,38 +1096,27 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Nada para atualizar !");
                     } else {
 
-                        String sql = "SELECT id_Veiculo FROM veiculo WHERE id_Veiculo = ?";
-                        conVeic.pstm = conVeic.conn.prepareStatement(sql);
-                        conVeic.pstm.setInt(1, veic.getId());
-                        ResultSet rs = conVeic.pstm.executeQuery();
-                        if (rs.next()) {
-                            sql = "DELETE FROM veiculo WHERE id_Veiculo = ?";
-                            veic.setId(Integer.parseInt(txtCodigo.getText()));
-                            veic.setPlaca(txtPlaca.getText());
-                            veic.setNumChassi(txtNumChassi.getText());
-                            veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
-                            veic.setModelo(txtModelo.getText());
+                        veic.setId(Integer.parseInt(txtCodigo.getText()));
+                        veic.setPlaca(txtPlaca.getText());
+                        veic.setNumChassi(txtNumChassi.getText());
+                        veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
+                        veic.setModelo(txtModelo.getText());
 
-                            //Tratando caixa de combinação de Centro de distribuição
-                            String dados2[] = String.valueOf(cbxCentroDist.getSelectedItem()).split(" - ");
-                            veic.setIdCentroDist(dados2[0]);
+                        //Tratando caixa de combinação de Centro de distribuição
+                        String dados2[] = String.valueOf(cbxCentroDist.getSelectedItem()).split(" - ");
+                        veic.setIdCentroDist(dados2[0]);
 
-                            //Tratando caixa de combinação de funcionario
-                            String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
-                            veic.setIdFunc(Integer.parseInt(dados[0]));
+                        //Tratando caixa de combinação de funcionario
+                        String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
+                        veic.setIdFunc(Integer.parseInt(dados[0]));
 
-                            //Tratando a caixa de combinação de cidade.
-                            String dados3[] = String.valueOf(cbxCidade.getSelectedItem()).split(" - ");
-                            veic.setCidade(Integer.parseInt(dados3[0]));
+                        //Tratando a caixa de combinação de cidade.
+                        String dados3[] = String.valueOf(cbxCidade.getSelectedItem()).split(" - ");
+                        veic.setCidade(Integer.parseInt(dados3[0]));
 
-                            DaoVeic.atualizarVeiculo(veic);
+                        DaoVeic.atualizarVeiculo(veic);
 
-                            JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null, "Registro não existe !!");
-                        }
-
+                        JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
                     }
 
                 } catch (Exception e) {
