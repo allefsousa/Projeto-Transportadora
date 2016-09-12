@@ -29,6 +29,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     ConnBanco conCidade = new ConnBanco();
     ConnBanco conFunc = new ConnBanco();
     ConnBanco conCentro = new ConnBanco();
+    ConnBanco conVeic = new ConnBanco();
 
     DaoVeiculo DaoVeic = new DaoVeiculo();
     Veiculo veic = new Veiculo();
@@ -977,7 +978,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxCidadeActionPerformed
 
     private void cbxCidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCidadeFocusLost
-        
+
     }//GEN-LAST:event_cbxCidadeFocusLost
 
     private void btnLimparrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparrActionPerformed
@@ -994,9 +995,20 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         int x = JOptionPane.showConfirmDialog(this, "Deseja alterar o registro ?");
-                switch (x) {
-                    case 0:
-                        try {
+        switch (x) {
+            case 0:
+                try {
+                    if (txtCodigo.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Nada para atualizar !");
+                    } else {
+                        //Consulta o banco para verificar se o veiculo a remover existe
+                        conVeic.conn = conVeic.getConection();
+                        String sql = "SELECT id_Veiculo FROM veiculo WHERE id_Veiculo = ?";
+                        conVeic.pstm = conVeic.conn.prepareStatement(sql);
+                        conVeic.pstm.setInt(1, veic.getId());
+                        ResultSet rs = conVeic.pstm.executeQuery();
+                        //Caso exista, altera.
+                        if (rs.next()) {
                             veic.setId(Integer.parseInt(txtCodigo.getText()));
                             veic.setPlaca(txtPlaca.getText());
                             veic.setNumChassi(txtNumChassi.getText());
@@ -1018,6 +1030,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                             DaoVeic.atualizarVeiculo(veic);
 
                             JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
+                        }else{
+                             JOptionPane.showMessageDialog(null, "Veiculo não existe !!");
+                        }
+
+                    }
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro ao alterar registro !!");
@@ -1031,13 +1048,13 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
-    private void btnEditarrActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btnEditarrActionPerformed(java.awt.event.ActionEvent evt) {
         //Depreciado
-    }                                         
+    }
 
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {
         //Depreciado
-    }                                         
+    }
 
     /**
      * @param args the command line arguments
