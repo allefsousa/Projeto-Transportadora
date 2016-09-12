@@ -22,8 +22,12 @@ import javax.swing.JOptionPane;
  * @author Felipe
  */
 public class CadastrarFuncionario extends javax.swing.JFrame {
-Dao.DaoFuncionario DaoFunc = new DaoFuncionario();
-ConnBanco viewFunc = new ConnBanco();
+
+    Dao.DaoFuncionario DaoFunc = new DaoFuncionario();
+    ConnBanco viewFunc = new ConnBanco();
+    ConnBanco concidade = new ConnBanco();
+    Funcionario func = new Funcionario();
+
     /**
      * Metodo responsavel por receber os dados da tela de pesquisa os valores
      * foram passados por um objeto do tipo funcionario
@@ -33,12 +37,12 @@ ConnBanco viewFunc = new ConnBanco();
      * @data 14/08/2016
      * @param funcionario
      */
-    
-    public void recebendoFilial(String a){
+    public void recebendoFilial(String a) {
         cbxCentrodis.addItem(a);
         cbxCentrodis.setSelectedIndex(1);
         cbxCentrodis.setEditable(false);
     }
+
     public void recebendo1(String b[]) {
         cbxcidade.addItem(b);
     }
@@ -56,36 +60,33 @@ ConnBanco viewFunc = new ConnBanco();
         txtNumero.setText(String.valueOf(funcionario.getNumero()));
         txtBairro.setText(funcionario.getBairro());
         txtComplemento.setText(funcionario.getComplemento());
-          txtTelefone.setText(String.valueOf(funcionario.getTelCelular()));
-      
+        txtTelefone.setText(String.valueOf(funcionario.getTelCelular()));
+
         cbxcidade.setSelectedIndex(funcionario.getCidadeFunciCentro());
         cbxEstado.setSelectedItem(funcionario.getEstado());
         dataAdmisao.setDate(funcionario.getDataRegistro());
         String unidade = funcionario.getCnpjTransp();
-       
+
         try {
-             String sql;
-             String resultado = null;
-             sql = "select nome_Fantasia from centro_dist where cnpj =? ";
-            
-            
-           // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+            String sql;
+            String resultado = null;
+            sql = "select nome_Fantasia from centro_dist where cnpj =? ";
+
+            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
             viewFunc.conn = viewFunc.getConection();
             viewFunc.pstm = viewFunc.conn.prepareStatement(sql);
             viewFunc.pstm.setString(1, unidade);
             ResultSet rs = viewFunc.pstm.executeQuery();
             if (rs.next()) {
-                resultado=(rs.getString(1));
+                resultado = (rs.getString(1));
             }
-             cbxCentrodis.setSelectedItem(resultado);
-            
-            
+            cbxCentrodis.setSelectedItem(resultado);
+
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+            JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
         }
-        
-       
-       // cbxCentrodis.setSelectedIndex(String.valueOf(funcionario.getCnpjTransp()));
+
+        // cbxCentrodis.setSelectedIndex(String.valueOf(funcionario.getCnpjTransp()));
     }
 
     /**
@@ -93,10 +94,10 @@ ConnBanco viewFunc = new ConnBanco();
      */
     ConnBanco banco = new ConnBanco();
     // Instanciando Objeto do tipo da tela para Persistir os dados.
-    
+
     Dao.ConnBanco conn = new ConnBanco();
 
-    Funcionario func = new Funcionario();
+    Funcionario func1 = new Funcionario();
 
     public CadastrarFuncionario() {
         initComponents();
@@ -110,7 +111,7 @@ ConnBanco viewFunc = new ConnBanco();
          */
         String sql1 = ("select nome from cidade;");
         String sql = ("select nome from estado;");
-        String sql3 =("select nome_Fantasia from centro_dist; ");
+        String sql3 = ("select nome_Fantasia from centro_dist; ");
 
         try {
 
@@ -126,7 +127,7 @@ ConnBanco viewFunc = new ConnBanco();
             while (rscidade.next()) {
                 cbxcidade.addItem(rscidade.getString(1));
             }
-            while(rsfilial.next()){
+            while (rsfilial.next()) {
                 cbxCentrodis.addItem(rsfilial.getString(1));
             }
 
@@ -179,10 +180,8 @@ ConnBanco viewFunc = new ConnBanco();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         btnGravar = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
-        btnEditar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
-        btnLimpar = new javax.swing.JButton();
-        jSeparator7 = new javax.swing.JToolBar.Separator();
         btnExcluir = new javax.swing.JButton();
         jSeparator8 = new javax.swing.JToolBar.Separator();
         btnPesquisar = new javax.swing.JButton();
@@ -207,7 +206,7 @@ ConnBanco viewFunc = new ConnBanco();
         txtCodigo = new javax.swing.JTextField();
         lblCargo1 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
-        cbxCentrodis = new javax.swing.JComboBox<>();
+        cbxCentrodis = new javax.swing.JComboBox<String>();
         lblSenha1 = new javax.swing.JLabel();
         txtNascimento = new com.toedter.calendar.JDateChooser();
         dataAdmisao = new com.toedter.calendar.JDateChooser();
@@ -430,53 +429,34 @@ ConnBanco viewFunc = new ConnBanco();
         jToolBar1.add(btnGravar);
         jToolBar1.add(jSeparator5);
 
-        btnEditar.setBackground(new java.awt.Color(0, 28, 119));
-        btnEditar.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Editar.png"))); // NOI18N
-        btnEditar.setText("EDITAR");
-        btnEditar.setBorder(null);
-        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditar.setFocusable(false);
-        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEditar.setMaximumSize(new java.awt.Dimension(70, 70));
-        btnEditar.setMinimumSize(new java.awt.Dimension(70, 70));
-        btnEditar.setPreferredSize(new java.awt.Dimension(70, 70));
-        btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAlterar.setBackground(new java.awt.Color(0, 28, 119));
+        btnAlterar.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Editar.png"))); // NOI18N
+        btnAlterar.setText("EDITAR");
+        btnAlterar.setBorder(null);
+        btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAlterar.setFocusable(false);
+        btnAlterar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAlterar.setMaximumSize(new java.awt.Dimension(70, 70));
+        btnAlterar.setMinimumSize(new java.awt.Dimension(70, 70));
+        btnAlterar.setPreferredSize(new java.awt.Dimension(70, 70));
+        btnAlterar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditarMouseEntered(evt);
+                btnAlterarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditarMouseExited(evt);
+                btnAlterarMouseExited(evt);
             }
         });
-        jToolBar1.add(btnEditar);
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnAlterar);
         jToolBar1.add(jSeparator6);
-
-        btnLimpar.setBackground(new java.awt.Color(0, 28, 119));
-        btnLimpar.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Limpar.png"))); // NOI18N
-        btnLimpar.setText("LIMPAR");
-        btnLimpar.setBorder(null);
-        btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLimpar.setFocusable(false);
-        btnLimpar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLimpar.setMaximumSize(new java.awt.Dimension(70, 70));
-        btnLimpar.setMinimumSize(new java.awt.Dimension(70, 70));
-        btnLimpar.setPreferredSize(new java.awt.Dimension(70, 70));
-        btnLimpar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLimparMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLimparMouseExited(evt);
-            }
-        });
-        jToolBar1.add(btnLimpar);
-        jToolBar1.add(jSeparator7);
 
         btnExcluir.setBackground(new java.awt.Color(0, 28, 119));
         btnExcluir.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -661,12 +641,14 @@ ConnBanco viewFunc = new ConnBanco();
             }
         });
 
+        txtCodigo.setEnabled(false);
         txtCodigo.setPreferredSize(new java.awt.Dimension(60, 20));
 
         lblCargo1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblCargo1.setText("Telefone:");
 
-        cbxCentrodis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbxCentrodis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        cbxCentrodis.setEnabled(false);
 
         lblSenha1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblSenha1.setText("Centro De Distribuição:");
@@ -690,19 +672,22 @@ ConnBanco viewFunc = new ConnBanco();
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(111, 111, 111)
-                                                        .addComponent(lblCPF))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(118, 118, 118)
-                                                        .addComponent(lblRG))
-                                                    .addComponent(lblNascimento))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(lblCargo1)
+                                                    .addComponent(lblCargo))
                                                 .addGap(10, 10, 10)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(txtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                                    .addComponent(txtRG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                    .addComponent(cbxCargo, 0, 232, Short.MAX_VALUE)
+                                                    .addComponent(txtTelefone))
+                                                .addGap(26, 26, 26))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(14, 14, 14)
+                                                .addComponent(lblCidade)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(cbxcidade, 0, 273, Short.MAX_VALUE)))
+                                        .addGap(385, 385, 385))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(11, 11, 11)
                                                 .addComponent(lblBairro)
@@ -714,27 +699,24 @@ ConnBanco viewFunc = new ConnBanco();
                                                     .addComponent(lblEstado)
                                                     .addComponent(lblCEP))
                                                 .addGap(10, 10, 10)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtcep, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGap(401, 401, 401))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtcep, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                                    .addComponent(cbxEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(lblCargo1)
-                                                    .addComponent(lblCargo))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(111, 111, 111)
+                                                        .addComponent(lblCPF))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(118, 118, 118)
+                                                        .addComponent(lblRG))
+                                                    .addComponent(lblNascimento))
                                                 .addGap(10, 10, 10)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cbxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(26, 26, 26))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(14, 14, 14)
-                                                .addComponent(lblCidade)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(cbxcidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGap(385, 385, 385))))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                                                    .addComponent(txtRG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addGap(401, 401, 401))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(lblCodigo)
@@ -754,7 +736,7 @@ ConnBanco viewFunc = new ConnBanco();
                                         .addGap(59, 59, 59)
                                         .addComponent(lblNascimento1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(dataAdmisao, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(dataAdmisao, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(148, 148, 148)
@@ -875,7 +857,7 @@ ConnBanco viewFunc = new ConnBanco();
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
-        
+
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair1ActionPerformed
@@ -935,20 +917,20 @@ ConnBanco viewFunc = new ConnBanco();
         btnGravar.setBorder(null);
     }//GEN-LAST:event_btnGravarMouseExited
 
-    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
-        btnEditar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    }//GEN-LAST:event_btnEditarMouseEntered
+    private void btnAlterarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseEntered
+        btnAlterar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    }//GEN-LAST:event_btnAlterarMouseEntered
 
-    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
-        btnEditar.setBorder(null);
-    }//GEN-LAST:event_btnEditarMouseExited
+    private void btnAlterarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseExited
+        btnAlterar.setBorder(null);
+    }//GEN-LAST:event_btnAlterarMouseExited
 
     private void btnLimparMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparMouseEntered
-        btnLimpar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        //btnLimpar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
     }//GEN-LAST:event_btnLimparMouseEntered
 
     private void btnLimparMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparMouseExited
-        btnLimpar.setBorder(null);
+        //btnLimpar.setBorder(null);
     }//GEN-LAST:event_btnLimparMouseExited
 
     private void btnExcluirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluirMouseEntered
@@ -983,9 +965,9 @@ ConnBanco viewFunc = new ConnBanco();
         btnUltimo.setBorder(null);
     }//GEN-LAST:event_btnUltimoMouseExited
 
-   
+
     private void cbxCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCargoActionPerformed
-        
+
     }//GEN-LAST:event_cbxCargoActionPerformed
 
     /**
@@ -1015,7 +997,7 @@ ConnBanco viewFunc = new ConnBanco();
                 func.setNumero(Integer.parseInt(txtNumero.getText()));
                 func.setBairro(txtBairro.getText());
                 func.setComplemento(txtComplemento.getText());
-                
+
                 String cidade = (String) cbxcidade.getSelectedItem();
                 String sql = "SELECT id FROM cidade WHERE nome = ?;";
                 banco.conn = banco.getConection();
@@ -1025,11 +1007,11 @@ ConnBanco viewFunc = new ConnBanco();
                 if (rs.next()) {
                     func.setCidadeFunciCentro(rs.getInt("id"));
                 }
-              
+
                 func.setEstado((String) cbxEstado.getSelectedItem());
                 func.setTelCelular(Long.parseLong(txtTelefone.getText()));
                 String nomeFantasia = (String) cbxCentrodis.getSelectedItem();
-               
+
                 /**
                  * select utilizado para fazer a busca do cnpj com base no nome
                  * fantasia escolhido da filial
@@ -1042,7 +1024,7 @@ ConnBanco viewFunc = new ConnBanco();
                 if (rs1.next()) {
                     func.setCnpjTransp(rs1.getString("cnpj"));
                 }
-             
+
                 DateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
                 func.setDataRegistro((dataAdmisao.getDate()));
 
@@ -1067,7 +1049,7 @@ ConnBanco viewFunc = new ConnBanco();
      * @param evt
      */
     private void cbxEstadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxEstadoFocusLost
-        
+
 
     }//GEN-LAST:event_cbxEstadoFocusLost
     /**
@@ -1108,9 +1090,7 @@ ConnBanco viewFunc = new ConnBanco();
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
         btnProximo.setEnabled(true);
         btnAnterior.setEnabled(false);
-        cbxcidade.removeAllItems();
-        cbxEstado.removeAllItems();
-        cbxCargo.removeAllItems();
+
         try {
             String sql = "SELECT * FROM funcionario";
             banco.executaSQL(sql);
@@ -1121,9 +1101,16 @@ ConnBanco viewFunc = new ConnBanco();
             txtBairro.setText(banco.rs.getString("bairro"));
             txtNumero.setText(String.valueOf(banco.rs.getString("numero")));
             txtcep.setText(banco.rs.getString("cep"));
-            cbxEstado.addItem(banco.rs.getString("estado"));
-            cbxcidade.addItem(banco.rs.getString("cidade"));
-            cbxCargo.addItem(banco.rs.getString("cargo"));
+            cbxEstado.setSelectedItem(banco.rs.getString("estado"));
+
+            //Tatando o comboBox de cidade
+            int cidade = Integer.parseInt(banco.rs.getString("fk_Cidade_Func"));
+            String sql1 = "SELECT nome FROM cidade WHERE id = ?";
+            String x = DaoFunc.chaveEstrangeira(sql1, cidade);
+            cbxcidade.setSelectedItem(x);
+
+            txtTelefone.setText(banco.rs.getString("fone"));
+            cbxCargo.setSelectedItem(banco.rs.getString("cargo"));
             txtCPF.setText(banco.rs.getString("cpf"));
             txtRG.setText(banco.rs.getString("rg"));
             txtNascimento.setDate(banco.rs.getDate("DataNAsc"));
@@ -1144,9 +1131,6 @@ ConnBanco viewFunc = new ConnBanco();
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
         btnProximo.setEnabled(false);
         btnAnterior.setEnabled(true);
-        cbxcidade.removeAllItems();
-        cbxEstado.removeAllItems();
-        cbxCargo.removeAllItems();
 
         try {
             String sql = "SELECT * FROM funcionario";
@@ -1158,9 +1142,16 @@ ConnBanco viewFunc = new ConnBanco();
             txtBairro.setText(banco.rs.getString("bairro"));
             txtNumero.setText(String.valueOf(banco.rs.getString("numero")));
             txtcep.setText(banco.rs.getString("cep"));
-            cbxEstado.addItem(banco.rs.getString("estado"));
-            cbxcidade.addItem(banco.rs.getString("cidade"));
-            cbxCargo.addItem(banco.rs.getString("cargo"));
+            cbxEstado.setSelectedItem(banco.rs.getString("estado"));
+
+            //Tatando o comboBox de cidade
+            int cidade = Integer.parseInt(banco.rs.getString("fk_Cidade_Func"));
+            String sql1 = "SELECT nome FROM cidade WHERE id = ?";
+            String x = DaoFunc.chaveEstrangeira(sql1, cidade);
+            cbxcidade.setSelectedItem(x);
+
+            txtTelefone.setText(banco.rs.getString("fone"));
+            cbxCargo.setSelectedItem(banco.rs.getString("cargo"));
             txtCPF.setText(banco.rs.getString("cpf"));
             txtRG.setText(banco.rs.getString("rg"));
             txtNascimento.setDate(banco.rs.getDate("DataNAsc"));
@@ -1180,9 +1171,6 @@ ConnBanco viewFunc = new ConnBanco();
      */
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         btnProximo.setEnabled(true);
-        cbxcidade.removeAllItems();
-        cbxEstado.removeAllItems();
-        cbxCargo.removeAllItems();
 
         try {
             if (banco.rs.isFirst()) {
@@ -1195,9 +1183,16 @@ ConnBanco viewFunc = new ConnBanco();
                 txtBairro.setText(banco.rs.getString("bairro"));
                 txtNumero.setText(String.valueOf(banco.rs.getString("numero")));
                 txtcep.setText(banco.rs.getString("cep"));
-                cbxEstado.addItem(banco.rs.getString("estado"));
-                cbxcidade.addItem(banco.rs.getString("cidade"));
-                cbxCargo.addItem(banco.rs.getString("cargo"));
+                cbxEstado.setSelectedItem(banco.rs.getString("estado"));
+
+                //Tatando o comboBox de cidade
+                int cidade = Integer.parseInt(banco.rs.getString("fk_Cidade_Func"));
+                String sql1 = "SELECT nome FROM cidade WHERE id = ?";
+                String x = DaoFunc.chaveEstrangeira(sql1, cidade);
+                cbxcidade.setSelectedItem(x);
+
+                txtTelefone.setText(banco.rs.getString("fone"));
+                cbxCargo.setSelectedItem(banco.rs.getString("cargo"));
                 txtCPF.setText(banco.rs.getString("cpf"));
                 txtRG.setText(banco.rs.getString("rg"));
                 txtNascimento.setDate(banco.rs.getDate("DataNAsc"));
@@ -1213,13 +1208,11 @@ ConnBanco viewFunc = new ConnBanco();
     /**
      * Método recupera os dados de um registro posterior em relação a posição
      * atual, exceto se o mesmo estiver na última posição.
+     *
      * @param evt
      */
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
         btnAnterior.setEnabled(true);
-        cbxcidade.removeAllItems();
-        cbxEstado.removeAllItems();
-        cbxCargo.removeAllItems();
 
         try {
             if (banco.rs.isLast()) {
@@ -1232,9 +1225,16 @@ ConnBanco viewFunc = new ConnBanco();
                 txtBairro.setText(banco.rs.getString("bairro"));
                 txtNumero.setText(String.valueOf(banco.rs.getString("numero")));
                 txtcep.setText(banco.rs.getString("cep"));
-                cbxEstado.addItem(banco.rs.getString("estado"));
-                cbxcidade.addItem(banco.rs.getString("cidade"));
-                cbxCargo.addItem(banco.rs.getString("cargo"));
+                cbxEstado.setSelectedItem(banco.rs.getString("estado"));
+
+                //Tatando o comboBox de cidade
+                int cidade = Integer.parseInt(banco.rs.getString("fk_Cidade_Func"));
+                String sql1 = "SELECT nome FROM cidade WHERE id = ?";
+                String x = DaoFunc.chaveEstrangeira(sql1, cidade);
+                cbxcidade.setSelectedItem(x);
+
+                txtTelefone.setText(banco.rs.getString("fone"));
+                cbxCargo.setSelectedItem(banco.rs.getString("cargo"));
                 txtCPF.setText(banco.rs.getString("cpf"));
                 txtRG.setText(banco.rs.getString("rg"));
                 txtNascimento.setDate(banco.rs.getDate("DataNAsc"));
@@ -1246,6 +1246,60 @@ ConnBanco viewFunc = new ConnBanco();
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnProximoActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        viewFunc.conn = viewFunc.getConection();
+        int x = JOptionPane.showConfirmDialog(this, "Deseja alterar o registro ?");
+        switch (x) {
+            case 0:
+                try {
+                    if (txtCodigo.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Nada para atualizar !");
+                    } else {
+
+                        func.setNumMatricula(Integer.parseInt(txtCodigo.getText()));
+                        func.setCpf(txtCPF.getText());
+                        func.setNome(txtNomeCompleto.getText());
+                        func.setDataNasc(txtNascimento.getDate());
+                        func.setFuncao((String) cbxCargo.getSelectedItem());
+                        func.setCep(Integer.parseInt(txtcep.getText()));
+                        func.setEndereco(txtEndereco.getText());
+                        func.setNumMatricula(Integer.parseInt(txtNumero.getText()));
+                        func.setBairro(txtBairro.getText());
+                        func.setComplemento(txtComplemento.getText());
+                        func.setEstado((String) cbxEstado.getSelectedItem());
+                        func.setDataRegistro(dataAdmisao.getDate());
+                        func.setTelCelular(Long.parseLong(txtTelefone.getText()));
+                        func.setCnpjTransp(cbxCentrodis.getToolTipText());
+
+                        String cidade = (String) cbxcidade.getSelectedItem();
+                        String sql = "SELECT id FROM cidade WHERE nome = ?;";
+                        banco.conn = banco.getConection();
+                        banco.pstm = banco.conn.prepareStatement(sql);
+                        banco.pstm.setString(1, cidade);
+                        ResultSet rs = banco.pstm.executeQuery();
+                        if (rs.next()) {
+                            func.setCidadeFunciCentro(rs.getInt("id"));
+                        }
+
+                        //func.setCidadeFunciCentro(cbxcidade.getSelectedItem());
+
+                        DaoFunc.atualizarFunc(func);
+
+                        JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Erro ao alterar registro !!");
+                    e.printStackTrace();
+                }
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1291,11 +1345,10 @@ ConnBanco viewFunc = new ConnBanco();
     private javax.swing.JPanel BarraMenu;
     private javax.swing.ButtonGroup Cargo;
     private javax.swing.JPanel barraNavegacao;
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnAnterior;
-    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnGravar;
-    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnPrimeiro;
@@ -1317,7 +1370,6 @@ ConnBanco viewFunc = new ConnBanco();
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
-    private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JToolBar jToolBar1;
