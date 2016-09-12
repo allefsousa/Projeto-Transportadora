@@ -21,9 +21,6 @@ import javax.swing.JOptionPane;
  */
 public class CadastrarVeiculos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastrarVeiculos
-     */
     //Conexões com o banco
     ConnBanco banco = new ConnBanco();
     ConnBanco conCidade = new ConnBanco();
@@ -35,6 +32,77 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     Veiculo veic = new Veiculo();
     Funcionario func = new Funcionario();
     CentroDistribuicao centroDist = new CentroDistribuicao();
+    
+    /**
+     * Creates new form CadastrarVeiculos
+     * @param veiculo
+     */
+    public void recebendo(Veiculo veiculo) {
+
+        txtCodigo.setText(String.valueOf(veic.getId()));
+        txtPlaca.setText(veic.getPlaca());
+        txtNumChassi.setText(veic.getNumChassi());
+        txtPesoTotal.setText(String.valueOf(veic.getCapacidade()));
+        txtModelo.setText(veic.getModelo());
+        //cbxCentroDist.setSelectedItem(veic.getIdCentroDist());
+        //cbxFunc.setSelectedItem(veic.getIdFunc());
+        //cbxCidade.setSelectedItem(veic.getCidade());
+        String unidade = veic.getIdCentroDist();
+        String unidade1 = String.valueOf(veic.getIdFunc());
+        String unidade2 = String.valueOf(veic.getCidade());
+        try {
+            //Tratando caixa combinada de Centro de Distribuição
+            String sql;
+            String resultado = null;
+            sql = "select * from centro_dist where cnpj =? ";
+
+            conVeic.conn = conVeic.getConection();
+            conVeic.pstm = conVeic.conn.prepareStatement(sql);
+            conVeic.pstm.setString(1, unidade);
+            ResultSet rs = conVeic.pstm.executeQuery();
+            if (rs.next()) {
+                resultado = (rs.getString("cnpj")) + " - " + rs.getString("nome_Fantasia");
+            }
+            cbxCentroDist.setSelectedItem(resultado);
+            
+            //Tratando caixa combinada de Funcionario
+            String sql1;
+            String resultado1 = null;
+            sql = "select * from funcionario where id = ? ";
+
+            conFunc.conn = conFunc.getConection();
+            conFunc.pstm = conFunc.conn.prepareStatement(sql);
+            conFunc.pstm.setString(1, unidade1);
+            ResultSet rs1 = conFunc.pstm.executeQuery();
+            if (rs1.next()) {
+                resultado1 = (rs1.getInt("id")) + " - " + rs1.getString("nome");
+            }
+            cbxFunc.setSelectedItem(resultado1);
+            
+            //Tratando caixa combinada de cidade
+            String sql2;
+            String resultado2 = null;
+            sql = "select * from cidade where id = ? ";
+
+            conCidade.conn = conCidade.getConection();
+            conCidade.pstm = conCidade.conn.prepareStatement(sql);
+            conCidade.pstm.setString(1, unidade2);
+            ResultSet rs2 = conCidade.pstm.executeQuery();
+            if (rs2.next()) {
+                resultado2 = (rs2.getInt("id")) + " - " + rs2.getString("nome");
+            }
+            cbxCidade.setSelectedItem(resultado2);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Erro ao trazer chaves estrangeiras");
+        }
+        
+        
+
+        // cbxCentrodis.setSelectedIndex(String.valueOf(funcionario.getCnpjTransp()));
+    }
+
+    
 
     public CadastrarVeiculos() {
         initComponents();
@@ -364,11 +432,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnLimparr.setPreferredSize(new java.awt.Dimension(70, 70));
         btnLimparr.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLimparr.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLimparrMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnLimparrMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLimparrMouseExited(evt);
             }
         });
         btnLimparr.addActionListener(new java.awt.event.ActionListener() {
@@ -427,6 +495,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnPesquisarMouseExited(evt);
+            }
+        });
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
             }
         });
         jToolBar1.add(btnPesquisar);
@@ -1030,8 +1103,8 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                             DaoVeic.atualizarVeiculo(veic);
 
                             JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
-                        }else{
-                             JOptionPane.showMessageDialog(null, "Veiculo não existe !!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Veiculo não existe !!");
                         }
 
                     }
@@ -1047,6 +1120,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        this.dispose();
+        new PesquisarVeiculo().setVisible(true);
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnEditarrActionPerformed(java.awt.event.ActionEvent evt) {
         //Depreciado
