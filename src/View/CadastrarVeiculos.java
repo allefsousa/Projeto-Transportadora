@@ -10,7 +10,6 @@ import Dao.DaoVeiculo;
 import Model.CentroDistribuicao;
 import Model.Funcionario;
 import Model.Veiculo;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -30,27 +29,30 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
 
     DaoVeiculo DaoVeic = new DaoVeiculo();
     Veiculo veic = new Veiculo();
+    Veiculo veic1 = new Veiculo();
     Funcionario func = new Funcionario();
     CentroDistribuicao centroDist = new CentroDistribuicao();
-    
+
     /**
      * Creates new form CadastrarVeiculos
+     *
      * @param veiculo
      */
     public void recebendo(Veiculo veiculo) {
 
-        txtCodigo.setText(String.valueOf(veic.getId()));
-        txtPlaca.setText(veic.getPlaca());
-        txtNumChassi.setText(veic.getNumChassi());
-        txtPesoTotal.setText(String.valueOf(veic.getCapacidade()));
-        txtModelo.setText(veic.getModelo());
-        //cbxCentroDist.setSelectedItem(veic.getIdCentroDist());
-        //cbxFunc.setSelectedItem(veic.getIdFunc());
-        //cbxCidade.setSelectedItem(veic.getCidade());
-        String unidade = veic.getIdCentroDist();
-        String unidade1 = String.valueOf(veic.getIdFunc());
-        String unidade2 = String.valueOf(veic.getCidade());
+        txtCodigo.setText(String.valueOf(veiculo.getId()));
+        txtPlaca.setText(veiculo.getPlaca());
+        txtNumChassi.setText(veiculo.getNumChassi());
+        txtPesoTotal.setText(String.valueOf(veiculo.getCapacidade()));
+        txtModelo.setText(veiculo.getModelo());
+        cbxCentroDist.setSelectedItem(veiculo.getIdCentroDist());
+        cbxFunc.setSelectedIndex(veiculo.getIdFunc());
+        cbxCidade.setSelectedIndex(veiculo.getCidade());
+        /*String unidade = veiculo.getIdCentroDist();
+        String unidade1 = String.valueOf(veiculo.getIdFunc());
+        String unidade2 = String.valueOf(veiculo.getCidade());
         try {
+
             //Tratando caixa combinada de Centro de Distribuição
             String sql;
             String resultado = null;
@@ -61,10 +63,10 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             conVeic.pstm.setString(1, unidade);
             ResultSet rs = conVeic.pstm.executeQuery();
             if (rs.next()) {
-                resultado = (rs.getString("cnpj")) + " - " + rs.getString("nome_Fantasia");
+                resultado = rs.getString("cnpj") + " - " + rs.getString("nome_Fantasia");
             }
-            cbxCentroDist.setSelectedItem(resultado);
-            
+            cbxCentroDist.addItem(resultado);
+
             //Tratando caixa combinada de Funcionario
             String sql1;
             String resultado1 = null;
@@ -75,10 +77,10 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             conFunc.pstm.setString(1, unidade1);
             ResultSet rs1 = conFunc.pstm.executeQuery();
             if (rs1.next()) {
-                resultado1 = (rs1.getInt("id")) + " - " + rs1.getString("nome");
+                resultado1 = rs1.getInt("id") + " - " + rs1.getString("nome");
             }
-            cbxFunc.setSelectedItem(resultado1);
-            
+            cbxFunc.addItem(resultado1);
+
             //Tratando caixa combinada de cidade
             String sql2;
             String resultado2 = null;
@@ -89,20 +91,16 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             conCidade.pstm.setString(1, unidade2);
             ResultSet rs2 = conCidade.pstm.executeQuery();
             if (rs2.next()) {
-                resultado2 = (rs2.getInt("id")) + " - " + rs2.getString("nome");
+                resultado2 = rs2.getInt("id") + " - " + rs2.getString("nome");
             }
-            cbxCidade.setSelectedItem(resultado2);
+            cbxCidade.addItem(resultado2);
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Erro ao trazer chaves estrangeiras");
-        }
-        
-        
+        }*/
 
         // cbxCentrodis.setSelectedIndex(String.valueOf(funcionario.getCnpjTransp()));
     }
-
-    
 
     public CadastrarVeiculos() {
         initComponents();
@@ -1067,6 +1065,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparrActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        conVeic.conn = conVeic.getConection();
         int x = JOptionPane.showConfirmDialog(this, "Deseja alterar o registro ?");
         switch (x) {
             case 0:
@@ -1074,14 +1073,13 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                     if (txtCodigo.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Nada para atualizar !");
                     } else {
-                        //Consulta o banco para verificar se o veiculo a remover existe
-                        conVeic.conn = conVeic.getConection();
+
                         String sql = "SELECT id_Veiculo FROM veiculo WHERE id_Veiculo = ?";
                         conVeic.pstm = conVeic.conn.prepareStatement(sql);
                         conVeic.pstm.setInt(1, veic.getId());
                         ResultSet rs = conVeic.pstm.executeQuery();
-                        //Caso exista, altera.
                         if (rs.next()) {
+                            sql = "DELETE FROM veiculo WHERE id_Veiculo = ?";
                             veic.setId(Integer.parseInt(txtCodigo.getText()));
                             veic.setPlaca(txtPlaca.getText());
                             veic.setNumChassi(txtNumChassi.getText());
@@ -1103,8 +1101,9 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                             DaoVeic.atualizarVeiculo(veic);
 
                             JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Veiculo não existe !!");
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Registro não existe !!");
                         }
 
                     }
