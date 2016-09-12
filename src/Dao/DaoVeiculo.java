@@ -10,6 +10,7 @@ import Model.Funcionario;
 import Model.Veiculo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +25,47 @@ public class DaoVeiculo {
     Funcionario funcionario = new Funcionario();
     //Instanciando Centro de Distribuição
     CentroDistribuicao centroDist = new CentroDistribuicao();
+
+    public String chaveEstrangeira(String sql,int idChave){
+        try {
+            String resultado = null;
+            
+           // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+            ConnVeic.conn = ConnVeic.getConection();
+            ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);
+            ConnVeic.pstm.setInt(1, idChave);
+            ResultSet rs = ConnVeic.pstm.executeQuery();
+            if (rs.next()) {
+                resultado=(rs.getString(1));
+            }
+            
+            
+            return resultado;
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+        }
+        return null;
+    }
+    public String chaveEstrangeiraLong(String sql,Long idChave){
+        try {
+            String resultado = null;
+            
+           // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+            ConnVeic.conn = ConnVeic.getConection();
+            ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);
+            ConnVeic.pstm.setLong(1, idChave);
+            ResultSet rs = ConnVeic.pstm.executeQuery();
+            if (rs.next()) {
+                resultado=(rs.getString(1));
+            }
+            
+            
+            return resultado;
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+        }
+        return null;
+    }
 
     /**
      * Metódo insere veículo no banco de dados
@@ -100,7 +142,7 @@ public class DaoVeiculo {
             ConnVeic.conn = ConnVeic.getConection();
             String sql = "UPDATE veiculo set placa = ?, num_Chassi = ?, capacidade = ?, "
                     + "modelo = ?, fk_Id_Centro_Dist = ?, fk_Id_func = ?, fk_Id_Cidade = ? WHERE id_Veiculo = ?";
-            ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);        
+            ConnVeic.pstm = ConnVeic.conn.prepareStatement(sql);
             ConnVeic.pstm.setString(1, veiculo.getPlaca());
             ConnVeic.pstm.setString(2, veiculo.getNumChassi());
             ConnVeic.pstm.setInt(3, veiculo.getCapacidade());
@@ -120,7 +162,7 @@ public class DaoVeiculo {
             e.printStackTrace();
             return false;
         }
-        
+
     }
 
     /**
@@ -143,7 +185,6 @@ public class DaoVeiculo {
             ResultSet rs = ConnVeic.pstm.executeQuery();
             Veiculo v = new Veiculo();
             if (rs.next()) {
-
                 v.setId(rs.getInt(1));
                 v.setPlaca(rs.getString(2));
                 v.setNumChassi(rs.getString(3));
