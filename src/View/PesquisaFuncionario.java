@@ -42,7 +42,7 @@ public class PesquisaFuncionario extends javax.swing.JFrame {
     public PesquisaFuncionario() {
         initComponents();
         connBanco.getConection();
-        preencherTabela("SELECT * FROM transportadoraf.funcionario order by id;");
+        preencherTabela("SELECT * FROM transportadora.funcionario order by id;");
     }
 
     public void preencherTabela(String SQL) {
