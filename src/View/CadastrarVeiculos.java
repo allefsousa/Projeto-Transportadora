@@ -777,7 +777,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
 
             String dados2[] = String.valueOf(cbxCentroDist.getSelectedItem()).split(" - ");
-            veic.setIdCentroDist(Integer.parseInt(dados2[0]));
+            veic.setIdCentroDist(dados2[0]);
 
             String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
             veic.setIdFunc(Integer.parseInt(dados[0]));
@@ -977,11 +977,19 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxCidadeActionPerformed
 
     private void cbxCidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCidadeFocusLost
-
+        
     }//GEN-LAST:event_cbxCidadeFocusLost
 
     private void btnLimparrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparrActionPerformed
-        // TODO add your handling code here:
+        txtCodigo.setText("");
+        txtPlaca.setText("");
+        txtNumChassi.setText("");
+        txtPesoTotal.setText("");
+        txtModelo.setText("");
+        cbxCentroDist.setSelectedIndex(0);
+        cbxCidade.setSelectedIndex(0);
+        cbxEstado.setSelectedIndex(0);
+        cbxFunc.setSelectedIndex(0);
     }//GEN-LAST:event_btnLimparrActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
@@ -997,7 +1005,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
 
                             //Tratando caixa de combinação de Centro de distribuição
                             String dados2[] = String.valueOf(cbxCentroDist.getSelectedItem()).split(" - ");
-                            veic.setIdCentroDist(Integer.parseInt(dados2[0]));
+                            veic.setIdCentroDist(dados2[0]);
 
                             //Tratando caixa de combinação de funcionario
                             String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
@@ -1024,19 +1032,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnEditarrActionPerformed(java.awt.event.ActionEvent evt) {                                          
-    
+        //Depreciado
     }                                         
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        txtCodigo.setText("");
-        txtPlaca.setText("");
-        txtNumChassi.setText("");
-        txtPesoTotal.setText("");
-        txtModelo.setText("");
-        cbxCentroDist.setSelectedIndex(0);
-        cbxCidade.setSelectedIndex(0);
-        cbxEstado.setSelectedIndex(0);
-        cbxFunc.setSelectedIndex(0);
+        //Depreciado
     }                                         
 
     /**
