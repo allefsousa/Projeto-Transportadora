@@ -23,46 +23,47 @@ import javax.swing.JOptionPane;
 public class DaoFuncionario {
 
     ConnBanco ConnFunc = new ConnBanco();
-    public String chaveEstrangeira(String sql,int idChave){
+
+    public String chaveEstrangeira(String sql, int idChave) {
         try {
             String resultado = null;
-            
-           // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+
+            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
             ConnFunc.conn = ConnFunc.getConection();
             ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
             ConnFunc.pstm.setInt(1, idChave);
             ResultSet rs = ConnFunc.pstm.executeQuery();
             if (rs.next()) {
-                resultado=(rs.getString(1));
+                resultado = (rs.getString(1));
             }
-            
-            
+
             return resultado;
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+            JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
         }
         return null;
     }
-    public String chaveEstrangeiraLong(String sql,Long idChave){
+
+    public String chaveEstrangeiraLong(String sql, Long idChave) {
         try {
             String resultado = null;
-            
-           // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+
+            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
             ConnFunc.conn = ConnFunc.getConection();
             ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
             ConnFunc.pstm.setLong(1, idChave);
             ResultSet rs = ConnFunc.pstm.executeQuery();
             if (rs.next()) {
-                resultado=(rs.getString(1));
+                resultado = (rs.getString(1));
             }
-            
-            
+
             return resultado;
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
+            JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras" + ex.getMessage());
         }
         return null;
     }
+
     public boolean insereFuncionario(Funcionario funcionario) {
         ConnFunc.conn = ConnFunc.getConection();
         String InsereFucionario = " INSERT INTO funcionario(cpf, nome, rg, dataNasc,"
@@ -112,9 +113,10 @@ public class DaoFuncionario {
         try {
             ConnFunc.conn = ConnFunc.getConection();
             String sql = "UPDATE funcionario set cpf = ?, nome = ?, rg = ?, dataNasc = ?, "
-                    + "nomeUsuario = ?, senha = ?, cargo = ?, cep = ?, rua = ?"
-                    + "numero = ?, bairro = ? complemento = ?, cidade = ?, estado = ?,"
-                    + "dataRegistro = ?";
+                    + " cargo = ?, cep = ?, rua = ?"
+                    + ",numero = ?, bairro = ? ,complemento = ?, estado = ?,"
+                    + "dataRegistro = ?,fone = ? ,fk_Cnpj_Centro_Dist = ?, fk_Cidade_Func =? where id=? ";
+            
             ConnFunc.pstm = ConnFunc.conn.prepareStatement(sql);
             ConnFunc.pstm.setString(1, funcionario.getCpf());
             ConnFunc.pstm.setString(2, funcionario.getNome());
@@ -122,23 +124,29 @@ public class DaoFuncionario {
             //Formatando a data para ano mes e dia 
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             ConnFunc.pstm.setString(4, formatter.format(funcionario.getDataNasc()));
-            ConnFunc.pstm.setString(7, funcionario.getFuncao());
-            ConnFunc.pstm.setInt(8, funcionario.getCep());
-            ConnFunc.pstm.setString(9, funcionario.getEndereco());
-            ConnFunc.pstm.setInt(10, funcionario.getNumero());
-            ConnFunc.pstm.setString(11, funcionario.getBairro());
-            ConnFunc.pstm.setString(12, funcionario.getComplemento());
-    
-            ConnFunc.pstm.setString(14, funcionario.getEstado());
-            ConnFunc.pstm.setString(15, formatter.format(funcionario.getDataRegistro()));
-            ConnFunc.pstm.setString(16, funcionario.getCnpjTransp());
+            ConnFunc.pstm.setString(5, funcionario.getFuncao());
+            ConnFunc.pstm.setInt(6, funcionario.getCep());
+            ConnFunc.pstm.setString(7, funcionario.getEndereco());
+            ConnFunc.pstm.setInt(8, funcionario.getNumero());
+            
+            ConnFunc.pstm.setString(9, funcionario.getBairro());
+            ConnFunc.pstm.setString(10, funcionario.getComplemento());
+            ConnFunc.pstm.setString(11, funcionario.getEstado());
+
+            ConnFunc.pstm.setString(12, formatter.format(funcionario.getDataRegistro()));
+            ConnFunc.pstm.setLong(13, funcionario.getTelCelular());
+           
+            ConnFunc.pstm.setString(14, funcionario.getCnpjTransp());
+             ConnFunc.pstm.setInt(15, funcionario.getCidadeFunciCentro());
+            ConnFunc.pstm.setInt(16, funcionario.getNumMatricula());
+
             //executa a query
             ConnFunc.pstm.execute();
             ConnFunc.conn.close();
             JOptionPane.showMessageDialog(null, "Funcionario atualizado com sucesso !");
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar funcionario!");
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar funcionario!" +e.getMessage());
             e.printStackTrace();
         }
         return false;
@@ -171,9 +179,9 @@ public class DaoFuncionario {
     }
 
     public Funcionario getFuncionario(int codigo) {
-       
+
         try {
-           
+
             ConnFunc.conn = ConnFunc.getConection();
             //  JOptionPane.showMessageDialog(null, ""+ codigo);
             DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
@@ -196,16 +204,16 @@ public class DaoFuncionario {
                 f.setNumero(rs.getInt(9));
                 f.setBairro(rs.getString(10));
                 f.setComplemento(rs.getString(11));
-            
+
                 f.setEstado(rs.getString(12));
                 f.setDataRegistro(rs.getDate(13));
                 f.setTelCelular(rs.getLong(14));
-               
+
                 f.setCnpjTransp(rs.getString(15));
                 f.setCidadeFunciCentro(rs.getInt(16));
                 // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
                 //com essa mensagem nao 
-                JOptionPane.showMessageDialog(null, "");
+                JOptionPane.showMessageDialog(null, "Registros Retornados Com Sucesso");
 
             }
             return f;

@@ -310,10 +310,9 @@ public class Login extends javax.swing.JFrame {
 
         if (txtLogin.getText().isEmpty() || txtSenha.getPassword().toString().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Usuario e senha Invalidos !! ");
-        }
-        if ( cmbCentro.getSelectedIndex() == 0) {
+        }else if( cmbCentro.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(rootPane, "Selecione O Centro de Distribuição. ");
-        } else {
+        }
             try {
                 ModeloLogin Mlogin = new ModeloLogin();
                 Dao.DaoLogin daologin = new DaoLogin();
@@ -334,10 +333,8 @@ public class Login extends javax.swing.JFrame {
                 }
                 // metodo que verifica o login 
                 boolean resposta = daologin.verificaLogin(Mlogin);
-
-                // Chamando a tela passando o  valor para o metodo
-                // Verifica o estado da tela
-                if (menu == null) {
+                 if(resposta == true){
+                      if (menu == null) {
                     menu.setVisible(true);
                     menu.Recebendoctd((String) cmbCentro.getSelectedItem());
                     this.setVisible(false);
@@ -347,11 +344,16 @@ public class Login extends javax.swing.JFrame {
                     menu.Recebendoctd((String) cmbCentro.getSelectedItem());
                     this.setVisible(false);
                 }
+                 }
+                // Chamando a tela passando o  valor para o metodo
+                // Verifica o estado da tela
+               
+            
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        }
+        
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
