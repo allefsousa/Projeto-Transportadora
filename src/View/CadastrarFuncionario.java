@@ -108,8 +108,8 @@ ConnBanco viewFunc = new ConnBanco();
          * @Author Allef preenche os combos de cidade e estado quando a tela é
          * iniciada
          */
-        String sql1 = ("select nome from transportadoraf.cidade;");
-        String sql = ("select nome from transportadoraf.estado;");
+        String sql1 = ("select nome from cidade;");
+        String sql = ("select nome from estado;");
         String sql3 =("select nome_Fantasia from centro_dist; ");
 
         try {
