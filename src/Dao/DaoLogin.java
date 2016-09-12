@@ -43,6 +43,7 @@ public class DaoLogin {
             }
             if(loginBanco.isEmpty() || senhaBanco.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Usuario e senha não Conferem !! ");
+                autentica = false;
             }
             return autentica;
 

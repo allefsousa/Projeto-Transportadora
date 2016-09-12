@@ -34,11 +34,11 @@ ConnBanco viewFunc = new ConnBanco();
      * @param funcionario
      */
     
-   /* public void recebendoFilial(String a){
+    public void recebendoFilial(String a){
         cbxCentrodis.addItem(a);
         cbxCentrodis.setSelectedIndex(1);
         cbxCentrodis.setEditable(false);
-    }*/
+    }
     public void recebendo1(String b[]) {
         cbxcidade.addItem(b);
     }
