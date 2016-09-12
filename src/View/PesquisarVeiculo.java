@@ -49,7 +49,7 @@ public class PesquisarVeiculo extends javax.swing.JFrame {
 
             // pegando os valores e formatando para preecher a tabela  
             do {
-                /*cidade = connBanco.rs.getInt("fk_Id_Cidade");
+                cidade = connBanco.rs.getInt("fk_Id_Cidade");
                 sql = "SELECT nome FROM cidade where id = ?";
                 cid = daoVeic.chaveEstrangeira(sql, cidade);
                 
@@ -59,12 +59,12 @@ public class PesquisarVeiculo extends javax.swing.JFrame {
                 
                 funcionario = connBanco.rs.getInt("fk_Id_Func");
                 sql2 = "SELECT nome FROM funcionario where id = ?";
-                fun = daoVeic.chaveEstrangeira(sql2, funcionario);*/
+                fun = daoVeic.chaveEstrangeira(sql2, funcionario);
                 
                 dados.add(new Object[]{connBanco.rs.getInt("id_Veiculo"), connBanco.rs.getString("placa"),
                     connBanco.rs.getString("num_Chassi"), connBanco.rs.getInt("capacidade"),
-                     connBanco.rs.getString("modelo"), connBanco.rs.getString("fk_Id_Centro_Dist"),
-                     connBanco.rs.getString("fk_Id_Func"), connBanco.rs.getString("fk_id_Cidade")});
+                     connBanco.rs.getString("modelo"), uni, fun, cid/*connBanco.rs.getString("fk_Id_Centro_Dist"),
+                     connBanco.rs.getString("fk_Id_Func"), connBanco.rs.getString("fk_id_Cidade")*/});
             } while (connBanco.rs.next());
            
         } catch (SQLException ex) {
