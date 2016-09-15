@@ -42,7 +42,7 @@ public class PesquisaFuncionario extends javax.swing.JFrame {
     public PesquisaFuncionario() {
         initComponents();
         connBanco.getConection();
-        preencherTabela("SELECT * FROM transportadora.funcionario order by id;");
+        preencherTabela("SELECT * FROM funcionario order by id;");
     }
 
     public void preencherTabela(String SQL) {
@@ -139,7 +139,7 @@ public class PesquisaFuncionario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tabelaFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

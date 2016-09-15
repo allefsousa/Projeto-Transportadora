@@ -1270,8 +1270,8 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
      * Método lista cidades e estado no comboBox
      */
     public void listarCidEst() {
-        String sql1 = ("select * from transportadora.cidade;");
-        String sql = ("select * from transportadora.estado;");
+        String sql1 = ("select * from transportadoraf.cidade;");
+        String sql = ("select * from transportadoraf.estado;");
 
         try {
             banco.conn = banco.getConection();

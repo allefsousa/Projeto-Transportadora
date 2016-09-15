@@ -143,7 +143,7 @@ public class DaoFuncionario {
             //executa a query
             ConnFunc.pstm.execute();
             ConnFunc.conn.close();
-            //JOptionPane.showMessageDialog(null, "Funcionario atualizado com sucesso !");
+            JOptionPane.showMessageDialog(null, "Funcionario atualizado com sucesso !");
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar funcionario!" +e.getMessage());
@@ -214,7 +214,7 @@ public class DaoFuncionario {
                 // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
                 //com essa mensagem nao 
                 JOptionPane.showMessageDialog(null, "Registros Retornados Com Sucesso");
-
+                return f;
             }
             return f;
         } catch (Exception e) {

@@ -26,6 +26,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     Dao.DaoFuncionario DaoFunc = new DaoFuncionario();
     ConnBanco viewFunc = new ConnBanco();
     ConnBanco concidade = new ConnBanco();
+     Funcionario rec;
     Funcionario func = new Funcionario();
 
     /**
@@ -48,7 +49,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }
 
     public void recebendo(Funcionario funcionario) {
-
+       
+       
+        cbxCentrodis.removeAllItems();
         txtCodigo.setText(String.valueOf(funcionario.getNumMatricula()));
         txtNomeCompleto.setText(funcionario.getNome());
         txtCPF.setText(funcionario.getCpf());
@@ -80,7 +83,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             if (rs.next()) {
                 resultado = (rs.getString(1));
             }
-            cbxCentrodis.setSelectedItem(resultado);
+            cbxCentrodis.addItem(resultado);
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
@@ -101,9 +104,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
     public CadastrarFuncionario() {
         initComponents();
+        limpar();
+     
         setExtendedState(MAXIMIZED_BOTH);
         btnAnterior.setEnabled(false);
         btnProximo.setEnabled(false);
+        txtNomeCompleto.requestFocus();
 
         /**
          * @Author Allef preenche os combos de cidade e estado quando a tela é
@@ -111,7 +117,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
          */
         String sql1 = ("select nome from cidade;");
         String sql = ("select nome from estado;");
-        String sql3 = ("select nome_Fantasia from centro_dist; ");
+       
 
         try {
 
@@ -119,7 +125,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             banco.pstm = banco.conn.prepareStatement(sql);
             ResultSet rscidade = banco.executaSQLRetorno(sql1);
             ResultSet rsestado = banco.executaSQLRetorno(sql);
-            ResultSet rsfilial = banco.executaSQLRetorno(sql3);
+          ;
             while (rsestado.next()) {
                 String a = rsestado.getString(1);
                 cbxEstado.addItem(rsestado.getString(1));
@@ -127,13 +133,30 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             while (rscidade.next()) {
                 cbxcidade.addItem(rscidade.getString(1));
             }
-            while (rsfilial.next()) {
-                cbxCentrodis.addItem(rsfilial.getString(1));
-            }
+            
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "" + ex);
         }
+    }
+    public void limpar(){
+        txtNascimento.setDate(null);
+        dataAdmisao.setDate(null);
+        txtComplemento.setText("");
+        txtCodigo.setText("");
+        txtNomeCompleto.setText("");
+        txtEndereco.setText("");
+        txtBairro.setText("");
+        txtcep.setText("");
+        txtNumero.setText("");
+        txtCPF.setText("");
+        txtRG.setText("");
+        txtTelefone.setText("");
+        cbxCentrodis.setSelectedIndex(-1);
+        cbxEstado.setSelectedIndex(-1);
+        cbxCargo.setSelectedIndex(-1);
+        cbxcidade.setSelectedIndex(-1);
+        txtNomeCompleto.requestFocus();
     }
 
     /**
@@ -904,6 +927,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         txtNumero.setText("");
         txtCPF.setText("");
         txtRG.setText("");
+        txtTelefone.setText("");
+        cbxCentrodis.setSelectedIndex(0);
         cbxEstado.setSelectedIndex(0);
         cbxCargo.setSelectedIndex(0);
         cbxcidade.setSelectedIndex(0);
@@ -979,7 +1004,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         if (txtCPF.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Impossivel Inserir Registro, existem campos em Branco.",
                     "Alerta ! ", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } else if(!txtCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Impossivel Inserir Registro !!");
+        
+        
+        
+        }else{
             /**
              * Bloco try catch so foi adicionado por causa da funcao DATAFORMAT
              * para converter a data
@@ -1032,11 +1062,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                  func.setTelFixo(Integer.parseInt(txtTelefone.getText()));
                  func.setTelCelular(Integer.parseInt(txtCelular.getText()));
                  */
-                JOptionPane.showMessageDialog(null, func.toString());
+                
                 DaoFunc.insereFuncionario(func);
-
+                limpar();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao Inserir Funcionario " + ex.getMessage() + func.toString());
+                JOptionPane.showMessageDialog(null, "Erro ao Inserir Funcionario " + ex.getMessage());
 
             }
 
@@ -1059,17 +1089,35 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
      * @param evt
      */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        try {
-            if (txtCodigo.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Nada para remover !");
-            } else {
-                func.setNumMatricula(Integer.parseInt(txtCodigo.getText()));
-                DaoFunc.deletarFunc(func);
-                //JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso !");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Impossivel Alterar !! ");
+         int x = JOptionPane.showConfirmDialog(this, "Deseja excluir o registro ?","SAIDA",JOptionPane.YES_NO_OPTION);
+        switch (x) {
+            case 0:
+                try {
+                    if (txtCodigo.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Nada para remover !");
+                    } else {
+                        func.setNumMatricula(Integer.parseInt(txtCodigo.getText()));
+                        DaoFunc.deletarFunc(func);
+                        
+                        JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso !");
+                        limpar();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Impossivel Alterar !! ");
+                }
+                break;
+
+            case 1:
+                break;
+            case 2:
+                break;
         }
+        
+        
+        
+        
+       
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -1095,6 +1143,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             String sql = "SELECT * FROM funcionario";
             banco.executaSQL(sql);
             banco.rs.first();
+            cbxCentrodis.removeAllItems();
             txtCodigo.setText(banco.rs.getString("id"));
             txtNomeCompleto.setText(banco.rs.getString("nome"));
             txtEndereco.setText(banco.rs.getString("rua"));
@@ -1113,9 +1162,15 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             cbxCargo.setSelectedItem(banco.rs.getString("cargo"));
             txtCPF.setText(banco.rs.getString("cpf"));
             txtRG.setText(banco.rs.getString("rg"));
-            txtNascimento.setDate(banco.rs.getDate("DataNAsc"));
+            txtNascimento.setDate(banco.rs.getDate("DataNasc"));
             dataAdmisao.setDate(banco.rs.getDate("dataRegistro"));
             txtComplemento.setText(banco.rs.getString("complemento"));
+            // tratando combo box de Filial 
+            Long centrodis = Long.parseLong(banco.rs.getString("fk_Cnpj_Centro_dist"));
+            String sql2 = "SELECT nome_Fantasia FROM centro_dist where cnpj = ?;";
+            String y = DaoFunc.chaveEstrangeiraLong(sql2, centrodis);
+            cbxCentrodis.addItem(y);
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
             e.printStackTrace();
@@ -1249,56 +1304,70 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         viewFunc.conn = viewFunc.getConection();
-        int x = JOptionPane.showConfirmDialog(this, "Deseja alterar o registro ?");
-        switch (x) {
-            case 0:
-                try {
-                    if (txtCodigo.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Nada para atualizar !");
-                    } else {
 
-                        func.setNumMatricula(Integer.parseInt(txtCodigo.getText()));
-                        func.setCpf(txtCPF.getText());
-                        func.setNome(txtNomeCompleto.getText());
-                        func.setDataNasc(txtNascimento.getDate());
-                        func.setFuncao((String) cbxCargo.getSelectedItem());
-                        func.setCep(Integer.parseInt(txtcep.getText()));
-                        func.setEndereco(txtEndereco.getText());
-                        func.setNumMatricula(Integer.parseInt(txtNumero.getText()));
-                        func.setBairro(txtBairro.getText());
-                        func.setComplemento(txtComplemento.getText());
-                        func.setEstado((String) cbxEstado.getSelectedItem());
-                        func.setDataRegistro(dataAdmisao.getDate());
-                        func.setTelCelular(Long.parseLong(txtTelefone.getText()));
-                        func.setCnpjTransp(cbxCentrodis.getToolTipText());
+        try {
+            if (txtCodigo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Nada para atualizar !");
+            } else {
+                func.setNumMatricula(Integer.parseInt(txtCodigo.getText()));
+                func.setCpf(txtCPF.getText());
+                func.setNome(txtNomeCompleto.getText());
+                func.setRg((txtRG.getText()));
+                // formatando a data da forma que ela deve ser digitada
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                func.setDataNasc((txtNascimento.getDate()));
+                func.setFuncao((String) cbxCargo.getSelectedItem());
+                func.setCep(Integer.parseInt(txtcep.getText()));
+                func.setEndereco(txtEndereco.getText());
+                func.setNumero(Integer.parseInt(txtNumero.getText()));
+                func.setBairro(txtBairro.getText());
+                func.setComplemento(txtComplemento.getText());
 
-                        String cidade = (String) cbxcidade.getSelectedItem();
-                        String sql = "SELECT id FROM cidade WHERE id = ?;";
-                        banco.conn = banco.getConection();
-                        banco.pstm = banco.conn.prepareStatement(sql);
-                        banco.pstm.setString(1, cidade);
-                        ResultSet rs = banco.pstm.executeQuery();
-                        if (rs.next()) {
-                            func.setCidadeFunciCentro(rs.getInt("id"));
-                        }
-
-                        //func.setCidadeFunciCentro(cbxcidade.getSelectedItem());
-
-                        DaoFunc.atualizarFunc(func);
-
-                        JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
-                    }
-
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Erro ao alterar registro !!");
-                    e.printStackTrace();
+                String cidade = (String) cbxcidade.getSelectedItem();
+                String sql = "SELECT id FROM cidade WHERE nome = ?;";
+                banco.conn = banco.getConection();
+                banco.pstm = banco.conn.prepareStatement(sql);
+                banco.pstm.setString(1, cidade);
+                ResultSet rs = banco.pstm.executeQuery();
+                if (rs.next()) {
+                    func.setCidadeFunciCentro(rs.getInt("id"));
                 }
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
+
+                func.setEstado((String) cbxEstado.getSelectedItem());
+                func.setTelCelular(Long.parseLong(txtTelefone.getText()));
+                String nomeFantasia = (String) cbxCentrodis.getSelectedItem();
+
+                /**
+                 * select utilizado para fazer a busca do cnpj com base no nome
+                 * fantasia escolhido da filial
+                 */
+                String sql1 = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+                banco.conn = banco.getConection();
+                banco.pstm = banco.conn.prepareStatement(sql1);
+                banco.pstm.setString(1, nomeFantasia);
+                ResultSet rs1 = banco.pstm.executeQuery();
+                if (rs1.next()) {
+                    func.setCnpjTransp(rs1.getString("cnpj"));
+                }
+
+                DateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+                func.setDataRegistro((dataAdmisao.getDate()));
+
+                /*
+                 func.setTelFixo(Integer.parseInt(txtTelefone.getText()));
+                 func.setTelCelular(Integer.parseInt(txtCelular.getText()));
+                 */
+               
+                DaoFunc.atualizarFunc(func);
+                limpar();
+               
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao alterar registro !!");
+            e.printStackTrace();
         }
+
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
