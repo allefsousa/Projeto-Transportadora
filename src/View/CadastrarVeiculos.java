@@ -1049,19 +1049,19 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             String sql1 = "SELECT * FROM centro_Dist WHERE cnpj = " + banco.rs.getString("fk_Id_Centro_Dist");
             conCentro.executaSQL(sql1);
             conCentro.rs.first();
-            cbxCentroDist.setSelectedItem(conCentro.rs.getString("cnpj") + " - " + conCentro.rs.getString("nome_Fantasia"));
+            cbxCentroDist.setSelectedItem(conCentro.rs.getString("nome_Fantasia"));
 
             //tratando a caixa de combinação de Centro de funcionario
             String sql2 = "SELECT * FROM funcionario WHERE id = " + banco.rs.getString("fk_Id_func");
             conFunc.executaSQL(sql2);
             conFunc.rs.first();
-            cbxFunc.setSelectedItem(conFunc.rs.getString("id") + " - " + conFunc.rs.getString("nome"));
+            cbxFunc.setSelectedItem(conFunc.rs.getString("nome"));
 
             //Tratando a caixa de combinação de cidade
-            String sql3 = "SELECT * FROM cidade WHERE id = " + banco.rs.getString("fk_Id_Cidade");
+            String sql3 = "SELECT * FROM cidade WHERE id = " + banco.rs.getInt("fk_Id_Cidade");
             conCidade.executaSQL(sql3);
             conCidade.rs.first();
-            cbxCidade.setSelectedItem(conCidade.rs.getString("id") + " - " + conCidade.rs.getString("nome"));
+            cbxCidade.setSelectedItem(conCidade.rs.getString("nome"));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao mostrar o primeiro registro !");
@@ -1087,19 +1087,19 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             String sql1 = "SELECT * FROM centro_Dist WHERE cnpj = " + banco.rs.getString("fk_Id_Centro_Dist");
             conCentro.executaSQL(sql1);
             conCentro.rs.first();
-            cbxCentroDist.setSelectedItem(conCentro.rs.getString("cnpj") + " - " + conCentro.rs.getString("nome_Fantasia"));
+            cbxCentroDist.setSelectedItem(conCentro.rs.getString("nome_Fantasia"));
 
             //tratando a caixa de combinação de Centro de funcionario
             String sql2 = "SELECT * FROM funcionario WHERE id = " + banco.rs.getString("fk_Id_func");
             conFunc.executaSQL(sql2);
             conFunc.rs.first();
-            cbxFunc.setSelectedItem(conFunc.rs.getString("id") + " - " + conFunc.rs.getString("nome"));
+            cbxFunc.setSelectedItem( conFunc.rs.getString("nome"));
 
             //Tratando a caixa de combinação de cidade
             String sql3 = "SELECT * FROM cidade WHERE id = " + banco.rs.getString("fk_Id_Cidade");
             conCidade.executaSQL(sql3);
             conCidade.rs.first();
-            cbxCidade.setSelectedItem(conCidade.rs.getString("id") + " - " + conCidade.rs.getString("nome"));
+            cbxCidade.setSelectedItem(conCidade.rs.getString("nome"));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao mostrar o ultimo registro !");
@@ -1125,19 +1125,19 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 String sql1 = "SELECT * FROM centro_Dist WHERE cnpj = " + banco.rs.getString("fk_Id_Centro_Dist");
                 conCentro.executaSQL(sql1);
                 conCentro.rs.first();
-                cbxCentroDist.setSelectedItem(conCentro.rs.getString("cnpj") + " - " + conCentro.rs.getString("nome_Fantasia"));
+                cbxCentroDist.setSelectedItem(conCentro.rs.getString("nome_Fantasia"));
 
                 //tratando a caixa de combinação de Centro de funcionario
                 String sql2 = "SELECT * FROM funcionario WHERE id = " + banco.rs.getString("fk_Id_func");
                 conFunc.executaSQL(sql2);
                 conFunc.rs.first();
-                cbxFunc.setSelectedItem(conFunc.rs.getString("id") + " - " + conFunc.rs.getString("nome"));
+                cbxFunc.setSelectedItem(conFunc.rs.getString("nome"));
 
                 //Tratando a caixa de combinação de cidade
                 String sql3 = "SELECT * FROM cidade WHERE id = " + banco.rs.getString("fk_Id_Cidade");
                 conCidade.executaSQL(sql3);
                 conCidade.rs.first();
-                cbxCidade.setSelectedItem(conCidade.rs.getString("id") + " - " + conCidade.rs.getString("nome"));
+                cbxCidade.setSelectedItem(conCidade.rs.getString("nome"));
 
             }
         } catch (Exception e) {
@@ -1164,19 +1164,19 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 String sql1 = "SELECT * FROM centro_Dist WHERE cnpj = " + banco.rs.getString("fk_Id_Centro_Dist");
                 conCentro.executaSQL(sql1);
                 conCentro.rs.first();
-                cbxCentroDist.setSelectedItem(conCentro.rs.getString("cnpj") + " - " + conCentro.rs.getString("nome_Fantasia"));
+                cbxCentroDist.setSelectedItem(conCentro.rs.getString("nome_Fantasia"));
 
                 //tratando a caixa de combinação  de funcionario
                 String sql2 = "SELECT * FROM funcionario WHERE id = " + banco.rs.getString("fk_Id_func");
                 conFunc.executaSQL(sql2);
                 conFunc.rs.first();
-                cbxFunc.setSelectedItem(conFunc.rs.getString("id") + " - " + conFunc.rs.getString("nome"));
+                cbxFunc.setSelectedItem(conFunc.rs.getString("nome"));
 
                 //Tratando a caixa de combinação de cidade
                 String sql3 = "SELECT * FROM cidade WHERE id = " + banco.rs.getString("fk_Id_Cidade");
                 conCidade.executaSQL(sql3);
                 conCidade.rs.first();
-                cbxCidade.setSelectedItem(conCidade.rs.getString("id") + " - " + conCidade.rs.getString("nome"));
+                cbxCidade.setSelectedItem(conCidade.rs.getString("nome"));
 
             }
         } catch (Exception e) {
@@ -1358,11 +1358,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 String a = rsestado.getString(1);
                 cbxEstado.removeAllItems();
                 //cbxEstado.addItem(rsestado.getString(1));
-                cbxEstado.addItem(String.valueOf(rsestado.getInt("id")) + " - " + rsestado.getString("nome"));
+                cbxEstado.addItem( rsestado.getString("nome"));
             }
             while (rscidade.next()) {
                 //cbxCidade.addItem(rscidade.getString(1));
-                cbxCidade.addItem(String.valueOf(rscidade.getInt("id")) + " - " + rscidade.getString("nome"));
+                cbxCidade.addItem(rscidade.getString("nome"));
             }
 
         } catch (SQLException ex) {
@@ -1377,7 +1377,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             banco.pstm = banco.conn.prepareStatement(sql);
             ResultSet rs = banco.executaSQLRetorno(sql);
             while (rs.next()) {
-                cbxFunc.addItem(String.valueOf(rs.getInt("id")) + " - " + rs.getString("nome"));
+                cbxFunc.addItem(rs.getString("nome"));
                 //cbxFunc.addItem( rs.getString("id"));
             }
         } catch (Exception e) {
@@ -1392,7 +1392,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             banco.pstm = banco.conn.prepareStatement(sql);
             ResultSet rs = banco.executaSQLRetorno(sql);
             while (rs.next()) {
-                cbxCentroDist.addItem((rs.getString("cnpj")) + " - " + rs.getString("nome_Fantasia"));
+                cbxCentroDist.addItem(rs.getString("nome_Fantasia"));
                 //cbxCentroDist.addItem( rs.getString("cnpj"));
             }
         } catch (Exception e) {
