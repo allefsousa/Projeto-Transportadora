@@ -154,7 +154,7 @@ public class DaoVeiculo {
             //executa a query
             ConnVeic.pstm.execute();
             ConnVeic.conn.close();
-            //JOptionPane.showMessageDialog(null, "Registro alterado com sucesso !!");
+            JOptionPane.showMessageDialog(null, "Registro alterado com sucesso !!");
             return true;
 
         } catch (Exception e) {
