@@ -44,7 +44,7 @@ public class CalculadoraModeloTest {
         double a = 10.0;
         double b = 30.0;
         CalculadoraModelo instance = new CalculadoraModelo();
-        Double expResult = 40.0;
+        Double expResult = 45.0;
         Double result = instance.somar(a, b);
         assertEquals(expResult, result);
       
