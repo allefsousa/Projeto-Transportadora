@@ -229,7 +229,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         lblCargo1 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
-        cbxCentrodis = new javax.swing.JComboBox<String>();
+        cbxCentrodis = new javax.swing.JComboBox<>();
         lblSenha1 = new javax.swing.JLabel();
         txtNascimento = new com.toedter.calendar.JDateChooser();
         dataAdmisao = new com.toedter.calendar.JDateChooser();
@@ -239,6 +239,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPanel1FocusLost(evt);
+            }
+        });
 
         BarraMenu.setBackground(new java.awt.Color(0, 28, 119));
 
@@ -321,12 +326,22 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         lblNascimento.setText("Data de Nascimento:");
 
         txtNomeCompleto.setPreferredSize(new java.awt.Dimension(250, 20));
+        txtNomeCompleto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNomeCompletoFocusLost(evt);
+            }
+        });
 
         txtEndereco.setPreferredSize(new java.awt.Dimension(250, 20));
 
         txtBairro.setPreferredSize(new java.awt.Dimension(250, 20));
 
         txtNumero.setPreferredSize(new java.awt.Dimension(60, 20));
+        txtNumero.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumeroFocusLost(evt);
+            }
+        });
 
         barraNavegacao.setBackground(new java.awt.Color(0, 28, 119));
 
@@ -670,7 +685,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         lblCargo1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblCargo1.setText("Telefone:");
 
-        cbxCentrodis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        cbxCentrodis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         cbxCentrodis.setEnabled(false);
 
         lblSenha1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -1371,6 +1386,18 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void jPanel1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1FocusLost
+
+    private void txtNomeCompletoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeCompletoFocusLost
+        
+    }//GEN-LAST:event_txtNomeCompletoFocusLost
+
+    private void txtNumeroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroFocusLost
+        
+    }//GEN-LAST:event_txtNumeroFocusLost
 
     /**
      * @param args the command line arguments

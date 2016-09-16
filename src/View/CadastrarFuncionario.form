@@ -49,6 +49,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jPanel1FocusLost"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -471,6 +474,9 @@
               <Dimension value="[250, 20]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNomeCompletoFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEndereco">
           <Properties>
@@ -492,6 +498,9 @@
               <Dimension value="[60, 20]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNumeroFocusLost"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="barraNavegacao">
           <Properties>

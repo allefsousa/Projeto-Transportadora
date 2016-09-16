@@ -5,6 +5,16 @@
  */
 package View;
 
+import Dao.ConnBanco;
+import Dao.DaoEmpresa;
+import Model.CentroDistribuicao;
+import com.sun.media.sound.ModelAbstractChannelMixer;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Felipe
@@ -14,11 +24,44 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     /**
      * Creates new form CadastrarEmpresa
      */
+    CentroDistribuicao centrodis = new CentroDistribuicao();
+    Dao.DaoEmpresa daocentro = new DaoEmpresa();
+    Dao.ConnBanco banco = new ConnBanco();
     public CadastrarEmpresa() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
-    }
+        String sql = ("select nome from cidade;");
+       
+       
 
+        try {
+
+            banco.conn = banco.getConection();
+            banco.pstm = banco.conn.prepareStatement(sql);
+            ResultSet rscidade = banco.executaSQLRetorno(sql);
+         
+            
+            while (rscidade.next()) {
+                cbxCidade.addItem(rscidade.getString(1));
+            }
+            
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Trazer cidades" + ex);
+        }
+    }
+    public void limpar(){
+        txtCEP.setText("");
+        txtCNPJ.setText("");
+        txtNomeFantasia.setText("");
+        txtRazao.setText("");
+        txtEmail.setText("");
+        txtBairro.setText("");
+        txtEndereco.setText("");
+        cbxCidade.setSelectedIndex(0);
+        txtNumero.setText("");
+        txtTelefone.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +84,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         lblCEP = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblTelefone = new javax.swing.JLabel();
-        lblCelular = new javax.swing.JLabel();
         lblCNPJ = new javax.swing.JLabel();
         txtRazao = new javax.swing.JTextField();
         txtNomeFantasia = new javax.swing.JTextField();
@@ -51,7 +93,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         txtNumero = new javax.swing.JTextField();
         txtCEP = new javax.swing.JFormattedTextField();
         txtTelefone = new javax.swing.JFormattedTextField();
-        txtCelular = new javax.swing.JFormattedTextField();
         txtCNPJ = new javax.swing.JFormattedTextField();
         barraNavegacao = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
@@ -65,8 +106,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         btnGravar = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         btnEditar = new javax.swing.JButton();
-        jSeparator6 = new javax.swing.JToolBar.Separator();
-        btnLimpar = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
         btnExcluir = new javax.swing.JButton();
         jSeparator8 = new javax.swing.JToolBar.Separator();
@@ -77,10 +116,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         btnUltimo = new javax.swing.JButton();
         jSeparator11 = new javax.swing.JToolBar.Separator();
         lblCidade = new javax.swing.JLabel();
-        lblCidade1 = new javax.swing.JLabel();
-        cbxEstado = new javax.swing.JComboBox();
-        txtCodigo = new javax.swing.JTextField();
-        lblCodigo = new javax.swing.JLabel();
         cbxCidade = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -170,9 +205,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         lblTelefone.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblTelefone.setText("Telefone:");
 
-        lblCelular.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblCelular.setText("Celular:");
-
         lblCNPJ.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblCNPJ.setText("CNPJ:");
 
@@ -191,8 +223,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         txtCEP.setPreferredSize(new java.awt.Dimension(100, 20));
 
         txtTelefone.setPreferredSize(new java.awt.Dimension(100, 20));
-
-        txtCelular.setPreferredSize(new java.awt.Dimension(100, 20));
 
         txtCNPJ.setPreferredSize(new java.awt.Dimension(100, 20));
 
@@ -221,6 +251,11 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnPrimeiroMouseExited(evt);
+            }
+        });
+        btnPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrimeiroActionPerformed(evt);
             }
         });
         jToolBar1.add(btnPrimeiro);
@@ -331,29 +366,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnEditar);
-        jToolBar1.add(jSeparator6);
-
-        btnLimpar.setBackground(new java.awt.Color(0, 28, 119));
-        btnLimpar.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Limpar.png"))); // NOI18N
-        btnLimpar.setText("LIMPAR");
-        btnLimpar.setBorder(null);
-        btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLimpar.setFocusable(false);
-        btnLimpar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLimpar.setMaximumSize(new java.awt.Dimension(70, 60));
-        btnLimpar.setPreferredSize(new java.awt.Dimension(70, 70));
-        btnLimpar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLimparMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLimparMouseExited(evt);
-            }
-        });
-        jToolBar1.add(btnLimpar);
         jToolBar1.add(jSeparator7);
 
         btnExcluir.setBackground(new java.awt.Color(0, 28, 119));
@@ -402,6 +414,11 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnPesquisarMouseExited(evt);
+            }
+        });
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
             }
         });
         jToolBar1.add(btnPesquisar);
@@ -472,20 +489,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         lblCidade.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblCidade.setText("Cidade:");
 
-        lblCidade1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblCidade1.setText("Estado:");
-
-        cbxEstado.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SP", "MG" }));
-        cbxEstado.setBorder(null);
-
-        txtCodigo.setEditable(false);
-        txtCodigo.setFocusable(false);
-        txtCodigo.setPreferredSize(new java.awt.Dimension(250, 20));
-
-        lblCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblCodigo.setText("Codigo:");
-
         cbxCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha uma cidade...", " " }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -501,24 +504,17 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCNPJ)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblNomeFantasia)
-                                .addComponent(lblRazao, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblEndereco, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblBairro, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblCEP, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblTelefone, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblCelular, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(59, 59, 59)
-                                    .addComponent(lblCidade)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNomeFantasia)
+                            .addComponent(lblRazao, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblEndereco, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblBairro, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCEP, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblTelefone, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblCodigo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(59, 59, 59)
+                                .addComponent(lblCidade)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -528,29 +524,33 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
                             .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbxCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(77, 77, 77)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNumero)
-                            .addComponent(lblCidade1))
+                        .addGap(593, 593, 593))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(lblCNPJ)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(379, 379, 379))))
+                        .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblNumero)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(756, 756, 756))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BarraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigo)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(lblCNPJ)
+                    .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRazao)
                     .addComponent(txtRazao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -561,22 +561,22 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEndereco)
-                    .addComponent(lblNumero)
-                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBairro)
                     .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNumero)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCEP)
                     .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCidade)
-                    .addComponent(lblCidade1)
-                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -586,15 +586,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefone)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCelular)
-                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCNPJ)
-                    .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addComponent(barraNavegacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -607,7 +599,10 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -655,9 +650,9 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         txtNumero.setEditable(true);
         txtEmail.setEditable(true);
         txtTelefone.setEditable(true);
-        txtCelular.setEditable(true);
+       
         txtCNPJ.setEditable(true);
-        cbxEstado.setEnabled(true);
+       
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnGravarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGravarMouseEntered
@@ -675,14 +670,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
         btnEditar.setBorder(null);
     }//GEN-LAST:event_btnEditarMouseExited
-
-    private void btnLimparMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparMouseEntered
-        btnLimpar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    }//GEN-LAST:event_btnLimparMouseEntered
-
-    private void btnLimparMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparMouseExited
-        btnLimpar.setBorder(null);
-    }//GEN-LAST:event_btnLimparMouseExited
 
     private void btnExcluirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluirMouseEntered
         btnExcluir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -717,16 +704,124 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUltimoMouseExited
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
-        // TODO add your handling code here:
+        try {
+            centrodis.setCnpj(txtCNPJ.getText());
+            centrodis.setNomeFantasia(txtNomeFantasia.getText());
+            centrodis.setRazaosocial(txtRazao.getText());
+            centrodis.setEmailTransp(txtEmail.getText());
+            centrodis.setRuaTransp(txtEndereco.getText());
+            centrodis.setNumeroTransp(txtNumero.getText());
+            centrodis.setBairroTransp(txtBairro.getText());
+            centrodis.setCepTransp(Integer.parseInt(txtCEP.getText()));
+            centrodis.setFone(txtTelefone.getText());
+            String cidade = (String) cbxCidade.getSelectedItem();
+            String sql = "SELECT id FROM cidade WHERE nome = ?;";
+            banco.conn = banco.getConection();
+            banco.pstm = banco.conn.prepareStatement(sql);
+            banco.pstm.setString(1, cidade);
+            ResultSet rs = banco.pstm.executeQuery();
+            if (rs.next()) {
+                centrodis.setCidade(rs.getInt("id"));
+            }
+            daocentro.insereEmpresa(centrodis);
+            limpar();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao trazer cidade !!");
+        }
     }//GEN-LAST:event_btnGravarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+         int x = JOptionPane.showConfirmDialog(this, "Deseja excluir o registro ?","SAIDA",JOptionPane.YES_NO_OPTION);
+        switch (x) {
+            case 0:
+                try {
+                    if (txtCNPJ.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Nada para remover !");
+                    } else {
+                        centrodis.setCnpj((txtCNPJ.getText()));
+                        daocentro.deletarEmp(centrodis);
+                        limpar();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Impossivel Remover !! ");
+                }
+                break;
+
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        try {
+            if (txtCNPJ.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Nada para atualizar !");
+            } else {
+            centrodis.setCnpj(txtCNPJ.getText());
+            centrodis.setNomeFantasia(txtNomeFantasia.getText());
+            centrodis.setRazaosocial(txtRazao.getText());
+            centrodis.setEmailTransp(txtEmail.getText());
+            centrodis.setRuaTransp(txtEndereco.getText());
+            centrodis.setNumeroTransp(txtNumero.getText());
+            centrodis.setBairroTransp(txtBairro.getText());
+            centrodis.setCepTransp(Integer.parseInt(txtCEP.getText()));
+            centrodis.setFone(txtTelefone.getText());
+            String cidade = (String) cbxCidade.getSelectedItem();
+            String sql = "SELECT id FROM cidade WHERE nome = ?;";
+            banco.conn = banco.getConection();
+            banco.pstm = banco.conn.prepareStatement(sql);
+            banco.pstm.setString(1, cidade);
+            ResultSet rs = banco.pstm.executeQuery();
+            if (rs.next()) {
+                centrodis.setCidade(rs.getInt("id"));
+            }
+            daocentro.atualizarEmp(centrodis);
+            limpar();
+            
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao trazer cidade !!");
+        } 
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        this.dispose();
+        PesquisaEmpresa  emp= new PesquisaEmpresa();
+        emp.setVisible(true);
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
+        btnProximo.setEnabled(true);
+        btnAnterior.setEnabled(false);
+
+        try {
+            String sql = "SELECT * FROM centro_dist";
+            banco.executaSQL(sql);
+            banco.rs.first();
+           // cbxCidade.removeAllItems();
+            txtCNPJ.setText(banco.rs.getString("cnpj"));
+            txtRazao.setText(banco.rs.getString("razão_Social"));
+            txtNomeFantasia.setText(banco.rs.getString("nome_Fantasia"));
+            txtEmail.setText(banco.rs.getString("email_Transp"));
+            txtEndereco.setText(String.valueOf(banco.rs.getString("rua_Transp")));
+            txtNumero.setText(banco.rs.getString("numero_Transp"));
+            txtBairro.setText(banco.rs.getString("bairro_Transp"));
+             txtCEP.setText(String.valueOf(banco.rs.getInt("cep_Transp")));
+            txtTelefone.setText(banco.rs.getString("fone"));
+            // tratando a chave estrangeira de cidade
+            String sql1 = "SELECT nome FROM cidade WHERE id = ?";
+            int cidade = (banco.rs.getInt("fk_Id_Cidade"));
+            String x = daocentro.chaveEstrangeira(sql1, cidade);
+            cbxCidade.setSelectedItem(x);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -770,7 +865,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnGravar;
-    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnPrimeiro;
@@ -779,7 +873,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     private javax.swing.JButton btnSair1;
     private javax.swing.JButton btnUltimo;
     private javax.swing.JComboBox cbxCidade;
-    private javax.swing.JComboBox cbxEstado;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;
@@ -788,7 +881,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
-    private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
@@ -796,10 +888,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCNPJ;
-    private javax.swing.JLabel lblCelular;
     private javax.swing.JLabel lblCidade;
-    private javax.swing.JLabel lblCidade1;
-    private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblNomeFantasia;
@@ -810,8 +899,6 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCEP;
     private javax.swing.JFormattedTextField txtCNPJ;
-    private javax.swing.JFormattedTextField txtCelular;
-    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNomeFantasia;

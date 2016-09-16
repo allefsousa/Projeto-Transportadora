@@ -6,7 +6,7 @@ package Model;
  * @author Allef
  */
 public class Empresa {
-    private int Cnpj;
+    private String Cnpj;
     private String NomeFantasia;
     private String RazaoSocial;
     private int TelComercial;
@@ -18,16 +18,16 @@ public class Empresa {
     //Campo de Seleção
     private int Cidade;
     //Campo de Seleção
-    private int Estado;
+    private String Bairro;
 
     public Empresa() {
     }
 
-    public int getCnpj() {
+    public String getCnpj() {
         return Cnpj;
     }
 
-    public void setCnpj(int Cnpj) {
+    public void setCnpj(String Cnpj) {
         this.Cnpj = Cnpj;
     }
 
@@ -103,12 +103,12 @@ public class Empresa {
         this.Cidade = Cidade;
     }
 
-    public int getEstado() {
-        return Estado;
+    public String getBairro() {
+        return Bairro;
     }
 
-    public void setEstado(int Estado) {
-        this.Estado = Estado;
+    public void setBairro(String Baiiro) {
+        this.Bairro = Bairro;
     }
     
 }
