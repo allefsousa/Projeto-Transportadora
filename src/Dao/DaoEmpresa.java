@@ -104,28 +104,30 @@ public class DaoEmpresa {
 
         try {
             ConnEmpresa.conn = ConnEmpresa.getConection();
-            String sql = "UPDATE centro_dist SET nome_Fantasia = ?, email_Transp = ?, email_Transp = ?, "
-                    + " rua_Transp = ?, numero_Transp = ?,bairro_Transp = ?"
-                    + ",cep_Transp = ?, fone = ? ,fk_Id_Cidade = ?"
-                    + "WHERE cnpj=? ";
+            String sql = "UPDATE centro_dist SET cnpj= ?,  razão_Social = ?,nome_Fantasia = ?, email_Transp = ?"
+                    + ", rua_Transp = ?, numero_Transp = ?,bairro_Transp = ?"
+                    + ",cep_Transp = ?, fone = ? ,fk_Id_Cidade = ?  where cnpj = ? ;";
             
-           PreparedStatement comando = ConnEmpresa.conn.prepareStatement(sql);
+           ConnEmpresa.pstm = ConnEmpresa.conn.prepareStatement(sql);
             // formatar a query 
-            
-            comando.setString(1, centroDistribuicao.getRazaosocial());
-            comando.setString(2, centroDistribuicao.getNomeFantasia());
+            ConnEmpresa.pstm.setString(1,centroDistribuicao.getCnpj());
+            ConnEmpresa.pstm.setString(2, centroDistribuicao.getRazaosocial());
+            ConnEmpresa.pstm.setString(3, centroDistribuicao.getNomeFantasia());
+            JOptionPane.showMessageDialog(null, "Aqui "+centroDistribuicao.getRazaosocial());
            
-            comando.setString(3, centroDistribuicao.getEmailTransp());
-            comando.setString(4, centroDistribuicao.getRuaTransp());
-            comando.setString(5, centroDistribuicao.getNumeroTransp());
-            comando.setString(6, centroDistribuicao.getBairroTransp());
-            comando.setInt(7, centroDistribuicao.getCepTransp());
-            comando.setString(8, centroDistribuicao.getFone());
-            comando.setInt(9, centroDistribuicao.getCidade());
-           comando.setString(10, centroDistribuicao.getCnpj());
+            ConnEmpresa.pstm.setString(4, centroDistribuicao.getEmailTransp());
+            ConnEmpresa.pstm.setString(5, centroDistribuicao.getRuaTransp());
+            ConnEmpresa.pstm.setString(6, centroDistribuicao.getNumeroTransp());
+            ConnEmpresa.pstm.setString(7, centroDistribuicao.getBairroTransp());
+            ConnEmpresa.pstm.setInt(8, centroDistribuicao.getCepTransp());
+            ConnEmpresa.pstm.setString(9, centroDistribuicao.getFone());
+            ConnEmpresa.pstm.setInt(10, centroDistribuicao.getCidade());
+           ConnEmpresa.pstm.setString(11,centroDistribuicao.getCnpj());
+           JOptionPane.showMessageDialog(null, centroDistribuicao.getCnpj());
+           
             //executa a query
             ConnEmpresa.pstm.execute();
-            ConnEmpresa.conn.close();
+           // ConnEmpresa.conn.close();
             JOptionPane.showMessageDialog(null, "Empresa atualizada com sucesso !");
             return true;
         } catch (Exception e) {
