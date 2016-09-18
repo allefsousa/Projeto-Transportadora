@@ -170,7 +170,7 @@ public class DaoEmpresa {
             ConnEmpresa.conn = ConnEmpresa.getConection();
             //  JOptionPane.showMessageDialog(null, ""+ codigo);
             DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
-            String sql = ("SELECT cnpj,razao_Social, nome_Fantasia, email_Transp, rua_Transp, numero_Transp, bairro_Transp, cep_Transp, fone FROM centro_dist WHERE cnpj= ?;");
+            String sql = ("SELECT cnpj,razão_Social, nome_Fantasia, email_Transp, rua_Transp, numero_Transp, bairro_Transp, cep_Transp, fone, fk_Id_Cidade FROM centro_dist WHERE cnpj= ?;");
             ConnEmpresa.pstm = ConnEmpresa.conn.prepareStatement(sql);
             ConnEmpresa.pstm.setString(1, codigo);
             // recebendo os resultados do select  e executando a tarefa 

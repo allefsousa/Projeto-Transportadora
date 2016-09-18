@@ -5,19 +5,88 @@
  */
 package View;
 
+import Dao.ConnBanco;
+import Dao.DaoEmpresa;
+import Funcionalidades.ModeloTabela;
+import Model.CentroDistribuicao;
+import Model.Funcionario;
+import java.awt.Color;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author Allef
  */
-public class PesquisaEmpresa extends javax.swing.JFrame {
+public final class PesquisaEmpresa extends javax.swing.JFrame {
 
     /**
      * Creates new form PesquisaEmpresa
      */
+    CadastrarEmpresa EnviandoObjeto = new CadastrarEmpresa();
+    Dao.DaoEmpresa daoemp = new DaoEmpresa();
+    ConnBanco connBanco = new ConnBanco();
     public PesquisaEmpresa() {
         setExtendedState(MAXIMIZED_BOTH);
         initComponents();
+        connBanco.getConection();
         setLocationRelativeTo(this);
+        preencherTabela("SELECT * FROM centro_dist order by cnpj;");
+    }
+     public void preencherTabela(String SQL) {
+        int cidade;
+        String cid = null,sql;
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"Cnpj", "Razão Social", "Nome Fantasia", "Email", "Endereço","Numero", "Bairro", "Cep", "Telefone", "Cidade Unidade"};
+     
+        connBanco.executaSQL(SQL);
+        // pegando o primeiro registro 
+        try {
+            connBanco.rs.first();
+
+            // pegando os valores e formatando para preecher a tabela  
+            do {
+                 cidade = connBanco.rs.getInt("fk_Id_Cidade");
+                 sql = "SELECT nome FROM cidade where id = ?";
+                cid=daoemp.chaveEstrangeira(sql, cidade); 
+                dados.add(new Object[]{connBanco.rs.getString("cnpj"), connBanco.rs.getString("razão_Social"),connBanco.rs.getString("nome_Fantasia"),connBanco.rs.getString("email_Transp"),connBanco.rs.getString("rua_Transp"),connBanco.rs.getString("numero_Transp"), connBanco.rs.getString("bairro_Transp"),connBanco.rs.getInt("cep_Transp"),connBanco.rs.getString("fone"),cid });
+            } while (connBanco.rs.next());
+           
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        // colocando os devidos valores em suas colunas 
+        ModeloTabela modelo = new ModeloTabela(dados, colunas);
+        tabelaEmpresa.setModel(modelo);
+        tabelaEmpresa.getColumnModel().getColumn(0).setPreferredWidth(120);
+        tabelaEmpresa.getColumnModel().getColumn(0).setResizable(true);
+        tabelaEmpresa.getColumnModel().getColumn(1).setPreferredWidth(240);
+        tabelaEmpresa.setSelectionBackground(Color.lightGray);
+        tabelaEmpresa.setSelectionForeground(Color.BLUE);
+
+        tabelaEmpresa.getColumnModel().getColumn(1).setResizable(true);
+        tabelaEmpresa.getColumnModel().getColumn(2).setPreferredWidth(160);
+        tabelaEmpresa.getColumnModel().getColumn(2).setResizable(true);
+        tabelaEmpresa.getColumnModel().getColumn(3).setPreferredWidth(140);
+        tabelaEmpresa.getColumnModel().getColumn(3).setResizable(true);
+        tabelaEmpresa.getColumnModel().getColumn(4).setPreferredWidth(140);
+        tabelaEmpresa.getColumnModel().getColumn(4).setResizable(false);
+        tabelaEmpresa.getColumnModel().getColumn(5).setPreferredWidth(90);
+        tabelaEmpresa.getColumnModel().getColumn(5).setResizable(true);
+        tabelaEmpresa.getColumnModel().getColumn(6).setPreferredWidth(120);
+        tabelaEmpresa.getColumnModel().getColumn(6).setResizable(true);
+        tabelaEmpresa.getColumnModel().getColumn(7).setPreferredWidth(100);
+        tabelaEmpresa.getColumnModel().getColumn(7).setResizable(true);
+        tabelaEmpresa.getColumnModel().getColumn(8).setPreferredWidth(120);
+        tabelaEmpresa.getColumnModel().getColumn(8).setResizable(true);
+        tabelaEmpresa.getColumnModel().getColumn(9).setPreferredWidth(110);
+        tabelaEmpresa.getColumnModel().getColumn(9).setResizable(true);
+       
+        tabelaEmpresa.setAutoResizeMode(tabelaEmpresa.AUTO_RESIZE_OFF);
+        tabelaEmpresa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
     }
 
     /**
@@ -64,6 +133,11 @@ public class PesquisaEmpresa extends javax.swing.JFrame {
 
             }
         ));
+        tabelaEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaEmpresaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaEmpresa);
 
         BarraMenu.setBackground(new java.awt.Color(0, 28, 119));
@@ -226,12 +300,33 @@ public class PesquisaEmpresa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        
         this.dispose();
+       
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair1ActionPerformed
         this.setExtendedState(Menu.ICONIFIED);
     }//GEN-LAST:event_btnSair1ActionPerformed
+
+    private void tabelaEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaEmpresaMouseClicked
+         int linha = tabelaEmpresa.getSelectedRow();
+        String codigo = (tabelaEmpresa.getValueAt(linha, 0).toString());
+        CentroDistribuicao centro;
+        centro = daoemp.getEmp(codigo);
+
+        if (EnviandoObjeto == null) {
+            EnviandoObjeto = new CadastrarEmpresa();
+            EnviandoObjeto.setVisible(true);
+            EnviandoObjeto.recebendo(centro);
+            this.setVisible(false);
+        } else {
+            EnviandoObjeto.setVisible(true);
+            EnviandoObjeto.setState(PesquisaEmpresa.NORMAL);
+            EnviandoObjeto.recebendo(centro);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_tabelaEmpresaMouseClicked
 
     /**
      * @param args the command line arguments

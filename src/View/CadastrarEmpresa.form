@@ -83,7 +83,7 @@
                               <Component id="txtEmail" max="32767" attributes="0"/>
                               <Component id="txtCEP" min="-2" max="-2" attributes="0"/>
                               <Component id="txtTelefone" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbxCidade" min="-2" pref="250" max="-2" attributes="0"/>
+                              <Component id="cbxCidade" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lblNumero" min="-2" max="-2" attributes="0"/>
@@ -816,12 +816,14 @@
         <Component class="javax.swing.JComboBox" name="cbxCidade">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Escolha uma cidade..."/>
-                <StringItem index="1" value=" "/>
+              <StringArray count="1">
+                <StringItem index="0" value="Selecione uma Cidade .."/>
               </StringArray>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

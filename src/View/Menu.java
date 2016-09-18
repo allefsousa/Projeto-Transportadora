@@ -197,8 +197,8 @@ public class Menu extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
         Jdata = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         Jhora = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1210,7 +1210,7 @@ public class Menu extends javax.swing.JFrame {
 
         lblUnidade1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblUnidade1.setForeground(new java.awt.Color(255, 255, 255));
-        lblUnidade1.setText("LOJA:");
+        lblUnidade1.setText("UNIDADE:");
         lblUnidade1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUnidade1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1240,7 +1240,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(lblUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1269,6 +1269,11 @@ public class Menu extends javax.swing.JFrame {
         Jdata.setText("dd/mm/aaaa");
         jToolBar1.add(Jdata);
 
+        Jhora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        Jhora.setForeground(new java.awt.Color(255, 255, 255));
+        Jhora.setText(" ");
+        jToolBar1.add(Jhora);
+
         jButton2.setBackground(new java.awt.Color(0, 28, 119));
         jButton2.setBorder(null);
         jButton2.setEnabled(false);
@@ -1277,11 +1282,6 @@ public class Menu extends javax.swing.JFrame {
         jButton2.setMaximumSize(new java.awt.Dimension(10, 10));
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton2);
-
-        Jhora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        Jhora.setForeground(new java.awt.Color(255, 255, 255));
-        Jhora.setText("00:00:00");
-        jToolBar1.add(Jhora);
 
         jButton3.setBackground(new java.awt.Color(0, 28, 119));
         jButton3.setBorder(null);
@@ -1395,7 +1395,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCalculadoraActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        this.dispose();
+        this.setVisible(false);
         new Login().setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
@@ -1427,7 +1427,7 @@ public class Menu extends javax.swing.JFrame {
         if (aux==1){
             ViewFuncionario.recebendoFilial(lblUnidade.getText());
             ViewFuncionario.setVisible(true);
-            this.setVisible(false);}
+           }
             
             if (aux==3){
             new EntregaPedido().setVisible(true);

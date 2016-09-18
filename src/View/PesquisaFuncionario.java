@@ -8,6 +8,7 @@ package View;
 import Dao.ConnBanco;
 import Dao.DaoFuncionario;
 import Funcionalidades.ModeloTabela;
+import Model.Filial;
 import Model.Funcionario;
 import com.sun.java.swing.plaf.windows.resources.windows;
 import com.sun.org.apache.xpath.internal.functions.FuncBoolean;
@@ -17,6 +18,8 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -35,94 +38,133 @@ public class PesquisaFuncionario extends javax.swing.JFrame {
     Model.Funcionario func = new Funcionario();
     DaoFuncionario daoFunc = new DaoFuncionario();
     
-
+   
     ConnBanco connBanco = new ConnBanco();
+    ConnBanco conn = new ConnBanco();
     Dao.DaoFuncionario daofunc = new DaoFuncionario();
-
+    Filial sessao = Filial.getInstance();
+   
+    
     public PesquisaFuncionario() {
+        // sessao para receber a cidade de Login
+         
         setExtendedState(MAXIMIZED_BOTH);
         initComponents();
-        connBanco.getConection();
-        preencherTabela("SELECT * FROM funcionario order by id;");
+        //connBanco.getConection();
+        //conn.getConection();
+        preencherTabela("SELECT * FROM funcionario where fk_Cnpj_Centro_Dist = ?;");
+      
+      
     }
 
-    public void preencherTabela(String SQL) {
-        int cidade;
-                Long unidade;
-        String cid = null,uni,sql1,sql;
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"N° Regist", "Nome Completo", "Cpf", "Rg", "Data Nasc", "Cargo", "fone", "Cep", "Endereço", "Numero", "Bairro", "Complemento", "Cidade", "Estado", "Data Regist", "Unidade"};
-        // formatando a data que sera mostrada na tabela 
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        connBanco.executaSQL(SQL);
-        // pegando o primeiro registro 
-        try {
-            connBanco.rs.first();
-
-            // pegando os valores e formatando para preecher a tabela  
-            do {
-                 cidade = connBanco.rs.getInt("fk_Cidade_Func");
-                 sql = "SELECT nome FROM cidade where id = ?";
-                cid=daoFunc.chaveEstrangeira(sql, cidade);
-                unidade = connBanco.rs.getLong("fk_Cnpj_Centro_Dist");
-                sql1 = "SELECT nome_Fantasia from centro_dist where cnpj =?";
-                uni = daoFunc.chaveEstrangeiraLong(sql1, unidade);
-                
-                
-                dados.add(new Object[]{connBanco.rs.getInt("id"), connBanco.rs.getString("nome"), connBanco.rs.getString("cpf"), connBanco.rs.getInt("rg"),
-                    formatter.format(connBanco.rs.getDate("dataNasc")), connBanco.rs.getString("cargo"), connBanco.rs.getString("fone"), connBanco.rs.getInt("cep"),
-                    connBanco.rs.getString("rua"), connBanco.rs.getInt("numero"), connBanco.rs.getString("bairro"), connBanco.rs.getString("complemento"), 
-                   cid, connBanco.rs.getString("estado"), formatter.format(connBanco.rs.getDate("dataRegistro")), uni});
-            } while (connBanco.rs.next());
+    public final void preencherTabela(String sql) {
+      
            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        // colocando os devidos valores em suas colunas 
-        ModeloTabela modelo = new ModeloTabela(dados, colunas);
-        tabelaFuncionario.setModel(modelo);
-        tabelaFuncionario.getColumnModel().getColumn(0).setPreferredWidth(80);
-        tabelaFuncionario.getColumnModel().getColumn(0).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(1).setPreferredWidth(160);
-        tabelaFuncionario.setSelectionBackground(Color.lightGray);
-        tabelaFuncionario.setSelectionForeground(Color.BLUE);
-
-        tabelaFuncionario.getColumnModel().getColumn(1).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(2).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(2).setResizable(false);
-        tabelaFuncionario.getColumnModel().getColumn(3).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(3).setResizable(false);
-        tabelaFuncionario.getColumnModel().getColumn(4).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(4).setResizable(false);
-        tabelaFuncionario.getColumnModel().getColumn(5).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(5).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(6).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(6).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(7).setPreferredWidth(100);
-        tabelaFuncionario.getColumnModel().getColumn(7).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(8).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(8).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(9).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(9).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(10).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(10).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(11).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(11).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(12).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(12).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(13).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(13).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(14).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(14).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(15).setPreferredWidth(120);
-        tabelaFuncionario.getColumnModel().getColumn(15).setResizable(true);
-       /* tabelaFuncionario.getColumnModel().getColumn(16).setPreferredWidth(100);
-        tabelaFuncionario.getColumnModel().getColumn(16).setResizable(true);
-        tabelaFuncionario.getColumnModel().getColumn(17).setPreferredWidth(100);
-        tabelaFuncionario.getColumnModel().getColumn(17).setResizable(true);
-        tabelaFuncionario.getTableHeader().setReorderingAllowed(false);*/
-        tabelaFuncionario.setAutoResizeMode(tabelaFuncionario.AUTO_RESIZE_OFF);
-        tabelaFuncionario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            
+                
+                ResultSet res = null ;
+                int cidade;
+                Long unidade;
+                String cid = null,uni = "",sql1,result;
+                ArrayList dados = new ArrayList();
+                String[] colunas = new String[]{"N° Regist", "Nome Completo", "Cpf", "Rg", "Data Nasc", "Cargo", "fone", "Cep", "Endereço", "Numero", "Bairro", "Complemento", "Cidade", "Estado", "Data Regist", "Unidade"};
+                // formatando a data que sera mostrada na tabela
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                 try {
+                String sql2 = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
+                conn.conn = conn.getConection();
+                conn.pstm = conn.conn.prepareStatement(sql2);
+                result = sessao.fili;
+                conn.pstm.setString(1, result);
+                ResultSet rs1 = conn.pstm.executeQuery();
+                
+                if (rs1.next()) {
+                 uni=(rs1.getString("cnpj"));
+                }
+               
+                
+                connBanco.conn = connBanco.getConection();
+                connBanco.pstm = connBanco.conn.prepareStatement(sql);
+                connBanco.pstm.setString(1, uni);
+                     res = connBanco.pstm.executeQuery();
+                } catch (SQLException ex) {
+             
+            }
+                // pegando o primeiro registro
+                try {
+                    
+                    res.first();
+                    
+                    // pegando os valores e formatando para preecher a tabela
+                    do {
+                        cidade = res.getInt("fk_Cidade_Func");
+                        sql = "SELECT nome FROM cidade where id = ?";
+                        cid=daoFunc.chaveEstrangeira(sql, cidade);
+                        unidade = res.getLong("fk_Cnpj_Centro_Dist");
+                        sql1 = "SELECT nome_Fantasia from centro_dist where cnpj =?";
+                        uni = daoFunc.chaveEstrangeiraLong(sql1, unidade);
+                        
+                        
+                        dados.add(new Object[]{res.getInt("id"), res.getString("nome"), res.getString("cpf"), res.getInt("rg"),
+                            formatter.format(res.getDate("dataNasc")), res.getString("cargo"), res.getString("fone"), res.getInt("cep"),
+                            res.getString("rua"), res.getInt("numero"), res.getString("bairro"), res.getString("complemento"),
+                            cid, res.getString("estado"), formatter.format(res.getDate("dataRegistro")), uni});
+                    } while (res.next());
+                    
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+                // colocando os devidos valores em suas colunas
+                ModeloTabela modelo = new ModeloTabela(dados, colunas);
+                tabelaFuncionario.setModel(modelo);
+                tabelaFuncionario.getColumnModel().getColumn(0).setPreferredWidth(80);
+                tabelaFuncionario.getColumnModel().getColumn(0).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(1).setPreferredWidth(160);
+                tabelaFuncionario.setSelectionBackground(Color.lightGray);
+                tabelaFuncionario.setSelectionForeground(Color.BLUE);
+                
+                tabelaFuncionario.getColumnModel().getColumn(1).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(2).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(2).setResizable(false);
+                tabelaFuncionario.getColumnModel().getColumn(3).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(3).setResizable(false);
+                tabelaFuncionario.getColumnModel().getColumn(4).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(4).setResizable(false);
+                tabelaFuncionario.getColumnModel().getColumn(5).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(5).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(6).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(6).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(7).setPreferredWidth(100);
+                tabelaFuncionario.getColumnModel().getColumn(7).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(8).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(8).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(9).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(9).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(10).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(10).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(11).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(11).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(12).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(12).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(13).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(13).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(14).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(14).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(15).setPreferredWidth(120);
+                tabelaFuncionario.getColumnModel().getColumn(15).setResizable(true);
+                /* tabelaFuncionario.getColumnModel().getColumn(16).setPreferredWidth(100);
+                tabelaFuncionario.getColumnModel().getColumn(16).setResizable(true);
+                tabelaFuncionario.getColumnModel().getColumn(17).setPreferredWidth(100);
+                tabelaFuncionario.getColumnModel().getColumn(17).setResizable(true);
+                tabelaFuncionario.getTableHeader().setReorderingAllowed(false);*/
+                tabelaFuncionario.setAutoResizeMode(tabelaFuncionario.AUTO_RESIZE_OFF);
+                tabelaFuncionario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                
+                
+                
+            
+            
+    
 
     }
     @SuppressWarnings("unchecked")

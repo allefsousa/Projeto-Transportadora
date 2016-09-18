@@ -8,6 +8,8 @@ package View;
 import Dao.ConnBanco;
 import Dao.DaoEmpresa;
 import Model.CentroDistribuicao;
+import Model.Filial;
+import Model.Funcionario;
 import com.sun.media.sound.ModelAbstractChannelMixer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,33 +26,47 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     /**
      * Creates new form CadastrarEmpresa
      */
+    Filial sessao = Filial.getInstance();
     CentroDistribuicao centrodis = new CentroDistribuicao();
     Dao.DaoEmpresa daocentro = new DaoEmpresa();
     Dao.ConnBanco banco = new ConnBanco();
+    String pegando_filial;
     public CadastrarEmpresa() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         String sql = ("select nome from cidade;");
-       
-       
 
         try {
 
             banco.conn = banco.getConection();
             banco.pstm = banco.conn.prepareStatement(sql);
             ResultSet rscidade = banco.executaSQLRetorno(sql);
-         
-            
+
             while (rscidade.next()) {
-                cbxCidade.addItem(rscidade.getString(1));
+                cbxCidade.addItem(rscidade.getString("nome"));
             }
-            
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Trazer cidades" + ex);
         }
     }
-    public void limpar(){
+
+    public void recebendo(CentroDistribuicao centro) {
+
+        txtCNPJ.setText((centro.getCnpj()));
+        txtRazao.setText(centro.getRazaosocial());
+        txtNomeFantasia.setText(centro.getNomeFantasia());
+        txtNumero.setText(centro.getNumeroTransp());
+        txtEndereco.setText(centro.getRuaTransp());
+        txtBairro.setText(centro.getBairroTransp());
+        txtCEP.setText(String.valueOf(centro.getCepTransp()));
+        cbxCidade.setSelectedIndex(centro.getCidade());
+        txtEmail.setText((centro.getEmailTransp()));
+        txtTelefone.setText(centro.getFone());
+
+    }
+
+    public void limpar() {
         txtCNPJ.requestFocus();
         txtCEP.setText("");
         txtCNPJ.setText("");
@@ -63,6 +79,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         txtNumero.setText("");
         txtTelefone.setText("");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,7 +134,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         btnUltimo = new javax.swing.JButton();
         jSeparator11 = new javax.swing.JToolBar.Separator();
         lblCidade = new javax.swing.JLabel();
-        cbxCidade = new javax.swing.JComboBox();
+        cbxCidade = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("CadastroEmpresa"); // NOI18N
@@ -514,7 +531,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         lblCidade.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblCidade.setText("Cidade:");
 
-        cbxCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha uma cidade...", " " }));
+        cbxCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma Cidade .." }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -550,7 +567,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
                             .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(lblNumero)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -627,6 +644,12 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+       pegando_filial  = sessao.fili;
+        
+        Menu men = new Menu();
+        
+        men.setVisible(true);
+        men.Recebendoctd(pegando_filial);
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
@@ -660,7 +683,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         limpar();
-       
+
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnGravarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGravarMouseEntered
@@ -739,7 +762,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGravarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-         int x = JOptionPane.showConfirmDialog(this, "Deseja excluir o registro ?","SAIDA",JOptionPane.YES_NO_OPTION);
+        int x = JOptionPane.showConfirmDialog(this, "Deseja excluir o registro ?", "SAIDA", JOptionPane.YES_NO_OPTION);
         switch (x) {
             case 0:
                 try {
@@ -761,12 +784,12 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
             case 2:
                 break;
         }
-        
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         try {
-          
+
             centrodis.setCnpj(txtCNPJ.getText());
             centrodis.setNomeFantasia(txtNomeFantasia.getText());
             centrodis.setRazaosocial(txtRazao.getText());
@@ -788,17 +811,18 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, centrodis.toString());
             daocentro.atualizarEmp(centrodis);
             limpar();
-            
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao trazer cidade !!");
-        } 
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        this.dispose();
-        PesquisaEmpresa  emp= new PesquisaEmpresa();
-        emp.setVisible(true);
+       
+        new PesquisaEmpresa().setVisible(true);
+        
+
+
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
@@ -809,7 +833,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
             String sql = "SELECT * FROM centro_dist";
             banco.executaSQL(sql);
             banco.rs.first();
-           // cbxCidade.removeAllItems();
+            // cbxCidade.removeAllItems();
             txtCNPJ.setText(banco.rs.getString("cnpj"));
             txtRazao.setText(banco.rs.getString("razão_Social"));
             txtNomeFantasia.setText(banco.rs.getString("nome_Fantasia"));
@@ -817,7 +841,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
             txtEndereco.setText(String.valueOf(banco.rs.getString("rua_Transp")));
             txtNumero.setText(banco.rs.getString("numero_Transp"));
             txtBairro.setText(banco.rs.getString("bairro_Transp"));
-             txtCEP.setText(String.valueOf(banco.rs.getInt("cep_Transp")));
+            txtCEP.setText(String.valueOf(banco.rs.getInt("cep_Transp")));
             txtTelefone.setText(banco.rs.getString("fone"));
             // tratando a chave estrangeira de cidade
             String sql1 = "SELECT nome FROM cidade WHERE id = ?";
@@ -831,30 +855,29 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-       btnProximo.setEnabled(true);
+        btnProximo.setEnabled(true);
         try {
-             if (banco.rs.isFirst()) {
+            if (banco.rs.isFirst()) {
                 btnAnterior.setEnabled(false);
             } else {
-           
-            
-            banco.rs.previous();
-           // cbxCidade.removeAllItems();
-            txtCNPJ.setText(banco.rs.getString("cnpj"));
-            txtRazao.setText(banco.rs.getString("razão_Social"));
-            txtNomeFantasia.setText(banco.rs.getString("nome_Fantasia"));
-            txtEmail.setText(banco.rs.getString("email_Transp"));
-            txtEndereco.setText(String.valueOf(banco.rs.getString("rua_Transp")));
-            txtNumero.setText(banco.rs.getString("numero_Transp"));
-            txtBairro.setText(banco.rs.getString("bairro_Transp"));
-             txtCEP.setText(String.valueOf(banco.rs.getInt("cep_Transp")));
-            txtTelefone.setText(banco.rs.getString("fone"));
-            // tratando a chave estrangeira de cidade
-            String sql1 = "SELECT nome FROM cidade WHERE id = ?";
-            int cidade = (banco.rs.getInt("fk_Id_Cidade"));
-            String x = daocentro.chaveEstrangeira(sql1, cidade);
-            cbxCidade.setSelectedItem(x);
-             }
+
+                banco.rs.previous();
+                // cbxCidade.removeAllItems();
+                txtCNPJ.setText(banco.rs.getString("cnpj"));
+                txtRazao.setText(banco.rs.getString("razão_Social"));
+                txtNomeFantasia.setText(banco.rs.getString("nome_Fantasia"));
+                txtEmail.setText(banco.rs.getString("email_Transp"));
+                txtEndereco.setText(String.valueOf(banco.rs.getString("rua_Transp")));
+                txtNumero.setText(banco.rs.getString("numero_Transp"));
+                txtBairro.setText(banco.rs.getString("bairro_Transp"));
+                txtCEP.setText(String.valueOf(banco.rs.getInt("cep_Transp")));
+                txtTelefone.setText(banco.rs.getString("fone"));
+                // tratando a chave estrangeira de cidade
+                String sql1 = "SELECT nome FROM cidade WHERE id = ?";
+                int cidade = (banco.rs.getInt("fk_Id_Cidade"));
+                String x = daocentro.chaveEstrangeira(sql1, cidade);
+                cbxCidade.setSelectedItem(x);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
             e.printStackTrace();
@@ -862,28 +885,28 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
-      btnAnterior.setEnabled(true);
+        btnAnterior.setEnabled(true);
         try {
-           if (banco.rs.isLast()) {
+            if (banco.rs.isLast()) {
                 btnProximo.setEnabled(false);
             } else {
-            banco.rs.next();
-           // cbxCidade.removeAllItems();
-            txtCNPJ.setText(banco.rs.getString("cnpj"));
-            txtRazao.setText(banco.rs.getString("razão_Social"));
-            txtNomeFantasia.setText(banco.rs.getString("nome_Fantasia"));
-            txtEmail.setText(banco.rs.getString("email_Transp"));
-            txtEndereco.setText(String.valueOf(banco.rs.getString("rua_Transp")));
-            txtNumero.setText(banco.rs.getString("numero_Transp"));
-            txtBairro.setText(banco.rs.getString("bairro_Transp"));
-             txtCEP.setText(String.valueOf(banco.rs.getInt("cep_Transp")));
-            txtTelefone.setText(banco.rs.getString("fone"));
-            // tratando a chave estrangeira de cidade
-            String sql1 = "SELECT nome FROM cidade WHERE id = ?";
-            int cidade = (banco.rs.getInt("fk_Id_Cidade"));
-            String x = daocentro.chaveEstrangeira(sql1, cidade);
-            cbxCidade.setSelectedItem(x);
-           }
+                banco.rs.next();
+                // cbxCidade.removeAllItems();
+                txtCNPJ.setText(banco.rs.getString("cnpj"));
+                txtRazao.setText(banco.rs.getString("razão_Social"));
+                txtNomeFantasia.setText(banco.rs.getString("nome_Fantasia"));
+                txtEmail.setText(banco.rs.getString("email_Transp"));
+                txtEndereco.setText(String.valueOf(banco.rs.getString("rua_Transp")));
+                txtNumero.setText(banco.rs.getString("numero_Transp"));
+                txtBairro.setText(banco.rs.getString("bairro_Transp"));
+                txtCEP.setText(String.valueOf(banco.rs.getInt("cep_Transp")));
+                txtTelefone.setText(banco.rs.getString("fone"));
+                // tratando a chave estrangeira de cidade
+                String sql1 = "SELECT nome FROM cidade WHERE id = ?";
+                int cidade = (banco.rs.getInt("fk_Id_Cidade"));
+                String x = daocentro.chaveEstrangeira(sql1, cidade);
+                cbxCidade.setSelectedItem(x);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
             e.printStackTrace();
@@ -891,29 +914,29 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
-         btnProximo.setEnabled(false);
+        btnProximo.setEnabled(false);
         btnAnterior.setEnabled(true);
         try {
             if (banco.rs.isLast()) {
                 btnProximo.setEnabled(false);
             } else {
-          
-            banco.rs.last();
-           // cbxCidade.removeAllItems();
-            txtCNPJ.setText(banco.rs.getString("cnpj"));
-            txtRazao.setText(banco.rs.getString("razão_Social"));
-            txtNomeFantasia.setText(banco.rs.getString("nome_Fantasia"));
-            txtEmail.setText(banco.rs.getString("email_Transp"));
-            txtEndereco.setText(String.valueOf(banco.rs.getString("rua_Transp")));
-            txtNumero.setText(banco.rs.getString("numero_Transp"));
-            txtBairro.setText(banco.rs.getString("bairro_Transp"));
-             txtCEP.setText(String.valueOf(banco.rs.getInt("cep_Transp")));
-            txtTelefone.setText(banco.rs.getString("fone"));
-            // tratando a chave estrangeira de cidade
-            String sql1 = "SELECT nome FROM cidade WHERE id = ?";
-            int cidade = (banco.rs.getInt("fk_Id_Cidade"));
-            String x = daocentro.chaveEstrangeira(sql1, cidade);
-            cbxCidade.setSelectedItem(x);
+
+                banco.rs.last();
+                // cbxCidade.removeAllItems();
+                txtCNPJ.setText(banco.rs.getString("cnpj"));
+                txtRazao.setText(banco.rs.getString("razão_Social"));
+                txtNomeFantasia.setText(banco.rs.getString("nome_Fantasia"));
+                txtEmail.setText(banco.rs.getString("email_Transp"));
+                txtEndereco.setText(String.valueOf(banco.rs.getString("rua_Transp")));
+                txtNumero.setText(banco.rs.getString("numero_Transp"));
+                txtBairro.setText(banco.rs.getString("bairro_Transp"));
+                txtCEP.setText(String.valueOf(banco.rs.getInt("cep_Transp")));
+                txtTelefone.setText(banco.rs.getString("fone"));
+                // tratando a chave estrangeira de cidade
+                String sql1 = "SELECT nome FROM cidade WHERE id = ?";
+                int cidade = (banco.rs.getInt("fk_Id_Cidade"));
+                String x = daocentro.chaveEstrangeira(sql1, cidade);
+                cbxCidade.setSelectedItem(x);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao mostrar dados !");
@@ -970,7 +993,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSair1;
     private javax.swing.JButton btnUltimo;
-    private javax.swing.JComboBox cbxCidade;
+    private javax.swing.JComboBox<String> cbxCidade;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;

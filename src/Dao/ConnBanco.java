@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class ConnBanco {
 
-    private String url = "jdbc:mysql://localhost:3306/transportadora";
+    private String url = "jdbc:mysql://localhost:3306/transportadoraf";
     private String usuario = "root";
-    private String senha = "root";
+    private String senha = "26011994";
     public ResultSet rs;//Armazena o resultado de uma pesquisa passada para o Statement
     public PreparedStatement pstm;
     public Statement stm;//Prepara e realiza pesquisas no banco de dados
@@ -53,7 +53,7 @@ public class ConnBanco {
 
     public void executaSQL(String sql) {
         try {
-            stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
+            stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = stm.executeQuery(sql);
 
         } catch (SQLException ex) {

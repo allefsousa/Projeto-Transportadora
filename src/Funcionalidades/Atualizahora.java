@@ -50,7 +50,7 @@ public class Atualizahora {
                     while (true) {
                         Date date = new Date();
                         StringBuffer data = new StringBuffer();
-                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss"); // Para Atualizar a DATA so mudar para o formato dd/MM/yyyy
+                        SimpleDateFormat sdf = new SimpleDateFormat("    HH:mm:ss"); // Para Atualizar a DATA so mudar para o formato dd/MM/yyyy
                         jhora.setText(data.toString() + sdf.format(date));
                         Thread.sleep(1000);
                         jhora.revalidate();

@@ -7,6 +7,7 @@ package View;
 
 import Dao.ConnBanco;
 import Dao.DaoLogin;
+import Model.Filial;
 import Model.ModeloLogin;
 import Model.Usuario;
 import static java.awt.SystemColor.menu;
@@ -23,7 +24,7 @@ import javax.swing.JOptionPane;
  * @author Felipe
  */
 public class Login extends javax.swing.JFrame {
-
+ 
     Menu menu = new Menu();
     ConnBanco banco = new ConnBanco();
 
@@ -348,6 +349,9 @@ public class Login extends javax.swing.JFrame {
                 // metodo que verifica o login 
                 boolean resposta = daologin.verificaLogin(Mlogin);
                  if(resposta == true){
+                    // DECLARANDO O OBJETO DO TIPO FILIAL QUE VAI FAZER CONTROLE DA SESSÃO  E TORNANDO A FILIAL GLOBAL
+                    Filial sessao = Filial.getInstance();
+                    sessao.fili = (String) cmbCentro.getSelectedItem();
                       if (menu == null) {
                     menu.setVisible(true);
                     menu.Recebendoctd((String) cmbCentro.getSelectedItem());

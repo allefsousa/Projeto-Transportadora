@@ -21,8 +21,9 @@ import javax.swing.JOptionPane;
  *
  * @author Felipe
  */
-public class CadastrarFuncionario extends javax.swing.JFrame {
 
+public class CadastrarFuncionario extends javax.swing.JFrame {
+    String Pegando_Filial;
     Dao.DaoFuncionario DaoFunc = new DaoFuncionario();
     ConnBanco viewFunc = new ConnBanco();
     ConnBanco concidade = new ConnBanco();
@@ -40,7 +41,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
      */
     public void recebendoFilial(String a) {
         cbxCentrodis.addItem(a);
-        cbxCentrodis.setSelectedIndex(1);
+       
         cbxCentrodis.setEditable(false);
     }
 
@@ -104,12 +105,14 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
     public CadastrarFuncionario() {
         initComponents();
-        limpar();
-     
+      
+        setLocationRelativeTo(this);
+       
         setExtendedState(MAXIMIZED_BOTH);
         btnAnterior.setEnabled(false);
         btnProximo.setEnabled(false);
         txtNomeCompleto.requestFocus();
+        
 
         /**
          * @Author Allef preenche os combos de cidade e estado quando a tela é
@@ -139,7 +142,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "" + ex);
         }
     }
-    public void limpar(){
+    public final void limpar(){
         txtNascimento.setDate(null);
         dataAdmisao.setDate(null);
         txtComplemento.setText("");
@@ -152,10 +155,10 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         txtCPF.setText("");
         txtRG.setText("");
         txtTelefone.setText("");
-        cbxCentrodis.setSelectedIndex(-1);
-        cbxEstado.setSelectedIndex(-1);
-        cbxCargo.setSelectedIndex(-1);
-        cbxcidade.setSelectedIndex(-1);
+        cbxCentrodis.setSelectedIndex(0);
+        cbxEstado.setSelectedIndex(0);
+        cbxCargo.setSelectedIndex(0);
+        cbxcidade.setSelectedIndex(0);
         txtNomeCompleto.requestFocus();
     }
 
@@ -229,7 +232,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         lblCargo1 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
-        cbxCentrodis = new javax.swing.JComboBox<String>();
+        cbxCentrodis = new javax.swing.JComboBox<>();
         lblSenha1 = new javax.swing.JLabel();
         txtNascimento = new com.toedter.calendar.JDateChooser();
         dataAdmisao = new com.toedter.calendar.JDateChooser();
@@ -695,6 +698,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         lblCargo1.setText("Telefone:");
 
         cbxCentrodis.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cbxCentrodis.setEnabled(false);
         cbxCentrodis.setPreferredSize(new java.awt.Dimension(148, 21));
         cbxCentrodis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -886,7 +890,12 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        Pegando_Filial  = String.valueOf(cbxCentrodis.getSelectedItem());
         this.dispose();
+        Menu men = new Menu();
+        
+        men.setVisible(true);
+        men.Recebendoctd(Pegando_Filial);
 
     }//GEN-LAST:event_btnSairActionPerformed
 
