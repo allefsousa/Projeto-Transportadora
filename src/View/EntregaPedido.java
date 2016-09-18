@@ -7,17 +7,16 @@ package View;
 
 /**
  *
- * @author Allef
+ * @author Felipe
  */
-public class PesquisaEmpresa extends javax.swing.JFrame {
+public class EntregaPedido extends javax.swing.JFrame {
 
     /**
-     * Creates new form PesquisaEmpresa
+     * Creates new form EntregaPedido
      */
-    public PesquisaEmpresa() {
-        setExtendedState(MAXIMIZED_BOTH);
+    public EntregaPedido() {
         initComponents();
-        setLocationRelativeTo(this);
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -30,43 +29,29 @@ public class PesquisaEmpresa extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaEmpresa = new javax.swing.JTable();
         BarraMenu = new javax.swing.JPanel();
         btnSair = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
         btnSair1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         lblCodigo = new javax.swing.JLabel();
-        lblCNPJ = new javax.swing.JLabel();
-        lblNome = new javax.swing.JLabel();
-        lblRegiao = new javax.swing.JLabel();
+        lblDataEntrega = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
-        txtCNPJ = new javax.swing.JTextField();
-        txtNome = new javax.swing.JTextField();
-        txtRegiao = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
+        txtDataEntrega = new com.toedter.calendar.JDateChooser();
         btnPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setName("PesquisarEmpresa"); // NOI18N
+        setName("EntregaPedido"); // NOI18N
         setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        tabelaEmpresa.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(tabelaEmpresa);
-
         BarraMenu.setBackground(new java.awt.Color(0, 28, 119));
+        BarraMenu.setPreferredSize(new java.awt.Dimension(860, 43));
 
         btnSair.setBackground(new java.awt.Color(0, 28, 119));
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Sair.png"))); // NOI18N
@@ -84,7 +69,7 @@ public class PesquisaEmpresa extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("PESQUISAR UNIDADES");
+        lblTitulo.setText("ENTREGA DE PEDIDOS");
 
         btnSair1.setBackground(new java.awt.Color(0, 28, 119));
         btnSair1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Minimizar.png"))); // NOI18N
@@ -107,46 +92,53 @@ public class PesquisaEmpresa extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BarraMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSair1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 461, Short.MAX_VALUE)
+                .addComponent(btnSair1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         BarraMenuLayout.setVerticalGroup(
             BarraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(BarraMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(btnSair1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSair1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+            .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
         );
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         lblCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblCodigo.setText("CODIGO:");
+        lblCodigo.setText("CODIGO PEDIDO:");
 
-        lblCNPJ.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblCNPJ.setText("CNPJ:");
+        lblDataEntrega.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblDataEntrega.setText("DATA DA ENTREGA:");
 
-        lblNome.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblNome.setText("NOME:");
-
-        lblRegiao.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblRegiao.setText("REGIÃO:");
+        lblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUsuario.setText("USUARIO:");
 
         txtCodigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        txtCNPJ.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        txtNome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        txtRegiao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtUsuario.setOpaque(false);
 
         btnPesquisar.setBackground(new java.awt.Color(0, 28, 119));
         btnPesquisar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnPesquisar.setForeground(new java.awt.Color(255, 255, 255));
-        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Pesquisa.png"))); // NOI18N
-        btnPesquisar.setText("PESQUISAR");
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/checked.png"))); // NOI18N
+        btnPesquisar.setText("BAIXA / ENTREGUE");
         btnPesquisar.setFocusPainted(false);
         btnPesquisar.setFocusable(false);
         btnPesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -156,59 +148,49 @@ public class PesquisaEmpresa extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BarraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1)
                 .addGap(10, 10, 10))
-            .addComponent(BarraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblRegiao)
-                    .addComponent(lblCodigo)
-                    .addComponent(lblCNPJ, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblNome, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblDataEntrega)
+                    .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCodigo, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtRegiao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(160, 160, 160))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(txtDataEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(BarraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BarraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCodigo)
                             .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCNPJ)
-                            .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDataEntrega)
+                            .addComponent(txtDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNome)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblUsuario)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRegiao)
-                    .addComponent(txtRegiao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,7 +201,7 @@ public class PesquisaEmpresa extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -250,20 +232,20 @@ public class PesquisaEmpresa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PesquisaEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EntregaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PesquisaEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EntregaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PesquisaEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EntregaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PesquisaEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EntregaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PesquisaEmpresa().setVisible(true);
+                new EntregaPedido().setVisible(true);
             }
         });
     }
@@ -275,15 +257,13 @@ public class PesquisaEmpresa extends javax.swing.JFrame {
     private javax.swing.JButton btnSair1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCNPJ;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCodigo;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblRegiao;
+    private javax.swing.JLabel lblDataEntrega;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tabelaEmpresa;
-    private javax.swing.JTextField txtCNPJ;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtRegiao;
+    private com.toedter.calendar.JDateChooser txtDataEntrega;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

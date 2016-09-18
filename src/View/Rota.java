@@ -139,6 +139,7 @@ public class Rota extends javax.swing.JFrame {
         btnPrimeiro.setForeground(new java.awt.Color(255, 255, 255));
         btnPrimeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Primeiro.png"))); // NOI18N
         btnPrimeiro.setText("PRIMEIRO");
+        btnPrimeiro.setToolTipText("Primeiro Registro");
         btnPrimeiro.setBorder(null);
         btnPrimeiro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPrimeiro.setFocusable(false);
@@ -162,6 +163,7 @@ public class Rota extends javax.swing.JFrame {
         btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
         btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Registro Anterior.png"))); // NOI18N
         btnAnterior.setText("ANTERIOR");
+        btnAnterior.setToolTipText("Registro Anterior");
         btnAnterior.setBorder(null);
         btnAnterior.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAnterior.setFocusable(false);
@@ -185,6 +187,7 @@ public class Rota extends javax.swing.JFrame {
         btnNovo.setForeground(new java.awt.Color(255, 255, 255));
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Novo.png"))); // NOI18N
         btnNovo.setText("NOVO");
+        btnNovo.setToolTipText("Novo Registro");
         btnNovo.setBorder(null);
         btnNovo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNovo.setFocusable(false);
@@ -213,6 +216,7 @@ public class Rota extends javax.swing.JFrame {
         btnGravar.setForeground(new java.awt.Color(255, 255, 255));
         btnGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Gravar.png"))); // NOI18N
         btnGravar.setText("GRAVAR");
+        btnGravar.setToolTipText("Gravar Registro");
         btnGravar.setBorder(null);
         btnGravar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGravar.setFocusable(false);
@@ -236,6 +240,7 @@ public class Rota extends javax.swing.JFrame {
         btnEditar.setForeground(new java.awt.Color(255, 255, 255));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Editar.png"))); // NOI18N
         btnEditar.setText("EDITAR");
+        btnEditar.setToolTipText("Editar Registro");
         btnEditar.setBorder(null);
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditar.setFocusable(false);
@@ -259,6 +264,7 @@ public class Rota extends javax.swing.JFrame {
         btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Limpar.png"))); // NOI18N
         btnLimpar.setText("LIMPAR");
+        btnLimpar.setToolTipText("Limpar Registro");
         btnLimpar.setBorder(null);
         btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpar.setFocusable(false);
@@ -282,6 +288,7 @@ public class Rota extends javax.swing.JFrame {
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Excluir.png"))); // NOI18N
         btnExcluir.setText("EXCLUIR");
+        btnExcluir.setToolTipText("Excluir Registro");
         btnExcluir.setBorder(null);
         btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir.setFocusable(false);
@@ -305,6 +312,7 @@ public class Rota extends javax.swing.JFrame {
         btnPesquisar.setForeground(new java.awt.Color(255, 255, 255));
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Pesquisa.png"))); // NOI18N
         btnPesquisar.setText("PESQUISA");
+        btnPesquisar.setToolTipText("Pesquisar");
         btnPesquisar.setBorder(null);
         btnPesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPesquisar.setFocusable(false);
@@ -328,6 +336,7 @@ public class Rota extends javax.swing.JFrame {
         btnProximo.setForeground(new java.awt.Color(255, 255, 255));
         btnProximo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Proximo Registro.png"))); // NOI18N
         btnProximo.setText("PROXIMO");
+        btnProximo.setToolTipText("Proximo Registro");
         btnProximo.setBorder(null);
         btnProximo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProximo.setFocusable(false);
@@ -351,6 +360,7 @@ public class Rota extends javax.swing.JFrame {
         btnUltimo.setForeground(new java.awt.Color(255, 255, 255));
         btnUltimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Ultimo.png"))); // NOI18N
         btnUltimo.setText("ULTIMO");
+        btnUltimo.setToolTipText("Ultimo Registro");
         btnUltimo.setBorder(null);
         btnUltimo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUltimo.setFocusable(false);
@@ -373,10 +383,10 @@ public class Rota extends javax.swing.JFrame {
         barraNavegacao.setLayout(barraNavegacaoLayout);
         barraNavegacaoLayout.setHorizontalGroup(
             barraNavegacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraNavegacaoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180))
+            .addGroup(barraNavegacaoLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         barraNavegacaoLayout.setVerticalGroup(
             barraNavegacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,10 +416,10 @@ public class Rota extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(BarraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(barraNavegacao, javax.swing.GroupLayout.PREFERRED_SIZE, 867, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barraNavegacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 13, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(291, 291, 291)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblDistacia)
                     .addComponent(lblValorFrete)
@@ -423,14 +433,14 @@ public class Rota extends javax.swing.JFrame {
                     .addComponent(txtDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtValorFrete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(290, 290, 290))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BarraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90)
+                .addGap(79, 79, 79)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodigo)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -450,7 +460,7 @@ public class Rota extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValorFrete)
                     .addComponent(txtValorFrete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addComponent(barraNavegacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -463,7 +473,7 @@ public class Rota extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );

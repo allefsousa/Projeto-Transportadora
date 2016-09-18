@@ -28,7 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
@@ -48,11 +48,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="BarraMenu" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="barraNavegacao" min="-2" pref="867" max="-2" attributes="0"/>
+                  <Component id="barraNavegacao" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
               </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="291" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="lblDistacia" min="-2" max="-2" attributes="0"/>
                       <Component id="lblValorFrete" min="-2" max="-2" attributes="0"/>
@@ -68,7 +68,7 @@
                       <Component id="txtValorFrete" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="txtCodigo" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -77,7 +77,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="BarraMenu" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -102,7 +102,7 @@
                       <Component id="lblValorFrete" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtValorFrete" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="150" max="32767" attributes="0"/>
+                  <EmptySpace pref="161" max="32767" attributes="0"/>
                   <Component id="barraNavegacao" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
@@ -220,10 +220,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jToolBar1" min="-2" pref="840" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="jToolBar1" min="-2" pref="790" max="-2" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -267,6 +267,7 @@
                       <Image iconType="3" name="/Icones/Primeiro.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="PRIMEIRO"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Primeiro Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -305,6 +306,7 @@
                       <Image iconType="3" name="/Icones/Registro Anterior.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="ANTERIOR"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Registro Anterior"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -343,6 +345,7 @@
                       <Image iconType="3" name="/Icones/Novo.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="NOVO"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Novo Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -382,6 +385,7 @@
                       <Image iconType="3" name="/Icones/Gravar.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="GRAVAR"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Gravar Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -420,6 +424,7 @@
                       <Image iconType="3" name="/Icones/Editar.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="EDITAR"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Editar Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -458,6 +463,7 @@
                       <Image iconType="3" name="/Icones/Limpar.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="LIMPAR"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Limpar Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -496,6 +502,7 @@
                       <Image iconType="3" name="/Icones/Excluir.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="EXCLUIR"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Excluir Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -534,6 +541,7 @@
                       <Image iconType="3" name="/Icones/Pesquisa.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="PESQUISA"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Pesquisar"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -572,6 +580,7 @@
                       <Image iconType="3" name="/Icones/Proximo Registro.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="PROXIMO"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Proximo Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -610,6 +619,7 @@
                       <Image iconType="3" name="/Icones/Ultimo.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="ULTIMO"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Ultimo Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>

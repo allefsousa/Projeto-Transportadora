@@ -309,6 +309,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnPrimeiro.setForeground(new java.awt.Color(255, 255, 255));
         btnPrimeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Primeiro.png"))); // NOI18N
         btnPrimeiro.setText("PRIMEIRO");
+        btnPrimeiro.setToolTipText("Primeiro Registro");
         btnPrimeiro.setBorder(null);
         btnPrimeiro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPrimeiro.setFocusable(false);
@@ -338,6 +339,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
         btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Registro Anterior.png"))); // NOI18N
         btnAnterior.setText("ANTERIOR");
+        btnAnterior.setToolTipText("Registro Anterior");
         btnAnterior.setBorder(null);
         btnAnterior.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAnterior.setFocusable(false);
@@ -367,6 +369,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnNovo.setForeground(new java.awt.Color(255, 255, 255));
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Novo.png"))); // NOI18N
         btnNovo.setText("NOVO");
+        btnNovo.setToolTipText("Novo Registro");
         btnNovo.setBorder(null);
         btnNovo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNovo.setFocusable(false);
@@ -396,7 +399,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnImprimir.setForeground(new java.awt.Color(255, 255, 255));
         btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Imprimir.png"))); // NOI18N
         btnImprimir.setText("IMPRIMIR");
-        btnImprimir.setToolTipText("FICHA DE PREENCHIMENTO");
+        btnImprimir.setToolTipText("Imprimir Ficha de Saida");
         btnImprimir.setBorder(null);
         btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnImprimir.setFocusable(false);
@@ -421,6 +424,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnGravar.setForeground(new java.awt.Color(255, 255, 255));
         btnGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Gravar.png"))); // NOI18N
         btnGravar.setText("GRAVAR");
+        btnGravar.setToolTipText("Gravar Registro");
         btnGravar.setBorder(null);
         btnGravar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGravar.setFocusable(false);
@@ -450,6 +454,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Editar.png"))); // NOI18N
         btnAtualizar.setText("EDITAR");
+        btnAtualizar.setToolTipText("Editar Registro");
         btnAtualizar.setBorder(null);
         btnAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAtualizar.setFocusable(false);
@@ -479,6 +484,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnLimparr.setForeground(new java.awt.Color(255, 255, 255));
         btnLimparr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Limpar.png"))); // NOI18N
         btnLimparr.setText("LIMPAR");
+        btnLimparr.setToolTipText("Limpar Registro");
         btnLimparr.setBorder(null);
         btnLimparr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimparr.setFocusable(false);
@@ -508,6 +514,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Excluir.png"))); // NOI18N
         btnExcluir.setText("EXCLUIR");
+        btnExcluir.setToolTipText("Excluir Registro");
         btnExcluir.setBorder(null);
         btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir.setFocusable(false);
@@ -537,6 +544,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnPesquisar.setForeground(new java.awt.Color(255, 255, 255));
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Pesquisa.png"))); // NOI18N
         btnPesquisar.setText("PESQUISA");
+        btnPesquisar.setToolTipText("Pesquisar Registro");
         btnPesquisar.setBorder(null);
         btnPesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPesquisar.setFocusable(false);
@@ -566,6 +574,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnProximo.setForeground(new java.awt.Color(255, 255, 255));
         btnProximo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Proximo Registro.png"))); // NOI18N
         btnProximo.setText("PROXIMO");
+        btnProximo.setToolTipText("Proximo Registro");
         btnProximo.setBorder(null);
         btnProximo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProximo.setFocusable(false);
@@ -595,6 +604,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         btnUltimo.setForeground(new java.awt.Color(255, 255, 255));
         btnUltimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Ultimo.png"))); // NOI18N
         btnUltimo.setText("ULTIMO");
+        btnUltimo.setToolTipText("Ultimo Registro");
         btnUltimo.setBorder(null);
         btnUltimo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUltimo.setFocusable(false);
@@ -624,9 +634,9 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         barraNavegacaoLayout.setHorizontalGroup(
             barraNavegacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(barraNavegacaoLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         barraNavegacaoLayout.setVerticalGroup(
             barraNavegacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -765,7 +775,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRevisao)
                     .addComponent(cbxCentroDist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addComponent(barraNavegacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -774,17 +784,11 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(62, 62, 62))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -826,14 +830,6 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
 
     }//GEN-LAST:event_btnNovoActionPerformed
-
-    private void btnImprimirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseEntered
-        btnImprimir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-    }//GEN-LAST:event_btnImprimirMouseEntered
-
-    private void btnImprimirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseExited
-        btnImprimir.setBorder(null);
-    }//GEN-LAST:event_btnImprimirMouseExited
 
     private void btnGravarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGravarMouseEntered
         btnGravar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1246,6 +1242,14 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         this.dispose();
         new PesquisarVeiculo().setVisible(true);
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnImprimirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseExited
+        btnImprimir.setBorder(null);
+    }//GEN-LAST:event_btnImprimirMouseExited
+
+    private void btnImprimirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseEntered
+        btnImprimir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    }//GEN-LAST:event_btnImprimirMouseEntered
 
     private void btnEditarrActionPerformed(java.awt.event.ActionEvent evt) {
         //Depreciado

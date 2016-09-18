@@ -30,11 +30,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -57,13 +53,14 @@
               <Component id="BarraMenu" alignment="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="barraNavegacao" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="barraNavegacao" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblNomeFantasia" min="-2" max="-2" attributes="0"/>
                               <Component id="lblRazao" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -72,7 +69,7 @@
                               <Component id="lblCEP" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblEmail" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblTelefone" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                                   <Component id="lblCidade" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -86,28 +83,20 @@
                               <Component id="txtEmail" max="32767" attributes="0"/>
                               <Component id="txtCEP" min="-2" max="-2" attributes="0"/>
                               <Component id="txtTelefone" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbxCidade" max="32767" attributes="0"/>
+                              <Component id="cbxCidade" min="-2" pref="250" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="593" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="lblCNPJ" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCNPJ" min="-2" pref="138" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lblNumero" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNumero" min="-2" pref="86" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblCNPJ" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCNPJ" min="-2" pref="138" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="756" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -116,7 +105,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="BarraMenu" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblCNPJ" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCNPJ" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -127,9 +116,15 @@
                       <Component id="txtRazao" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblNomeFantasia" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNomeFantasia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="lblNumero" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblNomeFantasia" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNomeFantasia" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -141,12 +136,7 @@
                       <Component id="lblBairro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtBairro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblNumero" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblCEP" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCEP" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -166,7 +156,7 @@
                       <Component id="lblTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="152" max="32767" attributes="0"/>
+                  <EmptySpace pref="145" max="32767" attributes="0"/>
                   <Component id="barraNavegacao" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -466,6 +456,7 @@
                       <Image iconType="3" name="/Icones/Primeiro.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="PRIMEIRO"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Primeiro Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -505,6 +496,7 @@
                       <Image iconType="3" name="/Icones/Registro Anterior.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="ANTERIOR"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Registro Anterior"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -544,6 +536,7 @@
                       <Image iconType="3" name="/Icones/Novo.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="NOVO"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Novo Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -583,6 +576,7 @@
                       <Image iconType="3" name="/Icones/Gravar.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="GRAVAR"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Gravar Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -622,6 +616,7 @@
                       <Image iconType="3" name="/Icones/Editar.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="EDITAR"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Editar Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -661,6 +656,7 @@
                       <Image iconType="3" name="/Icones/Excluir.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="EXCLUIR"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Excluir Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -700,6 +696,7 @@
                       <Image iconType="3" name="/Icones/Pesquisa.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="PESQUISA"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Pesquisa"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -739,6 +736,7 @@
                       <Image iconType="3" name="/Icones/Proximo Registro.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="PROXIMO"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Proximo Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -778,6 +776,7 @@
                       <Image iconType="3" name="/Icones/Ultimo.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="ULTIMO"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Ultimo Registro"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>

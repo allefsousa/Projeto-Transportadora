@@ -191,13 +191,15 @@ public class Menu extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JToolBar.Separator();
         btnCalculadora2 = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JToolBar.Separator();
-        jButton1 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
         lblUnidade1 = new javax.swing.JLabel();
         lblUnidade = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
         Jdata = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         Jhora = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Menu"); // NOI18N
@@ -744,7 +746,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(btnMenu15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnMenu16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -964,6 +966,11 @@ public class Menu extends javax.swing.JFrame {
         btnPedidos.setMinimumSize(new java.awt.Dimension(150, 60));
         btnPedidos.setPreferredSize(new java.awt.Dimension(170, 60));
         btnPedidos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPedidosMouseEntered(evt);
+            }
+        });
         btnPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPedidosActionPerformed(evt);
@@ -1191,6 +1198,62 @@ public class Menu extends javax.swing.JFrame {
         jToolBar1.add(btnCalculadora2);
         jToolBar1.add(jSeparator9);
 
+        jPanel7.setBackground(new java.awt.Color(0, 28, 119));
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
+        jPanel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel7.setPreferredSize(new java.awt.Dimension(300, 60));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
+        });
+
+        lblUnidade1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUnidade1.setForeground(new java.awt.Color(255, 255, 255));
+        lblUnidade1.setText("LOJA:");
+        lblUnidade1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblUnidade1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUnidade1MouseClicked(evt);
+            }
+        });
+
+        lblUnidade.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblUnidade.setForeground(new java.awt.Color(255, 255, 255));
+        lblUnidade.setText(" Unidade");
+        lblUnidade.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblUnidade.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUnidadeMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblUnidade1))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(lblUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblUnidade1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblUnidade)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jToolBar1.add(jPanel7);
+
         jButton1.setBackground(new java.awt.Color(0, 28, 119));
         jButton1.setBorder(null);
         jButton1.setEnabled(false);
@@ -1199,16 +1262,6 @@ public class Menu extends javax.swing.JFrame {
         jButton1.setMaximumSize(new java.awt.Dimension(300, 10));
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton1);
-
-        lblUnidade1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblUnidade1.setForeground(new java.awt.Color(255, 255, 255));
-        lblUnidade1.setText("Filial:  ");
-        jToolBar1.add(lblUnidade1);
-
-        lblUnidade.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblUnidade.setForeground(new java.awt.Color(255, 255, 255));
-        lblUnidade.setText(" Unidade");
-        jToolBar1.add(lblUnidade);
         jToolBar1.add(jSeparator10);
 
         Jdata.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -1230,15 +1283,23 @@ public class Menu extends javax.swing.JFrame {
         Jhora.setText("00:00:00");
         jToolBar1.add(Jhora);
 
+        jButton3.setBackground(new java.awt.Color(0, 28, 119));
+        jButton3.setBorder(null);
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton3);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1354, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(503, 503, 503)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(111, 437, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1356,18 +1417,30 @@ public class Menu extends javax.swing.JFrame {
     private void btnMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu2ActionPerformed
         if (aux==1)
             new CadastroCliente().setVisible(true);
+        
+           if (aux==3){            
+            new EntradaUnidade().setVisible(true);
+        }
     }//GEN-LAST:event_btnMenu2ActionPerformed
 
     private void btnMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu3ActionPerformed
-        if (aux==1)
-             ViewFuncionario.recebendoFilial(lblUnidade.getText());
+        if (aux==1){
+            ViewFuncionario.recebendoFilial(lblUnidade.getText());
             ViewFuncionario.setVisible(true);
-           // this.setVisible(false);
+            this.setVisible(false);}
+            
+            if (aux==3){
+            new EntregaPedido().setVisible(true);
+        }
     }//GEN-LAST:event_btnMenu3ActionPerformed
 
     private void btnMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu4ActionPerformed
         if (aux==1)
             new CadastrarVeiculos().setVisible(true);
+        
+           if (aux==3) {
+               //new EntregaPedido().setVisible(true);
+           }
     }//GEN-LAST:event_btnMenu4ActionPerformed
 
     private void btnMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu6ActionPerformed
@@ -1418,8 +1491,18 @@ public class Menu extends javax.swing.JFrame {
        // btnMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
         
         btnMenu2.setVisible(true);
-        btnMenu2.setText(" RELATORIOS");
+        btnMenu2.setText(" ENTRADA");
        // btnMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
+        
+        btnMenu3.setVisible(true);
+        btnMenu3.setText(" ENTREGAS");
+       // btnMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
+        
+        btnMenu4.setVisible(true);
+        btnMenu4.setText(" RELATORIOS");
+       // btnMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
+        
+        
 
         
     }//GEN-LAST:event_btnPedidosActionPerformed
@@ -1513,6 +1596,25 @@ public class Menu extends javax.swing.JFrame {
         new Informacoes().setVisible(true);
     }//GEN-LAST:event_btnInformaçõesActionPerformed
 
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        PesquisaEmpresa  emp= new PesquisaEmpresa();
+        emp.setVisible(true);
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void btnPedidosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPedidosMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPedidosMouseEntered
+
+    private void lblUnidade1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUnidade1MouseClicked
+         PesquisaEmpresa  emp= new PesquisaEmpresa();
+        emp.setVisible(true);
+    }//GEN-LAST:event_lblUnidade1MouseClicked
+
+    private void lblUnidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUnidadeMouseClicked
+        PesquisaEmpresa  emp= new PesquisaEmpresa();
+        emp.setVisible(true);
+    }//GEN-LAST:event_lblUnidadeMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1603,6 +1705,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnSair1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -1611,6 +1714,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JToolBar.Separator jSeparador4;
     private javax.swing.JToolBar.Separator jSeparator1;
