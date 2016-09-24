@@ -21,7 +21,8 @@ import javax.swing.JOptionPane;
  * @author Allef
  */
 public class DaoEmpresa {
-     ConnBanco ConnEmpresa = new ConnBanco();
+
+    ConnBanco ConnEmpresa = new ConnBanco();
 
     public String chaveEstrangeira(String sql, int idChave) {
         try {
@@ -74,7 +75,7 @@ public class DaoEmpresa {
             comando.setString(1, centroDistribuicao.getCnpj());
             comando.setString(2, centroDistribuicao.getRazaosocial());
             comando.setString(3, centroDistribuicao.getNomeFantasia());
-           
+
             comando.setString(4, centroDistribuicao.getEmailTransp());
             comando.setString(5, centroDistribuicao.getRuaTransp());
             comando.setString(6, centroDistribuicao.getNumeroTransp());
@@ -82,10 +83,8 @@ public class DaoEmpresa {
             comando.setInt(8, centroDistribuicao.getCepTransp());
             comando.setString(9, centroDistribuicao.getFone());
             comando.setInt(10, centroDistribuicao.getCidade());
-            
-           
-            // Implememtar a classe empresa  comando.setInt(17, funcionario.getCnpjTransp());
 
+            // Implememtar a classe empresa  comando.setInt(17, funcionario.getCnpjTransp());
             //executa a query
             comando.execute();
             //Fecha a conexao com o BD
@@ -107,14 +106,14 @@ public class DaoEmpresa {
             String sql = "UPDATE centro_dist SET cnpj= ?,  razão_Social = ?,nome_Fantasia = ?, email_Transp = ?"
                     + ", rua_Transp = ?, numero_Transp = ?,bairro_Transp = ?"
                     + ",cep_Transp = ?, fone = ? ,fk_Id_Cidade = ?  where cnpj = ? ;";
-            
-           ConnEmpresa.pstm = ConnEmpresa.conn.prepareStatement(sql);
+
+            ConnEmpresa.pstm = ConnEmpresa.conn.prepareStatement(sql);
             // formatar a query 
-            ConnEmpresa.pstm.setString(1,centroDistribuicao.getCnpj());
+            ConnEmpresa.pstm.setString(1, centroDistribuicao.getCnpj());
             ConnEmpresa.pstm.setString(2, centroDistribuicao.getRazaosocial());
             ConnEmpresa.pstm.setString(3, centroDistribuicao.getNomeFantasia());
-            JOptionPane.showMessageDialog(null, "Aqui "+centroDistribuicao.getRazaosocial());
-           
+            //JOptionPane.showMessageDialog(null, "Aqui "+centroDistribuicao.getRazaosocial());
+
             ConnEmpresa.pstm.setString(4, centroDistribuicao.getEmailTransp());
             ConnEmpresa.pstm.setString(5, centroDistribuicao.getRuaTransp());
             ConnEmpresa.pstm.setString(6, centroDistribuicao.getNumeroTransp());
@@ -122,16 +121,16 @@ public class DaoEmpresa {
             ConnEmpresa.pstm.setInt(8, centroDistribuicao.getCepTransp());
             ConnEmpresa.pstm.setString(9, centroDistribuicao.getFone());
             ConnEmpresa.pstm.setInt(10, centroDistribuicao.getCidade());
-           ConnEmpresa.pstm.setString(11,centroDistribuicao.getCnpj());
-           JOptionPane.showMessageDialog(null, centroDistribuicao.getCnpj());
-           
+            ConnEmpresa.pstm.setString(11, centroDistribuicao.getCnpj());
+            //JOptionPane.showMessageDialog(null, centroDistribuicao.getCnpj());
+
             //executa a query
             ConnEmpresa.pstm.execute();
-           // ConnEmpresa.conn.close();
+            // ConnEmpresa.conn.close();
             JOptionPane.showMessageDialog(null, "Empresa atualizada com sucesso !");
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar Empresa!" +e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar Empresa!" + e.getMessage());
             e.printStackTrace();
         }
         return false;
@@ -195,7 +194,7 @@ public class DaoEmpresa {
             }
             return f;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao recuperar funcionario!" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao recuperar dados!" + e.getMessage());
         }
         return null;
     }
