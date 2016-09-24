@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -31,6 +32,8 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     Dao.DaoEmpresa daocentro = new DaoEmpresa();
     Dao.ConnBanco banco = new ConnBanco();
     String pegando_filial;
+    public int p;
+
     public CadastrarEmpresa() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
@@ -49,6 +52,24 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Trazer cidades" + ex);
         }
+        btnAnterior.setEnabled(false);
+        btnProximo.setEnabled(false);
+        btnUltimo.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnEditar.setEnabled(false);
+
+    }
+
+    //metodo para setar botoes como ativos/desativos quando escolher item em Pesquisa
+    public void botoes() {
+        btnAnterior.setEnabled(false);
+        btnProximo.setEnabled(false);
+        btnUltimo.setEnabled(false);
+        btnExcluir.setEnabled(true);
+        btnEditar.setEnabled(true);
+        btnGravar.setEnabled(false);
+        txtCNPJ.setEditable(false);
+
     }
 
     public void recebendo(CentroDistribuicao centro) {
@@ -644,10 +665,10 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-       pegando_filial  = sessao.fili;
-        
+        pegando_filial = sessao.fili;
+
         Menu men = new Menu();
-        
+
         men.setVisible(true);
         men.Recebendoctd(pegando_filial);
         this.dispose();
@@ -683,6 +704,14 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         limpar();
+        btnGravar.setEnabled(true);
+        btnAnterior.setEnabled(false);
+        btnProximo.setEnabled(false);
+        btnUltimo.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnPesquisar.setEnabled(true);
+        txtCNPJ.setEditable(true);
 
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -759,6 +788,8 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao trazer cidade !!");
         }
+        btnNovo.setEnabled(true);
+        btnPesquisar.setEnabled(true);
     }//GEN-LAST:event_btnGravarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -777,9 +808,19 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Impossivel Remover !! ");
                 }
+                btnAnterior.setEnabled(false);
+                btnProximo.setEnabled(false);
+                btnUltimo.setEnabled(false);
+                btnNovo.setEnabled(true);
+                btnExcluir.setEnabled(false);
+                btnEditar.setEnabled(false);
+                btnPesquisar.setEnabled(true);
+                btnGravar.setEnabled(true);
+                txtCNPJ.setEditable(true);
                 break;
 
             case 1:
+                txtCNPJ.setEditable(false);
                 break;
             case 2:
                 break;
@@ -808,7 +849,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
             if (rs.next()) {
                 centrodis.setCidade(rs.getInt("id"));
             }
-            JOptionPane.showMessageDialog(null, centrodis.toString());
+            //JOptionPane.showMessageDialog(null, centrodis.toString());
             daocentro.atualizarEmp(centrodis);
             limpar();
 
@@ -818,16 +859,22 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-       
+
         new PesquisaEmpresa().setVisible(true);
-        
 
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
+        btnAnterior.setEnabled(true);
         btnProximo.setEnabled(true);
-        btnAnterior.setEnabled(false);
+        btnUltimo.setEnabled(true);
+        btnNovo.setEnabled(true);
+        btnExcluir.setEnabled(true);
+        btnEditar.setEnabled(true);
+        btnPesquisar.setEnabled(true);
+        btnGravar.setEnabled(false);
+        txtCNPJ.setEditable(false);
 
         try {
             String sql = "SELECT * FROM centro_dist";
