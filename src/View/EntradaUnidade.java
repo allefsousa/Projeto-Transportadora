@@ -5,6 +5,16 @@
  */
 package View;
 
+import Dao.ConnBanco;
+import Dao.DaoTransPedido;
+import Funcionalidades.ModeloTabela;
+import Model.TransportadoraPedido;
+import java.awt.Color;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author Felipe
@@ -14,9 +24,107 @@ public class EntradaUnidade extends javax.swing.JFrame {
     /**
      * Creates new form EntradaUnidade
      */
+    ConnBanco connBanco = new ConnBanco();
+    ConnBanco conEnt = new ConnBanco();
+    ConnBanco banco = new ConnBanco();
+    TransportadoraPedido transPed = new TransportadoraPedido();
+    Dao.DaoTransPedido daoTransPed = new DaoTransPedido();
+
     public EntradaUnidade() {
         setExtendedState(MAXIMIZED_BOTH);
         initComponents();
+        connBanco.getConection();
+        listaCentroDist();
+    }
+
+    public void preencherTabela(String sql) {
+        int cliente = 0, cidade = 0, veiculo = 0;
+        String cli, cid, veic;
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "End", "Nº Coleta", "Bairro",
+            "CEP", "Complemento", "Data de Entrega", "End Entrega", "Nº Entrega", "Bairro",
+            "Cep", "Complemento", "Cliente", "Cidade", "Veiculo", "Rota"};
+
+        connBanco.executaSQL(sql);
+        try {
+            connBanco.rs.first();
+            do {
+                cliente = connBanco.rs.getInt("fk_Id_Cliente");
+                sql = "SELECT razao_Social_cli FROM cliente where id_Cli = ?";
+                cli = daoTransPed.chaveEstrangeira(sql, cliente);
+                
+                cidade = connBanco.rs.getInt("fk_Id_Cidade");
+                sql = "SELECT nome FROM cidade where id = ?";
+                cid = daoTransPed.chaveEstrangeira(sql, cidade);
+                
+                veiculo = connBanco.rs.getInt("fk_Id_Veiculo");
+                sql = "SELECT modelo FROM veiculo where id_Veiculo = ?";
+                veic= daoTransPed.chaveEstrangeira(sql, veiculo);
+                
+                dados.add(new Object[]{connBanco.rs.getInt("num_Pedido"), connBanco.rs.getDate("data_Coleta"),
+                    connBanco.rs.getString("rua_Coleta"), connBanco.rs.getInt("num_End_Coleta"),
+                    connBanco.rs.getString("bairro_Coleta"), connBanco.rs.getString("cep_Coleta"),
+                    connBanco.rs.getString("complemento_Coleta"), connBanco.rs.getDate("data_Entrega"),
+                    connBanco.rs.getString("rua_Entrega"), connBanco.rs.getString("num_End_Entrega"),
+                    connBanco.rs.getString("bairro_Entrega"), connBanco.rs.getString("cep_Entrega"),
+                    connBanco.rs.getString("complemento"), cli, cid, veic,
+                    connBanco.rs.getString("fk_Id_Rota")});
+
+            } while (connBanco.rs.next());
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao preencher tabela !");
+        }
+
+        ModeloTabela modelo = new ModeloTabela(dados, colunas);
+        tabelaEntrada.setModel(modelo);
+        tabelaEntrada.getColumnModel().getColumn(0).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(0).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(1).setPreferredWidth(80);
+        tabelaEntrada.setSelectionBackground(Color.lightGray);
+        tabelaEntrada.setSelectionForeground(Color.BLUE);
+        tabelaEntrada.getColumnModel().getColumn(1).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(2).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(2).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(3).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(3).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(4).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(4).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(5).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(5).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(6).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(6).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(7).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(7).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(8).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(8).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(9).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(9).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(10).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(10).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(11).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(11).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(12).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(12).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(13).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(13).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(14).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(14).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(15).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(15).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(16).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(16).setResizable(false);
+
+        tabelaEntrada.getTableHeader().setReorderingAllowed(false);
+        tabelaEntrada.setAutoResizeMode(tabelaEntrada.AUTO_RESIZE_OFF);
+        tabelaEntrada.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+
+    public void limpar() {
+        txtCodigo.setText(" ");
+        txtDataEntrada.setDate(null);
+        cbxStatus.setSelectedIndex(0);
+        cbxCentroDist.setSelectedIndex(0);
     }
 
     /**
@@ -34,16 +142,17 @@ public class EntradaUnidade extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         btnSair1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaEntrada = new javax.swing.JTable();
         lblCodigo = new javax.swing.JLabel();
         lblDataEntrega = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
-        txtUsuario = new javax.swing.JTextField();
-        txtDataEntrega = new com.toedter.calendar.JDateChooser();
+        txtDataEntrada = new com.toedter.calendar.JDateChooser();
         btnPesquisar = new javax.swing.JButton();
         lblUsuario1 = new javax.swing.JLabel();
-        txtUsuario1 = new javax.swing.JTextField();
+        cbxCentroDist = new javax.swing.JComboBox();
+        btnInserir = new javax.swing.JButton();
+        cbxStatus = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("EntradaUnidade"); // NOI18N
@@ -109,18 +218,18 @@ public class EntradaUnidade extends javax.swing.JFrame {
             .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaEntrada.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaEntrada);
 
         lblCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblCodigo.setText("CODIGO PEDIDO:");
@@ -129,12 +238,9 @@ public class EntradaUnidade extends javax.swing.JFrame {
         lblDataEntrega.setText("DATA DA CHEGADA:");
 
         lblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblUsuario.setText("USUARIO:");
+        lblUsuario.setText("Status:");
 
         txtCodigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        txtUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtUsuario.setOpaque(false);
 
         btnPesquisar.setBackground(new java.awt.Color(0, 28, 119));
         btnPesquisar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -145,12 +251,25 @@ public class EntradaUnidade extends javax.swing.JFrame {
         btnPesquisar.setFocusable(false);
         btnPesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPesquisar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         lblUsuario1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblUsuario1.setText("UNIDADE:");
 
-        txtUsuario1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtUsuario1.setOpaque(false);
+        cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um item" }));
+
+        btnInserir.setText("Salvar");
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
+            }
+        });
+
+        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Status", "Em Transporte", "Entregue", " " }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -166,44 +285,51 @@ public class EntradaUnidade extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblDataEntrega)
-                        .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblCodigo, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(lblCodigo, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(lblUsuario1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtUsuario1)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDataEntrega, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                    .addComponent(txtDataEntrada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(cbxCentroDist, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(49, 49, 49)
                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(btnInserir)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BarraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCodigo)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDataEntrega)
-                            .addComponent(txtDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblCodigo)
+                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDataEntrega)
+                                    .addComponent(txtDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblUsuario)
+                                    .addComponent(cbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblUsuario)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuario1)
-                    .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblUsuario1)
+                            .addComponent(cbxCentroDist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(btnInserir)))
+                .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
@@ -233,6 +359,108 @@ public class EntradaUnidade extends javax.swing.JFrame {
     private void btnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair1ActionPerformed
         this.setExtendedState(Menu.ICONIFIED);
     }//GEN-LAST:event_btnSair1ActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        boolean loop = true;
+        try {
+            //Tratando entrada de código do pedido
+            if (txtCodigo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Insira um código válido");
+            } else {
+                do {
+                    //Verrificando se registro do pedido existe  no banco de dados
+                    String codigo = txtCodigo.getText();
+                    String sql1 = "SELECT num_Pedido FROM pedido WHERE num_Pedido = ?;";
+                    banco.conn = banco.getConection();
+                    banco.pstm = banco.conn.prepareStatement(sql1);
+                    banco.pstm.setString(1, codigo);
+                    ResultSet rs1 = banco.pstm.executeQuery();
+                    if (rs1.next()) {
+                        preencherTabela("SELECT * FROM pedido where num_Pedido = " + Integer.parseInt(txtCodigo.getText()));
+                    } else {
+                        //Tratando entrada de código caso seja inserido texto
+                        JOptionPane.showMessageDialog(null, "Número de pedido não existe\n"
+                                + "Insira um número válido !");
+                    }
+                    loop = false;
+                } while (loop);
+
+            }
+        } catch (NumberFormatException e) {
+            //Exceção de entrada fora do esperado (nesse caso...)
+            JOptionPane.showMessageDialog(null, "Insira um código válido !");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        boolean loop = true;
+        try {
+            //Tratando caixa combinada de Centro de Distribuição
+            if (cbxCentroDist.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Selecione um centro de Distribuição !");
+                limpar();
+            } else {               
+                String nomeFantasia = (String) cbxCentroDist.getSelectedItem();
+                String sql1 = "SELECT cnpj FROM centro_Dist WHERE nome_Fantasia = ?;";
+                banco.conn = banco.getConection();
+                banco.pstm = banco.conn.prepareStatement(sql1);
+                banco.pstm.setString(1, nomeFantasia);
+                ResultSet rs1 = banco.pstm.executeQuery();
+                //Verificando se o pedido já não teve sua entrada registrada no Centro de distribuição em questão
+                if (rs1.next()) {
+                    String sqlCD = "SELECT fk_Centro_Dist FROM Transportadora_pedido where fk_Centro_Dist = ?";
+                    String cnpj = rs1.getString("cnpj");
+                    banco.conn = banco.getConection();
+                    banco.pstm = banco.conn.prepareStatement(sqlCD);
+                    banco.pstm.setString(1, cnpj);
+                    ResultSet rs2 = banco.pstm.executeQuery();
+                    //Caso possua registro mostra mensagem de advertência
+                    if (rs2.next()) {
+                        JOptionPane.showMessageDialog(null, "Pedido já registrado nesse Centro de Didtribuição\n"
+                                + "Selecione outro !");
+                    } else {
+                        transPed.setCentroDist(rs1.getString("cnpj"));
+                        //Verificando se o campo de entrada de código não está vazio
+                        if (txtCodigo.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Insira um código válido");
+                        } else {
+                            //Verificando se caracteres inválidos foram inseridos
+                            do {
+                                transPed.setNumPedido(Integer.parseInt(txtCodigo.getText()));
+                                loop = false;
+                            } while (loop);
+                            //Verificando se entrada de data não está vazio
+                            if (txtDataEntrada.getDate() == null) {
+                                JOptionPane.showMessageDialog(null, "Insira a data de hoje!");
+                            } else {
+                                transPed.setDataEnt(txtDataEntrada.getDate());
+                                //Verificando se entrada de status não está vazio
+                                if (cbxStatus.getSelectedIndex() == 0) {
+                                    JOptionPane.showMessageDialog(null, "Insira o status do pedido !");
+                                } else {
+                                    transPed.setStatus((String) cbxStatus.getSelectedItem());
+
+                                    daoTransPed.insereTranspPedido(transPed);
+                                    JOptionPane.showMessageDialog(null, "Pedido registrado com sucesso !");
+                                    limpar();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (NumberFormatException e) {
+            //Exceção de entrada fora do esperado (nesse caso...)
+            JOptionPane.showMessageDialog(null, "Insira um código válido !");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao registrar entrada !");
+        }
+
+    }//GEN-LAST:event_btnInserirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,20 +499,36 @@ public class EntradaUnidade extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BarraMenu;
+    private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSair1;
+    private javax.swing.JComboBox cbxCentroDist;
+    private javax.swing.JComboBox cbxStatus;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblDataEntrega;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel lblUsuario1;
+    private javax.swing.JTable tabelaEntrada;
     private javax.swing.JTextField txtCodigo;
-    private com.toedter.calendar.JDateChooser txtDataEntrega;
-    private javax.swing.JTextField txtUsuario;
-    private javax.swing.JTextField txtUsuario1;
+    private com.toedter.calendar.JDateChooser txtDataEntrada;
     // End of variables declaration//GEN-END:variables
+
+    public void listaCentroDist() {
+        String sql = "SELECT * FROM centro_dist";
+        try {
+            banco.conn = banco.getConection();
+            banco.pstm = banco.conn.prepareStatement(sql);
+            ResultSet rs = banco.executaSQLRetorno(sql);
+            while (rs.next()) {
+                cbxCentroDist.addItem(rs.getString("nome_Fantasia"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

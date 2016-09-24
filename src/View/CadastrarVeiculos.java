@@ -13,8 +13,6 @@ import Model.Veiculo;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -105,59 +103,6 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao trazer chaves estrangeiras");
         }
-
-
-        /*String unidade = veiculo.getIdCentroDist();
-         String unidade1 = String.valueOf(veiculo.getIdFunc());
-         String unidade2 = String.valueOf(veiculo.getCidade());
-         try {
-
-         //Tratando caixa combinada de Centro de Distribuição
-         String sql;
-         String resultado = null;
-         sql = "select * from centro_dist where cnpj =? ";
-
-         conVeic.conn = conVeic.getConection();
-         conVeic.pstm = conVeic.conn.prepareStatement(sql);
-         conVeic.pstm.setString(1, unidade);
-         ResultSet rs = conVeic.pstm.executeQuery();
-         if (rs.next()) {
-         resultado = rs.getString("cnpj") + " - " + rs.getString("nome_Fantasia");
-         }
-         cbxCentroDist.addItem(resultado);
-
-         //Tratando caixa combinada de Funcionario
-         String sql1;
-         String resultado1 = null;
-         sql = "select * from funcionario where id = ? ";
-
-         conFunc.conn = conFunc.getConection();
-         conFunc.pstm = conFunc.conn.prepareStatement(sql);
-         conFunc.pstm.setString(1, unidade1);
-         ResultSet rs1 = conFunc.pstm.executeQuery();
-         if (rs1.next()) {
-         resultado1 = rs1.getInt("id") + " - " + rs1.getString("nome");
-         }
-         cbxFunc.addItem(resultado1);
-
-         //Tratando caixa combinada de cidade
-         String sql2;
-         String resultado2 = null;
-         sql = "select * from cidade where id = ? ";
-
-         conCidade.conn = conCidade.getConection();
-         conCidade.pstm = conCidade.conn.prepareStatement(sql);
-         conCidade.pstm.setString(1, unidade2);
-         ResultSet rs2 = conCidade.pstm.executeQuery();
-         if (rs2.next()) {
-         resultado2 = rs2.getInt("id") + " - " + rs2.getString("nome");
-         }
-         cbxCidade.addItem(resultado2);
-
-         } catch (SQLException ex) {
-         JOptionPane.showMessageDialog(null, " Erro ao trazer chaves estrangeiras");
-         }*/
-        // cbxCentrodis.setSelectedIndex(String.valueOf(funcionario.getCnpjTransp()));
     }
 
     public CadastrarVeiculos() {

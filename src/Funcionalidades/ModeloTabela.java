@@ -15,6 +15,10 @@ import javax.swing.table.AbstractTableModel;
 public class ModeloTabela extends AbstractTableModel{
     private ArrayList linhas = null;
     private String [] colunas = null;
+
+    public ModeloTabela(String [] col) {
+    }
+    
     public ModeloTabela(ArrayList lin,String [] col){
         setLinhas(lin);
         setColunas(col);

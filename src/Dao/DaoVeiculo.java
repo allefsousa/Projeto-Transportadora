@@ -194,7 +194,7 @@ public class DaoVeiculo {
                 v.setCidade(rs.getInt(8));
                 // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
                 //com essa mensagem nao 
-                JOptionPane.showMessageDialog(null, "Objeto Retornado");
+                JOptionPane.showMessageDialog(null, "Dados Retornados !");
 
             }
             return v;
