@@ -52,51 +52,44 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         String unidade = veiculo.getIdCentroDist();
         String unidade1 = String.valueOf(veiculo.getCidade());
         String unidade2 = String.valueOf(veiculo.getIdFunc());
-       try {
-           //Tratando Centro de distribuição
+        try {
+
+            //Tratando Centro de distribuição
             String sql;
             String resultado = null;
             sql = "select * from centro_dist where cnpj =? ";
-
-            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
             conCentro.conn = conCentro.getConection();
             conCentro.pstm = conCentro.conn.prepareStatement(sql);
             conCentro.pstm.setString(1, unidade);
             ResultSet rs = conCentro.pstm.executeQuery();
             if (rs.next()) {
-                resultado = (rs.getString("cnpj") + " - " +rs.getString("nome_Fantasia"));
+                resultado = (rs.getString("nome_Fantasia"));
             }
             cbxCentroDist.setSelectedItem(resultado);
-            
+
             //Tratando cidade
-            
             String sql1;
             String resultado1 = null;
             sql1 = "select * from cidade where id =? ";
-
-            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
             conCidade.conn = conCidade.getConection();
             conCidade.pstm = conCidade.conn.prepareStatement(sql1);
             conCidade.pstm.setString(1, unidade1);
             ResultSet rs1 = conCidade.pstm.executeQuery();
             if (rs1.next()) {
-                resultado1 = (rs1.getString("id") + " - " +rs1.getString("nome"));
+                resultado1 = (rs1.getString("nome"));
             }
             cbxCidade.setSelectedItem(resultado1);
-            
+
             //Tratando funcionario
-            
             String sql2;
             String resultado2 = null;
             sql2 = "select * from funcionario where id =? ";
-
-            // String sql = "SELECT cnpj FROM centro_dist WHERE nome_Fantasia = ?;";
             conFunc.conn = conFunc.getConection();
             conFunc.pstm = conFunc.conn.prepareStatement(sql2);
             conFunc.pstm.setString(1, unidade2);
             ResultSet rs2 = conFunc.pstm.executeQuery();
             if (rs2.next()) {
-                resultado2 = (rs2.getString("id") + " - " +rs2.getString("nome"));
+                resultado2 = (rs2.getString("nome"));
             }
             cbxFunc.setSelectedItem(resultado2);
 
@@ -117,6 +110,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         listaCentroDist();
         btnAnterior.setEnabled(false);
         btnProximo.setEnabled(false);
+        txtCodigo.setEnabled(false);
     }
 
     /**
@@ -773,7 +767,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoMouseExited
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-
+        txtCodigo.setEnabled(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnGravarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGravarMouseEntered
@@ -866,7 +860,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 ResultSet rsC = conVeic.pstm.executeQuery();
 
                 if (rsC.next()) {
-                    JOptionPane.showMessageDialog(null, "Essa chassi já foi cadastrada.\n"
+                    JOptionPane.showMessageDialog(null, "Esse chassi já foi cadastrada.\n"
                             + " Insira um chassi válido !");
                 } else if (txtNumChassi.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Insira um chassi válido !");
@@ -975,7 +969,6 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
         btnProximo.setEnabled(true);
         btnAnterior.setEnabled(false);
-
         try {
             String sql = "SELECT * FROM veiculo";
             banco.executaSQL(sql);
@@ -1034,7 +1027,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             String sql2 = "SELECT * FROM funcionario WHERE id = " + banco.rs.getString("fk_Id_func");
             conFunc.executaSQL(sql2);
             conFunc.rs.first();
-            cbxFunc.setSelectedItem( conFunc.rs.getString("nome"));
+            cbxFunc.setSelectedItem(conFunc.rs.getString("nome"));
 
             //Tratando a caixa de combinação de cidade
             String sql3 = "SELECT * FROM cidade WHERE id = " + banco.rs.getString("fk_Id_Cidade");
@@ -1140,42 +1133,94 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         conVeic.conn = conVeic.getConection();
+        boolean loop = true;
         int x = JOptionPane.showConfirmDialog(this, "Deseja alterar o registro ?");
         switch (x) {
             case 0:
                 try {
+                    String sql = "SELECT * FROM veiculo";
+                    banco.executaSQL(sql);
+                    banco.rs.first();
                     if (txtCodigo.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Nada para atualizar !");
                     } else {
-
                         veic.setId(Integer.parseInt(txtCodigo.getText()));
-                        veic.setPlaca(txtPlaca.getText());
-                        veic.setNumChassi(txtNumChassi.getText());
-                        veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
-                        veic.setModelo(txtModelo.getText());
 
-                        //Tratando caixa de combinação de Centro de distribuição
-                        String dados2[] = String.valueOf(cbxCentroDist.getSelectedItem()).split(" - ");
-                        veic.setIdCentroDist(dados2[0]);
+                        //Tratando Placa
+                        if (txtPlaca.getText().isEmpty() || txtPlaca.getText().length() != 7) {
+                            JOptionPane.showMessageDialog(this, "Insira uma placa válida !");
+                        } else {
+                            veic.setPlaca(txtPlaca.getText());
 
-                        //Tratando caixa de combinação de funcionario
-                        String dados[] = String.valueOf(cbxFunc.getSelectedItem()).split(" - ");
-                        veic.setIdFunc(Integer.parseInt(dados[0]));
+                            //Tratando Numero de Chassi
+                            if (txtNumChassi.getText().isEmpty()) {
+                                JOptionPane.showMessageDialog(this, "Insira um chassi válido !");
+                            } else {
+                                veic.setNumChassi(txtNumChassi.getText());
 
-                        //Tratando a caixa de combinação de cidade.
-                        String dados3[] = String.valueOf(cbxCidade.getSelectedItem()).split(" - ");
-                        veic.setCidade(Integer.parseInt(dados3[0]));
+                                //Tratando capacidade
+                                do {
+                                    veic.setCapacidade(Integer.parseInt(txtPesoTotal.getText()));
+                                    loop = false;
+                                } while (loop);
 
-                        DaoVeic.atualizarVeiculo(veic);
+                                //Tratando modelo
+                                if (txtModelo.getText().isEmpty()) {
+                                    JOptionPane.showMessageDialog(this, "Insira um modelo de veículo válido !");
+                                } else {
+                                    veic.setModelo(txtModelo.getText());
 
-                        JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
+                                    //Tratando caixa combinada de Centro de Distribuição
+                                    String nomeFantasia = (String) cbxCentroDist.getSelectedItem();
+                                    String sql1 = "SELECT cnpj FROM centro_Dist WHERE nome_Fantasia = ?;";
+                                    banco.conn = banco.getConection();
+                                    banco.pstm = banco.conn.prepareStatement(sql1);
+                                    banco.pstm.setString(1, nomeFantasia);
+                                    ResultSet rs1 = banco.pstm.executeQuery();
+                                    if (rs1.next()) {
+                                        veic.setIdCentroDist(rs1.getString("cnpj"));
+                                    }
+
+                                    //Tratando caixa combinada de Funcionario   
+                                    String nomeFun = (String) cbxFunc.getSelectedItem();
+                                    String sql2 = "SELECT id FROM funcionario WHERE nome = ?;";
+                                    banco.conn = banco.getConection();
+                                    banco.pstm = banco.conn.prepareStatement(sql2);
+                                    banco.pstm.setString(1, nomeFun);
+                                    ResultSet rs2 = banco.pstm.executeQuery();
+                                    if (rs2.next()) {
+                                        veic.setIdFunc(rs2.getInt("id"));
+                                    }
+
+                                    //Tratando caixa combinada de cidade
+                                    String nomeCid = (String) cbxCidade.getSelectedItem();
+                                    String sql3 = "SELECT id FROM cidade WHERE nome = ?;";
+                                    banco.conn = banco.getConection();
+                                    banco.pstm = banco.conn.prepareStatement(sql3);
+                                    banco.pstm.setString(1, nomeCid);
+                                    ResultSet rs3 = banco.pstm.executeQuery();
+                                    if (rs3.next()) {
+                                        veic.setCidade(rs3.getInt("id"));
+                                    }
+
+                                    DaoVeic.atualizarVeiculo(veic);
+
+                                    JOptionPane.showMessageDialog(null, "Registro " + txtCodigo.getText() + " alterado com sucesso !!");
+                                }
+
+                            }
+                        }
                     }
 
+                } catch (NumberFormatException e) {
+                    //Exceção de entrada fora do esperado (nesse caso...)
+                    JOptionPane.showMessageDialog(null, "Insira um número de capacidade válido !");
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro ao alterar registro !!");
                     e.printStackTrace();
                 }
                 break;
+
             case 1:
                 break;
             case 2:
@@ -1218,16 +1263,21 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastrarVeiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarVeiculos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastrarVeiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarVeiculos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastrarVeiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarVeiculos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastrarVeiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarVeiculos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1307,7 +1357,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 String a = rsestado.getString(1);
                 cbxEstado.removeAllItems();
                 //cbxEstado.addItem(rsestado.getString(1));
-                cbxEstado.addItem( rsestado.getString("nome"));
+                cbxEstado.addItem(rsestado.getString("nome"));
             }
             while (rscidade.next()) {
                 //cbxCidade.addItem(rscidade.getString(1));
@@ -1348,8 +1398,8 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
-     public void limpar() {
+
+    public void limpar() {
         txtCodigo.setText("");
         txtPlaca.setText("");
         txtNumChassi.setText("");
