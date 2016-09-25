@@ -152,11 +152,7 @@ public class PesquisaFuncionario extends javax.swing.JFrame {
                 tabelaFuncionario.getColumnModel().getColumn(14).setResizable(true);
                 tabelaFuncionario.getColumnModel().getColumn(15).setPreferredWidth(120);
                 tabelaFuncionario.getColumnModel().getColumn(15).setResizable(true);
-                /* tabelaFuncionario.getColumnModel().getColumn(16).setPreferredWidth(100);
-                tabelaFuncionario.getColumnModel().getColumn(16).setResizable(true);
-                tabelaFuncionario.getColumnModel().getColumn(17).setPreferredWidth(100);
-                tabelaFuncionario.getColumnModel().getColumn(17).setResizable(true);
-                tabelaFuncionario.getTableHeader().setReorderingAllowed(false);*/
+               
                 tabelaFuncionario.setAutoResizeMode(tabelaFuncionario.AUTO_RESIZE_OFF);
                 tabelaFuncionario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                 

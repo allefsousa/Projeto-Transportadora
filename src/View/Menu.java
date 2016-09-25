@@ -173,6 +173,7 @@ public class Menu extends javax.swing.JFrame {
         jSeparator15 = new javax.swing.JToolBar.Separator();
         btnRelatorios = new javax.swing.JButton();
         jSeparator17 = new javax.swing.JToolBar.Separator();
+        jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
@@ -1021,6 +1022,17 @@ public class Menu extends javax.swing.JFrame {
         jToolBar2.add(btnRelatorios);
         jToolBar2.add(jSeparator17);
 
+        jButton4.setText("Localizar Pedido");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton4);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1487,7 +1499,7 @@ public class Menu extends javax.swing.JFrame {
         btnPedidos.setBackground(new java.awt.Color(0, 102, 255));
         
         btnMenu1.setVisible(true);
-        btnMenu1.setText(" NOVO");
+        btnMenu1.setText("Localizar Pedido");
        // btnMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
         
         btnMenu2.setVisible(true);
@@ -1615,6 +1627,11 @@ public class Menu extends javax.swing.JFrame {
         emp.setVisible(true);
     }//GEN-LAST:event_lblUnidadeMouseClicked
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        LocalizaPedido loc = new LocalizaPedido();
+        loc.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1706,6 +1723,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
