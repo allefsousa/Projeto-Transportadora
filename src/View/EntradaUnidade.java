@@ -41,8 +41,8 @@ public class EntradaUnidade extends javax.swing.JFrame {
         int cliente = 0, cidade = 0, veiculo = 0;
         String cli, cid, veic;
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "End", "Nº Coleta", "Bairro",
-            "CEP", "Complemento", "Data de Entrega", "End Entrega", "Nº Entrega", "Bairro",
+        String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "Endereço", "Nº Coleta", "Bairro",
+            "CEP", "Complemento", "Data de Entrega", "Endereço Entrega", "Nº Entrega", "Bairro",
             "Cep", "Complemento", "Cliente", "Cidade", "Veiculo", "Rota"};
 
         connBanco.executaSQL(sql);
@@ -78,41 +78,41 @@ public class EntradaUnidade extends javax.swing.JFrame {
 
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
         tabelaEntrada.setModel(modelo);
-        tabelaEntrada.getColumnModel().getColumn(0).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(0).setPreferredWidth(70);
         tabelaEntrada.getColumnModel().getColumn(0).setResizable(true);
-        tabelaEntrada.getColumnModel().getColumn(1).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(1).setPreferredWidth(110);
         tabelaEntrada.setSelectionBackground(Color.lightGray);
         tabelaEntrada.setSelectionForeground(Color.BLUE);
         tabelaEntrada.getColumnModel().getColumn(1).setResizable(true);
-        tabelaEntrada.getColumnModel().getColumn(2).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(2).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(2).setResizable(false);
-        tabelaEntrada.getColumnModel().getColumn(3).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(3).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(3).setResizable(false);
-        tabelaEntrada.getColumnModel().getColumn(4).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(4).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(4).setResizable(false);
-        tabelaEntrada.getColumnModel().getColumn(5).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(5).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(5).setResizable(true);
-        tabelaEntrada.getColumnModel().getColumn(6).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(6).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(6).setResizable(true);
-        tabelaEntrada.getColumnModel().getColumn(7).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(7).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(7).setResizable(true);
         tabelaEntrada.getColumnModel().getColumn(8).setResizable(true);
-        tabelaEntrada.getColumnModel().getColumn(8).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(8).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(9).setResizable(false);
-        tabelaEntrada.getColumnModel().getColumn(9).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(9).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(10).setResizable(false);
-        tabelaEntrada.getColumnModel().getColumn(10).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(10).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(11).setResizable(false);
-        tabelaEntrada.getColumnModel().getColumn(11).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(11).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(12).setResizable(true);
-        tabelaEntrada.getColumnModel().getColumn(12).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(12).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(13).setResizable(true);
-        tabelaEntrada.getColumnModel().getColumn(13).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(13).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(14).setResizable(true);
         tabelaEntrada.getColumnModel().getColumn(14).setResizable(true);
-        tabelaEntrada.getColumnModel().getColumn(15).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(15).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(15).setResizable(false);
-        tabelaEntrada.getColumnModel().getColumn(16).setPreferredWidth(80);
+        tabelaEntrada.getColumnModel().getColumn(16).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(16).setResizable(false);
 
         tabelaEntrada.getTableHeader().setReorderingAllowed(false);
@@ -330,8 +330,8 @@ public class EntradaUnidade extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(btnInserir)))
                 .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-                .addGap(10, 10, 10))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -401,7 +401,6 @@ public class EntradaUnidade extends javax.swing.JFrame {
             //Tratando caixa combinada de Centro de Distribuição
             if (cbxCentroDist.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(null, "Selecione um centro de Distribuição !");
-                limpar();
             } else {               
                 String nomeFantasia = (String) cbxCentroDist.getSelectedItem();
                 String sql1 = "SELECT cnpj FROM centro_Dist WHERE nome_Fantasia = ?;";
@@ -452,6 +451,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
                     }
                 }
             }
+            //limpar();
         } catch (NumberFormatException e) {
             //Exceção de entrada fora do esperado (nesse caso...)
             JOptionPane.showMessageDialog(null, "Insira um código válido !");

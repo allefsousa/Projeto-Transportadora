@@ -66,10 +66,10 @@ public class DaoTransPedido {
             //Fecha a conexao com o BD
             ConnPed.conn.close();
 
-            JOptionPane.showMessageDialog(null, "Pedido Inserido Com Sucesso !! ");
+            //JOptionPane.showMessageDialog(null, "Pedido Inserido Com Sucesso !! ");
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro 111 ao Inserir Pedido !!!" + e);
+            JOptionPane.showMessageDialog(null, "Erro ao Inserir Pedido !!!" + e);
             e.printStackTrace();
         }
 
