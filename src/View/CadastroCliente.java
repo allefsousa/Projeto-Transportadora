@@ -112,7 +112,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("CADASTRAR EMPRESA");
+        lblTitulo.setText("CADASTRAR CLIENTE");
 
         btnSair1.setBackground(new java.awt.Color(0, 28, 119));
         btnSair1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Minimizar.png"))); // NOI18N

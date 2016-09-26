@@ -105,8 +105,8 @@
                               <Component id="txtCPF" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtRG" alignment="0" max="32767" attributes="0"/>
                               <Component id="cbxCentrodis" alignment="0" pref="187" max="32767" attributes="0"/>
-                              <Component id="txtNascimento" min="-2" max="-2" attributes="0"/>
-                              <Component id="dataAdmisao" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNascimento" alignment="0" max="32767" attributes="0"/>
+                              <Component id="dataAdmisao" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

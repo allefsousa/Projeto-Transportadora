@@ -61,7 +61,6 @@ public class Menu extends javax.swing.JFrame {
             btnCadastrar.setBackground(new java.awt.Color(0,28,119));
             btnMovimentação.setBackground(new java.awt.Color(0,28,119));
             btnPedidos.setBackground(new java.awt.Color(0,28,119));
-            btnFuncionario.setBackground(new java.awt.Color(0,28,119));
             btnRelatorios.setBackground(new java.awt.Color(0,28,119));
                 
             
@@ -169,11 +168,8 @@ public class Menu extends javax.swing.JFrame {
         jSeparator12 = new javax.swing.JToolBar.Separator();
         btnPedidos = new javax.swing.JButton();
         jSeparator13 = new javax.swing.JToolBar.Separator();
-        btnFuncionario = new javax.swing.JButton();
-        jSeparator15 = new javax.swing.JToolBar.Separator();
         btnRelatorios = new javax.swing.JButton();
         jSeparator17 = new javax.swing.JToolBar.Separator();
-        jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
@@ -980,27 +976,6 @@ public class Menu extends javax.swing.JFrame {
         jToolBar2.add(btnPedidos);
         jToolBar2.add(jSeparator13);
 
-        btnFuncionario.setBackground(new java.awt.Color(0, 28, 119));
-        btnFuncionario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnFuncionario.setForeground(new java.awt.Color(255, 255, 255));
-        btnFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Funcionario.png"))); // NOI18N
-        btnFuncionario.setText("FUNCIONARIOS");
-        btnFuncionario.setBorder(null);
-        btnFuncionario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnFuncionario.setFocusable(false);
-        btnFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnFuncionario.setMaximumSize(new java.awt.Dimension(150, 60));
-        btnFuncionario.setMinimumSize(new java.awt.Dimension(150, 60));
-        btnFuncionario.setPreferredSize(new java.awt.Dimension(170, 60));
-        btnFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFuncionarioActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(btnFuncionario);
-        jToolBar2.add(jSeparator15);
-
         btnRelatorios.setBackground(new java.awt.Color(0, 28, 119));
         btnRelatorios.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnRelatorios.setForeground(new java.awt.Color(255, 255, 255));
@@ -1021,17 +996,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jToolBar2.add(btnRelatorios);
         jToolBar2.add(jSeparator17);
-
-        jButton4.setText("Localizar Pedido");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(jButton4);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1416,8 +1380,8 @@ public class Menu extends javax.swing.JFrame {
             new CadastrarEmpresa().setVisible(true);
         
         if (aux==3){
-            
-//            new InicioOrcamento().setVisible(true);
+        LocalizaPedido loc = new LocalizaPedido();
+        loc.setVisible(true);
         }
     }//GEN-LAST:event_btnMenu1ActionPerformed
 
@@ -1499,7 +1463,7 @@ public class Menu extends javax.swing.JFrame {
         btnPedidos.setBackground(new java.awt.Color(0, 102, 255));
         
         btnMenu1.setVisible(true);
-        btnMenu1.setText("Localizar Pedido");
+        btnMenu1.setText(" LOCALIZAR");
        // btnMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
         
         btnMenu2.setVisible(true);
@@ -1518,28 +1482,6 @@ public class Menu extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_btnPedidosActionPerformed
-
-    private void btnFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionarioActionPerformed
-        Menu.setVisible(true);
-        ocultarBotoes();
-        aux = 5;
-        cor();
-        btnFuncionario.setBackground(new java.awt.Color(0, 102, 255));
-        
-        btnMenu1.setVisible(true);
-        btnMenu1.setText(" CADASTRO");
-       // btnMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu2.setVisible(true);
-        btnMenu2.setText(" RELATORIO");
-       // btnMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu3.setVisible(true);
-        btnMenu3.setText(" SAIDA VEIC.");
-       // btnMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N  :
-        
-              
-    }//GEN-LAST:event_btnFuncionarioActionPerformed
 
     private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed
          Menu.setVisible(true);
@@ -1627,11 +1569,6 @@ public class Menu extends javax.swing.JFrame {
         emp.setVisible(true);
     }//GEN-LAST:event_lblUnidadeMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        LocalizaPedido loc = new LocalizaPedido();
-        loc.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -1679,7 +1616,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnCalculadora;
     private javax.swing.JButton btnCalculadora2;
     private javax.swing.JButton btnConfiguração;
-    private javax.swing.JButton btnFuncionario;
     private javax.swing.JButton btnInformações;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnMenu1;
@@ -1723,7 +1659,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -1740,7 +1675,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator11;
     private javax.swing.JToolBar.Separator jSeparator12;
     private javax.swing.JToolBar.Separator jSeparator13;
-    private javax.swing.JToolBar.Separator jSeparator15;
     private javax.swing.JToolBar.Separator jSeparator17;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
