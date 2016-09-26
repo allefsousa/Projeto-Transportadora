@@ -11,6 +11,8 @@ import Funcionalidades.ModeloTabela;
 import Model.TransportadoraPedido;
 import java.awt.Color;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -27,6 +29,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
     ConnBanco connBanco = new ConnBanco();
     ConnBanco conEnt = new ConnBanco();
     ConnBanco banco = new ConnBanco();
+    ConnBanco banco1 = new ConnBanco();
     TransportadoraPedido transPed = new TransportadoraPedido();
     Dao.DaoTransPedido daoTransPed = new DaoTransPedido();
 
@@ -44,7 +47,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
         String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "Endereço", "Nº Coleta", "Bairro",
             "CEP", "Complemento", "Data de Entrega", "Endereço Entrega", "Nº Entrega", "Bairro",
             "Cep", "Complemento", "Cliente", "Cidade", "Veiculo", "Rota"};
-
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         connBanco.executaSQL(sql);
         try {
             connBanco.rs.first();
@@ -52,19 +55,19 @@ public class EntradaUnidade extends javax.swing.JFrame {
                 cliente = connBanco.rs.getInt("fk_Id_Cliente");
                 sql = "SELECT razao_Social_cli FROM cliente where id_Cli = ?";
                 cli = daoTransPed.chaveEstrangeira(sql, cliente);
-                
+
                 cidade = connBanco.rs.getInt("fk_Id_Cidade");
                 sql = "SELECT nome FROM cidade where id = ?";
                 cid = daoTransPed.chaveEstrangeira(sql, cidade);
-                
+
                 veiculo = connBanco.rs.getInt("fk_Id_Veiculo");
                 sql = "SELECT modelo FROM veiculo where id_Veiculo = ?";
-                veic= daoTransPed.chaveEstrangeira(sql, veiculo);
-                
-                dados.add(new Object[]{connBanco.rs.getInt("num_Pedido"), connBanco.rs.getDate("data_Coleta"),
+                veic = daoTransPed.chaveEstrangeira(sql, veiculo);
+
+                dados.add(new Object[]{connBanco.rs.getInt("num_Pedido"), formatter.format(connBanco.rs.getDate("data_Coleta")),
                     connBanco.rs.getString("rua_Coleta"), connBanco.rs.getInt("num_End_Coleta"),
                     connBanco.rs.getString("bairro_Coleta"), connBanco.rs.getString("cep_Coleta"),
-                    connBanco.rs.getString("complemento_Coleta"), connBanco.rs.getDate("data_Entrega"),
+                    connBanco.rs.getString("complemento_Coleta"), formatter.format(connBanco.rs.getDate("data_Entrega")),
                     connBanco.rs.getString("rua_Entrega"), connBanco.rs.getString("num_End_Entrega"),
                     connBanco.rs.getString("bairro_Entrega"), connBanco.rs.getString("cep_Entrega"),
                     connBanco.rs.getString("complemento"), cli, cid, veic,
@@ -401,7 +404,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
             //Tratando caixa combinada de Centro de Distribuição
             if (cbxCentroDist.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(null, "Selecione um centro de Distribuição !");
-            } else {               
+            } else {
                 String nomeFantasia = (String) cbxCentroDist.getSelectedItem();
                 String sql1 = "SELECT cnpj FROM centro_Dist WHERE nome_Fantasia = ?;";
                 banco.conn = banco.getConection();
@@ -410,16 +413,19 @@ public class EntradaUnidade extends javax.swing.JFrame {
                 ResultSet rs1 = banco.pstm.executeQuery();
                 //Verificando se o pedido já não teve sua entrada registrada no Centro de distribuição em questão
                 if (rs1.next()) {
-                    String sqlCD = "SELECT fk_Centro_Dist FROM Transportadora_pedido where fk_Centro_Dist = ?";
+                    String sqlCD = "SELECT * FROM Transportadora_pedido where fk_Centro_Dist = ? and fk_Num_Pedido = ?";
                     String cnpj = rs1.getString("cnpj");
+                    String id = txtCodigo.getText();
                     banco.conn = banco.getConection();
                     banco.pstm = banco.conn.prepareStatement(sqlCD);
                     banco.pstm.setString(1, cnpj);
+                    banco.pstm.setString(2, id);
                     ResultSet rs2 = banco.pstm.executeQuery();
+
                     //Caso possua registro mostra mensagem de advertência
-                    if (rs2.next()) {
+                    if (rs2.next()) {                
                         JOptionPane.showMessageDialog(null, "Pedido já registrado nesse Centro de Didtribuição\n"
-                                + "Selecione outro !");
+                                    + "Selecione outro !");       
                     } else {
                         transPed.setCentroDist(rs1.getString("cnpj"));
                         //Verificando se o campo de entrada de código não está vazio
