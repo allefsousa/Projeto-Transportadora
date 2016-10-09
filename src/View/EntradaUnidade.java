@@ -41,12 +41,12 @@ public class EntradaUnidade extends javax.swing.JFrame {
     }
 
     public void preencherTabela(String sql) {
-        int cliente = 0, cidade = 0, veiculo = 0;
-        String cli, cid, veic;
+        int cliente = 0, cidadeColeta = 0, cidadeEntrega = 0, veiculo = 0;
+        String cli, cidEnt, cidCol, veic;
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "Endereço", "Nº Coleta", "Bairro",
-            "CEP", "Complemento", "Data de Entrega", "Endereço Entrega", "Nº Entrega", "Bairro",
-            "Cep", "Complemento", "Cliente", "Cidade", "Veiculo", "Rota"};
+            "CEP", "Cidade de Coleta", "Data de Entrega", "Endereço Entrega", "Nº Entrega", "Bairro",
+            "Cep", "Cidade de Entrega", "Cliente", "Veiculo", "Rota"};
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         connBanco.executaSQL(sql);
         try {
@@ -56,9 +56,15 @@ public class EntradaUnidade extends javax.swing.JFrame {
                 sql = "SELECT razao_Social_cli FROM cliente where id_Cli = ?";
                 cli = daoTransPed.chaveEstrangeira(sql, cliente);
 
-                cidade = connBanco.rs.getInt("fk_Id_Cidade");
+                //Tratando cidade de coleta
+                cidadeColeta = connBanco.rs.getInt("fk_IdCidade_Coleta");
                 sql = "SELECT nome FROM cidade where id = ?";
-                cid = daoTransPed.chaveEstrangeira(sql, cidade);
+                cidCol = daoTransPed.chaveEstrangeira(sql, cidadeColeta);
+                
+                //Tratando cidade de entrega
+                cidadeEntrega = connBanco.rs.getInt("fk_IdCidade_Entrega");
+                sql = "SELECT nome FROM cidade where id = ?";
+                cidEnt = daoTransPed.chaveEstrangeira(sql, cidadeEntrega);
 
                 veiculo = connBanco.rs.getInt("fk_Id_Veiculo");
                 sql = "SELECT modelo FROM veiculo where id_Veiculo = ?";
@@ -67,11 +73,10 @@ public class EntradaUnidade extends javax.swing.JFrame {
                 dados.add(new Object[]{connBanco.rs.getInt("num_Pedido"), formatter.format(connBanco.rs.getDate("data_Coleta")),
                     connBanco.rs.getString("rua_Coleta"), connBanco.rs.getInt("num_End_Coleta"),
                     connBanco.rs.getString("bairro_Coleta"), connBanco.rs.getString("cep_Coleta"),
-                    connBanco.rs.getString("complemento_Coleta"), formatter.format(connBanco.rs.getDate("data_Entrega")),
+                    cidCol, formatter.format(connBanco.rs.getDate("data_Entrega")),
                     connBanco.rs.getString("rua_Entrega"), connBanco.rs.getString("num_End_Entrega"),
                     connBanco.rs.getString("bairro_Entrega"), connBanco.rs.getString("cep_Entrega"),
-                    connBanco.rs.getString("complemento"), cli, cid, veic,
-                    connBanco.rs.getString("fk_Id_Rota")});
+                    cidEnt, cli, veic, connBanco.rs.getString("fk_Id_Rota")});
 
             } while (connBanco.rs.next());
         } catch (Exception e) {
@@ -115,8 +120,8 @@ public class EntradaUnidade extends javax.swing.JFrame {
         tabelaEntrada.getColumnModel().getColumn(14).setResizable(true);
         tabelaEntrada.getColumnModel().getColumn(15).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(15).setResizable(false);
-        tabelaEntrada.getColumnModel().getColumn(16).setPreferredWidth(110);
-        tabelaEntrada.getColumnModel().getColumn(16).setResizable(false);
+        //tabelaEntrada.getColumnModel().getColumn(16).setPreferredWidth(110);
+        //tabelaEntrada.getColumnModel().getColumn(16).setResizable(false);
 
         tabelaEntrada.getTableHeader().setReorderingAllowed(false);
         tabelaEntrada.setAutoResizeMode(tabelaEntrada.AUTO_RESIZE_OFF);

@@ -90,7 +90,7 @@ public class LocalizaPedido extends javax.swing.JFrame {
                     sql = "SELECT nome_Fantasia from centro_dist where cnpj = ?";
                    centrodist = daopesquisa.chaveEstrangeiraString(sql, centrodist);
 
-                    dados.add(new Object[]{connBanco.rs.getInt("fk_Num_Pedido"), centrodist, formatter.format(connBanco.rs.getDate("dataEntrada")),formatter.format(connBanco.rs.getDate("dataSaida")), connBanco.rs.getString("status_Pedido")});
+                    dados.add(new Object[]{connBanco.rs.getInt("fk_Num_Pedido"), centrodist, formatter.format(connBanco.rs.getDate("dataEntrada")) ,formatter.format(connBanco.rs.getDate("dataSaida")), connBanco.rs.getString("status_Pedido")});
                 } while (connBanco.rs.next());
             }
         } catch (SQLException ex) {
