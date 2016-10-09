@@ -285,7 +285,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
             }
         });
 
-        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o Status", "Em Transporte", "Entregue", " " }));
+        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Status", "Entrada", " " }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -418,13 +418,15 @@ public class EntradaUnidade extends javax.swing.JFrame {
                 ResultSet rs1 = banco.pstm.executeQuery();
                 //Verificando se o pedido já não teve sua entrada registrada no Centro de distribuição em questão
                 if (rs1.next()) {
-                    String sqlCD = "SELECT * FROM Transportadora_pedido where fk_Centro_Dist = ? and fk_Num_Pedido = ?";
+                    String sqlCD = "SELECT * FROM Transportadora_pedido where fk_Centro_Dist = ? and fk_Num_Pedido = ? and status_Pedido = ?";
                     String cnpj = rs1.getString("cnpj");
                     String id = txtCodigo.getText();
+                    String stt = (String) cbxStatus.getSelectedItem();
                     banco.conn = banco.getConection();
                     banco.pstm = banco.conn.prepareStatement(sqlCD);
                     banco.pstm.setString(1, cnpj);
                     banco.pstm.setString(2, id);
+                    banco.pstm.setString(3, stt);
                     ResultSet rs2 = banco.pstm.executeQuery();
 
                     //Caso possua registro mostra mensagem de advertência

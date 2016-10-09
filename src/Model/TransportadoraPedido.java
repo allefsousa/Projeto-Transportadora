@@ -16,16 +16,18 @@ public class TransportadoraPedido {
     private int numPedido;
     private Date dataEnt;
     private Date dataSaida;
+    private Date dataEntrega;
     private String status;
 
     public TransportadoraPedido() {
     }
 
-    public TransportadoraPedido(String CentroDist, int numPedido, Date dataEnt, Date dataSaida, String status) {
+    public TransportadoraPedido(String CentroDist, int numPedido, Date dataEnt, Date dataSaida,Date dataEntrega, String status) {
         this.CentroDist = CentroDist;
         this.numPedido = numPedido;
         this.dataEnt = dataEnt;
         this.dataSaida = dataSaida;
+        this.dataEntrega = dataEntrega;
         this.status = status;
     }
     
@@ -61,6 +63,14 @@ public class TransportadoraPedido {
         this.dataSaida = dataSaida;
     }
 
+    public Date getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(Date dataEntrega) {
+        this.dataEntrega = dataEntrega;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -72,6 +82,6 @@ public class TransportadoraPedido {
     @Override
     public String toString() {
         return "TransportadoraPedido{" + "CentroDist=" + CentroDist + ", numPedido=" + numPedido + ""
-                + ", dataEnt=" + dataEnt + ", dataSaida=" + dataSaida + ", status=" + status + '}';
+                + ", dataEnt=" + dataEnt + ", dataSaida=" + dataSaida +"dataEntrega= "+dataEntrega +", status=" + status + '}';
     }
 }

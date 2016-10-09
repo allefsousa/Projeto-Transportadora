@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -58,6 +60,72 @@ public class DaoTransPedido {
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             
             comando.setString(3, formatter.format(transp.getDataEnt()));
+            comando.setString(4, transp.getStatus());
+
+            //executa a query
+            comando.execute();
+
+            //Fecha a conexao com o BD
+            ConnPed.conn.close();
+
+            //JOptionPane.showMessageDialog(null, "Pedido Inserido Com Sucesso !! ");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Inserir Pedido !!!" + e);
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    public boolean saidaPedido(TransportadoraPedido transp){
+        ConnPed.conn = ConnPed.getConection();
+
+        String saidaTransPed = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, dataSaida, status_Pedido)"
+                               +"VALUES(?,?,?,?)";
+        try {
+            PreparedStatement comando = ConnPed.conn.prepareStatement(saidaTransPed);
+            // formatar a query 
+            comando.setString(1, transp.getCentroDist());
+            comando.setInt(2, transp.getNumPedido());
+            
+            //Formatando a data para ano mes e dia           
+            DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            
+            comando.setString(3, formatter.format(transp.getDataSaida()));
+            comando.setString(4, transp.getStatus());
+
+            //executa a query
+            comando.execute();
+
+            //Fecha a conexao com o BD
+            ConnPed.conn.close();
+
+            //JOptionPane.showMessageDialog(null, "Pedido Inserido Com Sucesso !! ");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Inserir Pedido !!!" + e);
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    public boolean inserirEntregaPedido(TransportadoraPedido transp){
+        ConnPed.conn = ConnPed.getConection();
+
+        String saidaTransPed = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, dataSaida, status_Pedido)"
+                               +"VALUES(?,?,?,?)";
+        try {
+            PreparedStatement comando = ConnPed.conn.prepareStatement(saidaTransPed);
+            // formatar a query 
+            comando.setString(1, transp.getCentroDist());
+            comando.setInt(2, transp.getNumPedido());
+            
+            //Formatando a data para ano mes e dia           
+            DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            
+            comando.setString(3, formatter.format(transp.getDataEntrega()));
             comando.setString(4, transp.getStatus());
 
             //executa a query

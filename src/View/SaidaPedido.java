@@ -19,9 +19,9 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author Felipe
+ * @author Rafael
  */
-public class EntregaPedido extends javax.swing.JFrame {
+public class SaidaPedido extends javax.swing.JFrame {
 
     ConnBanco connBanco = new ConnBanco();
     ConnBanco conEnt = new ConnBanco();
@@ -29,18 +29,17 @@ public class EntregaPedido extends javax.swing.JFrame {
     ConnBanco banco1 = new ConnBanco();
     TransportadoraPedido transPed = new TransportadoraPedido();
     Dao.DaoTransPedido daoTransPed = new DaoTransPedido();
-    
+
     /**
-     * Creates new form EntregaPedido
+     * Creates new form SaidaPedido
      */
-    public EntregaPedido() {
+    public SaidaPedido() {
         initComponents();
-        setExtendedState(MAXIMIZED_BOTH);
         setExtendedState(MAXIMIZED_BOTH);
         connBanco.getConection();
         listaCentroDist();
     }
-    
+
     public void preencherTabela(String sql) {
         int cliente = 0, cidadeColeta = 0, cidadeEntrega = 0, veiculo = 0;
         String cli, cidEnt, cidCol, veic;
@@ -86,50 +85,50 @@ public class EntregaPedido extends javax.swing.JFrame {
         }
 
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
-        tabelaEntrega.setModel(modelo);
-        tabelaEntrega.getColumnModel().getColumn(0).setPreferredWidth(70);
-        tabelaEntrega.getColumnModel().getColumn(0).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(1).setPreferredWidth(110);
-        tabelaEntrega.setSelectionBackground(Color.lightGray);
-        tabelaEntrega.setSelectionForeground(Color.BLUE);
-        tabelaEntrega.getColumnModel().getColumn(1).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(2).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(2).setResizable(false);
-        tabelaEntrega.getColumnModel().getColumn(3).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(3).setResizable(false);
-        tabelaEntrega.getColumnModel().getColumn(4).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(4).setResizable(false);
-        tabelaEntrega.getColumnModel().getColumn(5).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(5).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(6).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(6).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(7).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(7).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(8).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(8).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(9).setResizable(false);
-        tabelaEntrega.getColumnModel().getColumn(9).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(10).setResizable(false);
-        tabelaEntrega.getColumnModel().getColumn(10).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(11).setResizable(false);
-        tabelaEntrega.getColumnModel().getColumn(11).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(12).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(12).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(13).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(13).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(14).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(14).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(15).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(15).setResizable(false);
+        tabelaSaida.setModel(modelo);
+        tabelaSaida.getColumnModel().getColumn(0).setPreferredWidth(70);
+        tabelaSaida.getColumnModel().getColumn(0).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(1).setPreferredWidth(110);
+        tabelaSaida.setSelectionBackground(Color.lightGray);
+        tabelaSaida.setSelectionForeground(Color.BLUE);
+        tabelaSaida.getColumnModel().getColumn(1).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(2).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(2).setResizable(false);
+        tabelaSaida.getColumnModel().getColumn(3).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(3).setResizable(false);
+        tabelaSaida.getColumnModel().getColumn(4).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(4).setResizable(false);
+        tabelaSaida.getColumnModel().getColumn(5).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(5).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(6).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(6).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(7).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(7).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(8).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(8).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(9).setResizable(false);
+        tabelaSaida.getColumnModel().getColumn(9).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(10).setResizable(false);
+        tabelaSaida.getColumnModel().getColumn(10).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(11).setResizable(false);
+        tabelaSaida.getColumnModel().getColumn(11).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(12).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(12).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(13).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(13).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(14).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(14).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(15).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(15).setResizable(false);
 
-        tabelaEntrega.getTableHeader().setReorderingAllowed(false);
-        tabelaEntrega.setAutoResizeMode(tabelaEntrega.AUTO_RESIZE_OFF);
-        tabelaEntrega.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabelaSaida.getTableHeader().setReorderingAllowed(false);
+        tabelaSaida.setAutoResizeMode(tabelaSaida.AUTO_RESIZE_OFF);
+        tabelaSaida.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    
+
     public void limpar() {
         txtCodigo.setText(" ");
-        cbxDataEntrega.setDate(null);
+        txtDataSaida.setDate(null);
         cbxStatus.setSelectedIndex(0);
         cbxCentroDist.setSelectedIndex(0);
     }
@@ -143,30 +142,29 @@ public class EntregaPedido extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        lblUsuario = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        txtDataSaida = new com.toedter.calendar.JDateChooser();
         BarraMenu = new javax.swing.JPanel();
         btnSair = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
         btnSair1 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
+        lblUsuario1 = new javax.swing.JLabel();
+        cbxCentroDist = new javax.swing.JComboBox();
+        btnInserir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaEntrega = new javax.swing.JTable();
+        tabelaSaida = new javax.swing.JTable();
+        cbxStatus = new javax.swing.JComboBox();
         lblCodigo = new javax.swing.JLabel();
         lblDataEntrega = new javax.swing.JLabel();
-        lblUsuario = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
-        cbxDataEntrega = new com.toedter.calendar.JDateChooser();
-        btnEntrega = new javax.swing.JButton();
-        cbxStatus = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        cbxCentroDist = new javax.swing.JComboBox();
-        btnPesquisar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setName("EntregaPedido"); // NOI18N
-        setUndecorated(true);
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        lblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUsuario.setText("STATUS:");
+
+        txtCodigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         BarraMenu.setBackground(new java.awt.Color(0, 28, 119));
         BarraMenu.setPreferredSize(new java.awt.Dimension(860, 43));
@@ -187,7 +185,7 @@ public class EntregaPedido extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("ENTREGA DE PEDIDOS");
+        lblTitulo.setText("SAÍDA DE PEDIDOS");
 
         btnSair1.setBackground(new java.awt.Color(0, 28, 119));
         btnSair1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Minimizar.png"))); // NOI18N
@@ -225,7 +223,42 @@ public class EntregaPedido extends javax.swing.JFrame {
             .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        tabelaEntrega.setModel(new javax.swing.table.DefaultTableModel(
+        btnPesquisar.setBackground(new java.awt.Color(0, 28, 119));
+        btnPesquisar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnPesquisar.setForeground(new java.awt.Color(255, 255, 255));
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/checked.png"))); // NOI18N
+        btnPesquisar.setText("PRODUTO NA UNIDADE");
+        btnPesquisar.setFocusPainted(false);
+        btnPesquisar.setFocusable(false);
+        btnPesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPesquisar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
+
+        lblUsuario1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUsuario1.setText("UNIDADE:");
+
+        cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um item" }));
+
+        btnInserir.setBackground(new java.awt.Color(0, 28, 119));
+        btnInserir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnInserir.setForeground(new java.awt.Color(255, 255, 255));
+        btnInserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Gravar.png"))); // NOI18N
+        btnInserir.setText("Salvar");
+        btnInserir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnInserir.setMaximumSize(new java.awt.Dimension(161, 59));
+        btnInserir.setMinimumSize(new java.awt.Dimension(161, 59));
+        btnInserir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
+            }
+        });
+
+        tabelaSaida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -236,120 +269,73 @@ public class EntregaPedido extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tabelaEntrega);
+        jScrollPane1.setViewportView(tabelaSaida);
+
+        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Status", "Em Transporte", " ", " " }));
 
         lblCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblCodigo.setText("CODIGO PEDIDO:");
 
         lblDataEntrega.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblDataEntrega.setText("DATA DA ENTREGA:");
-
-        lblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblUsuario.setText("STATUS:");
-
-        txtCodigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        btnEntrega.setBackground(new java.awt.Color(0, 28, 119));
-        btnEntrega.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnEntrega.setForeground(new java.awt.Color(255, 255, 255));
-        btnEntrega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/checked.png"))); // NOI18N
-        btnEntrega.setText("BAIXA / ENTREGUE");
-        btnEntrega.setFocusPainted(false);
-        btnEntrega.setFocusable(false);
-        btnEntrega.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEntrega.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnEntrega.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntregaActionPerformed(evt);
-            }
-        });
-
-        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Status", "Entregue" }));
-
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("UNIDADE:");
-
-        cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecone uma unidade" }));
-
-        btnPesquisar.setText("Pesquisar");
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BarraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
-                .addGap(10, 10, 10))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblDataEntrega)
-                        .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblCodigo, javax.swing.GroupLayout.Alignment.TRAILING)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtCodigo)
-                    .addComponent(cbxDataEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(cbxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxCentroDist, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(56, 56, 56)
-                .addComponent(btnPesquisar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BarraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCodigo)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblDataEntrega)
-                                    .addComponent(cbxDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(btnPesquisar)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblUsuario)
-                            .addComponent(cbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(cbxCentroDist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblDataEntrega.setText("DATA DE SAÍDA:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(BarraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1)
+                .addGap(10, 10, 10))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblDataEntrega)
+                        .addComponent(lblCodigo, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblUsuario1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDataSaida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxCentroDist, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxStatus, 0, 150, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BarraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCodigo)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDataEntrega)
+                            .addComponent(txtDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUsuario)
+                            .addComponent(cbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                    .addComponent(btnInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblUsuario1)
+                    .addComponent(cbxCentroDist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -397,7 +383,7 @@ public class EntregaPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void btnEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntregaActionPerformed
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
          boolean loop = true;
         try {
             //Tratando caixa combinada de Centro de Distribuição
@@ -439,17 +425,17 @@ public class EntregaPedido extends javax.swing.JFrame {
                                 loop = false;
                             } while (loop);
                             //Verificando se entrada de data não está vazio
-                            if (cbxDataEntrega.getDate() == null) {
+                            if (txtDataSaida.getDate() == null) {
                                 JOptionPane.showMessageDialog(null, "Insira a data de hoje!");
                             } else {
-                                transPed.setDataEnt(cbxDataEntrega.getDate());
+                                transPed.setDataSaida(txtDataSaida.getDate());
                                 //Verificando se entrada de status não está vazio
                                 if (cbxStatus.getSelectedIndex() == 0) {
                                     JOptionPane.showMessageDialog(null, "Insira o status do pedido !");
                                 } else {
                                     transPed.setStatus((String) cbxStatus.getSelectedItem());
 
-                                    daoTransPed.insereTranspPedido(transPed);
+                                    daoTransPed.saidaPedido(transPed);
                                     JOptionPane.showMessageDialog(null, "Pedido registrado com sucesso !");
                                     limpar();
                                 }
@@ -466,7 +452,7 @@ public class EntregaPedido extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao registrar entrada !");
         }
-    }//GEN-LAST:event_btnEntregaActionPerformed
+    }//GEN-LAST:event_btnInserirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -485,45 +471,44 @@ public class EntregaPedido extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EntregaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaidaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EntregaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaidaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EntregaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaidaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EntregaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaidaPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EntregaPedido().setVisible(true);
+                new SaidaPedido().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BarraMenu;
-    private javax.swing.JButton btnEntrega;
+    private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSair1;
     private javax.swing.JComboBox cbxCentroDist;
-    private com.toedter.calendar.JDateChooser cbxDataEntrega;
     private javax.swing.JComboBox cbxStatus;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblDataEntrega;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuario;
-    private javax.swing.JTable tabelaEntrega;
+    private javax.swing.JLabel lblUsuario1;
+    private javax.swing.JTable tabelaSaida;
     private javax.swing.JTextField txtCodigo;
+    private com.toedter.calendar.JDateChooser txtDataSaida;
     // End of variables declaration//GEN-END:variables
 
-public void listaCentroDist() {
+    public void listaCentroDist() {
         String sql = "SELECT * FROM centro_dist";
         try {
             banco.conn = banco.getConection();
@@ -536,5 +521,5 @@ public void listaCentroDist() {
             e.printStackTrace();
         }
     }
-    
+
 }
