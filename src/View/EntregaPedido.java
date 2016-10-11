@@ -412,21 +412,18 @@ public class EntregaPedido extends javax.swing.JFrame {
                 ResultSet rs1 = banco.pstm.executeQuery();
                 //Verificando se o pedido já não teve sua entrada registrada no Centro de distribuição em questão
                 if (rs1.next()) {
-                    String sqlCD = "SELECT * FROM Transportadora_pedido where fk_Centro_Dist = ? and fk_Num_Pedido = ? and status_Pedido = ?";
-                    String cnpj = rs1.getString("cnpj");
+                    String sqlCD = "SELECT * FROM Transportadora_pedido where fk_Num_Pedido = ? and status_Pedido = ?";
                     String id = txtCodigo.getText();
                     String stt = (String) cbxStatus.getSelectedItem();
                     banco.conn = banco.getConection();
                     banco.pstm = banco.conn.prepareStatement(sqlCD);
-                    banco.pstm.setString(1, cnpj);
-                    banco.pstm.setString(2, id);
-                    banco.pstm.setString(3, stt);
+                    banco.pstm.setString(1, id);
+                    banco.pstm.setString(2, stt);
                     ResultSet rs2 = banco.pstm.executeQuery();
 
                     //Caso possua registro mostra mensagem de advertência
                     if (rs2.next()) {                
-                        JOptionPane.showMessageDialog(null, "Pedido já registrado nesse Centro de Didtribuição\n"
-                                    + "Selecione outro !");       
+                        JOptionPane.showMessageDialog(null, "Pedido Inválido... Este pedido já foi entregue !");       
                     } else {
                         transPed.setCentroDist(rs1.getString("cnpj"));
                         //Verificando se o campo de entrada de código não está vazio
@@ -440,16 +437,16 @@ public class EntregaPedido extends javax.swing.JFrame {
                             } while (loop);
                             //Verificando se entrada de data não está vazio
                             if (cbxDataEntrega.getDate() == null) {
-                                JOptionPane.showMessageDialog(null, "Insira a data de hoje!");
+                                JOptionPane.showMessageDialog(null, "Insira a data de entrega!");
                             } else {
-                                transPed.setDataEnt(cbxDataEntrega.getDate());
+                                transPed.setDataEntrega(cbxDataEntrega.getDate());
                                 //Verificando se entrada de status não está vazio
                                 if (cbxStatus.getSelectedIndex() == 0) {
                                     JOptionPane.showMessageDialog(null, "Insira o status do pedido !");
                                 } else {
                                     transPed.setStatus((String) cbxStatus.getSelectedItem());
 
-                                    daoTransPed.insereTranspPedido(transPed);
+                                    daoTransPed.inserirEntregaPedido(transPed);
                                     JOptionPane.showMessageDialog(null, "Pedido registrado com sucesso !");
                                     limpar();
                                 }

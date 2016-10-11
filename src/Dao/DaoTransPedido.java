@@ -81,27 +81,20 @@ public class DaoTransPedido {
     public boolean saidaPedido(TransportadoraPedido transp){
         ConnPed.conn = ConnPed.getConection();
 
-        String saidaTransPed = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, dataSaida, status_Pedido)"
-                               +"VALUES(?,?,?,?)";
+        String saidaTransPed = "Update transportadora_pedido set dataSaida = ? WHERE fk_Centro_Dist = ? AND fk_Num_Pedido = ?";
         try {
-            PreparedStatement comando = ConnPed.conn.prepareStatement(saidaTransPed);
-            // formatar a query 
-            comando.setString(1, transp.getCentroDist());
-            comando.setInt(2, transp.getNumPedido());
+            ConnPed.pstm = ConnPed.conn.prepareStatement(saidaTransPed);
+            ConnPed.pstm.setString(1, transp.getCentroDist());
+            ConnPed.pstm.setInt(2, transp.getNumPedido());
             
             //Formatando a data para ano mes e dia           
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            ConnPed.pstm.setString(3, formatter.format(transp.getDataSaida()));
             
-            comando.setString(3, formatter.format(transp.getDataSaida()));
-            comando.setString(4, transp.getStatus());
-
-            //executa a query
-            comando.execute();
-
-            //Fecha a conexao com o BD
+            ConnPed.pstm.execute();
             ConnPed.conn.close();
-
-            //JOptionPane.showMessageDialog(null, "Pedido Inserido Com Sucesso !! ");
+            JOptionPane.showMessageDialog(null, "Saída de pedido inserida com sucesso !!");
+            
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao Inserir Pedido !!!" + e);
@@ -114,7 +107,7 @@ public class DaoTransPedido {
     public boolean inserirEntregaPedido(TransportadoraPedido transp){
         ConnPed.conn = ConnPed.getConection();
 
-        String saidaTransPed = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, dataSaida, status_Pedido)"
+        String saidaTransPed = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, dataEntrega, status_Pedido)"
                                +"VALUES(?,?,?,?)";
         try {
             PreparedStatement comando = ConnPed.conn.prepareStatement(saidaTransPed);
@@ -124,7 +117,8 @@ public class DaoTransPedido {
             
             //Formatando a data para ano mes e dia           
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-            
+            //comando.setString(3, formatter.format(transp.getDataEnt()));
+            //comando.setString(4, formatter.format(transp.getDataSaida()));
             comando.setString(3, formatter.format(transp.getDataEntrega()));
             comando.setString(4, transp.getStatus());
 

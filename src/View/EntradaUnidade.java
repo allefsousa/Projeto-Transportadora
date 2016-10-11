@@ -446,7 +446,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
                             } while (loop);
                             //Verificando se entrada de data não está vazio
                             if (txtDataEntrada.getDate() == null) {
-                                JOptionPane.showMessageDialog(null, "Insira a data de hoje!");
+                                JOptionPane.showMessageDialog(null, "Insira a data de entrada do pedido !");
                             } else {
                                 transPed.setDataEnt(txtDataEntrada.getDate());
                                 //Verificando se entrada de status não está vazio
