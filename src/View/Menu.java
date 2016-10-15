@@ -1415,7 +1415,7 @@ public class Menu extends javax.swing.JFrame {
             new CadastrarVeiculos().setVisible(true);
         
            if (aux==3) {
-               //new EntregaPedido().setVisible(true);
+               new SaidaPedido().setVisible(true);
            }
     }//GEN-LAST:event_btnMenu4ActionPerformed
 
@@ -1475,7 +1475,7 @@ public class Menu extends javax.swing.JFrame {
        // btnMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
         
         btnMenu4.setVisible(true);
-        btnMenu4.setText(" RELATORIOS");
+        btnMenu4.setText(" SAÍDA");
        // btnMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
         
         

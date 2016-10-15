@@ -84,12 +84,12 @@ public class DaoTransPedido {
         String saidaTransPed = "Update transportadora_pedido set dataSaida = ? WHERE fk_Centro_Dist = ? AND fk_Num_Pedido = ?";
         try {
             ConnPed.pstm = ConnPed.conn.prepareStatement(saidaTransPed);
-            ConnPed.pstm.setString(1, transp.getCentroDist());
-            ConnPed.pstm.setInt(2, transp.getNumPedido());
-            
             //Formatando a data para ano mes e dia           
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-            ConnPed.pstm.setString(3, formatter.format(transp.getDataSaida()));
+            ConnPed.pstm.setString(1, formatter.format(transp.getDataSaida()));
+            
+            ConnPed.pstm.setString(2, transp.getCentroDist());
+            ConnPed.pstm.setInt(3, transp.getNumPedido());
             
             ConnPed.pstm.execute();
             ConnPed.conn.close();
@@ -97,7 +97,7 @@ public class DaoTransPedido {
             
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao Inserir Pedido !!!" + e);
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar Pedido !!!" + e);
             e.printStackTrace();
         }
 

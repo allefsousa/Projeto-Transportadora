@@ -29,7 +29,7 @@ public class EntregaPedido extends javax.swing.JFrame {
     ConnBanco banco1 = new ConnBanco();
     TransportadoraPedido transPed = new TransportadoraPedido();
     Dao.DaoTransPedido daoTransPed = new DaoTransPedido();
-    
+
     /**
      * Creates new form EntregaPedido
      */
@@ -40,14 +40,14 @@ public class EntregaPedido extends javax.swing.JFrame {
         connBanco.getConection();
         listaCentroDist();
     }
-    
+
     public void preencherTabela(String sql) {
         int cliente = 0, cidadeColeta = 0, cidadeEntrega = 0, veiculo = 0;
         String cli, cidEnt, cidCol, veic;
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "Endereço", "Nº Coleta", "Bairro",
             "CEP", "Cidade de Coleta", "Data de Entrega", "Endereço Entrega", "Nº Entrega", "Bairro",
-            "Cep", "Cidade de Entrega", "Cliente", "Veiculo", "Rota"};
+            "Cep", "Cidade de Entrega", "Data de Solicitação", "Descrição Pedido", "Cliente", "Veiculo", "Rota"};
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         connBanco.executaSQL(sql);
         try {
@@ -77,7 +77,8 @@ public class EntregaPedido extends javax.swing.JFrame {
                     cidCol, formatter.format(connBanco.rs.getDate("data_Entrega")),
                     connBanco.rs.getString("rua_Entrega"), connBanco.rs.getString("num_End_Entrega"),
                     connBanco.rs.getString("bairro_Entrega"), connBanco.rs.getString("cep_Entrega"),
-                    cidEnt, cli, veic, connBanco.rs.getString("fk_Id_Rota")});
+                    cidEnt, formatter.format(connBanco.rs.getDate("data_Solicitacao")), connBanco.rs.getString("descricao_Produto"),
+                    cli, veic, connBanco.rs.getString("fk_Id_Rota")});
 
             } while (connBanco.rs.next());
         } catch (Exception e) {
@@ -121,12 +122,16 @@ public class EntregaPedido extends javax.swing.JFrame {
         tabelaEntrega.getColumnModel().getColumn(14).setResizable(true);
         tabelaEntrega.getColumnModel().getColumn(15).setPreferredWidth(110);
         tabelaEntrega.getColumnModel().getColumn(15).setResizable(false);
+        tabelaEntrega.getColumnModel().getColumn(16).setPreferredWidth(110);
+        tabelaEntrega.getColumnModel().getColumn(16).setResizable(false);
+        tabelaEntrega.getColumnModel().getColumn(17).setPreferredWidth(110);
+        tabelaEntrega.getColumnModel().getColumn(17).setResizable(false);
 
         tabelaEntrega.getTableHeader().setReorderingAllowed(false);
         tabelaEntrega.setAutoResizeMode(tabelaEntrega.AUTO_RESIZE_OFF);
         tabelaEntrega.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    
+
     public void limpar() {
         txtCodigo.setText(" ");
         cbxDataEntrega.setDate(null);
@@ -398,7 +403,7 @@ public class EntregaPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntregaActionPerformed
-         boolean loop = true;
+        boolean loop = true;
         try {
             //Tratando caixa combinada de Centro de Distribuição
             if (cbxCentroDist.getSelectedIndex() == 0) {
@@ -422,8 +427,8 @@ public class EntregaPedido extends javax.swing.JFrame {
                     ResultSet rs2 = banco.pstm.executeQuery();
 
                     //Caso possua registro mostra mensagem de advertência
-                    if (rs2.next()) {                
-                        JOptionPane.showMessageDialog(null, "Pedido Inválido... Este pedido já foi entregue !");       
+                    if (rs2.next()) {
+                        JOptionPane.showMessageDialog(null, "Pedido Inválido... Este pedido já foi entregue !");
                     } else {
                         transPed.setCentroDist(rs1.getString("cnpj"));
                         //Verificando se o campo de entrada de código não está vazio
@@ -520,7 +525,7 @@ public class EntregaPedido extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodigo;
     // End of variables declaration//GEN-END:variables
 
-public void listaCentroDist() {
+    public void listaCentroDist() {
         String sql = "SELECT * FROM centro_dist";
         try {
             banco.conn = banco.getConection();
@@ -533,5 +538,5 @@ public void listaCentroDist() {
             e.printStackTrace();
         }
     }
-    
+
 }
