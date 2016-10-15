@@ -46,7 +46,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "Endereço", "Nº Coleta", "Bairro",
             "CEP", "Cidade de Coleta", "Data de Entrega", "Endereço Entrega", "Nº Entrega", "Bairro",
-            "Cep", "Cidade de Entrega", "Data de Solicitação", "Descrição Pedido", "Cliente", "Veiculo", "Rota"};
+            "Cep", "Cidade de Entrega", "Data de Solicitação", "Cliente", "Veiculo", "Rota"};
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         connBanco.executaSQL(sql);
         try {
@@ -76,8 +76,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
                     cidCol, formatter.format(connBanco.rs.getDate("data_Entrega")),
                     connBanco.rs.getString("rua_Entrega"), connBanco.rs.getString("num_End_Entrega"),
                     connBanco.rs.getString("bairro_Entrega"), connBanco.rs.getString("cep_Entrega"),
-                    cidEnt, formatter.format(connBanco.rs.getDate("data_Solicitacao")), connBanco.rs.getString("descricao_Produto"),
-                    cli, veic, connBanco.rs.getString("fk_Id_Rota")});
+                    cidEnt, formatter.format(connBanco.rs.getDate("data_Solicitacao")), cli, veic, connBanco.rs.getString("fk_Id_Rota")});
 
             } while (connBanco.rs.next());
         } catch (Exception e) {
@@ -105,24 +104,24 @@ public class EntradaUnidade extends javax.swing.JFrame {
         tabelaEntrada.getColumnModel().getColumn(6).setResizable(true);
         tabelaEntrada.getColumnModel().getColumn(7).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(7).setResizable(true);
-        tabelaEntrada.getColumnModel().getColumn(8).setResizable(true);
         tabelaEntrada.getColumnModel().getColumn(8).setPreferredWidth(110);
-        tabelaEntrada.getColumnModel().getColumn(9).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(8).setResizable(true);
         tabelaEntrada.getColumnModel().getColumn(9).setPreferredWidth(110);
-        tabelaEntrada.getColumnModel().getColumn(10).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(9).setResizable(false);
         tabelaEntrada.getColumnModel().getColumn(10).setPreferredWidth(110);
-        tabelaEntrada.getColumnModel().getColumn(11).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(10).setResizable(false);
         tabelaEntrada.getColumnModel().getColumn(11).setPreferredWidth(110);
-        tabelaEntrada.getColumnModel().getColumn(12).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(11).setResizable(false);
         tabelaEntrada.getColumnModel().getColumn(12).setPreferredWidth(110);
-        tabelaEntrada.getColumnModel().getColumn(13).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(12).setResizable(true);
         tabelaEntrada.getColumnModel().getColumn(13).setPreferredWidth(110);
-        tabelaEntrada.getColumnModel().getColumn(14).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(13).setResizable(true);
+        tabelaEntrada.getColumnModel().getColumn(14).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(14).setResizable(true);
         tabelaEntrada.getColumnModel().getColumn(15).setPreferredWidth(110);
         tabelaEntrada.getColumnModel().getColumn(15).setResizable(false);
-        //tabelaEntrada.getColumnModel().getColumn(16).setPreferredWidth(110);
-        //tabelaEntrada.getColumnModel().getColumn(16).setResizable(false);
+        tabelaEntrada.getColumnModel().getColumn(16).setPreferredWidth(110);
+        tabelaEntrada.getColumnModel().getColumn(16).setResizable(false);
 
         tabelaEntrada.getTableHeader().setReorderingAllowed(false);
         tabelaEntrada.setAutoResizeMode(tabelaEntrada.AUTO_RESIZE_OFF);

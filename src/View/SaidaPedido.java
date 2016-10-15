@@ -44,9 +44,9 @@ public class SaidaPedido extends javax.swing.JFrame {
         int cliente = 0, cidadeColeta = 0, cidadeEntrega = 0, veiculo = 0;
         String cli, cidEnt, cidCol, veic;
         ArrayList dados = new ArrayList();
-       String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "Endereço", "Nº Coleta", "Bairro",
+        String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "Endereço", "Nº Coleta", "Bairro",
             "CEP", "Cidade de Coleta", "Data de Entrega", "Endereço Entrega", "Nº Entrega", "Bairro",
-            "Cep", "Cidade de Entrega", "Data de Solicitação", "Descrição Pedido", "Cliente", "Veiculo", "Rota"};
+            "Cep", "Cidade de Entrega", "Data de Solicitação", "Cliente", "Veiculo", "Rota"};
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         connBanco.executaSQL(sql);
         try {
@@ -76,8 +76,7 @@ public class SaidaPedido extends javax.swing.JFrame {
                     cidCol, formatter.format(connBanco.rs.getDate("data_Entrega")),
                     connBanco.rs.getString("rua_Entrega"), connBanco.rs.getString("num_End_Entrega"),
                     connBanco.rs.getString("bairro_Entrega"), connBanco.rs.getString("cep_Entrega"),
-                    cidEnt, formatter.format(connBanco.rs.getDate("data_Solicitacao")), connBanco.rs.getString("descricao_Produto"),
-                    cli, veic, connBanco.rs.getString("fk_Id_Rota")});
+                    cidEnt, formatter.format(connBanco.rs.getDate("data_Solicitacao")), cli, veic, connBanco.rs.getString("fk_Id_Rota")});
 
             } while (connBanco.rs.next());
         } catch (Exception e) {
@@ -105,22 +104,24 @@ public class SaidaPedido extends javax.swing.JFrame {
         tabelaSaida.getColumnModel().getColumn(6).setResizable(true);
         tabelaSaida.getColumnModel().getColumn(7).setPreferredWidth(110);
         tabelaSaida.getColumnModel().getColumn(7).setResizable(true);
-        tabelaSaida.getColumnModel().getColumn(8).setResizable(true);
         tabelaSaida.getColumnModel().getColumn(8).setPreferredWidth(110);
-        tabelaSaida.getColumnModel().getColumn(9).setResizable(false);
+        tabelaSaida.getColumnModel().getColumn(8).setResizable(true);
         tabelaSaida.getColumnModel().getColumn(9).setPreferredWidth(110);
-        tabelaSaida.getColumnModel().getColumn(10).setResizable(false);
+        tabelaSaida.getColumnModel().getColumn(9).setResizable(false);
         tabelaSaida.getColumnModel().getColumn(10).setPreferredWidth(110);
-        tabelaSaida.getColumnModel().getColumn(11).setResizable(false);
+        tabelaSaida.getColumnModel().getColumn(10).setResizable(false);
         tabelaSaida.getColumnModel().getColumn(11).setPreferredWidth(110);
-        tabelaSaida.getColumnModel().getColumn(12).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(11).setResizable(false);
         tabelaSaida.getColumnModel().getColumn(12).setPreferredWidth(110);
-        tabelaSaida.getColumnModel().getColumn(13).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(12).setResizable(true);
         tabelaSaida.getColumnModel().getColumn(13).setPreferredWidth(110);
-        tabelaSaida.getColumnModel().getColumn(14).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(13).setResizable(true);
+        tabelaSaida.getColumnModel().getColumn(14).setPreferredWidth(110);
         tabelaSaida.getColumnModel().getColumn(14).setResizable(true);
         tabelaSaida.getColumnModel().getColumn(15).setPreferredWidth(110);
         tabelaSaida.getColumnModel().getColumn(15).setResizable(false);
+        tabelaSaida.getColumnModel().getColumn(16).setPreferredWidth(110);
+        tabelaSaida.getColumnModel().getColumn(16).setResizable(false);
 
         tabelaSaida.getTableHeader().setReorderingAllowed(false);
         tabelaSaida.setAutoResizeMode(tabelaSaida.AUTO_RESIZE_OFF);
@@ -385,7 +386,7 @@ public class SaidaPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
-         boolean loop = true;
+        boolean loop = true;
         try {
             //Tratando caixa combinada de Centro de Distribuição
             if (cbxCentroDist.getSelectedIndex() == 0) {
@@ -411,9 +412,9 @@ public class SaidaPedido extends javax.swing.JFrame {
                     ResultSet rs2 = banco.pstm.executeQuery();
 
                     //Caso possua registro mostra mensagem de advertência
-                    if (rs2.next()) {                
+                    if (rs2.next()) {
                         JOptionPane.showMessageDialog(null, "Pedido já registrado nesse Centro de Didtribuição\n"
-                                    + "Selecione outro !");       
+                                + "Selecione outro !");
                     } else {
                         transPed.setCentroDist(rs1.getString("cnpj"));
                         //Verificando se o campo de entrada de código não está vazio
