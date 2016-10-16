@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -47,9 +48,10 @@ public class DaoTransPedido {
     
     public boolean insereTranspPedido(TransportadoraPedido transp) {
         ConnPed.conn = ConnPed.getConection();
-
-        String InsereTransPed = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, dataEntrada, status_Pedido)"
-                               +"VALUES(?,?,?,?)";
+        
+        String InsereTransPed   = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, "
+                                + "dataEntrada, status_Pedido)"
+                                + "VALUES(?,?,?,?)";
         try {
             PreparedStatement comando = ConnPed.conn.prepareStatement(InsereTransPed);
             // formatar a query 
@@ -81,20 +83,28 @@ public class DaoTransPedido {
     public boolean saidaPedido(TransportadoraPedido transp){
         ConnPed.conn = ConnPed.getConection();
 
-        String saidaTransPed = "Update transportadora_pedido set dataSaida = ? WHERE fk_Centro_Dist = ? AND fk_Num_Pedido = ?";
+        String saidaTransPed   = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, "
+                                + "dataSaida, status_Pedido)"
+                                + "VALUES(?,?,?,?)";
         try {
-            ConnPed.pstm = ConnPed.conn.prepareStatement(saidaTransPed);
+            PreparedStatement comando = ConnPed.conn.prepareStatement(saidaTransPed);
+            // formatar a query 
+            comando.setString(1, transp.getCentroDist());
+            comando.setInt(2, transp.getNumPedido());
+            
             //Formatando a data para ano mes e dia           
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-            ConnPed.pstm.setString(1, formatter.format(transp.getDataSaida()));
             
-            ConnPed.pstm.setString(2, transp.getCentroDist());
-            ConnPed.pstm.setInt(3, transp.getNumPedido());
-            
-            ConnPed.pstm.execute();
+            comando.setString(3, formatter.format(transp.getDataSaida()));
+            comando.setString(4, transp.getStatus());
+
+            //executa a query
+            comando.execute();
+
+            //Fecha a conexao com o BD
             ConnPed.conn.close();
-            JOptionPane.showMessageDialog(null, "Saída de pedido inserida com sucesso !!");
-            
+
+            //JOptionPane.showMessageDialog(null, "Pedido Inserido Com Sucesso !! ");
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar Pedido !!!" + e);
