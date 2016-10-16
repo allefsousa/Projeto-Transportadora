@@ -266,9 +266,9 @@ public class EntradaUnidade extends javax.swing.JFrame {
         });
 
         lblUsuario1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblUsuario1.setText("UNIDADE:");
+        lblUsuario1.setText("Centro de Distribuição:");
 
-        cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um item" }));
+        cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Centro de Distrribução" }));
 
         btnInserir.setBackground(new java.awt.Color(0, 28, 119));
         btnInserir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -291,7 +291,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BarraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
+            .addComponent(BarraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1)
@@ -309,12 +309,12 @@ public class EntradaUnidade extends javax.swing.JFrame {
                     .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDataEntrada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbxCentroDist, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxStatus, 0, 150, Short.MAX_VALUE))
+                    .addComponent(cbxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(49, 49, 49)
                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

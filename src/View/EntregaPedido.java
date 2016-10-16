@@ -269,7 +269,7 @@ public class EntregaPedido extends javax.swing.JFrame {
         cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Status", "Entregue" }));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("UNIDADE:");
+        jLabel1.setText("Centro de Distribuição:");
 
         cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecone uma unidade" }));
 

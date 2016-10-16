@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="BarraMenu" alignment="0" pref="799" max="32767" attributes="0"/>
+          <Component id="BarraMenu" alignment="0" pref="872" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -44,7 +44,7 @@
                   <Component id="txtCodigo" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtDataSaida" alignment="0" max="32767" attributes="0"/>
                   <Component id="cbxCentroDist" alignment="1" max="32767" attributes="0"/>
-                  <Component id="cbxStatus" alignment="1" pref="150" max="32767" attributes="0"/>
+                  <Component id="cbxStatus" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               <Component id="btnPesquisar" min="-2" pref="196" max="-2" attributes="0"/>
@@ -82,8 +82,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="lblUsuario1" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbxCentroDist" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbxCentroDist" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUsuario1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="276" max="32767" attributes="0"/>
@@ -242,14 +242,14 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="UNIDADE:"/>
+        <Property name="text" type="java.lang.String" value="Centro de Distribui&#xe7;&#xe3;o:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbxCentroDist">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
-            <StringItem index="0" value="Selecione um item"/>
+            <StringItem index="0" value="Selecione um Centro de Distribui&#xe7;&#xe3;o"/>
           </StringArray>
         </Property>
       </Properties>
@@ -301,11 +301,12 @@
     <Component class="javax.swing.JComboBox" name="cbxStatus">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="5">
             <StringItem index="0" value="Selecione um Status"/>
             <StringItem index="1" value="Em Transporte"/>
-            <StringItem index="2" value=" "/>
+            <StringItem index="2" value="Em transporte para Entrega"/>
             <StringItem index="3" value=" "/>
+            <StringItem index="4" value=" "/>
           </StringArray>
         </Property>
       </Properties>

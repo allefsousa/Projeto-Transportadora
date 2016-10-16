@@ -241,9 +241,9 @@ public class SaidaPedido extends javax.swing.JFrame {
         });
 
         lblUsuario1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblUsuario1.setText("UNIDADE:");
+        lblUsuario1.setText("Centro de Distribuição:");
 
-        cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um item" }));
+        cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Centro de Distribuição" }));
 
         btnInserir.setBackground(new java.awt.Color(0, 28, 119));
         btnInserir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -273,7 +273,7 @@ public class SaidaPedido extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaSaida);
 
-        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Status", "Em Transporte", " ", " " }));
+        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Status", "Em Transporte", "Em transporte para Entrega", " ", " " }));
 
         lblCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblCodigo.setText("CODIGO PEDIDO:");
@@ -285,7 +285,7 @@ public class SaidaPedido extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BarraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
+            .addComponent(BarraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1)
@@ -303,7 +303,7 @@ public class SaidaPedido extends javax.swing.JFrame {
                     .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDataSaida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbxCentroDist, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxStatus, 0, 150, Short.MAX_VALUE))
+                    .addComponent(cbxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(49, 49, 49)
                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -333,8 +333,8 @@ public class SaidaPedido extends javax.swing.JFrame {
                     .addComponent(btnInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblUsuario1)
-                    .addComponent(cbxCentroDist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxCentroDist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario1))
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                 .addContainerGap())

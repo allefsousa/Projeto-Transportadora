@@ -46,7 +46,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="BarraMenu" alignment="0" pref="821" max="32767" attributes="0"/>
+              <Component id="BarraMenu" alignment="0" pref="874" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -67,13 +67,13 @@
                       <Component id="txtCodigo" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtDataEntrada" alignment="0" max="32767" attributes="0"/>
                       <Component id="cbxCentroDist" max="32767" attributes="0"/>
-                      <Component id="cbxStatus" pref="150" max="32767" attributes="0"/>
+                      <Component id="cbxStatus" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="btnPesquisar" min="-2" pref="196" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnInserir" min="-2" pref="196" max="-2" attributes="0"/>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -297,14 +297,14 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="UNIDADE:"/>
+            <Property name="text" type="java.lang.String" value="Centro de Distribui&#xe7;&#xe3;o:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxCentroDist">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
-                <StringItem index="0" value="Selecione um item"/>
+                <StringItem index="0" value="Selecione um Centro de Distrribu&#xe7;&#xe3;o"/>
               </StringArray>
             </Property>
           </Properties>
