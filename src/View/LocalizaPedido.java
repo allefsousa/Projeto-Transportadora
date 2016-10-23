@@ -37,17 +37,18 @@ public class LocalizaPedido extends javax.swing.JFrame {
         initComponents();
 
         connBanco.getConection();
-        preencherTabela("SELECT * FROM transportadora_pedido order by fk_Num_Pedido");
+       // preencherTabela("SELECT * FROM transportadora_pedido order by fk_Num_Pedido");
         setLocationRelativeTo(this);
-        Color nomesCor = new Color(250,128,114);
+        Color nomesCor = new Color(250, 128, 114);
         cortabela.setBackground(nomesCor);
     }
-    public void ModeloTabela( ArrayList dados){
-        
-        String[] colunas = new String[]{"Numero Pedido", "Centro Dstribuição", "Data Entrada", "Data Saida", "Situação Pedido"};
+
+    public void ModeloTabela(ArrayList dados) {
+
+        String[] colunas = new String[]{"Numero Pedido", "Centro Dstribuição", "Data Entrada", "Data Saida","Data Entrega", "Situação Pedido"};
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
         tabelaPedido.setModel(modelo);
-        
+
         tabelaPedido.getColumnModel().getColumn(0).setPreferredWidth(120);
         tabelaPedido.getColumnModel().getColumn(0).setResizable(true);
         tabelaPedido.getColumnModel().getColumn(1).setPreferredWidth(240);
@@ -57,25 +58,27 @@ public class LocalizaPedido extends javax.swing.JFrame {
         tabelaPedido.getColumnModel().getColumn(2).setResizable(true);
         tabelaPedido.getColumnModel().getColumn(3).setPreferredWidth(140);
         tabelaPedido.getColumnModel().getColumn(3).setResizable(true);
-        tabelaPedido.getColumnModel().getColumn(4).setPreferredWidth(170);
+        tabelaPedido.getColumnModel().getColumn(4).setPreferredWidth(200);
         tabelaPedido.getColumnModel().getColumn(4).setResizable(false);
-        
-        tabelaPedido.getColumnModel().getColumn(4).setCellRenderer(cortabela);
+         tabelaPedido.getColumnModel().getColumn(5).setPreferredWidth(240);
+        tabelaPedido.getColumnModel().getColumn(5).setResizable(false);
+        tabelaPedido.getColumnModel().getColumn(5).setCellRenderer(cortabela);
         tabelaPedido.setAutoResizeMode(tabelaPedido.AUTO_RESIZE_OFF);
         tabelaPedido.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
+
     public final void preencherTabela(String SQL) {
         int centrodis;
         String centrodist = null, sql;
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Numero Pedido", "Centro Dstribuição", "Data Entrada Filial", "Data Saida Filial", "Situação Pedido"};
+        String[] colunas = new String[]{"Numero Pedido", "Centro Dstribuição", "Data Entrada Filial", "Data Saida Filial","Data Prev Entrega", "Situação Pedido"};
         connBanco.getConection();
         connBanco.executaSQL(SQL);
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         // pegando o primeiro registro 
 
         try {
-            
+
             if (!connBanco.rs.first()) {
                 txtregistro.setForeground(Color.red);
                 txtregistro.setText("Não ha Registros Para Serem Exibidos");
@@ -88,17 +91,18 @@ public class LocalizaPedido extends javax.swing.JFrame {
                 do {
                     centrodist = connBanco.rs.getString(("fk_Centro_Dist"));
                     sql = "SELECT nome_Fantasia from centro_dist where cnpj = ?";
-                   centrodist = daopesquisa.chaveEstrangeiraString(sql, centrodist);
+                    centrodist = daopesquisa.chaveEstrangeiraString(sql, centrodist);
+                   
+                        dados.add(new Object[]{connBanco.rs.getInt("fk_Num_Pedido"), centrodist,formatter.format(connBanco.rs.getDate("dataEntrada")), (connBanco.rs.getDate("dataSaida")), (connBanco.rs.getDate("dataEntrega")) ,connBanco.rs.getString("status_Pedido")});
 
-                    dados.add(new Object[]{connBanco.rs.getInt("fk_Num_Pedido"), centrodist, formatter.format(connBanco.rs.getDate("dataEntrada")) ,formatter.format(connBanco.rs.getDate("dataSaida")), connBanco.rs.getString("status_Pedido")});
+                    
                 } while (connBanco.rs.next());
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-        
+
 //E na tabela eu set o renderer dela assim
-        
         // colocando os devidos valores em suas colunas 
         ModeloTabela(dados);
 
@@ -276,15 +280,15 @@ public class LocalizaPedido extends javax.swing.JFrame {
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
 
         ResultSet rs1 = null;
-        String NPedido = "",centrodist,sql;
+        String NPedido = "", centrodist, sql;
         NPedido = txtcodigoPedido.getText();
         int npedido;
         int cidade;
         Long unidade;
         String cid = null, sql1, result;
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Numero Pedido", "Centro Dstribuição", "Data Entrada", "Data Saida", "Situação Pedido"};
-         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String[] colunas = new String[]{"Numero Pedido", "Centro Dstribuição", "Data Entrada", "Data Saida","Data Entrega" ,"Situação Pedido"};
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
             String sql2 = "SELECT * FROM transportadora_pedido where fk_Num_Pedido = ? ";
             connBanco.conn = connBanco.getConection();
@@ -313,16 +317,21 @@ public class LocalizaPedido extends javax.swing.JFrame {
                 do {
                     centrodist = rs1.getString(("fk_Centro_Dist"));
                     sql = "SELECT nome_Fantasia from centro_dist where cnpj = ?";
-                   centrodist = daopesquisa.chaveEstrangeiraString(sql, centrodist);
-                   
-                    dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist, formatter.format(rs1.getDate("dataEntrada")), formatter.format(rs1.getDate("dataSaida")), rs1.getString("status_Pedido")});
+                    centrodist = daopesquisa.chaveEstrangeiraString(sql, centrodist);
+                    if(rs1.getDate("dataSaida") == null){
+                                            dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist, formatter.format(rs1.getDate("dataEntrada")),(rs1.getDate("dataSaida")),(rs1.getDate("dataEntrega")), rs1.getString("status_Pedido")});
+
+                    }else{
+                                            dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist, (rs1.getDate("dataEntrada")),formatter.format(rs1.getDate("dataSaida")), (rs1.getDate("dataEntrega")),rs1.getString("status_Pedido")});
+                                            
+                    }
                 } while (rs1.next());
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
 
-       ModeloTabela(dados);
+        ModeloTabela(dados);
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 

@@ -13,7 +13,7 @@ public class Filial {
 
     public String fili;
     private static Filial instance;
-     private Filial(){
+     public Filial(){
          
      }
   public static Filial getInstance() {

@@ -8,6 +8,7 @@ package View;
 import Dao.ConnBanco;
 import Dao.DaoTransPedido;
 import Funcionalidades.ModeloTabela;
+import Model.Filial;
 import Model.TransportadoraPedido;
 import java.awt.Color;
 import java.sql.ResultSet;
@@ -29,6 +30,7 @@ public class SaidaPedido extends javax.swing.JFrame {
     ConnBanco banco1 = new ConnBanco();
     TransportadoraPedido transPed = new TransportadoraPedido();
     DaoTransPedido daoTransPed = new DaoTransPedido();
+        Filial fili = new Filial();
 
     /**
      * Creates new form SaidaPedido
@@ -37,7 +39,9 @@ public class SaidaPedido extends javax.swing.JFrame {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         connBanco.getConection();
-        listaCentroDist();
+        
+        
+listaCentroDist();
     }
 
     public void preencherTabela(String sql) {
