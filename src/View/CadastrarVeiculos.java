@@ -608,28 +608,32 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
         lblRevisao.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblRevisao.setText("Centro de Distribuição:");
 
-        cbxCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione uma Cidade" }));
-        cbxCidade.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                cbxCidadeFocusLost(evt);
-            }
-        });
+        cbxCidade.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cbxCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione uma cidade" }));
         cbxCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxCidadeActionPerformed(evt);
             }
         });
+        cbxCidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbxCidadeFocusLost(evt);
+            }
+        });
 
-        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Estado" }));
+        cbxEstado.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um estado" }));
         cbxEstado.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 cbxEstadoFocusLost(evt);
             }
         });
 
-        cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Centro de Distribuição" }));
+        cbxCentroDist.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um centro de distribuição" }));
 
-        cbxFunc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um Funcionario" }));
+        cbxFunc.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cbxFunc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um funcionario" }));
         cbxFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxFuncActionPerformed(evt);
@@ -714,7 +718,7 @@ public class CadastrarVeiculos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRevisao)
                     .addComponent(cbxCentroDist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(barraNavegacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );

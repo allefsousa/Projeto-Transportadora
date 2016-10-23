@@ -141,10 +141,7 @@ public class Login extends javax.swing.JFrame {
         lblSenha.setForeground(new java.awt.Color(255, 255, 255));
         lblSenha.setText("SENHA:");
 
-        txtLogin.setText("Admin");
         txtLogin.setPreferredSize(new java.awt.Dimension(150, 20));
-
-        txtSenha.setText("Admin");
 
         btnExibirSenha.setBackground(new java.awt.Color(0, 28, 119));
         btnExibirSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/olho.png"))); // NOI18N
@@ -215,7 +212,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         cmbCentro.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        cmbCentro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione uma unidade ...." }));
+        cmbCentro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione uma unidade" }));
         cmbCentro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cmbCentroMouseClicked(evt);

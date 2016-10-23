@@ -57,6 +57,7 @@ public class Informacoes extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         BarraMenu.setBackground(new java.awt.Color(0, 28, 119));
 
@@ -71,7 +72,7 @@ public class Informacoes extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BarraMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo)
-                .addContainerGap(1104, Short.MAX_VALUE))
+                .addContainerGap(1100, Short.MAX_VALUE))
         );
         BarraMenuLayout.setVerticalGroup(
             BarraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +200,7 @@ public class Informacoes extends javax.swing.JFrame {
                         .addComponent(Lucas1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Rafael1)))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         Imagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Unifran.png"))); // NOI18N

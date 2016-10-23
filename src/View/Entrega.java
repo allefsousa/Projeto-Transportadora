@@ -170,17 +170,21 @@ public class Entrega extends javax.swing.JFrame {
 
         txtNumeroEntrega.setPreferredSize(new java.awt.Dimension(60, 20));
 
+        cbxCidade.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cbxCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha uma cidade...", " " }));
         cbxCidade.setPreferredSize(new java.awt.Dimension(100, 20));
 
+        cbxEstado.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cbxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SP", "MG" }));
 
+        cbxEntrega.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cbxEntrega.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         cbxEntrega.setPreferredSize(new java.awt.Dimension(100, 20));
 
         lblRota.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblRota.setText("Rota:");
 
+        cbxRota.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cbxRota.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         cbxRota.setPreferredSize(new java.awt.Dimension(100, 20));
 

@@ -143,9 +143,14 @@ public class LocalizaPedido extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelaPedido);
 
         btnPesquisar.setBackground(new java.awt.Color(0, 28, 119));
+        btnPesquisar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnPesquisar.setForeground(new java.awt.Color(255, 255, 255));
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Pesquisa.png"))); // NOI18N
+        btnPesquisar.setText("PESQUISAR");
         btnPesquisar.setFocusPainted(false);
         btnPesquisar.setFocusable(false);
+        btnPesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPesquisar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
