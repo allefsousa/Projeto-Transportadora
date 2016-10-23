@@ -478,6 +478,7 @@ public class SaidaPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        boolean loop = true;
         int x = JOptionPane.showConfirmDialog(this, "Deseja excluir o registro de saída de pedido ?");
         switch (x) {
             case 0:
@@ -485,13 +486,20 @@ public class SaidaPedido extends javax.swing.JFrame {
                     if (txtCodigo.getText().isEmpty() || cbxCentroDist.getSelectedIndex() == 0 || cbxStatus.getSelectedIndex() == 0) {
                         JOptionPane.showMessageDialog(null, "Existem campos vazios !");
                     } else {
-                        transPed.setNumPedido(Integer.parseInt(txtCodigo.getText()));
+                        do {
+                            transPed.setNumPedido(Integer.parseInt(txtCodigo.getText()));
+                            loop = false;
+                        } while (loop);
+                        
                         transPed.setCentroDist(cbxCentroDist.getSelectedItem().toString());
                         transPed.setStatus(cbxStatus.getSelectedItem().toString());
                         daoTransPed.deletarTransPedido(transPed);
                         limpar();
                     }
-                } catch (Exception e) {
+                }catch (NumberFormatException e) {
+                    //Exceção de entrada fora do esperado (nesse caso...)
+                    JOptionPane.showMessageDialog(null, "Insira um número de pedido válido !");
+                }catch (Exception e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Impossivel Remover !! ");
                 }

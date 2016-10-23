@@ -106,7 +106,7 @@ public class EntregaPedido extends javax.swing.JFrame {
         tabelaEntrega.getColumnModel().getColumn(7).setPreferredWidth(110);
         tabelaEntrega.getColumnModel().getColumn(7).setResizable(true);
         tabelaEntrega.getColumnModel().getColumn(8).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(8).setResizable(true);  
+        tabelaEntrega.getColumnModel().getColumn(8).setResizable(true);
         tabelaEntrega.getColumnModel().getColumn(9).setPreferredWidth(110);
         tabelaEntrega.getColumnModel().getColumn(9).setResizable(false);
         tabelaEntrega.getColumnModel().getColumn(10).setPreferredWidth(110);
@@ -332,10 +332,11 @@ public class EntregaPedido extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCodigo)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEditar))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblCodigo)
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -485,6 +486,7 @@ public class EntregaPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEntregaActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        boolean loop = true;
         int x = JOptionPane.showConfirmDialog(this, "Deseja excluir o registro de entrada de pedido ?");
         switch (x) {
             case 0:
@@ -492,12 +494,18 @@ public class EntregaPedido extends javax.swing.JFrame {
                     if (txtCodigo.getText().isEmpty() || cbxCentroDist.getSelectedIndex() == 0 || cbxStatus.getSelectedIndex() == 0) {
                         JOptionPane.showMessageDialog(null, "Existem campos vazios !");
                     } else {
-                        transPed.setNumPedido(Integer.parseInt(txtCodigo.getText()));
+                        do {
+                            transPed.setNumPedido(Integer.parseInt(txtCodigo.getText()));
+                            loop = false;
+                        } while (loop);
                         transPed.setCentroDist(cbxCentroDist.getSelectedItem().toString());
                         transPed.setStatus(cbxStatus.getSelectedItem().toString());
                         daoTransPed.deletarTransPedido(transPed);
                         limpar();
                     }
+                } catch (NumberFormatException e) {
+                    //Exceção de entrada fora do esperado (nesse caso...)
+                    JOptionPane.showMessageDialog(null, "Insira um número de pedido válido !");
                 } catch (Exception e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Impossivel Remover !! ");

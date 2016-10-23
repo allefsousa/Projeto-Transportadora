@@ -60,7 +60,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
                 cidadeColeta = connBanco.rs.getInt("fk_IdCidade_Coleta");
                 sql = "SELECT nome FROM cidade where id = ?";
                 cidCol = daoTransPed.chaveEstrangeira(sql, cidadeColeta);
-                
+
                 //Tratando cidade de entrega
                 cidadeEntrega = connBanco.rs.getInt("fk_IdCidade_Entrega");
                 sql = "SELECT nome FROM cidade where id = ?";
@@ -454,9 +454,9 @@ public class EntradaUnidade extends javax.swing.JFrame {
                     ResultSet rs2 = banco.pstm.executeQuery();
 
                     //Caso possua registro mostra mensagem de advertência
-                    if (rs2.next()) {                
+                    if (rs2.next()) {
                         JOptionPane.showMessageDialog(null, "Pedido já registrado nesse Centro de Didtribuição\n"
-                                    + "Selecione outro !");       
+                                + "Selecione outro !");
                     } else {
                         transPed.setCentroDist(rs1.getString("cnpj"));
                         //Verificando se o campo de entrada de código não está vazio
@@ -500,6 +500,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        boolean loop = true;
         int x = JOptionPane.showConfirmDialog(this, "Deseja excluir o registro de entrada de pedido ?");
         switch (x) {
             case 0:
@@ -507,12 +508,19 @@ public class EntradaUnidade extends javax.swing.JFrame {
                     if (txtCodigo.getText().isEmpty() || cbxCentroDist.getSelectedIndex() == 0 || cbxStatus.getSelectedIndex() == 0) {
                         JOptionPane.showMessageDialog(null, "Existem campos vazios !");
                     } else {
-                        transPed.setNumPedido(Integer.parseInt(txtCodigo.getText()));
+                        do {
+                            transPed.setNumPedido(Integer.parseInt(txtCodigo.getText()));
+                            loop = false;
+                        } while (loop);
+
                         transPed.setCentroDist(cbxCentroDist.getSelectedItem().toString());
                         transPed.setStatus(cbxStatus.getSelectedItem().toString());
                         daoTransPed.deletarTransPedido(transPed);
                         limpar();
                     }
+                } catch (NumberFormatException e) {
+                    //Exceção de entrada fora do esperado (nesse caso...)
+                    JOptionPane.showMessageDialog(null, "Insira um número de pedido válido !");
                 } catch (Exception e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Impossivel Remover !! ");
