@@ -45,7 +45,7 @@ public class EntregaPedido extends javax.swing.JFrame {
         int cliente = 0, cidadeColeta = 0, cidadeEntrega = 0, veiculo = 0;
         String cli, cidEnt, cidCol, veic;
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "Endereço", "Nº Coleta", "Bairro",
+        String[] colunas = new String[]{"Nº Pedido", "Endereço", "Nº Coleta", "Bairro",
             "CEP", "Cidade de Coleta", "Data de Entrega", "Endereço Entrega", "Nº Entrega", "Bairro",
             "Cep", "Cidade de Entrega", "Data de Solicitação", "Cliente", "Veiculo", "Rota"};
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -71,7 +71,7 @@ public class EntregaPedido extends javax.swing.JFrame {
                 sql = "SELECT modelo FROM veiculo where id_Veiculo = ?";
                 veic = daoTransPed.chaveEstrangeira(sql, veiculo);
 
-                dados.add(new Object[]{connBanco.rs.getInt("num_Pedido"), formatter.format(connBanco.rs.getDate("data_Coleta")),
+                dados.add(new Object[]{connBanco.rs.getInt("num_Pedido"),
                     connBanco.rs.getString("rua_Coleta"), connBanco.rs.getInt("num_End_Coleta"),
                     connBanco.rs.getString("bairro_Coleta"), connBanco.rs.getString("cep_Coleta"),
                     cidCol, formatter.format(connBanco.rs.getDate("data_Entrega")),
@@ -121,8 +121,6 @@ public class EntregaPedido extends javax.swing.JFrame {
         tabelaEntrega.getColumnModel().getColumn(14).setResizable(true);
         tabelaEntrega.getColumnModel().getColumn(15).setPreferredWidth(110);
         tabelaEntrega.getColumnModel().getColumn(15).setResizable(false);
-        tabelaEntrega.getColumnModel().getColumn(16).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(16).setResizable(false);
 
         tabelaEntrega.getTableHeader().setReorderingAllowed(false);
         tabelaEntrega.setAutoResizeMode(tabelaEntrega.AUTO_RESIZE_OFF);

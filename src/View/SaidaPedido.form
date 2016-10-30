@@ -400,8 +400,8 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="5">
                 <StringItem index="0" value="Selecione um status"/>
-                <StringItem index="1" value="Em transporte"/>
-                <StringItem index="2" value="Em transporte para entrega"/>
+                <StringItem index="1" value="Saiu para transporte para CD"/>
+                <StringItem index="2" value="Saiu para entrega"/>
                 <StringItem index="3" value=" "/>
                 <StringItem index="4" value=" "/>
               </StringArray>

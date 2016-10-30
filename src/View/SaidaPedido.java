@@ -48,7 +48,7 @@ listaCentroDist();
         int cliente = 0, cidadeColeta = 0, cidadeEntrega = 0, veiculo = 0;
         String cli, cidEnt, cidCol, veic;
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Nº Pedido", "Data de Coleta", "Endereço", "Nº Coleta", "Bairro",
+        String[] colunas = new String[]{"Nº Pedido", "Endereço", "Nº Coleta", "Bairro",
             "CEP", "Cidade de Coleta", "Data de Entrega", "Endereço Entrega", "Nº Entrega", "Bairro",
             "Cep", "Cidade de Entrega", "Data de Solicitação", "Cliente", "Veiculo", "Rota"};
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -74,7 +74,7 @@ listaCentroDist();
                 sql = "SELECT modelo FROM veiculo where id_Veiculo = ?";
                 veic = daoTransPed.chaveEstrangeira(sql, veiculo);
 
-                dados.add(new Object[]{connBanco.rs.getInt("num_Pedido"), formatter.format(connBanco.rs.getDate("data_Coleta")),
+                dados.add(new Object[]{connBanco.rs.getInt("num_Pedido"),
                     connBanco.rs.getString("rua_Coleta"), connBanco.rs.getInt("num_End_Coleta"),
                     connBanco.rs.getString("bairro_Coleta"), connBanco.rs.getString("cep_Coleta"),
                     cidCol, formatter.format(connBanco.rs.getDate("data_Entrega")),
@@ -124,8 +124,6 @@ listaCentroDist();
         tabelaSaida.getColumnModel().getColumn(14).setResizable(true);
         tabelaSaida.getColumnModel().getColumn(15).setPreferredWidth(110);
         tabelaSaida.getColumnModel().getColumn(15).setResizable(false);
-        tabelaSaida.getColumnModel().getColumn(16).setPreferredWidth(110);
-        tabelaSaida.getColumnModel().getColumn(16).setResizable(false);
 
         tabelaSaida.getTableHeader().setReorderingAllowed(false);
         tabelaSaida.setAutoResizeMode(tabelaSaida.AUTO_RESIZE_OFF);
@@ -316,7 +314,7 @@ listaCentroDist();
         txtCodigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         cbxStatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um status", "Em transporte", "Em transporte para entrega", " ", " " }));
+        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um status", "Saiu para transporte para CD", "Saiu para entrega", " ", " " }));
 
         lblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblUsuario.setText("STATUS:");
