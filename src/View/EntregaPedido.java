@@ -473,7 +473,7 @@ public class EntregaPedido extends javax.swing.JFrame {
                             if (cbxDataEntrega.getDate() == null) {
                                 JOptionPane.showMessageDialog(null, "Insira a data de entrega!");
                             } else {
-                                transPed.setDataEntrega(cbxDataEntrega.getDate());
+                                transPed.setData(cbxDataEntrega.getDate());
                                 //Verificando se entrada de status não está vazio
                                 if (cbxStatus.getSelectedIndex() == 0) {
                                     JOptionPane.showMessageDialog(null, "Insira o status do pedido !");

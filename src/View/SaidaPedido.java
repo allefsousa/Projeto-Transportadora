@@ -489,7 +489,7 @@ listaCentroDist();
                             if (txtDataSaida.getDate() == null) {
                                 JOptionPane.showMessageDialog(null, "Insira a data de hoje!");
                             } else {
-                                transPed.setDataSaida(txtDataSaida.getDate());
+                                transPed.setData(txtDataSaida.getDate());
                                 //Verificando se entrada de status não está vazio
                                 if (cbxStatus.getSelectedIndex() == 0) {
                                     JOptionPane.showMessageDialog(null, "Insira o status do pedido !");

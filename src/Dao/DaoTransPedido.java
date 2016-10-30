@@ -51,7 +51,7 @@ public class DaoTransPedido {
         ConnPed.conn = ConnPed.getConection();
 
         String InsereTransPed = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, "
-                + "dataEntrada, status_Pedido)"
+                + "data, status_Pedido)"
                 + "VALUES(?,?,?,?)";
         try {
             PreparedStatement comando = ConnPed.conn.prepareStatement(InsereTransPed);
@@ -62,7 +62,7 @@ public class DaoTransPedido {
             //Formatando a data para ano mes e dia           
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
-            comando.setString(3, formatter.format(transp.getDataEnt()));
+            comando.setString(3, formatter.format(transp.getData()));
             comando.setString(4, transp.getStatus());
 
             //executa a query
@@ -85,7 +85,7 @@ public class DaoTransPedido {
         ConnPed.conn = ConnPed.getConection();
 
         String saidaTransPed = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, "
-                + "dataSaida, status_Pedido)"
+                + "data, status_Pedido)"
                 + "VALUES(?,?,?,?)";
         try {
             PreparedStatement comando = ConnPed.conn.prepareStatement(saidaTransPed);
@@ -96,7 +96,7 @@ public class DaoTransPedido {
             //Formatando a data para ano mes e dia           
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
-            comando.setString(3, formatter.format(transp.getDataSaida()));
+            comando.setString(3, formatter.format(transp.getData()));
             comando.setString(4, transp.getStatus());
 
             //executa a query
@@ -118,7 +118,7 @@ public class DaoTransPedido {
     public boolean inserirEntregaPedido(TransportadoraPedido transp) {
         ConnPed.conn = ConnPed.getConection();
 
-        String saidaTransPed = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, dataEntrega, status_Pedido)"
+        String saidaTransPed = " INSERT INTO transportadora_pedido(fk_Centro_Dist, fk_Num_Pedido, data, status_Pedido)"
                 + "VALUES(?,?,?,?)";
         try {
             PreparedStatement comando = ConnPed.conn.prepareStatement(saidaTransPed);
@@ -130,7 +130,7 @@ public class DaoTransPedido {
             DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             //comando.setString(3, formatter.format(transp.getDataEnt()));
             //comando.setString(4, formatter.format(transp.getDataSaida()));
-            comando.setString(3, formatter.format(transp.getDataEntrega()));
+            comando.setString(3, formatter.format(transp.getData()));
             comando.setString(4, transp.getStatus());
 
             //executa a query

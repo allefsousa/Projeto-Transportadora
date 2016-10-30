@@ -45,7 +45,7 @@ public class LocalizaPedido extends javax.swing.JFrame {
 
     public void ModeloTabela(ArrayList dados) {
 
-        String[] colunas = new String[]{"Numero Pedido", "Centro Dstribuição", "Data Entrada", "Data Saida","Data Entrega", "Situação Pedido"};
+        String[] colunas = new String[]{"Numero Pedido", "Centro Dstribuição", "Data", "Situação Pedido"};
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
         tabelaPedido.setModel(modelo);
 
@@ -56,13 +56,9 @@ public class LocalizaPedido extends javax.swing.JFrame {
         tabelaPedido.getColumnModel().getColumn(1).setResizable(true);
         tabelaPedido.getColumnModel().getColumn(2).setPreferredWidth(160);
         tabelaPedido.getColumnModel().getColumn(2).setResizable(true);
-        tabelaPedido.getColumnModel().getColumn(3).setPreferredWidth(140);
-        tabelaPedido.getColumnModel().getColumn(3).setResizable(true);
-        tabelaPedido.getColumnModel().getColumn(4).setPreferredWidth(200);
-        tabelaPedido.getColumnModel().getColumn(4).setResizable(false);
-         tabelaPedido.getColumnModel().getColumn(5).setPreferredWidth(240);
-        tabelaPedido.getColumnModel().getColumn(5).setResizable(false);
-        tabelaPedido.getColumnModel().getColumn(5).setCellRenderer(cortabela);
+         tabelaPedido.getColumnModel().getColumn(3).setPreferredWidth(240);
+        tabelaPedido.getColumnModel().getColumn(3).setResizable(false);
+        tabelaPedido.getColumnModel().getColumn(3).setCellRenderer(cortabela);
         tabelaPedido.setAutoResizeMode(tabelaPedido.AUTO_RESIZE_OFF);
         tabelaPedido.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -287,7 +283,7 @@ public class LocalizaPedido extends javax.swing.JFrame {
         Long unidade;
         String cid = null, sql1, result;
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Numero Pedido", "Centro Dstribuição", "Data Entrada", "Data Saida","Data Entrega" ,"Situação Pedido"};
+        String[] colunas = new String[]{"Numero Pedido", "Centro Dstribuição", "Data", "Situação Pedido"};
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
             String sql2 = "SELECT * FROM transportadora_pedido where fk_Num_Pedido = ? ";
@@ -317,19 +313,8 @@ public class LocalizaPedido extends javax.swing.JFrame {
                 do {
                     centrodist = rs1.getString(("fk_Centro_Dist"));
                     sql = "SELECT nome_Fantasia from centro_dist where cnpj = ?";
-                    centrodist = daopesquisa.chaveEstrangeiraString(sql, centrodist);
-                    if(rs1.getDate("dataSaida") == null){
-                        dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist, (rs1.getDate("dataEntrada")),(rs1.getDate("dataSaida")),(rs1.getDate("dataEntrega")), rs1.getString("status_Pedido")});
-
-                    }else{
-                        dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist, (rs1.getDate("dataEntrada")),(rs1.getDate("dataSaida")), (rs1.getDate("dataEntrega")),rs1.getString("status_Pedido")});                                         
-                    }
-                    
-                    
-                    
-                    if(rs1.getDate("dataSaida") != null && rs1.getDate("dataEntrada") != null){
-                        dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist, formatter.format(rs1.getDate("dataEntrada")),formatter.format(rs1.getDate("dataSaida")), (rs1.getDate("dataEntrega")),rs1.getString("status_Pedido")});
-                    }
+                    centrodist = daopesquisa.chaveEstrangeiraString(sql, centrodist);                   
+                        dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist, (rs1.getDate("data")), rs1.getString("status_Pedido")});
                 } while (rs1.next());
             }
         } catch (SQLException ex) {

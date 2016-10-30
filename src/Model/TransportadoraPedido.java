@@ -14,20 +14,16 @@ import java.util.Date;
 public class TransportadoraPedido {
     private String CentroDist;
     private int numPedido;
-    private Date dataEnt;
-    private Date dataSaida;
-    private Date dataEntrega;
+    private Date data;
     private String status;
 
     public TransportadoraPedido() {
     }
 
-    public TransportadoraPedido(String CentroDist, int numPedido, Date dataEnt, Date dataSaida,Date dataEntrega, String status) {
+    public TransportadoraPedido(String CentroDist, int numPedido, Date data, String status) {
         this.CentroDist = CentroDist;
         this.numPedido = numPedido;
-        this.dataEnt = dataEnt;
-        this.dataSaida = dataSaida;
-        this.dataEntrega = dataEntrega;
+        this.data = data;
         this.status = status;
     }
     
@@ -47,28 +43,12 @@ public class TransportadoraPedido {
         this.numPedido = numPedido;
     }
 
-    public Date getDataEnt() {
-        return dataEnt;
+    public Date getData() {
+        return data;
     }
 
-    public void setDataEnt(Date dataEnt) {
-        this.dataEnt = dataEnt;
-    }
-
-    public Date getDataSaida() {
-        return dataSaida;
-    }
-
-    public void setDataSaida(Date dataSaida) {
-        this.dataSaida = dataSaida;
-    }
-
-    public Date getDataEntrega() {
-        return dataEntrega;
-    }
-
-    public void setDataEntrega(Date dataEntrega) {
-        this.dataEntrega = dataEntrega;
+    public void setData(Date data) {
+        this.data = data;
     }
 
     public String getStatus() {
@@ -82,6 +62,6 @@ public class TransportadoraPedido {
     @Override
     public String toString() {
         return "TransportadoraPedido{" + "CentroDist=" + CentroDist + ", numPedido=" + numPedido + ""
-                + ", dataEnt=" + dataEnt + ", dataSaida=" + dataSaida +"dataEntrega= "+dataEntrega +", status=" + status + '}';
+                + ", data=" + data + ", status=" + status + '}';
     }
 }

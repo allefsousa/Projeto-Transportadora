@@ -478,7 +478,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
                             if (txtDataEntrada.getDate() == null) {
                                 JOptionPane.showMessageDialog(null, "Insira a data de entrada do pedido !");
                             } else {
-                                transPed.setDataEnt(txtDataEntrada.getDate());
+                                transPed.setData(txtDataEntrada.getDate());
                                 //Verificando se entrada de status não está vazio
                                 if (cbxStatus.getSelectedIndex() == 0) {
                                     JOptionPane.showMessageDialog(null, "Insira o status do pedido !");
