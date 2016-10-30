@@ -324,6 +324,12 @@ public class LocalizaPedido extends javax.swing.JFrame {
                     }else{
                         dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist, (rs1.getDate("dataEntrada")),(rs1.getDate("dataSaida")), (rs1.getDate("dataEntrega")),rs1.getString("status_Pedido")});                                         
                     }
+                    
+                    
+                    
+                    if(rs1.getDate("dataSaida") != null && rs1.getDate("dataEntrada") != null){
+                        dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist, formatter.format(rs1.getDate("dataEntrada")),formatter.format(rs1.getDate("dataSaida")), (rs1.getDate("dataEntrega")),rs1.getString("status_Pedido")});
+                    }
                 } while (rs1.next());
             }
         } catch (SQLException ex) {
