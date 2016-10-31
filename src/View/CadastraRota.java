@@ -5,9 +5,18 @@
  */
 package View;
 
+import Dao.ConnBanco;
 import Dao.DaoRota;
+import Funcionalidades.ModeloTabela;
 import Model.modelRota;
+import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -20,9 +29,56 @@ public class CadastraRota extends javax.swing.JFrame {
      */
     modelRota mrota = new modelRota();
     Dao.DaoRota daorota = new DaoRota();
+    ConnBanco connBanco = new ConnBanco();
     public CadastraRota() {
         initComponents();
+        connBanco.getConection();
+        preencherTabela("select * from rota;");
         setLocationRelativeTo(this);
+    }
+     public void preencherTabela(String SQL) {
+        int cidade, funcionario;
+        Long unidade;
+        String cid = null,uni,sql1,sql,sql2,fun;
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"ID Rota", "Quantidade dias Prevista Entrega", "Valor Rota", "Descrição Rota"};
+        
+        connBanco.executaSQL(SQL);
+        // pegando o primeiro registro 
+        try {
+            connBanco.rs.first();
+
+            // pegando os valores e formatando para preecher a tabela  
+            do {
+                
+                
+                dados.add(new Object[]{connBanco.rs.getInt("numero_Rota"), connBanco.rs.getInt("qtd_Dias"),
+                    connBanco.rs.getFloat("valor_Rota"), connBanco.rs.getString("descricao_rota")});
+            } while (connBanco.rs.next());
+           
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        // colocando os devidos valores em suas colunas 
+        ModeloTabela modelo = new ModeloTabela(dados, colunas);
+        tabelarota.setModel(modelo);
+        tabelarota.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabelarota.getColumnModel().getColumn(0).setResizable(true);
+        tabelarota.getColumnModel().getColumn(1).setPreferredWidth(140);
+        tabelarota.setSelectionBackground(Color.lightGray);
+        tabelarota.setSelectionForeground(Color.BLUE);
+        tabelarota.getColumnModel().getColumn(1).setResizable(true);
+        tabelarota.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tabelarota.getColumnModel().getColumn(2).setResizable(false);
+        tabelarota.getColumnModel().getColumn(3).setPreferredWidth(295);
+        tabelarota.getColumnModel().getColumn(3).setResizable(false);
+        
+       
+        
+        tabelarota.getTableHeader().setReorderingAllowed(false);
+        tabelarota.setAutoResizeMode(tabelarota.AUTO_RESIZE_OFF);
+        tabelarota.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
     }
     public void limpar(){
          txtid.setText("");
@@ -50,7 +106,7 @@ public class CadastraRota extends javax.swing.JFrame {
         txtquantidade = new javax.swing.JTextField();
         txtdescricao = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelarota = new javax.swing.JTable();
         btnnovo = new javax.swing.JButton();
         btnsalvar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -66,7 +122,9 @@ public class CadastraRota extends javax.swing.JFrame {
 
         jLabel4.setText("Valor Frete");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        txtid.setEnabled(false);
+
+        tabelarota.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -77,7 +135,12 @@ public class CadastraRota extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabelarota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelarotaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelarota);
 
         btnnovo.setText("Novo");
         btnnovo.addActionListener(new java.awt.event.ActionListener() {
@@ -162,16 +225,14 @@ public class CadastraRota extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnnovo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Remover, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addComponent(Remover, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
@@ -228,6 +289,12 @@ public class CadastraRota extends javax.swing.JFrame {
         }   
     }//GEN-LAST:event_RemoverActionPerformed
 
+    private void tabelarotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelarotaMouseClicked
+        int linha = tabelarota.getSelectedRow();
+        int codigo = Integer.parseInt(tabelarota.getValueAt(linha, 0).toString());
+        
+    }//GEN-LAST:event_tabelarotaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -273,7 +340,7 @@ public class CadastraRota extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelarota;
     private javax.swing.JTextField txtdescricao;
     private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtquantidade;
