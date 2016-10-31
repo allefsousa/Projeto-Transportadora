@@ -101,47 +101,34 @@ public class DaoRota {
         return false;
     }
 
-    public Funcionario getFuncionario(int codigo) {
+    public modelRota getrota(int codigo) {
 
         try {
 
             connrota.conn = connrota.getConection();
             //  JOptionPane.showMessageDialog(null, ""+ codigo);
-            DateFormat formatter = new SimpleDateFormat("ddMMyyyy");
-            String sql = ("SELECT id,cpf, nome, rg, dataNasc, cargo, cep, rua, numero, bairro, complemento, estado, dataRegistro, fone, fk_Cnpj_Centro_Dist, Fk_Cidade_Func FROM funcionario WHERE id= ?;");
+          
+            String sql = ("SELECT * FROM rota WHERE numero_Rota= ?;");
             connrota.pstm = connrota.conn.prepareStatement(sql);
             connrota.pstm.setInt(1, codigo);
             // recebendo os resultados do select  e executando a tarefa 
             ResultSet rs = connrota.pstm.executeQuery();
-            Model.Funcionario f = new Funcionario();
+            Model.modelRota f = new modelRota();
             if (rs.next()) {
 
-                f.setNumMatricula((rs.getInt(1)));
-                f.setCpf(rs.getString(2));
-                f.setNome(rs.getString(3));
-                f.setRg(String.valueOf(rs.getInt(4)));
-                f.setDataNasc((rs.getDate(5)));
-                f.setFuncao(rs.getString(6));
-                f.setCep(rs.getInt(7));
-                f.setEndereco(rs.getString(8));
-                f.setNumero(rs.getInt(9));
-                f.setBairro(rs.getString(10));
-                f.setComplemento(rs.getString(11));
-
-                f.setEstado(rs.getString(12));
-                f.setDataRegistro(rs.getDate(13));
-                f.setTelCelular(rs.getLong(14));
-
-                f.setCnpjTransp(rs.getString(15));
-                f.setCidadeFunciCentro(rs.getInt(16));
+                f.setNumrota((rs.getInt(1)));
+                f.setQuantdias(rs.getInt(2));
+                f.setValorRota(rs.getFloat(3));
+                f.setDescricaoRota((rs.getString(4)));
+                
                 // verificar bug da mensagem quando nao existe essa mensagem logo abaixo  da erro 
                 //com essa mensagem nao 
-                JOptionPane.showMessageDialog(null, "Registros Retornados Com Sucesso");
+                //JOptionPane.showMessageDialog(null, "Registros Retornados Com Sucesso");
                 return f;
             }
             return f;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao recuperar funcionario!" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao recuperar Rota!" + e.getMessage());
         }
         return null;
     }

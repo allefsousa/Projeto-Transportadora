@@ -251,6 +251,7 @@ public class CadastraRota extends javax.swing.JFrame {
        mrota.setDescricaoRota(txtdescricao.getText());
        daorota.insereRota(mrota);
        limpar();
+       preencherTabela("select * from rota;");
     }//GEN-LAST:event_btnsalvarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -260,6 +261,7 @@ public class CadastraRota extends javax.swing.JFrame {
        mrota.setDescricaoRota(txtdescricao.getText());
        daorota.atualizarRota(mrota);
        limpar();
+       preencherTabela("select * from rota;");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
@@ -274,6 +276,7 @@ public class CadastraRota extends javax.swing.JFrame {
                         daorota.deletarRota(mrota);
                         
                         JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso !");
+                        preencherTabela("select * from rota;");
                         limpar();
                     }
                 } catch (Exception e) {
@@ -292,6 +295,12 @@ public class CadastraRota extends javax.swing.JFrame {
     private void tabelarotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelarotaMouseClicked
         int linha = tabelarota.getSelectedRow();
         int codigo = Integer.parseInt(tabelarota.getValueAt(linha, 0).toString());
+       modelRota mro;
+       mro=  daorota.getrota(codigo);
+        txtid.setText(String.valueOf(mro.getNumrota()));
+        txtquantidade.setText(String.valueOf(mro.getQuantdias()));
+        txtvalor.setText(String.valueOf(mro.getValorRota()));
+        txtdescricao.setText(mro.getDescricaoRota());
         
     }//GEN-LAST:event_tabelarotaMouseClicked
 
