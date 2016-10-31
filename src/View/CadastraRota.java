@@ -30,19 +30,22 @@ public class CadastraRota extends javax.swing.JFrame {
     modelRota mrota = new modelRota();
     Dao.DaoRota daorota = new DaoRota();
     ConnBanco connBanco = new ConnBanco();
+
     public CadastraRota() {
+        setExtendedState(MAXIMIZED_BOTH);
         initComponents();
         connBanco.getConection();
         preencherTabela("select * from rota;");
         setLocationRelativeTo(this);
     }
-     public void preencherTabela(String SQL) {
+
+    public void preencherTabela(String SQL) {
         int cidade, funcionario;
         Long unidade;
-        String cid = null,uni,sql1,sql,sql2,fun;
+        String cid = null, uni, sql1, sql, sql2, fun;
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"ID Rota", "Quantidade dias Prevista Entrega", "Valor Rota", "Descrição Rota"};
-        
+
         connBanco.executaSQL(SQL);
         // pegando o primeiro registro 
         try {
@@ -50,41 +53,39 @@ public class CadastraRota extends javax.swing.JFrame {
 
             // pegando os valores e formatando para preecher a tabela  
             do {
-                
-                
+
                 dados.add(new Object[]{connBanco.rs.getInt("numero_Rota"), connBanco.rs.getInt("qtd_Dias"),
                     connBanco.rs.getFloat("valor_Rota"), connBanco.rs.getString("descricao_rota")});
             } while (connBanco.rs.next());
-           
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
         // colocando os devidos valores em suas colunas 
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
         tabelarota.setModel(modelo);
-        tabelarota.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabelarota.getColumnModel().getColumn(0).setPreferredWidth(150);
         tabelarota.getColumnModel().getColumn(0).setResizable(true);
-        tabelarota.getColumnModel().getColumn(1).setPreferredWidth(140);
+        tabelarota.getColumnModel().getColumn(1).setPreferredWidth(210);
         tabelarota.setSelectionBackground(Color.lightGray);
         tabelarota.setSelectionForeground(Color.BLUE);
         tabelarota.getColumnModel().getColumn(1).setResizable(true);
-        tabelarota.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tabelarota.getColumnModel().getColumn(2).setPreferredWidth(160);
         tabelarota.getColumnModel().getColumn(2).setResizable(false);
-        tabelarota.getColumnModel().getColumn(3).setPreferredWidth(295);
+        tabelarota.getColumnModel().getColumn(3).setPreferredWidth(530);
         tabelarota.getColumnModel().getColumn(3).setResizable(false);
-        
-       
-        
+
         tabelarota.getTableHeader().setReorderingAllowed(false);
         tabelarota.setAutoResizeMode(tabelarota.AUTO_RESIZE_OFF);
         tabelarota.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
     }
-    public void limpar(){
-         txtid.setText("");
-       txtvalor.setText("");
-       txtdescricao.setText("");
-      txtquantidade.setText("");
+
+    public void limpar() {
+        txtid.setText("");
+        txtvalor.setText("");
+        txtdescricao.setText("");
+        txtquantidade.setText("");
 
     }
 
@@ -97,32 +98,84 @@ public class CadastraRota extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnnovo = new javax.swing.JButton();
+        btnsalvar = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        Remover = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelarota = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         txtid = new javax.swing.JTextField();
         txtvalor = new javax.swing.JTextField();
         txtquantidade = new javax.swing.JTextField();
         txtdescricao = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelarota = new javax.swing.JTable();
-        btnnovo = new javax.swing.JButton();
-        btnsalvar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        Remover = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        BarraMenu2 = new javax.swing.JPanel();
+        btnSair2 = new javax.swing.JButton();
+        lblTitulo = new javax.swing.JLabel();
+        btnSair3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastrar Rota");
+        setUndecorated(true);
+        setResizable(false);
 
-        jLabel1.setText("Numero Rota");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setText("QuantDias");
+        btnnovo.setBackground(new java.awt.Color(0, 28, 119));
+        btnnovo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnnovo.setForeground(new java.awt.Color(255, 255, 255));
+        btnnovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Novo.png"))); // NOI18N
+        btnnovo.setText("NOVO");
+        btnnovo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnnovo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnnovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnovoActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Descrição Rota");
+        btnsalvar.setBackground(new java.awt.Color(0, 28, 119));
+        btnsalvar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnsalvar.setForeground(new java.awt.Color(255, 255, 255));
+        btnsalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Gravar.png"))); // NOI18N
+        btnsalvar.setText("SALVAR");
+        btnsalvar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnsalvar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnsalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalvarActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setText("Valor Frete");
+        jButton3.setBackground(new java.awt.Color(0, 28, 119));
+        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Editar.png"))); // NOI18N
+        jButton3.setText("EDITAR");
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        txtid.setEnabled(false);
+        Remover.setBackground(new java.awt.Color(0, 28, 119));
+        Remover.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Remover.setForeground(new java.awt.Color(255, 255, 255));
+        Remover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Excluir.png"))); // NOI18N
+        Remover.setText("EXCLUIR");
+        Remover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Remover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Remover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverActionPerformed(evt);
+            }
+        });
 
         tabelarota.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,97 +195,167 @@ public class CadastraRota extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelarota);
 
-        btnnovo.setText("Novo");
-        btnnovo.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setText("Valor frete:");
+
+        txtid.setEnabled(false);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setText("Numero rota:");
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setText("Quantidade de dias:");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setText("Descrição rota:");
+
+        BarraMenu2.setBackground(new java.awt.Color(0, 28, 119));
+
+        btnSair2.setBackground(new java.awt.Color(0, 28, 119));
+        btnSair2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Sair.png"))); // NOI18N
+        btnSair2.setBorder(null);
+        btnSair2.setBorderPainted(false);
+        btnSair2.setFocusPainted(false);
+        btnSair2.setMaximumSize(new java.awt.Dimension(30, 30));
+        btnSair2.setMinimumSize(new java.awt.Dimension(30, 30));
+        btnSair2.setPreferredSize(new java.awt.Dimension(30, 30));
+        btnSair2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnnovoActionPerformed(evt);
+                btnSair2ActionPerformed(evt);
             }
         });
 
-        btnsalvar.setText("Salvar");
-        btnsalvar.addActionListener(new java.awt.event.ActionListener() {
+        lblTitulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitulo.setText("CADASTRAR FUNCIONARIO");
+
+        btnSair3.setBackground(new java.awt.Color(0, 28, 119));
+        btnSair3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Minimizar.png"))); // NOI18N
+        btnSair3.setBorder(null);
+        btnSair3.setBorderPainted(false);
+        btnSair3.setFocusPainted(false);
+        btnSair3.setMaximumSize(new java.awt.Dimension(30, 30));
+        btnSair3.setMinimumSize(new java.awt.Dimension(30, 30));
+        btnSair3.setPreferredSize(new java.awt.Dimension(30, 30));
+        btnSair3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsalvarActionPerformed(evt);
+                btnSair3ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Editar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout BarraMenu2Layout = new javax.swing.GroupLayout(BarraMenu2);
+        BarraMenu2.setLayout(BarraMenu2Layout);
+        BarraMenu2Layout.setHorizontalGroup(
+            BarraMenu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BarraMenu2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSair3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSair2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        BarraMenu2Layout.setVerticalGroup(
+            BarraMenu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnSair2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(BarraMenu2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(btnSair3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-        Remover.setText("Deletar");
-        Remover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RemoverActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BarraMenu2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel1)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel4)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(btnnovo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(Remover, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1054, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 51, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(BarraMenu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))))
+                .addGap(53, 53, 53)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnnovo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Remover, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btnnovo.getAccessibleContext().setAccessibleName("105");
+        btnnovo.getAccessibleContext().setAccessibleDescription("60");
+        btnsalvar.getAccessibleContext().setAccessibleName("105");
+        btnsalvar.getAccessibleContext().setAccessibleDescription("60");
+        jButton3.getAccessibleContext().setAccessibleName("105");
+        jButton3.getAccessibleContext().setAccessibleDescription("60");
+        Remover.getAccessibleContext().setAccessibleName("105");
+        Remover.getAccessibleContext().setAccessibleDescription("60");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Remover, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnnovo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(142, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnnovo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
-                        .addComponent(Remover, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -240,32 +363,44 @@ public class CadastraRota extends javax.swing.JFrame {
 
     private void btnnovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovoActionPerformed
         txtid.setText("");
-       txtvalor.setText("");
-       txtdescricao.setText("");
-      txtquantidade.setText("");
+        txtvalor.setText("");
+        txtdescricao.setText("");
+        txtquantidade.setText("");
+         preencherTabela("select * from rota;");
     }//GEN-LAST:event_btnnovoActionPerformed
 
     private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
-      mrota.setQuantdias(Integer.parseInt(txtquantidade.getText()));
-       mrota.setValorRota(Float.parseFloat(txtvalor.getText()));
-       mrota.setDescricaoRota(txtdescricao.getText());
-       daorota.insereRota(mrota);
-       limpar();
-       preencherTabela("select * from rota;");
+        if(!txtid.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Registro Já Existe Impossivel Salvar ");
+        }else{
+            
+        
+        mrota.setQuantdias(Integer.parseInt(txtquantidade.getText()));
+        mrota.setValorRota(Float.parseFloat(txtvalor.getText()));
+        mrota.setDescricaoRota(txtdescricao.getText());
+        daorota.insereRota(mrota);
+        limpar();
+        preencherTabela("select * from rota;");
+        }
     }//GEN-LAST:event_btnsalvarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         mrota.setNumrota(Integer.parseInt(txtid.getText()));
-        mrota.setQuantdias(Integer.parseInt(txtquantidade.getText()));
-       mrota.setValorRota(Float.parseFloat(txtvalor.getText()));
-       mrota.setDescricaoRota(txtdescricao.getText());
-       daorota.atualizarRota(mrota);
-       limpar();
-       preencherTabela("select * from rota;");
+        if (txtid.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Impossivel Atualizar ");
+        } else {
+
+            mrota.setNumrota(Integer.parseInt(txtid.getText()));
+            mrota.setQuantdias(Integer.parseInt(txtquantidade.getText()));
+            mrota.setValorRota(Float.parseFloat(txtvalor.getText()));
+            mrota.setDescricaoRota(txtdescricao.getText());
+            daorota.atualizarRota(mrota);
+            limpar();
+            preencherTabela("select * from rota;");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
-         int x = JOptionPane.showConfirmDialog(this, "Deseja excluir o registro ?","SAIDA",JOptionPane.YES_NO_OPTION);
+        int x = JOptionPane.showConfirmDialog(this, "Deseja excluir o registro ?", "SAIDA", JOptionPane.YES_NO_OPTION);
         switch (x) {
             case 0:
                 try {
@@ -274,14 +409,14 @@ public class CadastraRota extends javax.swing.JFrame {
                     } else {
                         mrota.setNumrota(Integer.parseInt(txtid.getText()));
                         daorota.deletarRota(mrota);
-                        
-                        JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso !");
+
+                        JOptionPane.showMessageDialog(null, "Rota removida com sucesso !");
                         preencherTabela("select * from rota;");
                         limpar();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Impossivel Alterar !! ");
+                    JOptionPane.showMessageDialog(null, "Impossivel Alterar Rota!! ");
                 }
                 break;
 
@@ -289,20 +424,28 @@ public class CadastraRota extends javax.swing.JFrame {
                 break;
             case 2:
                 break;
-        }   
+        }
     }//GEN-LAST:event_RemoverActionPerformed
 
     private void tabelarotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelarotaMouseClicked
         int linha = tabelarota.getSelectedRow();
         int codigo = Integer.parseInt(tabelarota.getValueAt(linha, 0).toString());
-       modelRota mro;
-       mro=  daorota.getrota(codigo);
+        modelRota mro;
+        mro = daorota.getrota(codigo);
         txtid.setText(String.valueOf(mro.getNumrota()));
         txtquantidade.setText(String.valueOf(mro.getQuantdias()));
         txtvalor.setText(String.valueOf(mro.getValorRota()));
         txtdescricao.setText(mro.getDescricaoRota());
-        
+
     }//GEN-LAST:event_tabelarotaMouseClicked
+
+    private void btnSair2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSair2ActionPerformed
+
+    private void btnSair3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair3ActionPerformed
+        this.setExtendedState(Menu.ICONIFIED);
+    }//GEN-LAST:event_btnSair3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,7 +483,10 @@ public class CadastraRota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BarraMenu2;
     private javax.swing.JButton Remover;
+    private javax.swing.JButton btnSair2;
+    private javax.swing.JButton btnSair3;
     private javax.swing.JButton btnnovo;
     private javax.swing.JButton btnsalvar;
     private javax.swing.JButton jButton3;
@@ -348,7 +494,9 @@ public class CadastraRota extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tabelarota;
     private javax.swing.JTextField txtdescricao;
     private javax.swing.JTextField txtid;

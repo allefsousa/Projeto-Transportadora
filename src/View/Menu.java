@@ -170,7 +170,6 @@ public class Menu extends javax.swing.JFrame {
         jSeparator13 = new javax.swing.JToolBar.Separator();
         btnRelatorios = new javax.swing.JButton();
         jSeparator17 = new javax.swing.JToolBar.Separator();
-        jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
@@ -998,17 +997,6 @@ public class Menu extends javax.swing.JFrame {
         jToolBar2.add(btnRelatorios);
         jToolBar2.add(jSeparator17);
 
-        jButton4.setText("jButton4");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(jButton4);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1360,6 +1348,10 @@ public class Menu extends javax.swing.JFrame {
         btnMenu4.setText(" VEICULO");
         //btnMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
         
+        btnMenu5.setVisible(true);
+        btnMenu5.setText(" ROTA");
+        //btnMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
+        
        
       
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -1398,8 +1390,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenu1ActionPerformed
 
     private void btnMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu5ActionPerformed
-        // if (aux==1)
-          //  new CadastroFornecedor().setVisible(true);
+        if (aux==1){
+            CadastraRota rota = new CadastraRota();
+            rota.setVisible(true);}
     }//GEN-LAST:event_btnMenu5ActionPerformed
 
     private void btnMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu2ActionPerformed
@@ -1581,11 +1574,6 @@ public class Menu extends javax.swing.JFrame {
         emp.setVisible(true);
     }//GEN-LAST:event_lblUnidadeMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       CadastraRota rota = new CadastraRota();
-        rota.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -1676,7 +1664,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
