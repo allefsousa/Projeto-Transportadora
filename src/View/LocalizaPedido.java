@@ -49,14 +49,14 @@ public class LocalizaPedido extends javax.swing.JFrame {
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
         tabelaPedido.setModel(modelo);
 
-        tabelaPedido.getColumnModel().getColumn(0).setPreferredWidth(120);
+        tabelaPedido.getColumnModel().getColumn(0).setPreferredWidth(250);
         tabelaPedido.getColumnModel().getColumn(0).setResizable(true);
-        tabelaPedido.getColumnModel().getColumn(1).setPreferredWidth(240);
+        tabelaPedido.getColumnModel().getColumn(1).setPreferredWidth(370);
 
         tabelaPedido.getColumnModel().getColumn(1).setResizable(true);
-        tabelaPedido.getColumnModel().getColumn(2).setPreferredWidth(160);
+        tabelaPedido.getColumnModel().getColumn(2).setPreferredWidth(260);
         tabelaPedido.getColumnModel().getColumn(2).setResizable(true);
-         tabelaPedido.getColumnModel().getColumn(3).setPreferredWidth(240);
+         tabelaPedido.getColumnModel().getColumn(3).setPreferredWidth(458);
         tabelaPedido.getColumnModel().getColumn(3).setResizable(false);
         tabelaPedido.getColumnModel().getColumn(3).setCellRenderer(cortabela);
         tabelaPedido.setAutoResizeMode(tabelaPedido.AUTO_RESIZE_OFF);
