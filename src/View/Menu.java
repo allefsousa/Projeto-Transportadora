@@ -170,6 +170,7 @@ public class Menu extends javax.swing.JFrame {
         jSeparator13 = new javax.swing.JToolBar.Separator();
         btnRelatorios = new javax.swing.JButton();
         jSeparator17 = new javax.swing.JToolBar.Separator();
+        jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
@@ -297,7 +298,7 @@ public class Menu extends javax.swing.JFrame {
         btnMenu1.setBackground(new java.awt.Color(40, 68, 159));
         btnMenu1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnMenu1.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu1.setText("EMPRESA");
+        btnMenu1.setText("jButton10");
         btnMenu1.setBorder(null);
         btnMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenu1.setFocusPainted(false);
@@ -315,7 +316,7 @@ public class Menu extends javax.swing.JFrame {
         btnMenu2.setBackground(new java.awt.Color(40, 68, 159));
         btnMenu2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnMenu2.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu2.setText("PRODUTOS");
+        btnMenu2.setText("jButton11");
         btnMenu2.setBorder(null);
         btnMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenu2.setFocusPainted(false);
@@ -997,6 +998,17 @@ public class Menu extends javax.swing.JFrame {
         jToolBar2.add(btnRelatorios);
         jToolBar2.add(jSeparator17);
 
+        jButton4.setText("jButton4");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton4);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1569,6 +1581,11 @@ public class Menu extends javax.swing.JFrame {
         emp.setVisible(true);
     }//GEN-LAST:event_lblUnidadeMouseClicked
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       CadastraRota rota = new CadastraRota();
+        rota.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1659,6 +1676,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
