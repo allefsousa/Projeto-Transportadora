@@ -30,20 +30,23 @@ public class CadastraRota extends javax.swing.JFrame {
     modelRota mrota = new modelRota();
     Dao.DaoRota daorota = new DaoRota();
     ConnBanco connBanco = new ConnBanco();
+    ConnBanco banco = new ConnBanco();
 
     public CadastraRota() {
         setExtendedState(MAXIMIZED_BOTH);
         initComponents();
         connBanco.getConection();
+        banco.getConection();
         preencherTabela("select * from rota;");
         setLocationRelativeTo(this);
+        listarCidEst();
     }
 
     public void preencherTabela(String SQL) {
         int cidadeOrigem, cidadeDestino;
         String cidOrigem, cidDestino, sql, sql1;
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID Rota", "Quantidade dias Prevista Entrega", "Valor Rota", "Cidade de Origem", "Cidade de Destino","Descrição Rota"};
+        String[] colunas = new String[]{"ID Rota", "Quantidade dias Prevista Entrega", "Valor Rota", "Cidade de Origem", "Cidade de Destino", "Descrição Rota"};
 
         connBanco.executaSQL(SQL);
         // pegando o primeiro registro 
@@ -54,8 +57,8 @@ public class CadastraRota extends javax.swing.JFrame {
             do {
                 cidadeOrigem = connBanco.rs.getInt("fk_Id_Cidade_Origem");
                 sql = "SELECT nome FROM cidade where id = ?";
-                cidOrigem= daorota.chaveEstrangeira(sql, cidadeOrigem);
-                
+                cidOrigem = daorota.chaveEstrangeira(sql, cidadeOrigem);
+
                 cidadeDestino = connBanco.rs.getInt("fk_Id_Cidade_Destino");
                 sql1 = "SELECT nome FROM cidade where id = ?";
                 cidDestino = daorota.chaveEstrangeira(sql1, cidadeDestino);
@@ -63,9 +66,8 @@ public class CadastraRota extends javax.swing.JFrame {
                 dados.add(new Object[]{connBanco.rs.getInt("numero_Rota"), connBanco.rs.getInt("qtd_Dias"),
                     connBanco.rs.getFloat("valor_Rota"), cidOrigem, cidDestino, connBanco.rs.getString("descricao_rota")});
             } while (connBanco.rs.next());
-            
-            //connBanco.conn.close();
 
+            //connBanco.conn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, ex);
@@ -97,9 +99,35 @@ public class CadastraRota extends javax.swing.JFrame {
         txtid.setText("");
         txtquantidade.setText("");
         txtvalor.setText("");
-        txtCidOrigem.setText("");
-        txtCidDestino.setText("");
+        cbxCidadeOrigem.setSelectedIndex(0);
+        cbxCidadeDestino.setSelectedIndex(0);
         txtdescricao.setText("");
+    }
+
+    public void listarCidEst() {
+        String sqlOrigem = ("select * from cidade;");
+
+        try {
+            banco.conn = banco.getConection();
+            banco.pstm = banco.conn.prepareStatement(sqlOrigem);
+            ResultSet rscidadeOrigem = banco.executaSQLRetorno(sqlOrigem);
+
+            banco.pstm = banco.conn.prepareStatement(sqlOrigem);
+            ResultSet rscidadeDestino = banco.executaSQLRetorno(sqlOrigem);
+
+            while (rscidadeOrigem.next()) {
+                //cbxCidade.addItem(rscidade.getString(1));
+                cbxCidadeOrigem.addItem(rscidadeOrigem.getString("nome"));
+            }
+
+            while (rscidadeDestino.next()) {
+                //cbxCidade.addItem(rscidade.getString(1));
+                cbxCidadeDestino.addItem(rscidadeDestino.getString("nome"));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -132,8 +160,9 @@ public class CadastraRota extends javax.swing.JFrame {
         btnSair3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtCidOrigem = new javax.swing.JTextField();
-        txtCidDestino = new javax.swing.JTextField();
+        BarraMenu3 = new javax.swing.JPanel();
+        cbxCidadeOrigem = new javax.swing.JComboBox();
+        cbxCidadeDestino = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Rota");
@@ -288,6 +317,23 @@ public class CadastraRota extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Cidade de Destino:");
 
+        BarraMenu3.setBackground(new java.awt.Color(0, 28, 119));
+
+        javax.swing.GroupLayout BarraMenu3Layout = new javax.swing.GroupLayout(BarraMenu3);
+        BarraMenu3.setLayout(BarraMenu3Layout);
+        BarraMenu3Layout.setHorizontalGroup(
+            BarraMenu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        BarraMenu3Layout.setVerticalGroup(
+            BarraMenu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 39, Short.MAX_VALUE)
+        );
+
+        cbxCidadeOrigem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione uma cidade" }));
+
+        cbxCidadeDestino.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione uma cidade" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -329,9 +375,10 @@ public class CadastraRota extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtquantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-                                .addComponent(txtCidOrigem)
-                                .addComponent(txtCidDestino)))))
+                                .addComponent(cbxCidadeOrigem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbxCidadeDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(105, Short.MAX_VALUE))
+            .addComponent(BarraMenu3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,14 +413,16 @@ public class CadastraRota extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtCidOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxCidadeOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtCidDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxCidadeDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(BarraMenu3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84))
         );
 
         btnnovo.getAccessibleContext().setAccessibleName("105");
@@ -402,42 +451,139 @@ public class CadastraRota extends javax.swing.JFrame {
     private void btnnovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnovoActionPerformed
         txtid.setText("");
         txtvalor.setText("");
-        txtCidOrigem.setText("");
-        txtCidDestino.setText("");
+        cbxCidadeOrigem.setSelectedIndex(0);
+        cbxCidadeDestino.setSelectedIndex(0);
         txtquantidade.setText("");
         txtdescricao.setText("");
-         preencherTabela("select * from rota;");
+        preencherTabela("select * from rota;");
     }//GEN-LAST:event_btnnovoActionPerformed
 
     private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
-        if(!txtid.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Registro Já Existe Impossivel Salvar ");
-        }else{            
-        mrota.setQuantdias(Integer.parseInt(txtquantidade.getText()));
-        mrota.setValorRota(Float.parseFloat(txtvalor.getText()));
-        mrota.setIdCidadeOrigem(Integer.parseInt(txtCidOrigem.getText()));
-        mrota.setIdCidadeDestino(Integer.parseInt(txtCidDestino.getText()));
-        mrota.setDescricaoRota(txtdescricao.getText());
-        daorota.insereRota(mrota);
-        limpar();
-        preencherTabela("select * from rota;");
+        boolean loop = true;
+        try {
+            if (!txtid.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Registro Já Existe Impossivel Salvar ");
+            } else {
+                //Tratando o campo de descrição de rota
+                if (txtdescricao.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Insira uma descrição de rota !! ");
+                } else {
+                    mrota.setDescricaoRota(txtdescricao.getText());
+                    do {
+                        //Quantidade de dias
+                        mrota.setQuantdias(Integer.parseInt(txtquantidade.getText()));
+
+                        //Valor da Rota
+                        mrota.setValorRota(Float.parseFloat(txtvalor.getText()));
+
+                        loop = false;
+                    } while (loop);
+
+                    //Tratando Cidade Origem
+                    if (cbxCidadeOrigem.getSelectedIndex() == 0) {
+                        JOptionPane.showMessageDialog(null, "Selecione uma cidade de origem !! ");
+                    } else {
+                        String cidadeOrigem = (String) cbxCidadeOrigem.getSelectedItem();
+                        String sql1 = "SELECT id FROM cidade WHERE nome = ?;";
+                        banco.conn = banco.getConection();
+                        banco.pstm = banco.conn.prepareStatement(sql1);
+                        banco.pstm.setString(1, cidadeOrigem);
+                        ResultSet rs1 = banco.pstm.executeQuery();
+                        rs1.first();
+                        mrota.setIdCidadeOrigem(rs1.getInt("id"));
+                    }
+
+                    //Tratando Cidade Destino
+                    if (cbxCidadeDestino.getSelectedIndex() == 0) {
+                        JOptionPane.showMessageDialog(null, "Selecione uma cidade de destino !! ");
+                    } else {
+                        String cidadeDestino = (String) cbxCidadeDestino.getSelectedItem();
+                        String sql2 = "SELECT id FROM cidade WHERE nome = ?;";
+                        banco.conn = banco.getConection();
+                        banco.pstm = banco.conn.prepareStatement(sql2);
+                        banco.pstm.setString(1, cidadeDestino);
+                        ResultSet rs2 = banco.pstm.executeQuery();
+                        rs2.first();
+                        mrota.setIdCidadeDestino(rs2.getInt("id"));
+                    }
+
+                    daorota.insereRota(mrota);
+                    limpar();
+
+                    preencherTabela("select * from rota;");
+                }
+            }
+        } catch (NumberFormatException e) {
+            //Exceção de entrada fora do esperado (nesse caso...)
+            JOptionPane.showMessageDialog(null, "Quantidade de dias e/ou valor da rota inválido !");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }//GEN-LAST:event_btnsalvarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (txtid.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Impossivel Atualizar ");
-        } else {
-            mrota.setNumrota(Integer.parseInt(txtid.getText()));
-            mrota.setQuantdias(Integer.parseInt(txtquantidade.getText()));
-            mrota.setValorRota(Float.parseFloat(txtvalor.getText()));
-            mrota.setIdCidadeOrigem(Integer.parseInt(txtCidOrigem.getText()));
-            mrota.setIdCidadeDestino(Integer.parseInt(txtCidDestino.getText()));
-            mrota.setDescricaoRota(txtdescricao.getText());
-            daorota.atualizarRota(mrota);
-            limpar();
-            preencherTabela("select * from rota;");
+        boolean loop = true;
+        try {
+            if (txtid.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Impossivel Atualizar ");
+            } else {
+                //Decrição Rota
+                if (txtdescricao.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Insira uma descrição para a rota !! ");
+                } else {
+                    mrota.setDescricaoRota(txtdescricao.getText());
+
+                    do {
+                        //Numero Rota
+                        mrota.setNumrota(Integer.parseInt(txtid.getText()));
+                        //Quantidade de dias
+                        mrota.setQuantdias(Integer.parseInt(txtquantidade.getText()));
+                        //Valor da Rota
+                        mrota.setValorRota(Float.parseFloat(txtvalor.getText()));
+
+                        loop = false;
+                    } while (loop);
+
+                    //Tratando Cidade Origem
+                    if (cbxCidadeOrigem.getSelectedIndex() == 0) {
+                        JOptionPane.showMessageDialog(null, "Selecione uma cidade de origem !! ");
+                    } else {
+                        String cidadeOrigem = (String) cbxCidadeOrigem.getSelectedItem();
+                        String sql1 = "SELECT id FROM cidade WHERE nome = ?;";
+                        banco.conn = banco.getConection();
+                        banco.pstm = banco.conn.prepareStatement(sql1);
+                        banco.pstm.setString(1, cidadeOrigem);
+                        ResultSet rs1 = banco.pstm.executeQuery();
+                        rs1.first();
+                        mrota.setIdCidadeOrigem(rs1.getInt("id"));
+                    }
+
+                    //Tratando Cidade Destino
+                    if (cbxCidadeDestino.getSelectedIndex() == 0) {
+                        JOptionPane.showMessageDialog(null, "Selecione uma cidade de destino !! ");
+                    } else {
+                        String cidadeDestino = (String) cbxCidadeDestino.getSelectedItem();
+                        String sql2 = "SELECT id FROM cidade WHERE nome = ?;";
+                        banco.conn = banco.getConection();
+                        banco.pstm = banco.conn.prepareStatement(sql2);
+                        banco.pstm.setString(1, cidadeDestino);
+                        ResultSet rs2 = banco.pstm.executeQuery();
+                        rs2.first();
+                        mrota.setIdCidadeDestino(rs2.getInt("id"));
+                    }
+                    daorota.atualizarRota(mrota);
+                    limpar();
+                    preencherTabela("select * from rota;");
+                }
+            }
+        } catch (NumberFormatException e) {
+            //Exceção de entrada fora do esperado (nesse caso...)
+            JOptionPane.showMessageDialog(null, "Quantidade de dias e/ou valor da rota inválido !");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
@@ -469,16 +615,39 @@ public class CadastraRota extends javax.swing.JFrame {
     }//GEN-LAST:event_RemoverActionPerformed
 
     private void tabelarotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelarotaMouseClicked
-        int linha = tabelarota.getSelectedRow();
-        int codigo = Integer.parseInt(tabelarota.getValueAt(linha, 0).toString());
-        modelRota mro;
-        mro = daorota.getrota(codigo);
-        txtid.setText(String.valueOf(mro.getNumrota()));
-        txtquantidade.setText(String.valueOf(mro.getQuantdias()));
-        txtvalor.setText(String.valueOf(mro.getValorRota()));
-        txtCidOrigem.setText(String.valueOf(mro.getIdCidadeOrigem()));
-        txtCidDestino.setText(String.valueOf(mro.getIdCidadeDestino()));
-        txtdescricao.setText(mro.getDescricaoRota());
+        try {
+            int linha = tabelarota.getSelectedRow();
+            int codigo = Integer.parseInt(tabelarota.getValueAt(linha, 0).toString());
+            modelRota mro;
+            mro = daorota.getrota(codigo);
+            txtid.setText(String.valueOf(mro.getNumrota()));
+            txtquantidade.setText(String.valueOf(mro.getQuantdias()));
+            txtvalor.setText(String.valueOf(mro.getValorRota()));
+
+            //Tratando Cidade Origem
+            String cidadeOrigem = String.valueOf(mro.getIdCidadeOrigem());
+            String sql1 = "SELECT nome FROM cidade WHERE id = ?;";
+            banco.conn = banco.getConection();
+            banco.pstm = banco.conn.prepareStatement(sql1);
+            banco.pstm.setString(1, cidadeOrigem);
+            ResultSet rs1 = banco.pstm.executeQuery();
+            rs1.first();
+            cbxCidadeOrigem.setSelectedItem(rs1.getString("nome"));
+
+            //Tratando Cidade destino
+            String cidadeDestino = String.valueOf(mro.getIdCidadeDestino());
+            String sql2 = "SELECT nome FROM cidade WHERE id = ?;";
+            banco.conn = banco.getConection();
+            banco.pstm = banco.conn.prepareStatement(sql2);
+            banco.pstm.setString(1, cidadeDestino);
+            ResultSet rs2 = banco.pstm.executeQuery();
+            rs2.first();
+            cbxCidadeDestino.setSelectedItem(rs2.getString("nome"));
+
+            txtdescricao.setText(mro.getDescricaoRota());
+        } catch (Exception e) {
+        }
+
 
     }//GEN-LAST:event_tabelarotaMouseClicked
 
@@ -527,11 +696,14 @@ public class CadastraRota extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BarraMenu2;
+    private javax.swing.JPanel BarraMenu3;
     private javax.swing.JButton Remover;
     private javax.swing.JButton btnSair2;
     private javax.swing.JButton btnSair3;
     private javax.swing.JButton btnnovo;
     private javax.swing.JButton btnsalvar;
+    private javax.swing.JComboBox cbxCidadeDestino;
+    private javax.swing.JComboBox cbxCidadeOrigem;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -543,8 +715,6 @@ public class CadastraRota extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tabelarota;
-    private javax.swing.JTextField txtCidDestino;
-    private javax.swing.JTextField txtCidOrigem;
     private javax.swing.JTextField txtdescricao;
     private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtquantidade;
