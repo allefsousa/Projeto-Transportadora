@@ -10,13 +10,24 @@ package Model;
  * @author Allef
  */
 public class modelRota {
- 
+
     private int numrota;
     private int quantdias;
-     private float valorRota;
+    private int idCidadeOrigem;
+    private int idCidadeDestino;
+    private float valorRota;
     private String descricaoRota;
 
     public modelRota() {
+    }
+
+    public modelRota(int numrota, int quantdias, int idCidadeOrigem, int idCidadeDestino, float valorRota, String descricaoRota) {
+        this.numrota = numrota;
+        this.quantdias = quantdias;
+        this.idCidadeOrigem = idCidadeOrigem;
+        this.idCidadeDestino = idCidadeDestino;
+        this.valorRota = valorRota;
+        this.descricaoRota = descricaoRota;
     }
 
     public int getNumrota() {
@@ -51,9 +62,25 @@ public class modelRota {
         this.descricaoRota = descricaoRota;
     }
 
+    public int getIdCidadeOrigem() {
+        return idCidadeOrigem;
+    }
+
+    public void setIdCidadeOrigem(int idCidadeOrigem) {
+        this.idCidadeOrigem = idCidadeOrigem;
+    }
+
+    public int getIdCidadeDestino() {
+        return idCidadeDestino;
+    }
+
+    public void setIdCidadeDestino(int idCidadeDestino) {
+        this.idCidadeDestino = idCidadeDestino;
+    }
+
     @Override
     public String toString() {
-        return "DaoRota{" + "numrota=" + numrota + ", quantdias=" + quantdias + ", valorRota=" + valorRota + ", descricaoRota=" + descricaoRota + '}';
+        return "modelRota{" + "numrota=" + numrota + ", quantdias=" + quantdias + ", idCidadeOrigem=" + idCidadeOrigem + ", idCidadeDestino=" + idCidadeDestino + ", valorRota=" + valorRota + ", descricaoRota=" + descricaoRota + '}';
     }
-       
+
 }
