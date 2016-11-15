@@ -45,8 +45,9 @@ public class DaoLogin {
                 JOptionPane.showMessageDialog(null, "Usuario e senha não Conferem !! ");
                 autentica = false;
             }
+             connLogin.desconecta();
             return autentica;
-
+           
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao tentar logar!" + ex.toString());
             return false;

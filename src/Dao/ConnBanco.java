@@ -15,7 +15,7 @@ public class ConnBanco {
 
     private String url = "jdbc:mysql://localhost:3306/transportadora";
     private String usuario = "root";
-    private String senha = "";
+    private String senha = "26011994";
     public ResultSet rs;//Armazena o resultado de uma pesquisa passada para o Statement
     public PreparedStatement pstm;
     public Statement stm;//Prepara e realiza pesquisas no banco de dados
@@ -43,9 +43,9 @@ public class ConnBanco {
     public void desconecta() {
         try {
             conn.close();
-            JOptionPane.showMessageDialog(null, "Desconectado com sucesso !");//Exibe caixa de mensagem
+           // JOptionPane.showMessageDialog(null, "Desconectado com sucesso !");//Exibe caixa de mensagem
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao desconectar...");//Exibe caixa de mensagem
+           // JOptionPane.showMessageDialog(null, "Erro ao desconectar...");//Exibe caixa de mensagem
             e.printStackTrace();
         }
     }

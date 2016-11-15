@@ -40,6 +40,7 @@ public class Login extends javax.swing.JFrame {
             while (banco.rs.next()) {
                 cmbCentro.addItem(banco.rs.getString(1));
             }
+            banco.desconecta();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Impossivel Selecionar Centro De Distribuição.");
         }
@@ -363,7 +364,7 @@ public class Login extends javax.swing.JFrame {
                 // Chamando a tela passando o  valor para o metodo
                 // Verifica o estado da tela
                
-            
+            banco.desconecta();
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }

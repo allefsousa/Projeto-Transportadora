@@ -232,6 +232,11 @@ public class Rota extends javax.swing.JFrame {
                 btnGravarMouseExited(evt);
             }
         });
+        btnGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGravarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnGravar);
         jToolBar1.add(jSeparator5);
 
@@ -573,6 +578,10 @@ public class Rota extends javax.swing.JFrame {
     private void btnUltimoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUltimoMouseExited
         btnUltimo.setBorder(null);
     }//GEN-LAST:event_btnUltimoMouseExited
+
+    private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGravarActionPerformed
 
     /**
      * @param args the command line arguments

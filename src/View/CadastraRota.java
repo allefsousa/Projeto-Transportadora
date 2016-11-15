@@ -46,7 +46,7 @@ public class CadastraRota extends javax.swing.JFrame {
         int cidadeOrigem, cidadeDestino;
         String cidOrigem, cidDestino, sql, sql1;
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID Rota", "Quantidade dias Prevista Entrega", "Valor Rota", "Cidade de Origem", "Cidade de Destino", "Descrição Rota"};
+        String[] colunas = new String[]{"ID Rota", "Quantidade Dias Prevista Entrega", "Valor Rota", "Cidade de Origem", "Cidade de Destino", "Descrição Rota"};
 
         connBanco.executaSQL(SQL);
         // pegando o primeiro registro 
@@ -64,7 +64,7 @@ public class CadastraRota extends javax.swing.JFrame {
                 cidDestino = daorota.chaveEstrangeira(sql1, cidadeDestino);
 
                 dados.add(new Object[]{connBanco.rs.getInt("numero_Rota"), connBanco.rs.getInt("qtd_Dias"),
-                    connBanco.rs.getFloat("valor_Rota"), cidOrigem, cidDestino, connBanco.rs.getString("descricao_rota")});
+                    connBanco.rs.getFloat("valor_Rota"), cidOrigem, cidDestino, connBanco.rs.getString("descrição_rota")});
             } while (connBanco.rs.next());
 
             //connBanco.conn.close();
