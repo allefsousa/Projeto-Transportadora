@@ -39,6 +39,8 @@ public class EntregaPedido extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
         connBanco.getConection();
         listaCentroDist();
+        String sql = "SELECT * FROM pedido";
+        preencherTabela(sql);
     }
 
     public void preencherTabela(String sql) {

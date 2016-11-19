@@ -5,16 +5,11 @@
  */
 package Dao;
 
-import Model.Funcionario;
 import Model.modelRota;
-import com.sun.swing.internal.plaf.metal.resources.metal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -80,7 +75,7 @@ public class DaoRota {
 
         try {
             connrota.conn = connrota.getConection();
-            String sql = "UPDATE rota set  qtd_Dias = ?, valor_Rota = ?, fk_Id_Cidade_Origem, fk_Id_Cidade_Destino, descricao_Rota = ? where numero_Rota =? ";
+            String sql = "UPDATE rota set  qtd_Dias = ?, valor_Rota = ?, fk_Id_Cidade_Origem= ?, fk_Id_Cidade_Destino = ?, descricao_Rota = ? where numero_Rota = ? ";
 
             connrota.pstm = connrota.conn.prepareStatement(sql);
 

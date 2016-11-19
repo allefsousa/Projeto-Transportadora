@@ -64,7 +64,7 @@ public class CadastraRota extends javax.swing.JFrame {
                 cidDestino = daorota.chaveEstrangeira(sql1, cidadeDestino);
 
                 dados.add(new Object[]{connBanco.rs.getInt("numero_Rota"), connBanco.rs.getInt("qtd_Dias"),
-                    connBanco.rs.getFloat("valor_Rota"), cidOrigem, cidDestino, connBanco.rs.getString("descrição_rota")});
+                    connBanco.rs.getFloat("valor_Rota"), cidOrigem, cidDestino, connBanco.rs.getString("descricao_rota")});
             } while (connBanco.rs.next());
 
             //connBanco.conn.close();

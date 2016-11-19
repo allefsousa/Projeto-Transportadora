@@ -38,6 +38,8 @@ public class EntradaUnidade extends javax.swing.JFrame {
         initComponents();
         connBanco.getConection();
         listaCentroDist();
+        String sql = "SELECT * FROM pedido";
+        preencherTabela(sql);
     }
 
     public void preencherTabela(String sql) {

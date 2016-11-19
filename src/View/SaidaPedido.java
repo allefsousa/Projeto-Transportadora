@@ -30,7 +30,7 @@ public class SaidaPedido extends javax.swing.JFrame {
     ConnBanco banco1 = new ConnBanco();
     TransportadoraPedido transPed = new TransportadoraPedido();
     DaoTransPedido daoTransPed = new DaoTransPedido();
-        Filial fili = new Filial();
+    Filial fili = new Filial();
 
     /**
      * Creates new form SaidaPedido
@@ -39,9 +39,9 @@ public class SaidaPedido extends javax.swing.JFrame {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         connBanco.getConection();
-        
-        
-listaCentroDist();
+        listaCentroDist();
+        String sql = "SELECT * FROM pedido";
+        preencherTabela(sql);
     }
 
     public void preencherTabela(String sql) {
@@ -539,16 +539,16 @@ listaCentroDist();
                             transPed.setNumPedido(Integer.parseInt(txtCodigo.getText()));
                             loop = false;
                         } while (loop);
-                        
+
                         transPed.setCentroDist(cbxCentroDist.getSelectedItem().toString());
                         transPed.setStatus(cbxStatus.getSelectedItem().toString());
                         daoTransPed.deletarTransPedido(transPed);
                         limpar();
                     }
-                }catch (NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     //Exceção de entrada fora do esperado (nesse caso...)
                     JOptionPane.showMessageDialog(null, "Insira um número de pedido válido !");
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Impossivel Remover !! ");
                 }
