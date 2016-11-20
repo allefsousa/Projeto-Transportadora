@@ -39,7 +39,21 @@ public class EntregaPedido extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
         connBanco.getConection();
         listaCentroDist();
-        String sql = "SELECT * FROM pedido";
+        String sql = "Select 	p.num_Pedido,\n"
+                + "		p.rua_Coleta, \n"
+                + "        p.num_End_Coleta, \n"
+                + "        p.fk_IdCidade_Coleta, \n"
+                + "        p.rua_Entrega, \n"
+                + "		p.num_End_Entrega, \n"
+                + "        p.fk_IdCidade_Entrega, \n"
+                + "        p.data_Solicitacao, \n"
+                + "        p.fk_Id_Cliente, \n"
+                + "        ip.num_Item_Pedido,\n"
+                + "        ip.quantidade_Item,\n"
+                + "        ip.peso_Item\n"
+                + "	from pedido p\n"
+                + "    inner join item_pedido ip\n"
+                + "    on p.num_Pedido = ip.fk_Id_Pedido";
         preencherTabela(sql);
     }
 
@@ -47,9 +61,8 @@ public class EntregaPedido extends javax.swing.JFrame {
         int cliente = 0, cidadeColeta = 0, cidadeEntrega = 0, veiculo = 0;
         String cli, cidEnt, cidCol, veic;
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Nº Pedido", "Endereço", "Nº Coleta", "Bairro",
-            "CEP", "Cidade de Coleta", "Data de Entrega", "Endereço Entrega", "Nº Entrega", "Bairro",
-            "Cep", "Cidade de Entrega", "Data de Solicitação", "Cliente", "Veiculo", "Rota"};
+        String[] colunas = new String[]{"Nº Pedido", "Endereço", "Nº Coleta", "Cidade de Coleta", "Endereço Entrega", "Nº Entrega",
+            "Cidade de Entrega", "Data de Solicitação", "Cliente", "Nº Item Pedido", "Quantidade", "Peso"};
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         connBanco.executaSQL(sql);
         try {
@@ -69,17 +82,12 @@ public class EntregaPedido extends javax.swing.JFrame {
                 sql = "SELECT nome FROM cidade where id = ?";
                 cidEnt = daoTransPed.chaveEstrangeira(sql, cidadeEntrega);
 
-                veiculo = connBanco.rs.getInt("fk_Id_Veiculo");
-                sql = "SELECT modelo FROM veiculo where id_Veiculo = ?";
-                veic = daoTransPed.chaveEstrangeira(sql, veiculo);
-
                 dados.add(new Object[]{connBanco.rs.getInt("num_Pedido"),
                     connBanco.rs.getString("rua_Coleta"), connBanco.rs.getInt("num_End_Coleta"),
-                    connBanco.rs.getString("bairro_Coleta"), connBanco.rs.getString("cep_Coleta"),
-                    cidCol, formatter.format(connBanco.rs.getDate("data_Entrega")),
-                    connBanco.rs.getString("rua_Entrega"), connBanco.rs.getString("num_End_Entrega"),
-                    connBanco.rs.getString("bairro_Entrega"), connBanco.rs.getString("cep_Entrega"),
-                    cidEnt, formatter.format(connBanco.rs.getDate("data_Solicitacao")), cli, veic, connBanco.rs.getString("fk_Id_Rota")});
+                    cidCol, connBanco.rs.getString("rua_Entrega"), connBanco.rs.getString("num_End_Entrega"),
+                    cidEnt, formatter.format(connBanco.rs.getDate("data_Solicitacao")), connBanco.rs.getString("fk_Id_Cliente"),
+                    connBanco.rs.getString("num_Item_Pedido"), connBanco.rs.getString("quantidade_Item"),
+                    connBanco.rs.getString("peso_Item")});
 
             } while (connBanco.rs.next());
         } catch (Exception e) {
@@ -115,14 +123,6 @@ public class EntregaPedido extends javax.swing.JFrame {
         tabelaEntrega.getColumnModel().getColumn(10).setResizable(false);
         tabelaEntrega.getColumnModel().getColumn(11).setPreferredWidth(110);
         tabelaEntrega.getColumnModel().getColumn(11).setResizable(false);
-        tabelaEntrega.getColumnModel().getColumn(12).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(12).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(13).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(13).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(14).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(14).setResizable(true);
-        tabelaEntrega.getColumnModel().getColumn(15).setPreferredWidth(110);
-        tabelaEntrega.getColumnModel().getColumn(15).setResizable(false);
 
         tabelaEntrega.getTableHeader().setReorderingAllowed(false);
         tabelaEntrega.setAutoResizeMode(tabelaEntrega.AUTO_RESIZE_OFF);
@@ -421,7 +421,23 @@ public class EntregaPedido extends javax.swing.JFrame {
                     banco.pstm.setString(1, codigo);
                     ResultSet rs1 = banco.pstm.executeQuery();
                     if (rs1.next()) {
-                        preencherTabela("SELECT * FROM pedido where num_Pedido = " + Integer.parseInt(txtCodigo.getText()));
+                        preencherTabela("Select "
+                                + "         p.num_Pedido,\n"
+                                + "         p.rua_Coleta, \n"
+                                + "        p.num_End_Coleta, \n"
+                                + "        p.fk_IdCidade_Coleta, \n"
+                                + "        p.rua_Entrega, \n"
+                                + "		p.num_End_Entrega, \n"
+                                + "        p.fk_IdCidade_Entrega, \n"
+                                + "        p.data_Solicitacao, \n"
+                                + "        p.fk_Id_Cliente, \n"
+                                + "        ip.num_Item_Pedido,\n"
+                                + "        ip.quantidade_Item,\n"
+                                + "        ip.peso_Item\n"
+                                + "	from pedido p\n"
+                                + "    inner join item_pedido ip\n"
+                                + "    on p.num_Pedido = ip.fk_Id_Pedido"
+                                + "    WHERE p.num_Pedido = " + Integer.parseInt(txtCodigo.getText()));
                     } else {
                         //Tratando entrada de código caso seja inserido texto
                         JOptionPane.showMessageDialog(null, "Número de pedido não existe\n"
