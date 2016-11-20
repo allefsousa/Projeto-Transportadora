@@ -59,10 +59,8 @@ public class Menu extends javax.swing.JFrame {
         public void cor(){
             
             btnCadastrar.setBackground(new java.awt.Color(0,28,119));
-            btnMovimentação.setBackground(new java.awt.Color(0,28,119));
             btnPedidos.setBackground(new java.awt.Color(0,28,119));
-            btnRelatorios.setBackground(new java.awt.Color(0,28,119));
-                
+                            
             
         }
          
@@ -87,22 +85,7 @@ public class Menu extends javax.swing.JFrame {
             btnMenu14.setVisible(false);
             btnMenu15.setVisible(false);
             btnMenu16.setVisible(false);
-            btnMenu17.setVisible(false);
-            btnMenu18.setVisible(false);
-            btnMenu19.setVisible(false);
-            btnMenu20.setVisible(false);
-            
-            //Terceira Parte
-            btnMenu21.setVisible(false);
-            btnMenu22.setVisible(false);
-            btnMenu23.setVisible(false);
-            btnMenu24.setVisible(false);
-            btnMenu25.setVisible(false);
-            btnMenu26.setVisible(false);
-            btnMenu27.setVisible(false);
-            btnMenu28.setVisible(false);
-            btnMenu29.setVisible(false);
-            btnMenu30.setVisible(false);
+
             
                  
             
@@ -135,15 +118,6 @@ public class Menu extends javax.swing.JFrame {
         btnMenu6 = new javax.swing.JButton();
         btnMenu7 = new javax.swing.JButton();
         btnMenu8 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        btnMenu21 = new javax.swing.JButton();
-        btnMenu22 = new javax.swing.JButton();
-        btnMenu20 = new javax.swing.JButton();
-        btnMenu19 = new javax.swing.JButton();
-        btnMenu18 = new javax.swing.JButton();
-        btnMenu17 = new javax.swing.JButton();
-        btnMenu24 = new javax.swing.JButton();
-        btnMenu23 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         btnMenu11 = new javax.swing.JButton();
         btnMenu12 = new javax.swing.JButton();
@@ -153,41 +127,21 @@ public class Menu extends javax.swing.JFrame {
         btnMenu9 = new javax.swing.JButton();
         btnMenu15 = new javax.swing.JButton();
         btnMenu16 = new javax.swing.JButton();
-        jPanel9 = new javax.swing.JPanel();
-        btnMenu29 = new javax.swing.JButton();
-        btnMenu28 = new javax.swing.JButton();
-        btnMenu27 = new javax.swing.JButton();
-        btnMenu26 = new javax.swing.JButton();
-        btnMenu25 = new javax.swing.JButton();
-        btnMenu30 = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         btnCadastrar = new javax.swing.JButton();
-        jSeparator11 = new javax.swing.JToolBar.Separator();
-        btnMovimentação = new javax.swing.JButton();
         jSeparator12 = new javax.swing.JToolBar.Separator();
         btnPedidos = new javax.swing.JButton();
         jSeparator13 = new javax.swing.JToolBar.Separator();
-        btnRelatorios = new javax.swing.JButton();
-        jSeparator17 = new javax.swing.JToolBar.Separator();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnLogout = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        btnAjuda = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
-        btnConfiguração = new javax.swing.JButton();
-        jSeparador4 = new javax.swing.JToolBar.Separator();
         btnInformações = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
-        btnNovaSenha = new javax.swing.JButton();
-        jSeparator6 = new javax.swing.JToolBar.Separator();
-        btnCalculadora = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
-        btnCalculadora2 = new javax.swing.JButton();
-        jSeparator9 = new javax.swing.JToolBar.Separator();
         jPanel7 = new javax.swing.JPanel();
         lblUnidade1 = new javax.swing.JLabel();
         lblUnidade = new javax.swing.JLabel();
@@ -473,149 +427,6 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(btnMenu8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(0, 28, 119));
-        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
-
-        btnMenu21.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu21.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu21.setText("EMPRESA");
-        btnMenu21.setBorder(null);
-        btnMenu21.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu21.setFocusPainted(false);
-        btnMenu21.setFocusable(false);
-        btnMenu21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu21.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu21.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu22.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu22.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu22.setText("PRODUTOS");
-        btnMenu22.setBorder(null);
-        btnMenu22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu22.setFocusPainted(false);
-        btnMenu22.setFocusable(false);
-        btnMenu22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu22.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu22.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu20.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu20.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu20.setText("jButton19");
-        btnMenu20.setBorder(null);
-        btnMenu20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu20.setFocusPainted(false);
-        btnMenu20.setFocusable(false);
-        btnMenu20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu20.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu20.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu19.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu19.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu19.setText("jButton18");
-        btnMenu19.setBorder(null);
-        btnMenu19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu19.setFocusPainted(false);
-        btnMenu19.setFocusable(false);
-        btnMenu19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu19.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu19.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu18.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu18.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu18.setText("jButton17");
-        btnMenu18.setBorder(null);
-        btnMenu18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu18.setFocusPainted(false);
-        btnMenu18.setFocusable(false);
-        btnMenu18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu18.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu18.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu17.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu17.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu17.setText("jButton16");
-        btnMenu17.setBorder(null);
-        btnMenu17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu17.setFocusPainted(false);
-        btnMenu17.setFocusable(false);
-        btnMenu17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu17.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu17.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu17.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu24.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu24.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu24.setText("jButton13");
-        btnMenu24.setBorder(null);
-        btnMenu24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu24.setFocusPainted(false);
-        btnMenu24.setFocusable(false);
-        btnMenu24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu24.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu24.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu23.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu23.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu23.setText("jButton12");
-        btnMenu23.setBorder(null);
-        btnMenu23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu23.setFocusPainted(false);
-        btnMenu23.setFocusable(false);
-        btnMenu23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu23.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu23.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(btnMenu17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMenu18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMenu19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMenu20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMenu21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMenu22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMenu23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMenu24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnMenu24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnMenu23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnMenu21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnMenu22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnMenu17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnMenu18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnMenu19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnMenu20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
         jPanel6.setBackground(new java.awt.Color(0, 28, 119));
         jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
 
@@ -760,98 +571,6 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(btnMenu14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel9.setBackground(new java.awt.Color(0, 28, 119));
-        jPanel9.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
-        btnMenu29.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu29.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu29.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu29.setText("jButton18");
-        btnMenu29.setBorder(null);
-        btnMenu29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu29.setFocusPainted(false);
-        btnMenu29.setFocusable(false);
-        btnMenu29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu29.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu29.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu29.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu28.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu28.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu28.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu28.setText("jButton17");
-        btnMenu28.setBorder(null);
-        btnMenu28.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu28.setFocusPainted(false);
-        btnMenu28.setFocusable(false);
-        btnMenu28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu28.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu28.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu27.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu27.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu27.setText("jButton16");
-        btnMenu27.setBorder(null);
-        btnMenu27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu27.setFocusPainted(false);
-        btnMenu27.setFocusable(false);
-        btnMenu27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu27.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu27.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu26.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu26.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu26.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu26.setText("jButton15");
-        btnMenu26.setBorder(null);
-        btnMenu26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu26.setFocusPainted(false);
-        btnMenu26.setFocusable(false);
-        btnMenu26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu26.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu26.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu26.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu25.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu25.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu25.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu25.setText("jButton14");
-        btnMenu25.setBorder(null);
-        btnMenu25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu25.setFocusPainted(false);
-        btnMenu25.setFocusable(false);
-        btnMenu25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu25.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu25.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu25.setPreferredSize(new java.awt.Dimension(135, 25));
-
-        btnMenu30.setBackground(new java.awt.Color(40, 68, 159));
-        btnMenu30.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMenu30.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu30.setText("jButton19");
-        btnMenu30.setBorder(null);
-        btnMenu30.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenu30.setFocusPainted(false);
-        btnMenu30.setFocusable(false);
-        btnMenu30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnMenu30.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMenu30.setMinimumSize(new java.awt.Dimension(135, 25));
-        btnMenu30.setPreferredSize(new java.awt.Dimension(135, 25));
-
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
@@ -861,22 +580,7 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(MenuLayout.createSequentialGroup()
-                        .addComponent(btnMenu25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMenu26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMenu27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMenu28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMenu29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMenu30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRecolhe2))
         );
@@ -888,19 +592,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnMenu30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnMenu29, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnMenu28, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnMenu27, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnMenu26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnMenu25, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jToolBar2.setBackground(new java.awt.Color(0, 28, 119));
@@ -927,27 +619,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(btnCadastrar);
-        jToolBar2.add(jSeparator11);
-
-        btnMovimentação.setBackground(new java.awt.Color(0, 28, 119));
-        btnMovimentação.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnMovimentação.setForeground(new java.awt.Color(255, 255, 255));
-        btnMovimentação.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Movimentação.png"))); // NOI18N
-        btnMovimentação.setText("MOVIMENTAÇÕES");
-        btnMovimentação.setBorder(null);
-        btnMovimentação.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMovimentação.setFocusable(false);
-        btnMovimentação.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMovimentação.setMaximumSize(new java.awt.Dimension(150, 60));
-        btnMovimentação.setMinimumSize(new java.awt.Dimension(150, 60));
-        btnMovimentação.setPreferredSize(new java.awt.Dimension(170, 60));
-        btnMovimentação.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnMovimentação.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMovimentaçãoActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(btnMovimentação);
         jToolBar2.add(jSeparator12);
 
         btnPedidos.setBackground(new java.awt.Color(0, 28, 119));
@@ -975,27 +646,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jToolBar2.add(btnPedidos);
         jToolBar2.add(jSeparator13);
-
-        btnRelatorios.setBackground(new java.awt.Color(0, 28, 119));
-        btnRelatorios.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnRelatorios.setForeground(new java.awt.Color(255, 255, 255));
-        btnRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Relatorios.png"))); // NOI18N
-        btnRelatorios.setText("RELATORIOS");
-        btnRelatorios.setBorder(null);
-        btnRelatorios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRelatorios.setFocusable(false);
-        btnRelatorios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnRelatorios.setMaximumSize(new java.awt.Dimension(150, 60));
-        btnRelatorios.setMinimumSize(new java.awt.Dimension(150, 60));
-        btnRelatorios.setPreferredSize(new java.awt.Dimension(170, 60));
-        btnRelatorios.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnRelatorios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRelatoriosActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(btnRelatorios);
-        jToolBar2.add(jSeparator17);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1053,43 +703,6 @@ public class Menu extends javax.swing.JFrame {
         jToolBar1.add(btnLogout);
         jToolBar1.add(jSeparator2);
 
-        btnAjuda.setBackground(new java.awt.Color(0, 28, 119));
-        btnAjuda.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnAjuda.setForeground(new java.awt.Color(255, 255, 255));
-        btnAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Ajuda.png"))); // NOI18N
-        btnAjuda.setText("AJUDA");
-        btnAjuda.setBorder(null);
-        btnAjuda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAjuda.setFocusable(false);
-        btnAjuda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAjuda.setMaximumSize(new java.awt.Dimension(110, 60));
-        btnAjuda.setMinimumSize(new java.awt.Dimension(110, 60));
-        btnAjuda.setPreferredSize(new java.awt.Dimension(110, 60));
-        btnAjuda.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btnAjuda);
-        jToolBar1.add(jSeparator3);
-
-        btnConfiguração.setBackground(new java.awt.Color(0, 28, 119));
-        btnConfiguração.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnConfiguração.setForeground(new java.awt.Color(255, 255, 255));
-        btnConfiguração.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Configuração.png"))); // NOI18N
-        btnConfiguração.setText("CONFIGURAÇÕES");
-        btnConfiguração.setBorder(null);
-        btnConfiguração.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConfiguração.setFocusable(false);
-        btnConfiguração.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnConfiguração.setMaximumSize(new java.awt.Dimension(110, 60));
-        btnConfiguração.setMinimumSize(new java.awt.Dimension(110, 60));
-        btnConfiguração.setPreferredSize(new java.awt.Dimension(110, 60));
-        btnConfiguração.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnConfiguração.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfiguraçãoActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnConfiguração);
-        jToolBar1.add(jSeparador4);
-
         btnInformações.setBackground(new java.awt.Color(0, 28, 119));
         btnInformações.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnInformações.setForeground(new java.awt.Color(255, 255, 255));
@@ -1110,69 +723,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jToolBar1.add(btnInformações);
         jToolBar1.add(jSeparator5);
-
-        btnNovaSenha.setBackground(new java.awt.Color(0, 28, 119));
-        btnNovaSenha.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnNovaSenha.setForeground(new java.awt.Color(255, 255, 255));
-        btnNovaSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Nova Senha.png"))); // NOI18N
-        btnNovaSenha.setText("NOVA SEN.");
-        btnNovaSenha.setBorder(null);
-        btnNovaSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNovaSenha.setFocusable(false);
-        btnNovaSenha.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnNovaSenha.setMaximumSize(new java.awt.Dimension(110, 60));
-        btnNovaSenha.setMinimumSize(new java.awt.Dimension(110, 60));
-        btnNovaSenha.setPreferredSize(new java.awt.Dimension(110, 60));
-        btnNovaSenha.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnNovaSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovaSenhaActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnNovaSenha);
-        jToolBar1.add(jSeparator6);
-
-        btnCalculadora.setBackground(new java.awt.Color(0, 28, 119));
-        btnCalculadora.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnCalculadora.setForeground(new java.awt.Color(255, 255, 255));
-        btnCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Calculadora.png"))); // NOI18N
-        btnCalculadora.setText("CALCULADORA");
-        btnCalculadora.setBorder(null);
-        btnCalculadora.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCalculadora.setFocusable(false);
-        btnCalculadora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCalculadora.setMaximumSize(new java.awt.Dimension(110, 60));
-        btnCalculadora.setMinimumSize(new java.awt.Dimension(110, 60));
-        btnCalculadora.setPreferredSize(new java.awt.Dimension(110, 60));
-        btnCalculadora.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnCalculadora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalculadoraActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnCalculadora);
         jToolBar1.add(jSeparator7);
-
-        btnCalculadora2.setBackground(new java.awt.Color(0, 28, 119));
-        btnCalculadora2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnCalculadora2.setForeground(new java.awt.Color(255, 255, 255));
-        btnCalculadora2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Beckup.png"))); // NOI18N
-        btnCalculadora2.setText("BACKUP");
-        btnCalculadora2.setBorder(null);
-        btnCalculadora2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCalculadora2.setFocusable(false);
-        btnCalculadora2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCalculadora2.setMaximumSize(new java.awt.Dimension(110, 60));
-        btnCalculadora2.setMinimumSize(new java.awt.Dimension(110, 60));
-        btnCalculadora2.setPreferredSize(new java.awt.Dimension(110, 60));
-        btnCalculadora2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnCalculadora2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalculadora2ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnCalculadora2);
-        jToolBar1.add(jSeparator9);
 
         jPanel7.setBackground(new java.awt.Color(0, 28, 119));
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
@@ -1216,7 +767,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(lblUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(707, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1370,10 +921,6 @@ public class Menu extends javax.swing.JFrame {
         cor();
     }//GEN-LAST:event_btnRecolhe2ActionPerformed
 
-    private void btnCalculadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculadoraActionPerformed
-        new Calculadora().setVisible(true);
-    }//GEN-LAST:event_btnCalculadoraActionPerformed
-
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         this.setVisible(false);
         new Login().setVisible(true);
@@ -1456,47 +1003,6 @@ public class Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnPedidosActionPerformed
 
-    private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed
-         Menu.setVisible(true);
-        ocultarBotoes();
-        aux = 7;
-        cor();
-        btnRelatorios.setBackground(new java.awt.Color(0, 102, 255));
-        
-        btnMenu1.setVisible(true);
-        btnMenu1.setText(" VENDAS");
-       // btnMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu2.setVisible(true);
-        btnMenu2.setText(" COMPRAS");
-       // btnMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu3.setVisible(true);
-        btnMenu3.setText(" ROTAS");
-       // btnMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu4.setVisible(true);
-        btnMenu4.setText(" ENTREGAS");
-        //btnMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu5.setVisible(true);
-        btnMenu5.setText(" FUNCIONARIOS");
-       // btnMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu6.setVisible(true);
-        btnMenu6.setText(" VEICULOS");
-       // btnMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu7.setVisible(true);
-        btnMenu7.setText(" MANUT. PREV.");
-       // btnMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu8.setVisible(true);
-        btnMenu8.setText(" REVISÃO");
-       // btnMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-    }//GEN-LAST:event_btnRelatoriosActionPerformed
-
     private void btnMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu7ActionPerformed
        // if (aux==1)
          //   new CadastroMaquinas().setVisible(true);
@@ -1506,18 +1012,6 @@ public class Menu extends javax.swing.JFrame {
         // if (aux==1)
          //   new CadastroProfissionais().setVisible(true);
     }//GEN-LAST:event_btnMenu8ActionPerformed
-
-    private void btnNovaSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovaSenhaActionPerformed
-        new NovaSenha().setVisible(true);
-    }//GEN-LAST:event_btnNovaSenhaActionPerformed
-
-    private void btnConfiguraçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguraçãoActionPerformed
-//        new Configuracoes().setVisible(true);
-    }//GEN-LAST:event_btnConfiguraçãoActionPerformed
-
-    private void btnCalculadora2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculadora2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCalculadora2ActionPerformed
 
     private void btnInformaçõesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformaçõesActionPerformed
         new Informacoes().setVisible(true);
@@ -1541,38 +1035,6 @@ public class Menu extends javax.swing.JFrame {
         PesquisaEmpresa  emp= new PesquisaEmpresa();
         emp.setVisible(true);
     }//GEN-LAST:event_lblUnidadeMouseClicked
-
-    private void btnMovimentaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimentaçãoActionPerformed
-        Menu.setVisible(true);
-        ocultarBotoes();
-        aux =2;
-        cor();
-        btnMovimentação.setBackground(new java.awt.Color(0, 102, 255));
-
-        btnMenu1.setVisible(true);
-        btnMenu1.setText(" A PAGAR");
-        // btnMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-
-        btnMenu2.setVisible(true);
-        btnMenu2.setText(" A RECEBER");
-        // btnMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-
-        btnMenu3.setVisible(true);
-        btnMenu3.setText(" POSTO");
-        // btnMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-
-        btnMenu4.setVisible(true);
-        btnMenu4.setText(" PEDIDOS");
-        // btnMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-
-        btnMenu5.setVisible(true);
-        btnMenu5.setText(" SAIDA VEIC.");
-        // btnMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-
-        btnMenu6.setVisible(true);
-        btnMenu6.setText(" ENTREGAS");
-        // btnMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-    }//GEN-LAST:event_btnMovimentaçãoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1616,11 +1078,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel Jdata;
     private javax.swing.JLabel Jhora;
     private javax.swing.JPanel Menu;
-    private javax.swing.JButton btnAjuda;
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnCalculadora;
-    private javax.swing.JButton btnCalculadora2;
-    private javax.swing.JButton btnConfiguração;
     private javax.swing.JButton btnInformações;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnMenu1;
@@ -1631,34 +1089,17 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnMenu14;
     private javax.swing.JButton btnMenu15;
     private javax.swing.JButton btnMenu16;
-    private javax.swing.JButton btnMenu17;
-    private javax.swing.JButton btnMenu18;
-    private javax.swing.JButton btnMenu19;
     private javax.swing.JButton btnMenu2;
-    private javax.swing.JButton btnMenu20;
-    private javax.swing.JButton btnMenu21;
-    private javax.swing.JButton btnMenu22;
-    private javax.swing.JButton btnMenu23;
-    private javax.swing.JButton btnMenu24;
-    private javax.swing.JButton btnMenu25;
-    private javax.swing.JButton btnMenu26;
-    private javax.swing.JButton btnMenu27;
-    private javax.swing.JButton btnMenu28;
-    private javax.swing.JButton btnMenu29;
     private javax.swing.JButton btnMenu3;
-    private javax.swing.JButton btnMenu30;
     private javax.swing.JButton btnMenu4;
     private javax.swing.JButton btnMenu5;
     private javax.swing.JButton btnMenu6;
     private javax.swing.JButton btnMenu7;
     private javax.swing.JButton btnMenu8;
     private javax.swing.JButton btnMenu9;
-    private javax.swing.JButton btnMovimentação;
-    private javax.swing.JButton btnNovaSenha;
     private javax.swing.JButton btnPedidos;
     private javax.swing.JButton btnRecolhe1;
     private javax.swing.JButton btnRecolhe2;
-    private javax.swing.JButton btnRelatorios;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSair1;
     private javax.swing.JButton jButton1;
@@ -1670,24 +1111,16 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JToolBar.Separator jSeparador4;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;
-    private javax.swing.JToolBar.Separator jSeparator11;
     private javax.swing.JToolBar.Separator jSeparator12;
     private javax.swing.JToolBar.Separator jSeparator13;
-    private javax.swing.JToolBar.Separator jSeparator17;
     private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
-    private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
-    private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel lblUnidade;
