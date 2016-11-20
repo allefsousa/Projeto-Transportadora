@@ -151,7 +151,6 @@ public class SaidaPedido extends javax.swing.JFrame {
         lblCodigo = new javax.swing.JLabel();
         lblDataEntrega = new javax.swing.JLabel();
         btnExcluir = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
         cbxCentroDist = new javax.swing.JComboBox();
         lblUsuario1 = new javax.swing.JLabel();
         BarraMenu = new javax.swing.JPanel();
@@ -208,16 +207,6 @@ public class SaidaPedido extends javax.swing.JFrame {
                 btnExcluirActionPerformed(evt);
             }
         });
-
-        btnEditar.setBackground(new java.awt.Color(0, 28, 119));
-        btnEditar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Editar.png"))); // NOI18N
-        btnEditar.setText("EDITAR");
-        btnEditar.setFocusPainted(false);
-        btnEditar.setFocusable(false);
-        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         cbxCentroDist.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cbxCentroDist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um centro de distribuição" }));
@@ -362,9 +351,7 @@ public class SaidaPedido extends javax.swing.JFrame {
                         .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(210, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addContainerGap())))
@@ -398,7 +385,6 @@ public class SaidaPedido extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbxCentroDist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblUsuario1)))
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
@@ -607,7 +593,6 @@ public class SaidaPedido extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BarraMenu;
     private javax.swing.JPanel BarraMenu1;
-    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnPesquisar;

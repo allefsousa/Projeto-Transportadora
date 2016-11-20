@@ -1428,38 +1428,6 @@ public class Menu extends javax.swing.JFrame {
   
     }//GEN-LAST:event_btnMenu6ActionPerformed
 
-    private void btnMovimentaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimentaçãoActionPerformed
-            Menu.setVisible(true);
-        ocultarBotoes();
-        aux =2;
-        cor();
-        btnMovimentação.setBackground(new java.awt.Color(0, 102, 255));
-        
-        btnMenu1.setVisible(true);
-        btnMenu1.setText(" A PAGAR");
-       // btnMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu2.setVisible(true);
-        btnMenu2.setText(" A RECEBER");
-       // btnMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu3.setVisible(true);
-        btnMenu3.setText(" POSTO");
-       // btnMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
-        
-        btnMenu4.setVisible(true);
-        btnMenu4.setText(" PEDIDOS");
-       // btnMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N   
- 
-        btnMenu5.setVisible(true);
-        btnMenu5.setText(" SAIDA VEIC.");
-       // btnMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N   
-        
-        btnMenu6.setVisible(true);
-        btnMenu6.setText(" ENTREGAS");
-       // btnMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N  
-    }//GEN-LAST:event_btnMovimentaçãoActionPerformed
-
     private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
         Menu.setVisible(true);
         ocultarBotoes();
@@ -1573,6 +1541,38 @@ public class Menu extends javax.swing.JFrame {
         PesquisaEmpresa  emp= new PesquisaEmpresa();
         emp.setVisible(true);
     }//GEN-LAST:event_lblUnidadeMouseClicked
+
+    private void btnMovimentaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimentaçãoActionPerformed
+        Menu.setVisible(true);
+        ocultarBotoes();
+        aux =2;
+        cor();
+        btnMovimentação.setBackground(new java.awt.Color(0, 102, 255));
+
+        btnMenu1.setVisible(true);
+        btnMenu1.setText(" A PAGAR");
+        // btnMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
+
+        btnMenu2.setVisible(true);
+        btnMenu2.setText(" A RECEBER");
+        // btnMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
+
+        btnMenu3.setVisible(true);
+        btnMenu3.setText(" POSTO");
+        // btnMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
+
+        btnMenu4.setVisible(true);
+        btnMenu4.setText(" PEDIDOS");
+        // btnMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
+
+        btnMenu5.setVisible(true);
+        btnMenu5.setText(" SAIDA VEIC.");
+        // btnMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
+
+        btnMenu6.setVisible(true);
+        btnMenu6.setText(" ENTREGAS");
+        // btnMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensMenus/Veiculos.png"))); // NOI18N
+    }//GEN-LAST:event_btnMovimentaçãoActionPerformed
 
     /**
      * @param args the command line arguments
