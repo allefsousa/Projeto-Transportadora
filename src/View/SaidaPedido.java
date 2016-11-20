@@ -50,6 +50,7 @@ public class SaidaPedido extends javax.swing.JFrame {
                 + "        p.data_Solicitacao, \n"
                 + "        p.fk_Id_Cliente, \n"
                 + "        ip.num_Item_Pedido,\n"
+                + "        ip.descricao_Item, \n"
                 + "        ip.quantidade_Item,\n"
                 + "        ip.peso_Item\n"
                 + "	from pedido p\n"
@@ -63,7 +64,7 @@ public class SaidaPedido extends javax.swing.JFrame {
         String cli, cidEnt, cidCol, veic;
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Nº Pedido", "Endereço", "Nº Coleta", "Cidade de Coleta", "Endereço Entrega", "Nº Entrega",
-            "Cidade de Entrega", "Data de Solicitação", "Cliente", "Nº Item Pedido", "Quantidade", "Peso"};
+            "Cidade de Entrega", "Data de Solicitação", "Cliente", "Nº Item Pedido", "Descrição", "Quantidade", "Peso"};
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         connBanco.executaSQL(sql);
         try {
@@ -87,7 +88,7 @@ public class SaidaPedido extends javax.swing.JFrame {
                     connBanco.rs.getString("rua_Coleta"), connBanco.rs.getInt("num_End_Coleta"),
                     cidCol, connBanco.rs.getString("rua_Entrega"), connBanco.rs.getString("num_End_Entrega"),
                     cidEnt, formatter.format(connBanco.rs.getDate("data_Solicitacao")), connBanco.rs.getString("fk_Id_Cliente"),
-                    connBanco.rs.getString("num_Item_Pedido"), connBanco.rs.getString("quantidade_Item"),
+                    connBanco.rs.getString("num_Item_Pedido"), connBanco.rs.getString("descricao_Item"), connBanco.rs.getString("quantidade_Item"),
                     connBanco.rs.getString("peso_Item")});
 
             } while (connBanco.rs.next());
@@ -434,6 +435,7 @@ public class SaidaPedido extends javax.swing.JFrame {
                                 + "        p.data_Solicitacao, \n"
                                 + "        p.fk_Id_Cliente, \n"
                                 + "        ip.num_Item_Pedido,\n"
+                                + "        ip.descricao_Item, \n"
                                 + "        ip.quantidade_Item,\n"
                                 + "        ip.peso_Item\n"
                                 + "	from pedido p\n"
