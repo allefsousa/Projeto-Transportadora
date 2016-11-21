@@ -15,7 +15,7 @@ public class ConnBanco {
 
     private String url = "jdbc:mysql://localhost:3306/transportadora";
     private String usuario = "root";
-    private String senha = "root";
+    private String senha = "";
     public ResultSet rs;//Armazena o resultado de uma pesquisa passada para o Statement
     public PreparedStatement pstm;
     public Statement stm;//Prepara e realiza pesquisas no banco de dados

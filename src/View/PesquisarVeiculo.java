@@ -45,10 +45,13 @@ public class PesquisarVeiculo extends javax.swing.JFrame {
         String[] colunas = new String[]{"ID Veiculo", "Placa", "Nº Chassi", "Capacidade", "Modelo", "Centro Dist", "Funcionario", "Cidade"};
         
         connBanco.executaSQL(SQL);
+        
         // pegando o primeiro registro 
         try {
             connBanco.rs.first();
-
+            if(connBanco.rs == null){
+                
+            }
             // pegando os valores e formatando para preecher a tabela  
             do {
                 cidade = connBanco.rs.getInt("fk_Id_Cidade");
@@ -75,23 +78,23 @@ public class PesquisarVeiculo extends javax.swing.JFrame {
         // colocando os devidos valores em suas colunas 
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
         tabelaVeiculo.setModel(modelo);
-        tabelaVeiculo.getColumnModel().getColumn(0).setPreferredWidth(80);
+        tabelaVeiculo.getColumnModel().getColumn(0).setPreferredWidth(100);
         tabelaVeiculo.getColumnModel().getColumn(0).setResizable(true);
-        tabelaVeiculo.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tabelaVeiculo.getColumnModel().getColumn(1).setPreferredWidth(140);
         tabelaVeiculo.setSelectionBackground(Color.lightGray);
         tabelaVeiculo.setSelectionForeground(Color.BLUE);
         tabelaVeiculo.getColumnModel().getColumn(1).setResizable(true);
-        tabelaVeiculo.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tabelaVeiculo.getColumnModel().getColumn(2).setPreferredWidth(160);
         tabelaVeiculo.getColumnModel().getColumn(2).setResizable(false);
-        tabelaVeiculo.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tabelaVeiculo.getColumnModel().getColumn(3).setPreferredWidth(180);
         tabelaVeiculo.getColumnModel().getColumn(3).setResizable(false);
-        tabelaVeiculo.getColumnModel().getColumn(4).setPreferredWidth(120);
+        tabelaVeiculo.getColumnModel().getColumn(4).setPreferredWidth(180);
         tabelaVeiculo.getColumnModel().getColumn(4).setResizable(false);
-        tabelaVeiculo.getColumnModel().getColumn(5).setPreferredWidth(180);
+        tabelaVeiculo.getColumnModel().getColumn(5).setPreferredWidth(220);
         tabelaVeiculo.getColumnModel().getColumn(5).setResizable(true);
-        tabelaVeiculo.getColumnModel().getColumn(6).setPreferredWidth(120);
+        tabelaVeiculo.getColumnModel().getColumn(6).setPreferredWidth(180);
         tabelaVeiculo.getColumnModel().getColumn(6).setResizable(true);
-        tabelaVeiculo.getColumnModel().getColumn(7).setPreferredWidth(100);
+        tabelaVeiculo.getColumnModel().getColumn(7).setPreferredWidth(183);
         tabelaVeiculo.getColumnModel().getColumn(7).setResizable(true);
         
         tabelaVeiculo.getTableHeader().setReorderingAllowed(false);

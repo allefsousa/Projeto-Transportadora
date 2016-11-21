@@ -290,7 +290,7 @@ public class EntradaUnidade extends javax.swing.JFrame {
         });
 
         cbxStatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um status", "Entrada centro de distribuicao", " " }));
+        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um status", "Entrada centro de distribuicao" }));
 
         btnExcluir.setBackground(new java.awt.Color(0, 28, 119));
         btnExcluir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N

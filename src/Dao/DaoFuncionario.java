@@ -66,7 +66,7 @@ public class DaoFuncionario {
 
     public boolean insereFuncionario(Funcionario funcionario) {
         ConnFunc.conn = ConnFunc.getConection();
-        String InsereFucionario = " INSERT INTO funcionario(cpf, nome, rg, dataNasc,"
+        String InsereFucionario = " INSERT INTO funcionario(cpf, nome, rg, dataNAsc,"
                 + "cargo, cep, rua, "
                 + "numero, bairro, complemento, estado, dataRegistro, fone, fk_Cnpj_Centro_Dist, fk_Cidade_Func)"
                 + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";

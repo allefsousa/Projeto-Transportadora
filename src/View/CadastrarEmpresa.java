@@ -151,7 +151,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         btnUltimo = new javax.swing.JButton();
         jSeparator11 = new javax.swing.JToolBar.Separator();
         lblCidade = new javax.swing.JLabel();
-        cbxCidade = new javax.swing.JComboBox<String>();
+        cbxCidade = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("CadastroEmpresa"); // NOI18N
@@ -549,7 +549,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         lblCidade.setText("Cidade:");
 
         cbxCidade.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        cbxCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione uma cidade" }));
+        cbxCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma cidade" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -850,9 +850,9 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-
+        
         new PesquisaEmpresa().setVisible(true);
-
+        
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 

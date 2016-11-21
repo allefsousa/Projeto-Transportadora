@@ -305,7 +305,7 @@ public class SaidaPedido extends javax.swing.JFrame {
         txtCodigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         cbxStatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um status", "Saiu para transporte para CD", "Saiu para entrega", " ", " " }));
+        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um status", "Saiu para transporte para CD", "Saiu para entrega" }));
 
         lblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblUsuario.setText("STATUS:");

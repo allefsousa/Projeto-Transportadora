@@ -16,7 +16,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -41,6 +43,7 @@ public class LocalizaPedido extends javax.swing.JFrame {
         setLocationRelativeTo(this);
         Color nomesCor = new Color(250, 128, 114);
         cortabela.setBackground(nomesCor);
+        
     }
 
     public void ModeloTabela(ArrayList dados) {
@@ -61,6 +64,7 @@ public class LocalizaPedido extends javax.swing.JFrame {
         tabelaPedido.getColumnModel().getColumn(3).setCellRenderer(cortabela);
         tabelaPedido.setAutoResizeMode(tabelaPedido.AUTO_RESIZE_OFF);
         tabelaPedido.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabelaPedido.getTableHeader().setReorderingAllowed(false);
     }
 
     public final void preencherTabela(String SQL) {
@@ -133,6 +137,7 @@ public class LocalizaPedido extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        tabelaPedido.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tabelaPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -323,7 +328,7 @@ public class LocalizaPedido extends javax.swing.JFrame {
                 txtregistro.setText("Não ha Registros com esse Numero Para Serem Exibidos");
 
             } else {
-
+                txtregistro.setText("");
                 rs1.first();
 
                 // pegando os valores e formatando para preecher a tabela  
@@ -331,7 +336,7 @@ public class LocalizaPedido extends javax.swing.JFrame {
                     centrodist = rs1.getString(("fk_Centro_Dist"));
                     sql = "SELECT nome_Fantasia from centro_dist where cnpj = ?";
                     centrodist = daopesquisa.chaveEstrangeiraString(sql, centrodist);                   
-                        dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist, (rs1.getDate("data")), rs1.getString("status_Pedido")});
+                        dados.add(new Object[]{rs1.getInt("fk_Num_Pedido"), centrodist,formatter.format(rs1.getDate("data")), rs1.getString("status_Pedido")});
                 } while (rs1.next());
             }
         } catch (SQLException ex) {
