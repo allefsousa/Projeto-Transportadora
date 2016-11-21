@@ -52,11 +52,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Trazer cidades" + ex);
         }
-        btnAnterior.setEnabled(false);
-        btnProximo.setEnabled(false);
-        btnUltimo.setEnabled(false);
-        btnExcluir.setEnabled(false);
-        btnEditar.setEnabled(false);
+        
 
     }
 

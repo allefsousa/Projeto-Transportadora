@@ -11,6 +11,7 @@ import Model.Filial;
 import Model.ModeloLogin;
 import Model.Usuario;
 import static java.awt.SystemColor.menu;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class Login extends javax.swing.JFrame {
         try {
             initComponents();
             txtLogin.requestFocus();
+            setIcon();
             txtSenha.setEchoChar('\u25cf');
             String sql = "SELECT nome_Fantasia FROM centro_dist;";
             banco.conn = banco.getConection();
@@ -44,6 +46,9 @@ public class Login extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Impossivel Selecionar Centro De Distribuição.");
         }
+    }
+    private void setIcon() {
+       setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("2.png")));
     }
 
     /**
