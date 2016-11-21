@@ -11,6 +11,7 @@ import Funcionalidades.AbrirNavegador;
 import Funcionalidades.Atualizahora;
 import Model.ModeloLogin;
 import View.Login;
+import java.awt.Toolkit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -33,6 +34,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        setIcon();
         Menu.setVisible(false);
        // lblUnidade.setText(modellogin.getCentroOn().toString());
         /**
@@ -54,6 +56,9 @@ public class Menu extends javax.swing.JFrame {
          */
         HoraData.StartHora(Jhora);
        
+    }
+    private void setIcon() {
+       setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("2.png")));
     }
     
         public void cor(){
